@@ -1,3 +1,5 @@
+.. highlight:: none
+
 ****************************
 First calculation with DFTB+
 ****************************

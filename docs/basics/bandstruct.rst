@@ -1,3 +1,5 @@
+.. highlight:: none
+
 ****************************
 Band structure, DOS and PDOS
 ****************************
