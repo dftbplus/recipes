@@ -7,5 +7,5 @@ DFTB+ recipes
 
    introduction.rst
    basics/index.rst
+   moleculardynamics/index.rst
    licence.rst
-

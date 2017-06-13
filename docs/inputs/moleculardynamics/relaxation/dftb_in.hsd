@@ -1,0 +1,26 @@
+Geometry = GenFormat {
+  <<< "geom.gen"
+}
+
+Driver = ConjugateGradient {
+  MaxForceComponent = 1e-5
+}
+
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1E-7
+  Filling = Fermi {
+    Temperature [Kelvin] = 400
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slako/"
+    Separator = "-"
+    Suffix = ".skf" 
+  }
+  MaxAngularMomentum = {
+    C = "p"
+    O = "p"
+    H = "s"
+  }
+}
