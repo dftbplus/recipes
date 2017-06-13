@@ -79,6 +79,13 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# Figures are enumerated and can be reference by the :numref: directive
+numfig = True
+
+numfig_format = {
+    'figure': 'Figure %s'
+}
+
 
 # -- Options for HTML output ----------------------------------------------
 

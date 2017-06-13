@@ -7,5 +7,6 @@ DFTB+ recipes
 
    introduction.rst
    basics/index.rst
+   waveplot.rst
    licence.rst
 
