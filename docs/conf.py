@@ -83,7 +83,10 @@ todo_include_todos = False
 numfig = True
 
 numfig_format = {
-    'figure': 'Figure %s'
+    'figure': 'Figure %s',
+    'table': 'Table %s',
+    'code-block': 'Listing %s',
+    'section': 'Section'
 }
 
 
