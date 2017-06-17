@@ -18,5 +18,10 @@ DFTB+ by setting the input geometry driver to be `VelocityVerlet` ::
     MDRestartFrequency = 100
   }
 
-See :download:`the full input <../inputs/moleculardynamics/bomd/dftb_in.hsd>`
-and :download:`geometry <../inputs/moleculardynamics/bomd/geom.gen>`.
+The velocity Verlet driver should have a time step on the scale of ~10x the
+highest vibrational period in the system. 1 fs is a common choice. The  
+
+.. only:: builder_html
+   
+   See :download:`the full input <../inputs/moleculardynamics/bomd/dftb_in.hsd>`
+   and :download:`geometry <../inputs/moleculardynamics/bomd/geom.gen>`.

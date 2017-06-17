@@ -9,3 +9,4 @@ Molecular dynamics
    startinggeometry.rst
    bornoppenheimer.rst
    xlbomd.rst
+   annealing.rst
