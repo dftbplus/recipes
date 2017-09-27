@@ -1,5 +1,5 @@
 Geometry = GenFormat {
-  <<< "geom.gen"
+  <<< "md3.geom.gen"
 }
 
 Driver = VelocityVerlet{

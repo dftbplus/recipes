@@ -33,5 +33,5 @@ an update for the atomic velocities:
 The user defined parameter :math:`\tau` controls the accuracy of the
 integration, typically this should be chosen to be somewhat shorter than the
 fastest vibrational period of the system. For many systems, :math:`\tau \approx
-1`fs is reasonably stable, but this should of course be tested for the
+1` fs is reasonably stable, but this should of course be tested for the
 particular case you are interested in.

@@ -1,5 +1,5 @@
 Geometry = GenFormat {
-  <<< "geom.gen"
+  <<< "md2.geom.gen"
 }
 
 Driver = SecondDerivatives {

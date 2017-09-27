@@ -23,5 +23,25 @@ highest vibrational period in the system. 1 fs is a common choice. The
 
 .. only:: builder_html
    
-   See :download:`the full input <../inputs/moleculardynamics/bomd/dftb_in.hsd>`
-   and :download:`geometry <../inputs/moleculardynamics/bomd/geom.gen>`.
+   See :download:`the full input <../_downloads/md3.dftb_in.hsd>`
+   and :download:`geometry <../_downloads/md3.geom.gen>`.
+
+The input file specifies initial velocities of the atoms ::
+  
+  Velocities [AA/ps] {
+    0.63060001     10.71652407      0.41599521
+    -4.78167517     -0.67726160      6.81193886
+    .
+    .
+  }
+  
+The initial velocities can be user suplied, however it is more common to
+generate them by thermalising the system starting from an initial
+Maxwell-Boltzmann distribution of atomic velocities. These can be generated for
+example by using the following input
+
+.. only:: builder_html
+   
+   See :download:`the full input <../_downloads/md4.dftb_in.hsd>`
+   and :download:`geometry <../_downloads/md4.geom.gen>`.
+

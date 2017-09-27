@@ -12,8 +12,8 @@ miniumum, prior to performing molecular dynamics.
 
 .. only:: builder_html
    
-   See :download:`the full input
-   <../inputs/moleculardynamics/relaxation/dftb_in.hsd>`
+   See :download:`the full input <../_downloads/md1.dftb_in.hsd>` and the
+   initial :download:`starting geometry <../_downloads/md1.geom.gen>`
 
 
 Vibrational modes
@@ -24,14 +24,12 @@ calculated, for future comparision with the power spectrum of the system.
 
 .. only:: builder_html
    
-   See :download:`the full input
-   <../inputs/moleculardynamics/vibration/dftb_in.hsd>` and the
-   :download:`geometry <../inputs/moleculardynamics/vibration/geom.gen>`
+   See :download:`the full input <../_downloads/md2.dftb_in.hsd>` and the
+   geometry :download:`geometry <../_downloads/md2.geom.gen>`
 
 Calculating the modes
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. only:: builder_html
    
-   See :download:`the modes input
-   <../inputs/moleculardynamics/vibration/modes_in.hsd>`
+   See :download:`the modes input <../_downloads/md2.modes_in.hsd>`
