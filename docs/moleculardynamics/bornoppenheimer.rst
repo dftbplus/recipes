@@ -24,7 +24,6 @@ highest vibrational period in the system. 1 fs is a common choice. The
 .. only:: builder_html
    
    See :download:`the full input <../_downloads/md3.dftb_in.hsd>`
-   and :download:`geometry <../_downloads/md3.geom.gen>`.
 
 The input file specifies initial velocities of the atoms ::
   
@@ -43,5 +42,4 @@ example by using the following input
 .. only:: builder_html
    
    See :download:`the full input <../_downloads/md4.dftb_in.hsd>`
-   and :download:`geometry <../_downloads/md4.geom.gen>`.
 

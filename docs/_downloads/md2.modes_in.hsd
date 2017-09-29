@@ -1,6 +1,6 @@
 # Neededs the equilibrium geometry, at which the Hessian had been calculated
 Geometry = GenFormat { 
-  <<< geom.gen
+  <<< md2.geom.gen
 }
 
 DisplayModes = {
