@@ -1,0 +1,69 @@
+<!-- i-PI input example for path integral MD at 300 K -->
+<simulation verbosity='high'>
+
+  <!-- Communicate via file /tmp/ipi-zundel, do not apply periodic
+       boundaries to coordinates -->
+  <ffsocket mode='unix' name='driver' pbc="false">
+    <latency>  1.0e-01</latency>
+    <timeout>  6.0e+02</timeout>
+    <address>zundel</address>
+  </ffsocket>
+
+  <!-- this number of steps is ~10x too low even for thermalization -->
+  <total_steps>400</total_steps>
+
+  <!-- Collect data -->
+  <output prefix='simulation'>
+
+    <!-- write data as it accumulates -->
+    <properties stride='40'> [ step, time, conserved,
+    temperature{kelvin}, kinetic_cv, potential, kinetic_cv(H),
+    kinetic_cv(O) ] </properties>
+
+    <!-- file prefix for individual beads in simulation, only write every 400 steps -->
+    <trajectory
+        filename='pos' stride='400' cell_units='angstrom'> positions{angstrom}
+    </trajectory>
+
+    <!-- file prefix for path centroid -->
+    <trajectory filename='xc' stride='16' format='xyz' cell_units='angstrom'> x_centroid{angstrom} </trajectory>
+
+    <!-- other properties like velocities or forces
+        <trajectory filename='vc' stride='100' cell_units='angstrom'> v_centroid </trajectory>
+        <trajectory filename='for' stride='100' format='xyz' cell_units='angstrom'> forces </trajectory>
+    -->
+  </output>
+
+  <prng>
+    <!-- random number generator -->
+    <seed>18885</seed>
+  </prng>
+
+  <system>
+    <forces>
+      <!-- use external code for forces -->
+      <force forcefield='driver'/>
+    </forces>
+
+    <!-- note: the lower the temperature, the more beads needed to converge properties -->
+    <initialize nbeads='8'>
+      <!-- initial structure, remember to set units as Angstrom -->
+      <file mode='xyz' units='angstrom'>start.xyz</file>
+    </initialize>
+
+    <ensemble>
+      <temperature units='kelvin'> 300.0 </temperature>
+    </ensemble>
+
+    <motion mode='dynamics'>
+      <!-- stochastic thermostat, targetting above temperature with 500fs time constant -->
+      <dynamics mode='nvt'>
+        <timestep units='femtosecond'> 0.25 </timestep>
+        <thermostat mode='svr'>
+          <tau units='femtosecond'>500</tau>
+        </thermostat>
+      </dynamics>
+    </motion>
+
+  </system>
+</simulation>

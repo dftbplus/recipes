@@ -1,0 +1,82 @@
+# Input example for path integral MD driven by i-PI for the Zundel ion
+# (H_5O_2)^+
+Geometry =  XyzFormat {
+    # Initial coordinates, these are only required to specify boundary
+    # conditions and chemical types of atoms at the start of the
+    # calculation. Number and species of atoms must match i-PI setup.
+    <<< start.xyz
+}
+
+Driver = Socket {
+    Verbosity = 0 # min verbose
+    Protocol = i-PI {} # i-PI interface
+    MaxSteps = -1 # Terminate this instance according to the external driver
+    File = "zundel"
+}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1.0E-8
+    #ReadInitialCharges = Yes
+    MaxAngularMomentum {
+        H = "s"
+        O = "p"
+    }
+    Charge = +1
+    Filling = Fermi {
+        Temperature [Kelvin] = 300 # same electronic temperature as i-PI beads
+    }
+
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../slakos/mio-ext/"
+        Separator = "-"
+        Suffix  = ".skf"
+    }
+
+    # use onsite corrections as this improves DFTB2 water cluster energetics
+    OnSiteCorrection= {
+      # ss' sp
+      # ps  pp'
+      Ouu = {0        0.08672
+             0.08672 -0.00523}
+      Oud = {0        0.14969
+             0.14969  0.03834}
+      Huu = {0}
+      Hud = {0}
+    }
+
+    # Embed molecule in implicit water as a solvent (GBSA)
+    Solvation = GeneralizedBorn {
+        Solvent = fromConstants {
+            Epsilon =   80.20
+            MolecularMass [amu] = 18.0
+            Density [kg/l] = 1.000
+        }
+        Temperature [K] = 300.0
+        FreeEnergyShift [kcal/mol] = 1.16556316
+        BornScale = 1.55243817
+        BornOffset = 2.462811043694508E-02
+        Radii = vanDerWaalsRadiiD3 {}
+        Descreening = Values {
+            H  = 0.71893869
+            O  = 0.75369019
+        }
+        RescaleSolvatedFields = Yes # Adjust dipole, if recorded
+    }
+
+}
+
+Options = {
+    # Minimize output files
+    WriteAutotestTag = No
+    WriteDetailedOut = No
+}
+
+Analysis = {
+    # Minimize output files
+    WriteBandOut = No
+}
+
+ParserOptions = {
+    ParserVersion = 11
+}

@@ -1,0 +1,42 @@
+<!-- i-PI input example for geometry relaxation -->
+<simulation verbosity='high'>
+
+  <!-- Communicate via file /tmp/ipi-zundel, do not apply periodic
+       boundaries to coordinates -->
+  <ffsocket mode='unix' name='driver' pbc="false">
+    <latency>  1.0e-01</latency>
+    <timeout>  6.0e+02</timeout>
+    <address>zundel</address>
+  </ffsocket>
+
+  <total_steps>400</total_steps>
+
+  <!-- Collect data -->
+  <output prefix='relaxation'>
+
+    <!-- write data as it accumulates -->
+    <properties stride='1'> [ step, potential ] </properties>
+
+    <!-- file prefix for geometry, remember Angstrom -->
+    <trajectory
+        filename='geom' stride='1' cell_units='angstrom'> positions{angstrom}
+    </trajectory>
+
+  </output>
+
+  <system>
+    <forces>
+      <!-- use external code for forces -->
+      <force forcefield='driver'/>
+    </forces>
+
+    <initialize nbeads='1'>
+      <!-- initial structure, remember to set units as Angstrom -->
+      <file mode='xyz' units='angstrom'>start.xyz</file>
+    </initialize>
+
+    <motion mode='minimize'>
+    </motion>
+
+  </system>
+</simulation>
