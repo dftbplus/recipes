@@ -45,12 +45,12 @@ This requires additional computational and communication libraries to be
 available on your system. The system administrator(s) of your machine may be
 able to help locate or configure these for you. The required packages are::
 
-  * MPI -- openMPI and MPICH are common options, but there may be a vendor
-    suppiled library
+  * MPI : openMPI and MPICH are common options, but there may be a vendor
+    supplied library for your network that has better performance
     
   * ScaLAPACK
       
-  * LAPACK and BLAS -- optimised serial implementations 
+  * LAPACK and BLAS : optimised serial implementations 
 
 Sections of the code are currently unable to operate with MPI parallelism
 (particularlty the excited state calculations).
