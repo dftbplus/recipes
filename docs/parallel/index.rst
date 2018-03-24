@@ -1,6 +1,6 @@
-##############
-Parallel usage
-##############
+#######################
+Parallel usage of DFTB+
+#######################
 
 .. toctree::
    :maxdepth: 1

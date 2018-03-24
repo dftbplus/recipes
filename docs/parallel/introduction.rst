@@ -26,7 +26,7 @@ Shared memory parallel
 ----------------------
 
 The default compilation options for DFTB+ produce an OpenMP enabled parallel
-program. The `make.arch` file for compiling the code should ::
+program. The `make.arch` file for compiling the code should
 
   1. Include the neccessary compiler and linking options for openMP. The
      supported `make.arch` examples already do this.
@@ -43,7 +43,7 @@ larger parallel computers and problem sizes.
 
 This requires additional computational and communication libraries to be
 available on your system. The system administrator(s) of your machine may be
-able to help locate or configure these for you. The required packages are::
+able to help locate or configure these for you. The required packages are
 
   * MPI : openMPI and MPICH are common options, but there may be a vendor
     supplied library for your network that has better performance
