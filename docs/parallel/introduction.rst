@@ -22,13 +22,32 @@ increases with the number of computing cores (usually a distributed memory
 machine, but shared memory systems often also have a substantial amount of
 memory per computing core).
 
+Types of parallel hardware
+--------------------------
+
+The two types of parallel computer that DFTB+ currently can make use of are
+either
+
+1. `shared memory` machines, where all processes have access to the same
+  data. These are typically small to medium size systems. Most modern CPUs have
+  multiple cores, so fall into this category even for desktop machines.
+
+2. `distributed memory` which consists of network connected machines. These are
+  typically larger scale systems with higher numbers of processors and a
+  dedicated high speed network between them.
+
+The different system types require distinct program models to make use of the
+hardware (however code designed for a distributed memory system can often be
+also used for shared memory architectures).
+
 Shared memory parallel
 ----------------------
 
 The default compilation options for DFTB+ produce an OpenMP enabled parallel
-program. The `make.arch` file for compiling the code should
+program for shared memory systems. The `make.arch` file for compiling the code
+should
 
-  1. Include the neccessary compiler and linking options for openMP. The
+  1. Include the necessary compiler and linking options for OpenMP. The
      supported `make.arch` examples already do this.
   2. A thread parallel LAPACK and BLAS is required and should be specified in
      `make.arch`, along with any extra thread communication libraries. Most
@@ -38,8 +57,9 @@ program. The `make.arch` file for compiling the code should
 Distributed memory parallel
 ---------------------------
 
-DFTB+ can also be compiled to use MPI parallelism. This is usually required for
-larger parallel computers and problem sizes.
+DFTB+ can also be compiled to use MPI parallelism, typically for distributed
+memory machines. This is usually required for larger parallel computers and
+problem sizes.
 
 This requires additional computational and communication libraries to be
 available on your system. The system administrator(s) of your machine may be
@@ -53,11 +73,12 @@ able to help locate or configure these for you. The required packages are
   * LAPACK and BLAS : optimised serial implementations 
 
 Sections of the code are currently unable to operate with MPI parallelism
-(particularlty the excited state calculations).
+(particularly the excited state calculations), but the majority of the
+functionality is the same as the shared memory version.
 
 Hybrid parallelism
 ------------------
 
 DFTB+ can be compiled with both MPI and openMP parallelism combined. However
-using this can require thread affinity for efficency and this is beyond the
-scope of this tutorial.
+using this can require system specific settings for thread affinity to provide
+efficiency and this is beyond the scope of this tutorial.

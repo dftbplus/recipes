@@ -10,10 +10,10 @@ calculations. This can be enabled by adding the following option to the input::
 
 This will activate the timers for the most significant stages of a
 calculation. Higher values increase the verbosity of timing, while a value of
-`-1` activates all timers.
+`-1` activates all available timers.
 
 The typical output of running the code with timers enabled for a serial
-calculation will look something like ::
+calculation will end with lines that look something like ::
   
   --------------------------------------------------------------------------------
   DFTB+ running times                          cpu [s]             wall clock [s]
@@ -81,27 +81,29 @@ There are several points to note
      of processors as ~3.1 and ~4.8 for the smallest and largest problems
      respectively. This implies that there is not much value in using more than
      ~4 processors for the smallest calculation, since this has already gained
-     around 2/3 of it theoretical maximum speed up. Adding a 5th or 6th
+     around 2/3 of its theoretical maximum speed up. Adding a 5th or 6th
      processor will only improve performance by ~5% each, so is probably a waste
-     of resources. Similarly For the largest calculation in this example, 6
+     of resources. Similarly for the largest calculation in this example, 6
      processors gives around a factor of 3 speed up compared to serial
      operation, but adding 7th processors will only speed the calculation up by
      ~6%.
 
-  4. The experimental data does not lie exactly on the Amdahl curves, this could
-     be due to competing processes taking resources (this is a shared memory
-     machine with other things running) or the problem may run anomalously well
-     for a particular number of processes (in this example 4 processors
+  4. The experimental data does not align exactly with the Amdahl curves, this
+     could be due to competing processes taking resources (this is a shared
+     memory machine with other jobs running) or the problem may run anomalously
+     well for a particular number of processes. In this example 4 processors
      consistently ran slightly better, perhaps due to the cache sizes on this
-     machine).
+     machine allowing the problem to be stored higher in the memory hierarchy
+     for 4 processors compared to 3 (thus saving some page fetching).
 
   5. The weak scaling (increasing the number of processors proportional to the
-     number of atoms) shows an approximately :math:`O(N^2)` growth in time,
-     where serial operation would be :math:`O(N^3)`.
+     number of atoms) shows an approximately :math:`O(N^2)` growth in time.  A
+     serial solution of these problems would increase as :math:`O(N^3)` in the
+     number of atoms.
 
   6. These timings are for this specific hardware and these particular problems,
-     so you should test the case you are interested in before deciding on
-     parallel resources.
+     so you should test the case you are interested in before deciding on a
+     suitable choice of parallel resources.
 
      
 Weak scaling from the same data set is shown here
@@ -115,3 +117,13 @@ Weak scaling from the same data set is shown here
 Distributed memory parallelism
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+This section coming soon!
+
+Topics to be discussed:
+
+* Parallel scaling of simple examples.
+
+* Use of the `Groups` keyword in DFTB+ to improve parallel scaling for
+  calculations with spin polarisation and/or k-points.
+
+* Effects of latency on code performance.
