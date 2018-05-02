@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'DFTB+ Recipes'
-copyright = '2017, DFTB+ developers group'
+copyright = '2018, DFTB+ developers group'
 author = 'DFTB+ developers group'
 
 # The version info for the project you're documenting, acts as replacement for
