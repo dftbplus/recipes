@@ -18,26 +18,30 @@ You will also usually need to specify the number of parallel threads that the
 code can use. This can be done by setting the OMP_NUM_THREADS environment
 variable
   
-  * For the bash shell
+* For the bash shell::
     
-      export OMP_NUM_THREADS=<number of threads to use>
+    export OMP_NUM_THREADS=<number of threads to use>
      
-  * For the csh or tcsh shells
+* For the csh or tcsh shells::
     
-      setenv OMP_NUM_THREADS <number of threads to use>
+    setenv OMP_NUM_THREADS <number of threads to use>
 
-Before running DFTB+.
+before running DFTB+.
+
 
 Compiling with MPI
 ------------------
 
 In order to use Message Passing Interface (MPI) enabled DFTB+, you will require
 
-1. A working MPI 2 (or later) installation (this should include a wrapper for Fortran
-   compilation, which is named some variant on mpifort or mpif90 for most MPI
-   implementations)
-2. The ScaLAPACK library (or a library such as MKL that supplies this functionality)
-3. either serial or thread aware LAPACK and BLAS libraries (or equivalents)
+#. A working MPI 2 (or later) installation (this should include a wrapper for
+   Fortran compilation, which is named some variant on mpifort or mpif90 for
+   most MPI implementations)
+
+#. The ScaLAPACK library (or a library such as MKL that supplies this
+   functionality)
+
+#. Either serial or thread aware LAPACK and BLAS libraries (or equivalents)
 
 Depending on your system, optimised MPI libraries for your network may be
 available (contact your system manager for details).

@@ -2,13 +2,14 @@
 Introduction
 ============
 
+
 Why run in parallel?
 --------------------
 
-There are two main reasons for using parallel computers::
+There are two main reasons for using parallel computers:
 
-  1. Faster throughput of results
-  2. Ability to simulate larger systems
+#. Faster throughput of results
+#. Ability to simulate larger systems
 
 These are related to two concepts in parallel computing, `strong` and `weak`
 parallel scaling of software. Strong scaling is defined as the how the time to
@@ -22,23 +23,25 @@ increases with the number of computing cores (usually a distributed memory
 machine, but shared memory systems often also have a substantial amount of
 memory per computing core).
 
+
 Types of parallel hardware
 --------------------------
 
 The two types of parallel computer that DFTB+ currently can make use of are
 either
 
-1. `shared memory` machines, where all processes have access to the same
-  data. These are typically small to medium size systems. Most modern CPUs have
-  multiple cores, so fall into this category even for desktop machines.
+#. **shared memory** machines, where all processes have access to the same
+   data. These are typically small to medium size systems. Most modern CPUs have
+   multiple cores, so fall into this category even for desktop machines.
 
-2. `distributed memory` which consists of network connected machines. These are
-  typically larger scale systems with higher numbers of processors and a
-  dedicated high speed network between them.
+#. **distributed memory** which consists of network connected machines. These are
+   typically larger scale systems with higher numbers of processors and a
+   dedicated high speed network between them.
 
 The different system types require distinct program models to make use of the
 hardware (however code designed for a distributed memory system can often be
 also used for shared memory architectures).
+
 
 Shared memory parallel
 ----------------------
@@ -47,12 +50,14 @@ The default compilation options for DFTB+ produce an OpenMP enabled parallel
 program for shared memory systems. The `make.arch` file for compiling the code
 should
 
-  1. Include the necessary compiler and linking options for OpenMP. The
-     supported `make.arch` examples already do this.
-  2. A thread parallel LAPACK and BLAS is required and should be specified in
-     `make.arch`, along with any extra thread communication libraries. Most
-     modern implementations of LAPACK (MKL, openBLAS, ATLAS BLAS, etc.) support
-     shared memory parallelism.
+#. Include the necessary compiler and linking options for OpenMP. The
+   supported `make.arch` examples already do this.
+
+#. A thread parallel LAPACK and BLAS is required and should be specified in
+   `make.arch`, along with any extra thread communication libraries. Most
+   modern implementations of LAPACK (MKL, openBLAS, ATLAS BLAS, etc.) support
+   shared memory parallelism.
+
 
 Distributed memory parallel
 ---------------------------
@@ -65,16 +70,17 @@ This requires additional computational and communication libraries to be
 available on your system. The system administrator(s) of your machine may be
 able to help locate or configure these for you. The required packages are
 
-  * MPI : openMPI and MPICH are common options, but there may be a vendor
-    supplied library for your network that has better performance
+* MPI : openMPI and MPICH are common options, but there may be a vendor
+  supplied library for your network that has better performance
     
-  * ScaLAPACK
+* ScaLAPACK
       
-  * LAPACK and BLAS : optimised serial implementations 
+* LAPACK and BLAS : optimised serial implementations 
 
 Sections of the code are currently unable to operate with MPI parallelism
 (particularly the excited state calculations), but the majority of the
 functionality is the same as the shared memory version.
+
 
 Hybrid parallelism
 ------------------

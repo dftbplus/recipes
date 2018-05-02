@@ -35,6 +35,7 @@ Amdahl's does not include the effects of latency or the cache hierarchy on
 parallel performance, but can be a good guide to the limits of scalability for
 `fixed` sizes of problem on parallel machines.
 
+
 Gustafson's law
 ===============
 

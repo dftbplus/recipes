@@ -4,7 +4,7 @@ Benchmarking and scalability
 DFTB+ has an internal timer for various significant parts of its
 calculations. This can be enabled by adding the following option to the input::
   
-  options ={
+  Options {
     TimingVerbosity = 2
   }
 
@@ -46,7 +46,8 @@ In the above example, at the termination of the code timings will be printed::
   sys     0m0.092s
 
 More advanced timing is possible by using profiling tools such as `gprof`.
-  
+
+
 Examples
 --------
 
@@ -69,41 +70,40 @@ time.
 
 There are several points to note
 
-  1. The parallel scalability improves for the larger problems, going from ~68%
-     to ~79% on moving from 512 atoms to 1728. This is a common feature, that
-     larger problems give sufficient material for parallelism to work better.
+#. The parallel scalability improves for the larger problems, going from ~68% to
+   ~79% on moving from 512 atoms to 1728. This is a common feature, that larger
+   problems give sufficient material for parallelism to work better.
 
-  2. The gain in throughput for these particular problems is around a factor of
-     2 when using 4 processors, and raises to around 3 on 8 processors for the
-     largest problem.
+#. The gain in throughput for these particular problems is around a factor of 2
+   when using 4 processors, and raises to around 3 on 8 processors for the
+   largest problem.
 
-  3. From Amdhal's law we can estimate the saturating limits for large numbers
-     of processors as ~3.1 and ~4.8 for the smallest and largest problems
-     respectively. This implies that there is not much value in using more than
-     ~4 processors for the smallest calculation, since this has already gained
-     around 2/3 of its theoretical maximum speed up. Adding a 5th or 6th
-     processor will only improve performance by ~5% each, so is probably a waste
-     of resources. Similarly for the largest calculation in this example, 6
-     processors gives around a factor of 3 speed up compared to serial
-     operation, but adding 7th processors will only speed the calculation up by
-     ~6%.
+#. From Amdhal's law we can estimate the saturating limits for large numbers of
+   processors as ~3.1 and ~4.8 for the smallest and largest problems
+   respectively. This implies that there is not much value in using more than ~4
+   processors for the smallest calculation, since this has already gained around
+   2/3 of its theoretical maximum speed up. Adding a 5th or 6th processor will
+   only improve performance by ~5% each, so is probably a waste of
+   resources. Similarly for the largest calculation in this example, 6
+   processors gives around a factor of 3 speed up compared to serial operation,
+   but adding 7th processors will only speed the calculation up by ~6%.
 
-  4. The experimental data does not align exactly with the Amdahl curves, this
-     could be due to competing processes taking resources (this is a shared
-     memory machine with other jobs running) or the problem may run anomalously
-     well for a particular number of processes. In this example 4 processors
-     consistently ran slightly better, perhaps due to the cache sizes on this
-     machine allowing the problem to be stored higher in the memory hierarchy
-     for 4 processors compared to 3 (thus saving some page fetching).
+#. The experimental data does not align exactly with the Amdahl curves, this
+   could be due to competing processes taking resources (this is a shared memory
+   machine with other jobs running) or the problem may run anomalously well for
+   a particular number of processes. In this example 4 processors consistently
+   ran slightly better, perhaps due to the cache sizes on this machine allowing
+   the problem to be stored higher in the memory hierarchy for 4 processors
+   compared to 3 (thus saving some page fetching).
 
-  5. The weak scaling (increasing the number of processors proportional to the
-     number of atoms) shows an approximately :math:`O(N^2)` growth in time.  A
-     serial solution of these problems would increase as :math:`O(N^3)` in the
-     number of atoms.
+#. The weak scaling (increasing the number of processors proportional to the
+   number of atoms) shows an approximately :math:`O(N^2)` growth in time.  A
+   serial solution of these problems would increase as :math:`O(N^3)` in the
+   number of atoms.
 
-  6. These timings are for this specific hardware and these particular problems,
-     so you should test the case you are interested in before deciding on a
-     suitable choice of parallel resources.
+#. These timings are for this specific hardware and these particular problems,
+   so you should test the case you are interested in before deciding on a
+   suitable choice of parallel resources.
 
      
 Weak scaling from the same data set is shown here
@@ -112,7 +112,7 @@ Weak scaling from the same data set is shown here
      :height: 40ex
      :align: center
      :alt: Weak scaling for some SiC supercells.
-	   
+   
 
 Distributed memory parallelism
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
