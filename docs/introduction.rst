@@ -1,6 +1,6 @@
-############
+************
 Introduction
-############
+************
 
 These worked examples use the quantum mechanical atomistic software DFTB+ which
 is available from `github <http://github.com/dftbplus/dftbplus>`_. Compiled

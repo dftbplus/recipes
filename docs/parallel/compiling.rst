@@ -48,7 +48,7 @@ available (contact your system manager for details).
 
 
 Obtaining the source
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
 If you have downloaded the official 18.1 (or later) release from the `DFTB+
 website <http://www.dftb-plus.info/>`_, all essential components for compiling
@@ -65,8 +65,9 @@ are included as submodules from the main code, and can be fetched with::
 There is more information on the structure and use of `submodules online
 <https://github.com/blog/2104-working-with-submodules>`_.
 
+
 Building DFTB+ with MPI support enabled
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You will need to either edit the file `make.config` to enable::
 

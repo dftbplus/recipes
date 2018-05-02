@@ -1,8 +1,7 @@
 .. highlight:: none
 
-****************************
 Band structure, DOS and PDOS
-****************************
+============================
 
 This chapter demonstrates, using the example of anatase (|TiO2|), how
 the band structure, the density of states (DOS) and the partial
@@ -24,7 +23,7 @@ files in other versions may slightly differ from those shown here.
 
 
 Introduction
-============
+------------
 
 The calculation of the band structure for a periodic system consists
 of two steps. Firstly for self-consistent (SCC) calculations, the
@@ -36,7 +35,7 @@ between high symmetry points in the Brillouin zone of that unit cell.
 
 
 Creating the proper input charges
-=================================
+---------------------------------
 
 In order to calculate a band structure in Density Functional Theory
 (DFT), at first the ground-state density for the given system must be
@@ -185,7 +184,7 @@ files provide the oxygen s and p shells.
 
 
 Plotting the density of states
-==============================
+------------------------------
 
 You can use the `dp_dos` program from the `dptools` package to take the
 eigenlevels stored in `band.out`, apply a gaussian smearing to them, and
@@ -238,7 +237,7 @@ made of the d-orbitals of titanium.
 
 
 Calculating the band structure
-==============================
+------------------------------
 
 Once well converged charges for a system have been obtained, the band
 structure can then be calculated at any chosen k-point. In our case,

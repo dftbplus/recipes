@@ -52,7 +52,7 @@ Examples
 --------
 
 Shared memory parallelism
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The strong scaling for the OpenMP parallel code for some example inputs is shown
 here
@@ -115,7 +115,7 @@ Weak scaling from the same data set is shown here
    
 
 Distributed memory parallelism
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section coming soon!
 
