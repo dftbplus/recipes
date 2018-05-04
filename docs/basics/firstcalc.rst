@@ -1,8 +1,7 @@
 .. highlight:: none
 
-****************************
 First calculation with DFTB+
-****************************
+============================
 
 This chapter should serve as a tutorial guiding you through your first
 calculation with DFTB+. As an example, the equilibrium geometry of a water
@@ -14,7 +13,7 @@ The description here is based on DFTB+ version 17.1, the input/output files in
 other versions may slightly differ from those shown here.
 
 Providing the input
-===================
+-------------------
 
 First you have to create the input for the code. DFTB+ accepts either
 Human-readable Structured Data (HSD) or eXtended Markup Language (XML) input. In
@@ -71,7 +70,7 @@ they are specifying file names.
 
 
 Geometry
---------
+^^^^^^^^
 
 The ``Geometry`` block contains the types and coordinates of the atoms in
 your system.  The geometry of the system in the sample input file is provided in
@@ -115,7 +114,7 @@ checked for any HSD constructs.) In the example above, the file
 `input_geometry.gen` *must* be in gen format.
 
 Driver
-------
+^^^^^^
 
 After having specified the geometry of your system, you should decide
 what DFTB+ will do with that geometry. The ``Driver`` environment
@@ -186,7 +185,7 @@ gen and the xyz formats (and various other formats).
 
 
 Hamiltonian
------------
+^^^^^^^^^^^
 
 You have to decide upon the model used to describe your system in
 order to calculate its properties. At the moment DFTB+ eases this
@@ -285,8 +284,9 @@ one electron levels with electrons. Here Fermi-Dirac statistics are
 used. The filling functions usually requires further parameters (e.g
 the temperature).
 
+
 Analysis
---------
+^^^^^^^^
 
 The ``Analysis`` block contains options to calculate (or display if otherwise
 only calculated internally) a number of properties. In this example, while
@@ -294,8 +294,9 @@ forces are needed to optimise the geometry, these are not usually printed in
 full, only the maximum value. The ``CalculateForces`` option enables printing of
 the forces.
 
+
 Options
--------
+^^^^^^^
 
 The ``Options`` block contains a few global settings for the code. In the
 current example, no options are specified. You could even leave out the::
@@ -307,7 +308,7 @@ is an empty block.
 
 
 ParserOptions
--------------
+^^^^^^^^^^^^^
 
 This block contains options which are interpreted by the parser itself
 and are not passed to the main program. The most important of those
@@ -327,10 +328,8 @@ without adapting it by hand, if the input format has changed in the
 more recent version.
 
 
-
 Running DFTB+
-=============
-
+-------------
 
 After creating the main input file, you should make sure that all the
 other required files (Slater-Koster files, any files included in the
@@ -446,7 +445,7 @@ time. Congratulations!
 
 
 Examining the output
-====================
+--------------------
 
 DFTB+ communicates through two channels with you: by printing information to
 standard output (which you should probably redirect into a file to keep for
@@ -455,7 +454,7 @@ following, the most important of these files will be introduced and analysed
 
 
 Standard output
----------------
+^^^^^^^^^^^^^^^
 
 The first thing appearing in standard output after the start of DFTB+ is the
 program header::
@@ -625,8 +624,9 @@ been set to ``6`` in the input, you would obtain::
   WARNING!
   -> !!! Geometry did NOT converge!
 
+
 dftb_pin.hsd
-------------
+^^^^^^^^^^^^
 
 As already mentioned, the processed input file `dftb_pin.hsd` is an input file
 generated from your `dftb_in.hsd` by including the default values for all
@@ -663,7 +663,7 @@ generated the file.
 
 
 detailed.out
-------------
+^^^^^^^^^^^^
 
 This file contains detailed information about the properties of your
 system. It is updated continuously during the run, by the end of the
@@ -833,7 +833,7 @@ xyz, gen and other geometry formats).
 
 
 band.out
---------
+^^^^^^^^
 
 For large systems, and especially for periodic systems with many
 k-points, it can become quite difficult to get a good overview of the
@@ -862,7 +862,7 @@ and the k-point weight in the first line in this case).
 
 
 results.tag
------------
+^^^^^^^^^^^
 
 If you want to process the results of DFTB+ with another program, you
 should not extract the information from the standard output or the
@@ -892,7 +892,7 @@ data for the given quantity is dumped as free format.
 
 
 Other output files
-------------------
+^^^^^^^^^^^^^^^^^^
 
 There are also other output files not discussed in detail here. They are only
 created, if appropriate choices in the ``Options`` or ``ExcitedState`` blocks

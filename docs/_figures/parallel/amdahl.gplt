@@ -1,0 +1,3 @@
+set logscale x 2
+f(x,p)=1/(1-p+p/x)
+plot [1:4096][0:] f(x,.90) t "90%" lw 4 lc 7, f(x,.75) t "75%" lw 4 lc 3, f(x,.5) t "50%" lw 4 lc 2

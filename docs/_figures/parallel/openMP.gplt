@@ -1,0 +1,5 @@
+f(x,p) = 1/(1-p+p/x)
+plot [1:10] f(x,.68) lw 3 lt -1 t '', f(x,.793) lw 3 lt -1 t '',\
+'openMP.dat' u 1:(1507.72/$4) w lp lw 2 pt 7 ps 1 t 'Si_{864}C_{864}',\
+'' u 1:(328.38/$3) w lp lw 2 pt 7 ps 1 t 'Si_{500}C_{500}',\
+'' u 1:(59.51/$2) w lp lw 2 pt 7 ps 1 t 'Si_{216}C_{216}'
