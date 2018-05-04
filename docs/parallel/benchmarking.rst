@@ -123,7 +123,9 @@ Topics to be discussed:
 
 * Parallel scaling of simple examples.
 
-* Use of the `Groups` keyword in DFTB+ to improve parallel scaling for
+* Parallel efficiency.
+
+* Use of the `Groups` keyword in DFTB+ to improve scaling and efficiency for
   calculations with spin polarisation and/or k-points.
 
 * Effects of latency on code performance.
