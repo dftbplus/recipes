@@ -18,4 +18,5 @@ or to explore the range of structural minima the system can adopt.
    startinggeometry.rst
    bornoppenheimer.rst
    xlbomd.rst
+   analysis.rst
    annealing.rst

@@ -34,7 +34,7 @@ The input file specifies initial velocities of the atoms ::
     .
   }
   
-The initial velocities can be user suplied, however it is more common to
+The initial velocities can be user supplied, however it is more common to
 generate them by thermalising the system starting from an initial
 Maxwell-Boltzmann distribution of atomic velocities. These can be generated for
 example by using the following input

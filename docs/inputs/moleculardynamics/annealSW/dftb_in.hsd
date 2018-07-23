@@ -3,15 +3,15 @@ Geometry = GenFormat {
 }
 
 Driver = VelocityVerlet {
-  
-  TimeStep [Femtosecond] = 2.0 # Using a thermostat, so conserved
-  # properties of dynamics are less
+
+  # Using a thermostat, so conserved properties of dynamics are less #
   # important
+  TimeStep [Femtosecond] = 2.0
   
   Thermostat = Andersen {
     
     # Probabalistically replaces atomic velocities from a
-    # Maxwell-Boltzmann distribution
+    # Maxwell-Boltzmann distribution    
     ReselectProbability = 0.2
     ReselectIndividually = Yes
     
