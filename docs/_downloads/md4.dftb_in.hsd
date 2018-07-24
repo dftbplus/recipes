@@ -71,8 +71,20 @@ Hamiltonian = DFTB {
   }
 }
 
+Analysis = {
+  WriteBandOut = No
+}
+
 Options = {
   RandomSeed = 3871906
   WriteDetailedOut = No
-  WriteBandOut = No
+}
+
+ParserOptions = {
+  ParserVersion = 5
+}
+
+# if run in parallel, allow openMP threads
+Parallel = {
+  UseOmpThreads = Yes
 }
