@@ -20,7 +20,7 @@ computed, using a higher temperature accelerates the annealing.
 .. only:: builder_html
    
    See :download:`the full input
-   <../inputs/moleculardynamics/annealSW/dftb_in.hsd>` and :download:`geometry
+   <../inputs/moleculardynamics/annealSW/annealSW_dftb_in.hsd>` and :download:`geometry
    <../inputs/moleculardynamics/annealSW/80_SW.gen>`.
 
 
@@ -34,6 +34,6 @@ final geometry is obtained.
 .. only:: builder_html
    
    See :download:`the full input
-   <../inputs/moleculardynamics/annealV2/dftb_in.hsd>` and :download:`geometry
+   <../inputs/moleculardynamics/annealV2/annealV2_dftb_in.hsd>` and :download:`geometry
    <../inputs/moleculardynamics/annealV2/80_V2.gen>`.
    
