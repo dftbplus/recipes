@@ -44,12 +44,17 @@ C O H
 Driver = VelocityVerlet{
  TimeStep [fs] = 0.5
  Thermostat = None {}
+ 
+ # extended Lagrangian dynamics, using the fast option
  XlbomdFast {
    IntegrationSteps = 5
    Scale = 0.5           # scalekappa (only for fast option with 1 scf cycle)
    TransientSteps = 10
  }
- Velocities [AA/ps] {
+
+ # Specify the initial velocities of the atoms to avoid having a 'burn
+ # in' period to get to a 'typical' microstate
+ Velocities [AA/ps] { # This is the same unit as xyz format output
       0.63060001     10.71652407      0.41599521
      -4.78167517     -0.67726160      6.81193886
       3.98425977      1.00737908    -10.59008962
@@ -95,7 +100,10 @@ Driver = VelocityVerlet{
 
 
 Hamiltonian = DFTB {
+
+  # use the corrected forces for XL-BOMD
   ForceEvaluation = Dynamics
+  
   SCC = Yes
   SCCTolerance = 1e-6
   Filling = Fermi {
@@ -115,9 +123,21 @@ Hamiltonian = DFTB {
 
 Options = {
   RandomSeed = 3871906
+  # speed up a bit by suppressing some file writing
   WriteDetailedOut = No
 }
 
 Analysis {
+  # speed up a bit by suppressing some file writing
   WriteBandOut = No
+}
+
+# This file uses the 5th input format
+ParserOptions = {
+  ParserVersion = 5
+}
+
+# if run in MPI parallel, allow openMP threads to be used
+Parallel = {
+  UseOmpThreads = Yes
 }

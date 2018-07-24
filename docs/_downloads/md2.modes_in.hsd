@@ -19,3 +19,6 @@ SlaterKosterFiles = Type2FileNames {
 Hessian = {
   <<< "hessian.out"
 }
+
+# This file uses the 3rd input format of the modes code
+InputVersion = 3

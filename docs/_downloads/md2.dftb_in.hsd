@@ -2,7 +2,9 @@ Geometry = GenFormat {
   <<< "md2.geom.gen"
 }
 
+# Calculate second derivatives of energy
 Driver = SecondDerivatives {
+  # Specified finite difference step
   Delta = 1e-4
 }
 
@@ -23,4 +25,14 @@ Hamiltonian = DFTB {
     O = "p"
     H = "s"
   }
+}
+
+# This file uses the 5th input format
+ParserOptions = {
+  ParserVersion = 5
+}
+
+# if run in MPI parallel, allow openMP threads to be used
+Parallel = {
+  UseOmpThreads = Yes
 }

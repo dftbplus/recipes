@@ -42,13 +42,18 @@ Geometry = GenFormat {
 }
 
 Driver = VelocityVerlet{
+  # Time step for MD
   TimeStep [fs] = 1.0
+  # Use thermostat to maintain temperature
   Thermostat = NoseHoover {
     Temperature [Kelvin] = 400
+    # Approximately the highest vibrational frequency of the molecule
     CouplingStrength [cm^-1] = 3200
   }
+  # total of 20 ps
   Steps = 20000
   MovedAtoms = 1:-1
+  # save every 100 steps
   MDRestartFrequency = 100
 }
 
@@ -72,19 +77,22 @@ Hamiltonian = DFTB {
 }
 
 Analysis = {
+  # speed up a bit by suppressing some file writing
   WriteBandOut = No
 }
 
 Options = {
   RandomSeed = 3871906
+  # speed up a bit by suppressing some file writing
   WriteDetailedOut = No
 }
 
+# This file uses the 5th input format
 ParserOptions = {
   ParserVersion = 5
 }
 
-# if run in parallel, allow openMP threads
+# if run in MPI parallel, allow openMP threads to be used
 Parallel = {
   UseOmpThreads = Yes
 }

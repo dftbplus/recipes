@@ -41,10 +41,10 @@ Geometry = GenFormat {
    38 3    0.1742211893E+01   -0.3457319437E+01   -0.1226020479E+00
 }
 
+# Optimise geometry
 Driver = ConjugateGradient {
   MaxForceComponent = 1e-5
 }
-
 
 Hamiltonian = DFTB {
   SCC = Yes
@@ -62,4 +62,14 @@ Hamiltonian = DFTB {
     O = "p"
     H = "s"
   }
+}
+
+# This file uses the 5th input format
+ParserOptions = {
+  ParserVersion = 5
+}
+
+# if run in MPI parallel, allow openMP threads to be used
+Parallel = {
+  UseOmpThreads = Yes
 }
