@@ -26,7 +26,7 @@
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '1.8'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -187,3 +187,76 @@ epub_copyright = copyright
 epub_exclude_files = ['search.html']
 
 
+# -- Additional functionality to archive files in _downloads
+
+def setup(app):
+    app.connect('builder-inited', create_archives)
+
+
+def create_archives(app):
+    '''Creates an .tar.xz archive in _downloads for each entry in _archives.'''
+
+    import os
+    import tarfile
+    from sphinx.util import logging
+
+    ARCHIVE_DIR = '_archives'
+    DOWNLOAD_DIR = '_downloads/archives'
+    IGNORE_FILE = '_ignore'
+    COMPRESSION = 'bz2'
+
+    logger = logging.getLogger(__name__)
+    cwd = os.getcwd()
+    archivedir = os.path.join(cwd, ARCHIVE_DIR)
+    downloaddir = os.path.join(cwd, DOWNLOAD_DIR)
+    if not os.path.exists(downloaddir):
+        os.makedirs(downloaddir)
+    archives = [fname for fname in os.listdir(archivedir) if fname[0] != '_']
+    tarfilter = _get_tar_filter(os.path.join(archivedir, IGNORE_FILE))
+    for archive in archives:
+        tarname = os.path.join(DOWNLOAD_DIR, archive + '.tar.' + COMPRESSION)
+        tarpath = os.path.join(cwd, tarname)
+        filename = os.path.join(ARCHIVE_DIR, archive)
+        filepath = os.path.join(cwd, filename)
+        tartime = os.path.getmtime(tarpath) if os.path.exists(tarpath) else 0.0
+        filetime = _newest_modification_time(filepath)
+        if tartime <= filetime:
+            with tarfile.open(tarpath, 'w:' + COMPRESSION) as tar:
+                tar.add(filepath, arcname=archive, filter=tarfilter)
+            logger.info('Created archive {} from {}'.format(tarname, filename))
+        else:
+            logger.info('Skipped unchanged archive {} from {}'\
+                        .format(tarname, filename))
+
+
+def _newest_modification_time(filepath):
+    '''Returns the newest modification time among all files within a folder.'''
+    import os
+    mtime = 0.0
+    for root, dirs, entries in os.walk(filepath):
+        for entry in entries:
+            entrypath = os.path.join(root, entry)
+            if not os.path.islink(entrypath):
+                entrytime = os.path.getmtime(os.path.join(root, entry))
+                mtime = max(mtime, entrytime)
+    return mtime
+
+
+def _get_tar_filter(ignorefile):
+    '''Filters out all files matching any pattern in an ignore file'''
+    import os
+    import fnmatch
+
+    if not os.path.exists(ignorefile):
+        return None
+    
+    with open(ignorefile, 'r') as fobj:
+        patterns = [line.strip() for line in fobj.readlines()]
+
+    def tar_filter(tarinfo):
+        for pattern in patterns:
+            if fnmatch.fnmatch(tarinfo.name, pattern):
+                return None
+        return tarinfo
+
+    return tar_filter
