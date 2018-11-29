@@ -2,6 +2,7 @@
 Introduction
 ************
 
+
 This document is a collection of examples demonstrating the usage of the quantum
 mechanical atomistic software package `DFTB+ <http://www.dftbplus.org>`_.
 
