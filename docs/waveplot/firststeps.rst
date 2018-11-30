@@ -2,7 +2,9 @@
 The first steps with Waveplot
 *****************************
 
-[Input: `recipes/waveplot/firststeps/`]
+.. only :: builder_html or readthedocs
+
+   [Input: `recipes/waveplot/firststeps/`]
 
 Making a DFTB+ calculation
 ==========================
