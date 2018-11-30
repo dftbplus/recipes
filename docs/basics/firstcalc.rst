@@ -7,16 +7,21 @@ First calculation with DFTB+
 [Input: `recipes/basics/firstcalc/`]
 
 This chapter should serve as a tutorial guiding you through your first
-calculation with DFTB+. As an example, the equilibrium geometry of a water
-molecule is calculated.
+calculation with DFTB+. As an example, the equilibrium geometry of the water
+molecule will be calculated. As with all simulation tools, the work consists of
+three steps:
+
+* telling DFTB+ what to do,
+* running DFTB+,
+* analysing the results.
 
 
 Providing the input
 ===================
 
-First you have to create the input for the code. DFTB+ accepts the input as
-Human-readable Structured Data (HSD). The input file must be called
-`dftb_in.hsd`.  The input file used in this howto looks as follows::
+DFTB+ accepts the input in the Human-readable Structured Data (HSD) format. The
+input file must be called `dftb_in.hsd`.  The input file used in this example
+looks as follows::
 
   Geometry = GenFormat { 
   3 C 
@@ -45,9 +50,6 @@ Human-readable Structured Data (HSD). The input file must be called
     MaxAngularMomentum {
       O = "p"
       H = "s"
-    }
-    Filling = Fermi {
-      Temperature [Kelvin] = 0.0
     }
   }
   
@@ -120,7 +122,7 @@ geometry should be changed (if at all) during the calculation. If you only would
 like to make a static calculation, you must either set it to an empty value
 like ::
 
-  Driver = {}   # Empty value for the driver
+  Driver {}   # Empty value for the driver
 
 or omit the ``Driver`` block completely from `dftb_in.hsd`.
 
@@ -176,8 +178,9 @@ written that will contain the present geometry during the optimisation (and then
 the final geometry at the end of the calculation). The geometry is written in
 gen and xyz formats to the files obtained by appending ".gen" and ".xyz"
 suffixes to the specified name (`geom.out.gen` and `geom.out.xyz` in our case.)
-The `dptools` package (distributed with DFTB+) contains scripts to convert
-between the gen and the xyz formats (and various other formats).
+The `dptools` package distributed with DFTB+ contains scripts (`gen2xyz` and
+`xyz2gen`) to convert between the gen and the xyz formats (and various other
+formats).
 
 
 Hamiltonian
@@ -201,9 +204,6 @@ DFTB Hamiltonian has the following properties::
       O = "p"
       H = "s"
     }
-    Filling = Fermi {                  # No electronic temperature
-      Temperature [Kelvin] = 0.0
-    }
   } 
 
 In this example the charge self-consistent DFTB (SCC-DFTB) method is used for
@@ -213,7 +213,7 @@ order to find the final ground state of the system it has to iteratively solve
 the system, until the atomic charges are self-consistently converged.
 Convergence is reached if the difference between the charges used to build the
 Hamiltonian and the charges obtained after the diagonalisation of the
-Hamiltonian is below a certain tolerance (the default is 1e-4 electrons, but can
+Hamiltonian is below a certain tolerance (the default is 1e-5 electrons, but can
 be tuned with the ``SccTolerance`` option). If this level of convergence is not
 reached within a certain number of iterations, the code calculates the total
 energy using the charges obtained so far and stops with an appropriate warning
@@ -226,7 +226,7 @@ Slater-Koster files. Those files always describe the interaction between atom
 pairs. Therefore, you have to specify, for each pairwise combination of chemical
 elements in your system, the corresponding Slater-Koster file::
 
-  SlaterKosterFiles = {               # Specifying Slater-Koster files
+  SlaterKosterFiles {               # Specifying Slater-Koster files
     O-O = "../../slakos/mio-ext/O-O.skf"
     O-H = "../../slakos/mio-ext/O-H.skf"
     H-O = "../../slakos/mio-ext/H-O.skf"
@@ -259,10 +259,6 @@ electrical charge of 0). If you would like to calculate charged systems, you
 have to use the ``Charge`` option. Similarly, the system is assumed to be
 spin-unpolarised. You can however use the option ``SpinPolarisation`` to change
 this standard behaviour.
-
-The ``Filling`` option describes the method to use for filling up the one
-electron levels with electrons. Here Fermi-Dirac statistics are used. The
-filling functions usually requires further parameters (e.g the temperature).
 
 
 Analysis
@@ -316,9 +312,11 @@ required files (Slater-Koster files, any files included in the HSD input via
 Slater-Koster files need to be present.
 
 In order to run the calculation, you should invoke DFTB+ without any arguments
-in the directory containing the file `dftb_in.hsd`::
+in the directory containing the file `dftb_in.hsd`. As DFTB+ writes some useful
+output to the standard output (to the screen), it is recommended to save this
+output for later investigation::
 
-  dftb+
+  dftb+ | tee output
 
 Assuming the binary `dftb+` lies in your search path, you should
 obtain an output starting with::
@@ -424,9 +422,9 @@ Examining the output
 ====================
 
 DFTB+ communicates through two channels with you: by printing information to
-standard output (which you should probably redirect into a file to keep for
-later evaluation) and by writing information into various files. In the
-following, the most important of these files will be introduced and analysed
+standard output (which you should redirect into a file to keep for later
+evaluation) and by writing information into various files. In the following, the
+most important of these files will be introduced and analysed
 
 
 Standard output
@@ -441,7 +439,6 @@ program header::
   |
   |  Copyright (C) 2017  DFTB+ developers group
   |
-  |===============================================================================
   |===============================================================================
   |
   |  When publishing results obtained with DFTB+, please cite the following
@@ -496,7 +493,7 @@ missing specifications, you should look at the processed input file
 `dftb_pin.hsd`, which contains the value for all the possible input settings
 (see next the subsection).
 
-At this point that the DFTB+ code is then initialised, and the most important
+At this point the DFTB+ code is then initialised, and the most important
 parameters of the calculation are then printed out::
 
   Mode:                        Conjugate gradient relaxation
@@ -616,7 +613,7 @@ set::
     MaxAtomStep = 0.20000000000000001
     AppendGeometries = No
     ConvergentForcesOnly = Yes
-    Constraints = {}
+    Constraints {}
   }
 
 Similarly, in the ``DFTB{}`` block the switch for the orbital resolved SCC, for
@@ -658,49 +655,45 @@ a summary of the last SCC cycle and coordinates of any moved atoms::
       2     -0.00000000     -0.26834536      1.47115110
       3      0.00000000     -0.26834536     -1.47115110
 
-Then the net atomic charges for each atom follow (in case of |H2O| showing a
-strong electron transfer from the each hydrogen to the oxygen)::
+Then the populaton analysis information follows::
 
-   Net atomic charges (e)
-    Atom       Net charge
-       1      -0.59261515
-       2       0.29630757
-       3       0.29630757
+  Total charge:    -0.00000000
+  
+  Atomic gross charges (e)
+  Atom           Charge
+     1      -0.59261515
+     2       0.29630757
+     3       0.29630757
+  
+  Nr. of electrons (up):      8.00000000
+  Atom populations (up)
+   Atom       Population
+      1       6.59261515
+      2       0.70369243
+      3       0.70369243
+  
+  l-shell populations (up)
+   Atom Sh.   l       Population
+      1   1   0       1.73421713
+      1   2   1       4.85839802
+      2   1   0       0.70369243
+      3   1   0       0.70369243
+  
+  Orbital populations (up)
+   Atom Sh.   l   m       Population
+      1   1   0   0       1.73421713
+      1   2   1  -1       1.68107958
+      1   2   1   0       1.17731844
+      1   2   1   1       2.00000000
+      2   1   0   0       0.70369243
+      3   1   0   0       0.70369243
+
+
+It shows the total charge of the system and the charges for each atom, followed
+by detailed population analyis for each atom, shell and orbital.
 
 .. |H2O| replace:: H\ :sub:`2`\ O
        
-Then the energies of the individual electronic levels (orbitals) in both
-Hartrees and electronvolts, followed by the occupation of the individual single
-particle levels for all of the possible spin channels. For spin unpolarised
-calculations (like this one) you will get only one set of values, since the
-levels are spin restricted and are twofold degenerate::
-
-   Eigenvalues /H
-     -0.84898606
-     -0.41433754
-     -0.31375444
-     -0.25917545
-      0.39926500
-      0.55838451
-   
-   Eigenvalues /eV
-    -23.10208606
-    -11.27469810
-     -8.53769263
-     -7.05252282
-     10.86455343
-     15.19441557
-   
-   Fillings
-       2.00000
-       2.00000
-       2.00000
-       2.00000
-       0.00000
-       0.00000
-
-In a collinear spin polarised calculation you would obtain separate values for
-the spin up and spin down levels.
 
 Then you obtain a count of the total number electrons in the system, and the
 number of electrons on each atom, each atomic shell of the atoms (s, p, d, etc.)
@@ -752,11 +745,12 @@ Mermin free energy instead of the total energy::
    Total Electronic energy:           -4.1505816095 H         -112.9431 eV
    Repulsive energy:                   0.0726436756 H            1.9767 eV
    Total energy:                      -4.0779379339 H         -110.9663 eV
+   Extrapolated to 0:                 -4.0779379339 H         -110.9663 eV
    Total Mermin free energy:          -4.0779379339 H         -110.9663 eV
 
-Between the two blocks of energy data, the input and output charges at the last
-Hamiltonian diagonalisation are shown, so that you can check that no charges get
-lost during the calculation.
+Between the two blocks of energy data, the input and output electron numbers at
+the last Hamiltonian diagonalisation are shown, so that you can check that no
+electrons get lost during the calculation.
 
 This is then followed by a confirmation that the SCC convergence has been
 reached in the last geometry step::
@@ -797,10 +791,12 @@ found stored as xyz and gen format in the output files `geom.out.xyz` and
 band.out
 --------
 
-For large systems, and especially for periodic systems with many k-points, it
-can become quite difficult to get a good overview of the one electron levels and
-their occupations in `detailed.out`. Therefore, an extra file `band.out` is also
-created, which contains this information in a more human readable format::
+This file contains the energies of the individual electronic levels (orbitals)
+in electronvolts, followed by the occupation of the individual single particle
+levels for all of the possible spin channels. For spin unpolarised calculations
+(like this one) you will get only one set of values, since the levels are spin
+restricted and are twofold degenerate. In a collinear spin polarised calculation
+you would obtain separate values for the spin up and spin down levels::
 
   KPT            1  SPIN            1  KWEIGHT    1.0000000000000000
      -23.10209     2.00000

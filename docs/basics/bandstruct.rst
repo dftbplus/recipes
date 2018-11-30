@@ -17,20 +17,20 @@ you will need the Slater-Koster sets `mio` and `tiorg`. The sample input files
 assume that the necessary Slater-Koster files have been copied into a
 subdirectory `mio-ext`.
 
-The examples here are based on DFTB+ version 17.1, the input/output
-files in other versions may slightly differ from those shown here.
-
 
 Introduction
 ============
 
 The calculation of the band structure for a periodic system consists of two
-steps. First for self-consistent (SCC) calculations, the charges in the system
-must be calculated using a converged k-point sampling. Then, keeping the
-obtained self-consistent charges fixed, the one-electron levels must be
-calculated for k-points chosen along the specific lines in k-space of the chosen
-band structure. These are usually between high symmetry points in the Brillouin
-zone of that unit cell.
+steps.
+
+* First for self-consistent (SCC) calculations, the charges in the system must
+  be calculated using a converged k-point sampling.
+
+* Then, keeping the obtained self-consistent charges fixed, the one-electron
+  levels must be calculated for k-points chosen along the specific lines in
+  k-space of the chosen band structure. These are usually between high symmetry
+  points in the Brillouin zone of that unit cell.
 
 
 Creating the proper input charges
@@ -84,9 +84,6 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
       Ti = "d"
       O  = "p"
     }
-    Filling = Fermi {
-      Temperature [Kelvin] = 0.0
-    }
     KPointsAndWeights = SupercellFolding {
       4 0 0
       0 4 0
@@ -111,7 +108,7 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
   }
   
   ParserOptions {
-    ParserVersion = 5
+    ParserVersion = 6
   }
 
 In the input above, the coordinates have been specified in relative (fractional)
@@ -123,7 +120,7 @@ line of the geometry specification::
       6  F
    :
 
-The k-points are been generated automatically using the ``SupercellFolding``
+The k-points are generated automatically using the ``SupercellFolding``
 method, which enables among others the generation of Monkhorst-Pack schemes. In
 the current example, a k-point set equivalent to the Monkhorst-Pack scheme
 :math:`4 \times 4 \times 4` has been chosen (For details how to specify the
@@ -141,7 +138,7 @@ an accuracy in the range of 1e-3 eV for the total energy. Also, by specifying a
 smaller SCC tolerance than the chosen one (1e-5) you can check that converging
 the charges more precisely does not significantly decrease the total energy. We
 note in passing that these settings provide well converged results for the total
-energy in the current example, by in principal may not provide converged values
+energy in the current example, but in principal may not provide converged values
 for other properties. One should, in principal, test the convergence of any
 evaluated properties with respect to the calculation parameters.
 
@@ -259,8 +256,9 @@ to be changed slightly::
 
   # ...
 
-Note: only the relevant part of the input are shown, here. See the
-`Introduction`_ how to obtain the archive with the full input.
+Note: only the relevant parts of the input are shown, here. See the
+:ref:`sec-introduction` section on how to obtain the archive with the full
+input.
 
 The input is (must be) almost the same as in the previous case, with only a few
 adaptions:
@@ -303,9 +301,9 @@ adaptions:
   point only, as demonstrated above for the Z-point.
   
   Running DFTB+ with the input above, the eigenlevel spectrum is calculated at
-  the required k-points. The results are written to the file `detailed.out` and
-  in more readable format to `band.out`. You can use the script `dp_bands` from
-  the `dptools` package to convert this file into NXY format. By issuing::
+  the required k-points. The results are written to the file `band.out`. You can
+  use the script `dp_bands` from the `dptools` package to convert this file into
+  XNY format. By issuing::
 
     dp_bands band.out band
 
