@@ -236,9 +236,7 @@ def _newest_modification_time(filepath):
     for root, dirs, entries in os.walk(filepath):
         for entry in entries:
             entrypath = os.path.join(root, entry)
-            if not os.path.islink(entrypath):
-                entrytime = os.path.getmtime(os.path.join(root, entry))
-                mtime = max(mtime, entrytime)
+            mtime = max(mtime, os.lstat(entrypath).st_mtime)
     return mtime
 
 
