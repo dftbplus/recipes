@@ -22,8 +22,15 @@ containing all the inputs of the individual recipes.
 
 .. only :: builder_html or readthedocs
 
-   See :download:`archive with all inputs <_downloads/archives/recipes.tar.bz2>`.
+   Download :download:`archive with all inputs
+   <_downloads/archives/recipes.tar.bz2>`.
 
+.. only :: not (builder_html or readthedocs)
+
+   The archive can be downloaded from the `online version of the DFTB+ recipes
+   <https://dftbplus-recipes.readthedocs.io/>`_ at
+   https://dftbplus-recipes.readthedocs.io/.
+   
 In each recipe we indicate in square brackets after the section titles the
 corresponding directories in the archive, where the self-contained input can be
 found (e.g. [Input: `recipes/basics/firstcalc/`]).
