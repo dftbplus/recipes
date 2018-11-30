@@ -12,3 +12,4 @@ the best place to start, if you are new to the software package.
 
    firstcalc.rst
    bandstruct.rst
+   waveplot.rst

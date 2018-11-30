@@ -1,8 +1,16 @@
-*****************************
-The first steps with Waveplot
-*****************************
+.. highlight:: none
 
-[Input: `recipes/waveplot/firststeps/`]
+*************************
+First steps with Waveplot
+*************************
+
+[Input: `recipes/basics/waveplot/`]
+
+Waveplot is a tool for generating grid-based volumetric data about charge
+distributions and wave-functions in your system. By visualising those
+distributions with appropriate graphical tools you can obtain a deeper
+understanding of the physics and chemistry of your quantum mechanical system.
+
 
 Making a DFTB+ calculation
 ==========================
@@ -42,9 +50,6 @@ optimised by DFTB+::
       O = "p"
       H = "s"
     }
-    Filling = Fermi {
-      Temperature [Kelvin] = 0.0
-    }
   }
   
   Options {
@@ -81,29 +86,29 @@ following::
 
   # General options
   
-  Options = {
-    TotalChargeDensity = Yes             # Total density be plotted?
-    TotalChargeDifference = Yes          # Total density difference plotted?
-    ChargeDensity = Yes                  # Charge density for each state?
-    RealComponent = Yes                  # Plot real component of the wavefunction
-    PlottedSpins = { 1 -1 }
-    PlottedLevels = { 4 }                # Levels to plot
-    PlottedRegion =  OptimalCuboid {}    # Region to plot
+  Options {
+    TotalChargeDensity = Yes           # Total density be plotted?
+    TotalChargeDifference = Yes        # Total density difference plotted?
+    ChargeDensity = Yes                # Charge density for each state?
+    RealComponent = Yes                # Plot real component of the wavefunction
+    PlottedSpins = 1 -1 
+    PlottedLevels = 4                  # Levels to plot
+    PlottedRegion =  OptimalCuboid {}  # Region to plot
   
-    NrOfPoints = { 50 50 50 }            # Number of grid points in each direction
-    NrOfCachedGrids = -1                 # Nr of cached grids (speeds up things)
-    Verbose = Yes                        # Wanna see a lot of messages?
+    NrOfPoints = 50 50 50              # Number of grid points in each direction
+    NrOfCachedGrids = -1               # Nr of cached grids (speeds up things)
+    Verbose = Yes                      # Wanna see a lot of messages?
   }
   
-  DetailedXML = "detailed.xml"           # File containing the detailed xml output
-                                         # of DFTB+
-  EigenvecBin = "eigenvec.bin"           # File cointaining the binary eigenvecs
+  DetailedXml = "detailed.xml"         # File containing the detailed xml output
+                                       # of DFTB+
+  EigenvecBin = "eigenvec.bin"         # File cointaining the binary eigenvecs
   
   
   # Definition of the basis
-  Basis = {
+  Basis {
     Resolution = 0.01
-    # Including mio-0-1.hsd. (If you use a set, which depends on other sets,
+    # Including mio-1-1.hsd. (If you use a set, which depends on other sets,
     # the wfc.*.hsd files for each required set must be included in a similar
     # way.)
     <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"  
@@ -144,11 +149,11 @@ Some notes to the input:
 * The basis defintion (``Basis``) is made by including the file containing the
   approrpiate wave function coefficient definitions.  You must make sure that
   you use the file for the same set, which you used during your DFTB+
-  calculation. Here, the ``mio-0-1`` set was using for calculating the H2O
-  molecule, and therefore the file ``wfc.mio-0-1.hsd`` is included.
+  calculation. Here, the ``mio-1-1`` set was using for calculating the H2O
+  molecule, and therefore the file ``wfc.mio-1-1.hsd`` is included.
 
-  You can download the wavefuntion coefficients for all published sets
-  from the Waveplot website.
+  The wavefuntion coefficients can be usually downloaded from the same place as
+  the Slater-Koster files.
 
 
 Output
@@ -220,8 +225,8 @@ Some notes on the output:
 
 * The warnings about unprocessed nodes appears, because the included file
   ``wfc.mio-0-1.hsd`` contained also wave function coefficients for some
-  elements (C, N, S), which were are not present in the calculated system, so
-  that those definitions were ignored.
+  elements (C, N, S), which are not present in the calculated system, so that
+  those definitions were ignored.
 
 * The ``Total charge of atomic densities`` tells you the amount of charge found
   in the selected region, if atomic densities are superposed. This number should
@@ -231,19 +236,19 @@ Some notes on the output:
   small or misplaced (``PlottedRegion``).
 
 * The output files for the individual levels (charge density, real part,
-  imaginary part) follow the naming convention 'wp-KPOINT-SPN-LEVEL-TYPE.cube'.
+  imaginary part) follow the naming convention `wp-KPOINT-SPN-LEVEL-TYPE.cube`.
 
   The total charge and the total charge difference are stored in the files
-  'wp-abs2.cube' and 'wp-abs2diff.cube', respectively.
+  `wp-abs2.cube` and `wp-abs2diff.cube`, respectively.
 
 
-Visualising the results with VMD
-================================
+Visualising the results
+=======================
 
-The molecular visualisation tool VMD can be used to visualise the data created
-by Waveplot. Also, any other tool being able to parse the Gaussian cube file
-format is appropriate. (The pictures presented here were generated using VMD
-1.8.6.)
+The volumetric data generated by Waveplot is in the Gaussian cube format and can
+be visualized with several graphical tools (VMD, JMol, ParaView, ...). Below we
+show the necessary steps to visualize it using VMD. (It refers to VMD version
+1.8.6 and may differ in newer versions.)
 
 
 Total charge distribution
@@ -252,18 +257,18 @@ Total charge distribution
 The cube file containing the total charge distribution ``wp-abs2.cube`` can be
 read by using the ``File|New Molecule`` menu. VMD should automatically
 recognise, that the file has the Gaussian cube format. After successful loading,
-the VMD screen shows the sceleton of the molecule.
+the VMD screen shows the skeleton of the molecule.
 
 In order to visualise the charge distribution, the graphical representation of
 the molecule has to be changed. This can be achieved by using the
-``Graphics|Representations...`` submenu. The sceleton representation can be
-turned to a CPK represenation (using balls and stick) by selecting CPK for the
-``Drawing method`` in the ``Graphical Representations`` dialog box. Then one
+``Graphics|Representations...`` submenu. The skeleton representation can be
+turned to a CPK represenation (using balls and sticks) by selecting CPK for the
+``Drawing method`` in the ``Graphical Representations`` dialog box. Then you
 should create an additional representation (``Create Rep``) and change the
 drawing method for it to be ``Isosurface``. The type of isosurface (``Draw``)
 should be changed from ``Points`` to ``Solid Surface`` and instead of
 ``Box+Isosurface`` only ``Isosurface`` should be selected.  Then, by tuning the
-``Isovalue`` one can select the isosurface to be plotted. 
+``Isovalue`` one can select the isosurface to be plotted.
 :numref:`fig_waveplot_h2odensity` was created using 0.100. (Display background
 color had been set to white using the ``Graphics|Colors`` menu.)
 
@@ -289,9 +294,9 @@ using ``ColorID`` as coloring method and choosing different color values for the
 different representations.
 
 :numref:`fig_waveplot_h2odensdiff` demonstrates this for the water
-molecule. Negative net charges were colored red, positive net charges blue. One
-can clearly see, that there is a significant charge transfer from the hydrogens
-to the oxygen (lone pair on the oxygen).
+molecule. Negative net populations were colored red, positive net populations
+blue. One can clearly see, that there is a significant electron transfer from
+the hydrogens to the oxygen (lone pair on the oxygen).
 
  .. _fig_waveplot_h2odensdiff:
  .. figure:: /_figures/waveplot/h2o-densitydiff.png
@@ -310,7 +315,7 @@ done in the same way as the total charge distribution or the total charge
 difference. If the charge density (probability distribution) of an orbital is
 plotted, the data contains only positive values, therefore only one isosurface
 representation is necessary (like for the charge distribution). If the real (or
-for periodic systems also the imaginary part) of the wavefunction is to be
+for periodic systems also the imaginary) part of the wavefunction is to be
 plotted, two isosurface representations are needed, one for the positive and one
 for the negative values (like for the charge difference).
 
