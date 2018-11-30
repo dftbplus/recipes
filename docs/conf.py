@@ -232,9 +232,9 @@ def create_archives(app):
 def _newest_modification_time(filepath):
     '''Returns the newest modification time among all files within a folder.'''
     import os
-    mtime = 0.0
+    mtime = os.lstat(filepath).st_mtime
     for root, dirs, entries in os.walk(filepath):
-        for entry in entries:
+        for entry in dirs + entries:
             entrypath = os.path.join(root, entry)
             mtime = max(mtime, os.lstat(entrypath).st_mtime)
     return mtime
