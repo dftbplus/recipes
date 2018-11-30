@@ -2,14 +2,15 @@
 The first steps with Waveplot
 *****************************
 
+[Input: `recipes/waveplot/firststeps/`]
+
 Making a DFTB+ calculation
 ==========================
 
-In order to plot the charge distribution or the orbitals in a certain
-system, you have to execute a DFTB+ calculation for this system
-first. The calculation must be executed as usual, you just have to
-make sure, that the options ``WriteDetailedXML`` and
-``WriteEigenvectors`` are turned on.
+In order to plot the charge distribution or the orbitals in a certain system,
+you have to execute a DFTB+ calculation for this system first. The calculation
+must be executed as usual, you just have to make sure, that the options
+``WriteDetailedXML`` and ``WriteEigenvectors`` are turned on.
 
 Below you see the input for the H2O molecule, where the geometry is
 optimised by DFTB+::
@@ -30,10 +31,10 @@ optimised by DFTB+::
   }
   
   Hamiltonian = DFTB {
-    SCC = Yes
-    SCCTolerance = 1.0e-5
+    Scc = Yes
+    SccTolerance = 1.0e-5
     SlaterKosterFiles = Type2FileNames {
-      Prefix = "./"
+      Prefix = "../../slakos/mio-ext/"
       Separator = "-"
       Suffix = ".skf"
     }
@@ -46,13 +47,13 @@ optimised by DFTB+::
     }
   }
   
-  Options = {
-    WriteDetailedXML = Yes
+  Options {
+    WriteDetailedXml = Yes
     WriteEigenvectors = Yes
   }
   
-  ParserOptions = {
-    ParserVersion = 4
+  ParserOptions {
+    ParserVersion = 6
   }
 
 Running DFTB+ for this input, you should obtain the usual results, and
@@ -105,7 +106,7 @@ following::
     # Including mio-0-1.hsd. (If you use a set, which depends on other sets,
     # the wfc.*.hsd files for each required set must be included in a similar
     # way.)
-    <<+ "wfc.mio-0-1.hsd"  
+    <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"  
   }
 
 
