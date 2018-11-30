@@ -1,26 +1,26 @@
 Geometry = GenFormat {
-  <<< 80_V2.gen
+  <<< 80_SW.gen
 }
 
 Driver = VelocityVerlet {
-  
-  TimeStep [Femtosecond] = 2.0 # Using a thermostat, so conserved
-  # properties of dynamics are less
+
+  # Using a thermostat, so conserved properties of dynamics are less #
   # important
+  TimeStep [Femtosecond] = 2.0
   
   Thermostat = Andersen {
     
     # Probabalistically replaces atomic velocities from a
-    # Maxwell-Boltzmann distribution
+    # Maxwell-Boltzmann distribution    
     ReselectProbability = 0.2
     ReselectIndividually = Yes
     
     # Simulated annealing profile for the temperature
     Temperature [Kelvin] = TemperatureProfile {
-      constant      1    100.0
-      linear      500   5000.0
-      constant   1500   5000.0
-      linear      999    100.0
+      constant      1    100.0 # Start
+      linear      499   5500.0 # Ramp up
+      constant    200   5500.0 # 'cook'
+      linear      500    100.0 # Quench
     }
     
     AdaptFillingTemp = Yes # Adjust electron temperature to match
@@ -50,7 +50,7 @@ Hamiltonian = DFTB {
   # thermostat
   
   SlaterKosterFiles = Type2FileNames {
-    Prefix = "../../slako/"
+    Prefix = "../../slakos/mio-ext/"
     Separator = "-"
     Suffix = ".skf"
   }
@@ -64,18 +64,12 @@ Hamiltonian = DFTB {
 
 Options {
   
-  # specify the rand number generator starting seed:
-  RandomSeed = 195828608
-  
-  #RandomSeed = 1819633407 # Ejects a C2 molecule
-  #RandomSeed = 171108352  # Anneals to a different divacancy
-  #RandomSeed = 1959391743 # Vacancies remain in place and oscillate
-  #RandomSeed = 0          # Genuinely random seed choice
-  
-  WriteDetailedOut = No # suppress writing detailed.out
   MullikenAnalysis = No
   WriteBandOut = No
   
+  WriteDetailedOut = No
+  RandomSeed = 589105024 # specify the rand number generator
+  # starting seed
 }
 
 ParserOptions {

@@ -4,6 +4,10 @@
 Dynamics in the ground state
 ****************************
 
+.. only :: builder_html or readthedocs
+
+   [Input: `recipes/moleculardynamics/md/`]
+
 Dynamics on the Born-Oppenheimer ground state energy surface can be performed in
 DFTB+ by setting the input geometry driver to be `VelocityVerlet` ::
   
@@ -21,10 +25,6 @@ DFTB+ by setting the input geometry driver to be `VelocityVerlet` ::
 The velocity Verlet driver should have a time step on the scale of ~10x the
 highest vibrational period in the system. 1 fs is a common choice. The  
 
-.. only:: builder_html
-   
-   See :download:`the full input <../_downloads/md3.dftb_in.hsd>`
-
 The input file specifies initial velocities of the atoms ::
   
   Velocities [AA/ps] {
@@ -33,13 +33,34 @@ The input file specifies initial velocities of the atoms ::
     .
     .
   }
-  
-The initial velocities can be user supplied, however it is more common to
-generate them by thermalising the system starting from an initial
-Maxwell-Boltzmann distribution of atomic velocities. These can be generated for
-example by using the following input
 
-.. only:: builder_html
-   
-   See :download:`the full input <../_downloads/md4.dftb_in.hsd>`
+Thermalising a system
+---------------------
+
+.. only :: builder_html or readthedocs
+
+   [Input: `recipes/moleculardynamics/thermalise/`]
+  
+The initial velocities of atoms can be user supplied, however it is more common
+to generate them by thermalising the system starting from an initial
+Maxwell-Boltzmann distribution of atomic velocities. These can be generated for
+example by using the following input::
+
+  Thermostat = NoseHoover {
+    # Target temperature
+    Temperature [Kelvin] = 400
+    # Approximately the highest vibrational frequency of the molecule
+    CouplingStrength [cm^-1] = 3200
+  }
+
+within the ``VelocityVerlet`` input block. The initial values of the velocities
+are set from a random number generator, hence to make the calculation repeatable
+this is set to a specific value ::
+
+  Options = {
+    RandomSeed = 3871906
+  }
+
+However, for real calculations, it would be common to use a fully random choice,
+by omitting the ``RandomSeed`` value.
 

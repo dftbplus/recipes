@@ -1,8 +1,9 @@
 Geometry = GenFormat {
-  <<< "md2.geom.gen"
+  # previously relaxed geometry
+  <<< "geom.gen"
 }
 
-# Calculate second derivatives of energy
+# Calculate the second derivatives of the energy
 Driver = SecondDerivatives {
   # Specified finite difference step
   Delta = 1e-4
@@ -16,7 +17,7 @@ Hamiltonian = DFTB {
     Temperature [Kelvin] = 400
   }
   SlaterKosterFiles = Type2FileNames {
-    Prefix = "../../slako/"
+    Prefix = "../../slakos/mio-ext/"
     Separator = "-"
     Suffix = ".skf" 
   }

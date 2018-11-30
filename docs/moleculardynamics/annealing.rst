@@ -4,6 +4,10 @@
 Simulated annealing
 *******************
 
+.. only :: builder_html or readthedocs
+
+   [Input: `recipes/moleculardynamics/annealSW/`]
+
 By heating up a system, and then allowing it to slowly cool, stable minima can
 be found. If the cooling is sufficiently (logarithmically) slow, then the global
 minima will be found, however this is not usually practical. More realistically,
@@ -17,23 +21,17 @@ a low temperature. The high temperature is above the usual disociation
 temperature of graphene, but since only a relatively short (2.4 ps) time is
 computed, using a higher temperature accelerates the annealing.
 
-.. only:: builder_html
+
+Annealing to multiple minima
+----------------------------
+
+.. only :: builder_html or readthedocs
+
+   [Input: `recipes/moleculardynamics/annealV2/`]
    
-   See :download:`the full input
-   <../inputs/moleculardynamics/annealSW/annealSW_dftb_in.hsd>` and :download:`geometry
-   <../inputs/moleculardynamics/annealSW/80_SW.gen>`.
-
-
 The annealing process can also be used to find alternative local minina. Here
 two vacancies in a graphene sheet are heated. Depending on the initial
 conditions, the system anneals to different final structures. The starting
 velocities are chosen at random, so depending on the seed value for the random
 generator (several different cases are given in the input file) a different
-final geometry is obtained.
-
-.. only:: builder_html
-   
-   See :download:`the full input
-   <../inputs/moleculardynamics/annealV2/annealV2_dftb_in.hsd>` and :download:`geometry
-   <../inputs/moleculardynamics/annealV2/80_V2.gen>`.
-   
+final defect geometry is obtained by the same cycle of heating and cooling.

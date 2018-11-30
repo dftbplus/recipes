@@ -65,7 +65,7 @@ Hamiltonian = DFTB {
     Temperature [Kelvin] = 400
   }
   SlaterKosterFiles = Type2FileNames {
-    Prefix = "../../slako/"
+    Prefix = "../../slakos/mio-ext/"
     Separator = "-"
     Suffix = ".skf" 
   }

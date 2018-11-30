@@ -11,5 +11,5 @@ Green-Kubo relations).
 
 The velocity-velocity auto-correlation encodes the (anharmonic) vibrational
 modes, while the dipole auto-correlation contains information on the mode
-intensities. Both of these can be evaluated from the information  in `md.out` -
-more information to follow.
+intensities. Both of these can be evaluated from the output of the code - more
+information to follow on this topic.
