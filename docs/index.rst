@@ -7,7 +7,6 @@ DFTB+ recipes
 
    introduction.rst
    basics/index.rst
-   parallel/index.rst
    moleculardynamics/index.rst
-   waveplot/index.rst
+   parallel/index.rst
    licence.rst
