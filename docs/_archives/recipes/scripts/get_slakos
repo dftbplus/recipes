@@ -1,0 +1,33 @@
+#!/bin/bash
+################################################################################
+# Downloads and unpacks slako related files from dftb.org
+################################################################################
+scriptdir="$(dirname $0)"
+root="$scriptdir/.."
+downloaddir="$root/slakos/download"
+downloadfile="$root/slakos/SLAKO_DOWNLOADS"
+slakourlprefix="http://www.dftb.org/fileadmin/DFTB/public/slako"
+
+echo "Downloading SLAKO archives:"
+for remotefile in $(cat $downloadfile); do
+  destdir=$(dirname $remotefile)
+  fname=$(basename $remotefile)
+  mkdir -p $downloaddir/$destdir
+  
+  echo "Downloading $remotefile"
+  echo "wget -q -O $downloaddir/$destdir/$fname $slakourlprefix/$remotefile"
+  wget -q -O $downloaddir/$destdir/$fname $slakourlprefix/$remotefile
+  if [ $? -ne 0 ]; then
+    echo "DOWNLOAD FAILED for$ slakourlprefix/$remotefile" >&2
+  fi
+
+  if [ "$(basename $fname .tar.xz)" != "$fname" ]; then
+    echo "Unpacking archive $fname"
+    tar -x -C $downloaddir/$destdir -J -f $downloaddir/$destdir/$fname
+    if [ $? -ne 0 ]; then
+      echo "UNPACKING FAILED for $downloaddir/$destdir/$fname" >&2
+    fi
+    echo "Removing archive $fname"
+    rm -f $downloaddir/$destdir/$fname
+  fi
+done
