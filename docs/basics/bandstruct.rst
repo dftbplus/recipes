@@ -5,9 +5,8 @@ Band structure, DOS and PDOS
 ****************************
 
 This chapter demonstrates, using the example of anatase (|TiO2|), how the band
-structure, the density of states (DOS) and the partial density of states (PDOS)
-of a periodic system (such as wires, surfaces or solids) can be obtained using
-DFTB+.
+structure, density of states (DOS) and the partial density of states (PDOS) of a
+periodic system (such as wires, surfaces or solids) can be obtained using DFTB+.
 
 .. |TiO2| replace:: TiO\ :sub:`2`\
 

@@ -11,7 +11,7 @@ parallelised BLAS library. These include `MKL
 <https://software.intel.com/en-us/mkl>`_ or `OpenBLAS
 <https://www.openblas.net/>`_.
 
-The available `dftb+ binaries <https://www.dftbplus.org/download/dftb-181/>`_
+The available `dftb+ binaries <https://www.dftbplus.org/download/dftb-stable/>`_
 are compiled with OpenMP support and use the OpenBLAS libraries.
 
 You will also usually need to specify the number of parallel threads that the
@@ -34,14 +34,14 @@ Compiling with MPI
 
 In order to use Message Passing Interface (MPI) enabled DFTB+, you will require
 
-#. A working MPI 2 (or later) installation (this should include a wrapper for
+#. A working MPI 2 (or later) installation. This should include a wrapper for
    Fortran compilation, which is named some variant on mpifort or mpif90 for
-   most MPI implementations)
+   most MPI implementations.
 
 #. The ScaLAPACK library (or a library such as MKL that supplies this
-   functionality)
+   functionality).
 
-#. Either serial or thread aware LAPACK and BLAS libraries (or equivalents)
+#. Either serial or thread aware LAPACK and BLAS libraries (or equivalents).
 
 Depending on your system, optimised MPI libraries for your network may be
 available (contact your system manager for details).

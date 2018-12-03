@@ -6,8 +6,8 @@ First steps with Waveplot
 
 [Input: `recipes/basics/waveplot/`]
 
-Waveplot is a tool for generating grid-based volumetric data about charge
-distributions and wave-functions in your system. By visualising those
+Waveplot is a tool for generating grid-based volumetric data for charge
+distributions or wave-functions in your system. By visualising those
 distributions with appropriate graphical tools you can obtain a deeper
 understanding of the physics and chemistry of your quantum mechanical system.
 
@@ -224,9 +224,9 @@ Output
 Some notes on the output:
 
 * The warnings about unprocessed nodes appears, because the included file
-  ``wfc.mio-0-1.hsd`` contained also wave function coefficients for some
-  elements (C, N, S), which are not present in the calculated system, so that
-  those definitions were ignored.
+  ``wfc.mio-0-1.hsd`` also contained wave function coefficients for elements (C,
+  N, S), which are not present in the calculated system. Hence these extra
+  definitions in the file were ignored.
 
 * The ``Total charge of atomic densities`` tells you the amount of charge found
   in the selected region, if atomic densities are superposed. This number should

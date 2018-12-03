@@ -8,8 +8,8 @@ First calculation with DFTB+
 
 This chapter should serve as a tutorial guiding you through your first
 calculation with DFTB+. As an example, the equilibrium geometry of the water
-molecule will be calculated. As with all simulation tools, the work consists of
-three steps:
+molecule will be calculated. As with all simulation tools, the process consists
+of three steps:
 
 * telling DFTB+ what to do,
 * running DFTB+,
@@ -64,19 +64,19 @@ looks as follows::
   }
 
 The order of the specified blocks in the HSD input is arbitrary. You are free to
-capitalise the keywords and physical units as you like, since they are
-case-insensitive. This is not valid, however, for string values, especially if
+capitalise the keywords and any physical units as you like, since they are
+case-insensitive. This is not valid however for string values, especially if
 they are specifying file names.
 
 
 Geometry
 --------
 
-The ``Geometry`` block contains the types and coordinates of the atoms in your
+The ``Geometry`` block contains types and coordinates of the atoms in your
 system.  The geometry of the system in the sample input file is provided in the
 so called "gen" format, which was the traditional geometry input format of the
 DFTB method. The formal description of this format can be found in the DFTB+
-manual.  The current example ::
+manual.  In the current example, the geometry is ::
 
   Geometry = GenFormat {
     3  C                   # 3 atoms, non-periodic cluster
@@ -85,16 +85,17 @@ manual.  The current example ::
          1    1    0.00000000000E+00  -0.10000000000E+01   0.00000000000E+00
          2    2    0.00000000000E+00   0.00000000000E+00   0.78306400000E+00
          3    2    0.00000000000E+00   0.00000000000E+00  -0.78306400000E+00
+  }
 
-specifies a cluster of 3 atoms of the type O and H (cluster geometries having
-open boundary conditions, as distinct from periodic supercell geometries). The
-Cartesian coordinates of the atoms in the "gen" format are given in Angstroms.
-The first column of integers contains sequential numbering of the atoms in the
-system (the actual values are ignored by the parser).  The second column
-contains the type of each atom, given as the position of the appropriate element
-in the element list of the second line of the "gen" data.  The ``GenFormat{}``
-is not the only way to specify the geometry, you should check the manual for
-other methods.
+which specifies a cluster of 3 atoms of chemical types O and H (cluster
+geometries having open boundary conditions as distinct from periodic supercell
+geometries). The Cartesian coordinates of the atoms in the "gen" format are
+given in Angstroms.  The first column of integers contains the sequential
+numbering of the atoms in the system (the actual values are ignored by the
+parser).  The second column contains the type of each atom, given as the
+position of the appropriate element in the element list of the second line of
+the "gen" data.  The ``GenFormat{}`` is not the only way to specify the
+geometry, you should check the manual for other methods.
 
 As demonstrated above, it is possible to put arbitrary comments in the HSD input
 after a hash-mark (``#``) character. Everything between this character and the
@@ -134,7 +135,7 @@ In the current example::
     MaxForceComponent = 1.0e-4      # Stop if maximal force below 1.0e-4
     MaxSteps = 100                  # Stop after maximal 100 steps
     OutputPrefix = "geom.out"       # Final geometry in geom.out.{xyz,gen}
-  } 
+  }
 
 the molecule is relaxed using the conjugate gradient method. The
 entire range of atoms from the first (atom 1) until and including the
@@ -187,10 +188,10 @@ Hamiltonian
 -----------
 
 You have to decide upon the model used to describe your system in order to
-calculate its properties. At the moment DFTB+ eases this decision quite a lot,
-since it currently only supports types of Density Functional based Tight Binding
-Hamiltonians (with some extensions). In our example, the chosen self-consistent
-DFTB Hamiltonian has the following properties::
+calculate its properties. At the moment DFTB+ simplifies this decision quite a
+lot, since it currently only supports types of Density Functional based Tight
+Binding Hamiltonians (with some extensions). In our example, the chosen
+self-consistent DFTB Hamiltonian has the following properties::
 
   Hamiltonian = DFTB {                 # DFTB Hamiltonian
     Scc = Yes                          # Use self consistent charges
@@ -204,7 +205,7 @@ DFTB Hamiltonian has the following properties::
       O = "p"
       H = "s"
     }
-  } 
+  }
 
 In this example the charge self-consistent DFTB (SCC-DFTB) method is used for
 the electronic structure (and calculating the total energy, forces, etc.). This
@@ -318,8 +319,8 @@ output for later investigation::
 
   dftb+ | tee output
 
-Assuming the binary `dftb+` lies in your search path, you should
-obtain an output starting with::
+Assuming the binary `dftb+` is in your search path, you should obtain an output
+starting with::
 
   |===============================================================================
   |
