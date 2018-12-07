@@ -1,9 +1,9 @@
 Introduction
-============
+------------
 
 
 Why run in parallel?
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 There are two main reasons for using parallel computers:
 
@@ -24,7 +24,7 @@ memory per computing core).
 
 
 Types of parallel hardware
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The two types of parallel computer that DFTB+ currently can make use of are
 either
@@ -43,7 +43,7 @@ also used for shared memory architectures).
 
 
 Shared memory parallel
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 The default compilation options for DFTB+ produce an OpenMP enabled parallel
 program for shared memory systems. The `make.arch` file for compiling the code
@@ -59,7 +59,7 @@ should
 
 
 Distributed memory parallel
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 DFTB+ can also be compiled to use MPI parallelism, typically for distributed
 memory machines. This is usually required for larger parallel computers and
@@ -82,7 +82,7 @@ functionality is the same as the shared memory version.
 
 
 Hybrid parallelism
-------------------
+~~~~~~~~~~~~~~~~~~
 
 DFTB+ can be compiled with both MPI and openMP parallelism combined. However
 using this can require system specific settings for thread affinity to provide

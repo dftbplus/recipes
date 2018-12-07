@@ -1,5 +1,5 @@
 Amdahl's law
-============
+------------
 
 One of the major issues in the performance of a parallel program is the possible
 speed up from using parallelism. Amdahl's law describes the expected gains for
@@ -37,7 +37,7 @@ parallel performance, but can be a good guide to the limits of scalability for
 
 
 Gustafson's law
-===============
+---------------
 
 Amdahl's law assumes that the size of the computational problem remains fixed as
 the number of processes increases. However, it is often more common that the

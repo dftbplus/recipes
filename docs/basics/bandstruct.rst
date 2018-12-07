@@ -18,7 +18,7 @@ subdirectory `mio-ext`.
 
 
 Introduction
-============
+------------
 
 The calculation of the band structure for a periodic system consists of two
 steps.
@@ -33,7 +33,7 @@ steps.
 
 
 Creating the proper input charges
-=================================
+---------------------------------
 
 [Input: `recipes/basics/bandstruct/1_density/`]
 
@@ -174,7 +174,7 @@ and d shells of Ti, while the last two files provide the oxygen s and p shells.
 
 
 Plotting the density of states
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use the `dp_dos` program from the `dptools` package to take the
 eigenlevels stored in `band.out`, apply a gaussian smearing to them, and to
@@ -226,7 +226,7 @@ made of the d-orbitals of titanium.
 
 
 Calculating the band structure
-==============================
+------------------------------
 
 [Input: `recipes/basics/bandstruct/2_bands/`]
 

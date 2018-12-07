@@ -8,7 +8,7 @@ This document is a collection of examples demonstrating the usage of the
 atomistic quantum mechanical software `DFTB+ <http://www.dftbplus.org>`_.
 
 Before you start
-================
+----------------
 
 The examples assume that you have the `latest stable version
 <http://www.dftbplus.org/download/dftb-stable/>`_ of DFTB+ installed (although
@@ -46,7 +46,7 @@ folders contain the individual commands needed to run the full example.
 
 
 Where to start
-==============
+--------------
 
 The individual chapters are more or less independent from each other, so you may
 go directly to the one relevant to your interests. However, if you are new to

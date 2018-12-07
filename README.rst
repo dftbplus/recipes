@@ -13,7 +13,7 @@ Contributions are very welcome!
 
 
 Technical notes
-===============
+---------------
 
 * The book is written in the restructured text format and is contained in the
   `docs/` folder. In order to process it, you need Sphinx version 1.8 or above.

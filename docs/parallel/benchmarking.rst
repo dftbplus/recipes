@@ -1,5 +1,5 @@
 Benchmarking and scalability
-============================
+----------------------------
 
 DFTB+ has an internal timer for various significant parts of its
 calculations. This can be enabled by adding the following option to the input::
@@ -49,7 +49,7 @@ More advanced timing is possible by using profiling tools such as `gprof`.
 
 
 Examples
---------
+~~~~~~~~
 
 Shared memory parallelism
 ^^^^^^^^^^^^^^^^^^^^^^^^^

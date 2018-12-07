@@ -1,9 +1,9 @@
 Compiling the code
-==================
+------------------
 
 
 Compiling for OpenMP
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 The default `make.arch` examples for DFTB+ should enable OpenMP parallelism, but
 in order to gain from this you will also require an efficient thread
@@ -30,7 +30,7 @@ before running DFTB+.
 
 
 Compiling with MPI
-------------------
+~~~~~~~~~~~~~~~~~~
 
 In order to use Message Passing Interface (MPI) enabled DFTB+, you will require
 
