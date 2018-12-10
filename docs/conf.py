@@ -194,7 +194,7 @@ def setup(app):
 
 
 def create_archives(app):
-    '''Creates an .tar.xz archive in _downloads for each entry in _archives.'''
+    '''Creates a .tar.bz2 archive in _downloads for each entry in _archives.'''
 
     import os
     import tarfile

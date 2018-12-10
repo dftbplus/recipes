@@ -35,14 +35,21 @@ In each recipe we indicate where to find the corresponding directories in the
 archive with square brackets after the section title (e.g. [Input:
 `recipes/basics/firstcalc/`]).
 
+Getting Slater-Koster data
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 After unpacking the archive, you must also download all Slater-Koster-files
 needed by the examples, by using the supplied script as ::
 
   ./scripts/get_slakos
 
-running this command in the root folder of the archive. After this you should be
-able to run each example. The provided `run.sh` script in each of the example
-folders contain the individual commands needed to run the full example.
+in the root folder of the archive. You should then be able to run each example
+by calling ``dftb+`` from the corresponding input folder (assuming that dftb+ is
+installed in your executable path).  For some examples, there is also a supplied
+script file in the directory to run examples of multistage calculations, called
+``run.sh`` which contains the individual commands needed to run the full
+example.
+
 
 
 Where to start
