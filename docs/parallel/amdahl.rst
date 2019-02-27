@@ -1,5 +1,8 @@
+Theoretical parallel scaling
+============================
+
 Amdahl's law
-============
+------------
 
 One of the major issues in the performance of a parallel program is the possible
 speed up from using parallelism. Amdahl's law describes the expected gains for
@@ -37,18 +40,20 @@ parallel performance, but can be a good guide to the limits of scalability for
 
 
 Gustafson's law
-===============
+---------------
 
 Amdahl's law assumes that the size of the computational problem remains fixed as
 the number of processes increases. However, it is often more common that the
 problem is increased along with the number of processes.
 
-This situation is partly described by Gustafson's law. However in the case of
-DFTB the computational effort for conventional diagonalisation (the dominant
-part for most calculations) grows as the cube of the number of atoms. This
-complicates the situation. In principle idealised weak scaling where the number
-of atoms increases proportional to the number of processors would give a time to
-solution that grows as the square of the number of atoms.
+This situation is partly described by `Gustafson's law
+<https://en.wikipedia.org/wiki/Gustafson's_law>`_. However in the case
+of DFTB the computational effort for conventional diagonalisation (the
+dominant part for most calculations) grows as the cube of the number
+of atoms. This complicates the situation. In principle idealised weak
+scaling where the number of atoms increases proportional to the number
+of processors would give a time to solution that grows as the square
+of the number of atoms.
 
 See for example `Snyder, Annu. Rev. Comput. Sci. 1: 289, 1986
 <https://dx.doi.org/10.1146/annurev.cs.01.060186.001445>`_ for a discussion of

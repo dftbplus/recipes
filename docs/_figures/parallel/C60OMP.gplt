@@ -1,0 +1,12 @@
+set key top left
+set border lw 3
+set xlabel 'Procs.'
+set ylabel 'Speed-up'
+set terminal svg font "Helvetica,22"
+set output 'C60time.svg
+f(x,p) = 1/(1-p+p/x)
+plot [1:16] f(x,.28) lw 3 lt -1 t '28%', f(x,.896) lw 3 lt -1 t '90%',\
+'C60OMP.dat' u 1:(38.31/$2) w p pt 6 ps 1 t 'ARPACK',\
+'' u 1:(106.96/$3) w p pt 6 ps 1 lc 7 t 'Stratmann'
+set output '/dev/null'
+
