@@ -1,0 +1,45 @@
+# Example input to calculate the eigenstates for one of the defective
+# armchair ribbons, using the self-consistent charges calculated in
+# the previous DOS example
+
+Geometry = GenFormat {
+  # take the structure from the directory where the DOS was calculated
+  <<< "geo.gen"
+}
+
+Hamiltonian = DFTB {
+  
+  # Self-consistent
+  SCC = Yes
+
+  # To generate wavefunctions at the gamma point only using an
+  # existing charges.bin set of data
+  ReadInitialCharges = Yes
+  MaxSCCIterations = 1
+  KPointsAndWeights {
+    0.0  0.0  0.0   1.0
+  }
+    
+  # Atomic states on the atoms
+  MaxAngularMomentum {
+    C = "p"
+    H = "s"
+  }    
+  
+  # Reading the parameters for the calculation
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slako/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+}
+
+Options {
+  WriteEigenvectors = Yes    #  store the eigenstates to disc
+  WriteDetailedXML = Yes     # required later for the waveplot program
+  WriteDetailedOut = No     
+}
+
+ParserOptions {
+  ParserVersion = 4
+}

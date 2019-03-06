@@ -1,0 +1,37 @@
+############################################################################
+# Sample input file for the waveplot tool
+#
+# For details about the syntax and the options see the manual
+############################################################################
+
+# General options
+Options {
+  TotalChargeDensity = No             	#  Total density should not be plotted
+  ChargeDensity = No                   	#  Charge density for each state
+  RealComponent = Yes                  	#  Real component of the wavefunction
+  PlottedLevels = 742:744        	#  Levels to plot
+  PlottedKPoints = 1               	#  Kpoints to plot
+  PlottedSpins =  1                 	#  Spins to plot
+  PlottedRegion {                    	#  Plotted region (alternatively you  
+    Box [Angstrom] {                 	#  you could use OptimalCuboid{} or   
+      20     0.000000     0.000000	#  UnitCell{} to specify the region)
+      0.           4     0.000000	                                    
+      0.0          0.0          51.12
+    }
+    Origin [Angstrom] =  0.00000  -2  0
+  }
+  NrOfPoints = 100 20 250              # Number of grid points in each direction
+  NrOfCachedGrids = -1                 # Nr of cached grids (speeds up things)
+  Verbose = Yes                        # Wanna see a lot of messages?
+}
+
+DetailedXML = "detailed.xml"           # File containing the detailed xml output
+                                       # of DFTB+
+EigenvecBin = "eigenvec.bin"           # File cointaining the binary eigenvecs
+
+
+# Definition of the basis
+Basis {
+  Resolution = 0.1
+  <<+ ../../data/wfc.mio-0-1.hsd
+}
