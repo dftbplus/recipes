@@ -12,3 +12,4 @@ defect calculations which can be helpful to understand the following chapter.
    :maxdepth: 1
 
    carbon2d-elec.rst
+   carbon2d-trans.rst
