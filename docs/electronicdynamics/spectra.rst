@@ -6,7 +6,7 @@ Calculation of electronic absorption spectra
 
 This chapter serves as a tutorial on using the real time propagation of electronic dynamics as implemented in DFTB+ for the calculation of electronic absorption spectra.
 
-Unless some good reason exist for not doing so, the electronic spectrum should be calculated at the equilibrium geometry. For this example we will use an optimized Chlorophyl a molecule. The example reproduces the results in `Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation of the optical response of photosynthetic pigments. Physical Chemistry Chemical Physics : PCCP, 12(25), 6706–6711. <ttp://doi.org/10.1039/b926051j>`_
+Unless some good reason exists for not doing so, the electronic spectrum should be calculated at the equilibrium geometry. For this example we will use an optimized Chlorophyl a molecule. The example reproduces the results in `Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation of the optical response of photosynthetic pigments. Physical Chemistry Chemical Physics : PCCP, 12(25), 6706–6711. <ttp://doi.org/10.1039/b926051j>`_
 
 The input
 =========
@@ -135,7 +135,7 @@ The calculation of the spectrum makes use of the fact that the Fourier transform
 
 :math:`\mathbf{mu}(\omega)=\overset\leftrightarrow{\alpha}(\omega)\mathbf{E}(\omega)`
 
-since the Fourier transform of a Dirac delta is a constant, the polarizability tensor :math:\overset\leftrightarrow{\alpha}(\omega) can be obtained from the time dependent response. The absorption is proportional to the imaginary part of the trace of the polarizability tensor. 
+since the Fourier transform of a Dirac delta is a constant, the polarizability tensor :math:`\overset\leftrightarrow{\alpha}(\omega)` can be obtained from the time dependent response. The absorption is proportional to the imaginary part of the trace of the polarizability tensor. 
 
 The calculation of the absorption spectrum is carried out using the script ``calc_timeprop_spectrum`` located in the ``utils`` directory under the ``dftbplus`` source tree. The invocation of the script is as follows::
 
