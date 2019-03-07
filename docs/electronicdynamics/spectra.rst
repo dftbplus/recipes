@@ -6,7 +6,7 @@ Calculation of electronic absorption spectra
 
 This chapter serves as a tutorial on using the real time propagation of electronic dynamics as implemented in DFTB+ for the calculation of electronic absorption spectra.
 
-Unless some good reason exists for not doing so, the electronic spectrum should be calculated at the equilibrium geometry. For this example we will use an optimized Chlorophyl a molecule. The example reproduces the results in `Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation of the optical response of photosynthetic pigments. Physical Chemistry Chemical Physics : PCCP, 12(25), 6706–6711. <ttp://doi.org/10.1039/b926051j>`_
+Unless some good reason exists for not doing so, the electronic spectrum should be calculated at the equilibrium geometry. For this example we will use an optimized Chlorophyl a molecule. The example reproduces the results in `Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation of the optical response of photosynthetic pigments. Physical Chemistry Chemical Physics : PCCP, 12(25), 6706–6711. <http://doi.org/10.1039/b926051j>`_
 
 The input
 =========
