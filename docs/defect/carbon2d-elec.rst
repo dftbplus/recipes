@@ -16,7 +16,7 @@ structure.
 Geometry, density of state
 --------------------------
 
-[Input: `recipes/transport/carbon2d-elect/graphene/latopt/`]
+[Input: `recipes/defect/carbon2d-elect/graphene/latopt/`]
 
 
 Preparing the input
@@ -55,10 +55,10 @@ script) and visualize it::
   jmol geo.441.xyz &
 
 You should then see a graphene sheet displayed, similar to Figure
-:ref:`fig_transport_carbon2d-elec_graphene-geo-441`.
+:ref:`fig_defect_carbon2d-elec_graphene-geo-441`.
 
-.. _fig_transport_carbon2d-elec_graphene-geo-441:
-.. figure:: ../_figures/transport/carbon2d-elec/graphene-geo-441.png
+.. _fig_defect_carbon2d-elec_graphene-geo-441:
+.. figure:: ../_figures/defect/carbon2d-elec/graphene-geo-441.png
    :width: 60%
    :align: center
    :alt: Graphene 4x4x1 sheet
@@ -236,10 +236,10 @@ help)::
 
 You can use also any other program (gnuplot, xmgrace) which can visualize
 XY-data. You should see something similar to Figure
-:ref:`fig_transport_carbon2d-elec_graphene-dos`.
+:ref:`fig_defect_carbon2d-elec_graphene-dos`.
 
-.. _fig_transport_carbon2d-elec_graphene-dos:
-.. figure:: ../_figures/transport/carbon2d-elec/graphene-dos.png
+.. _fig_defect_carbon2d-elec_graphene-dos:
+.. figure:: ../_figures/defect/carbon2d-elec/graphene-dos.png
    :width: 60%
    :align: center
    :alt: DOS and PDOS for graphene
@@ -263,7 +263,7 @@ Brillouin-zone sampling or using a slightly wider broadening function in
 Band structure
 --------------
 
-[Input: `recipes/transport/carbon2d-elect/graphene/bands/`]
+[Input: `recipes/defect/carbon2d-elect/graphene/bands/`]
 
 Band structure calculations in DFTB (as in DFT) always consist of two steps:
 
@@ -338,10 +338,10 @@ which yields -4.67 eV, and then visualize the band structure by invoking ::
   plotxy -L --xlabel "K points" --ylabel "Energy [eV]" band_tot.dat &
 
 This results in the band structure as shown in Figure
-:ref:`fig_transport_carbon2d-elec_graphene-band`.
+:ref:`fig_defect_carbon2d-elec_graphene-band`.
 
-.. _fig_transport_carbon2d-elec_graphene-band:
-.. figure:: ../_figures/transport/carbon2d-elec/graphene-band.png
+.. _fig_defect_carbon2d-elec_graphene-band:
+.. figure:: ../_figures/defect/carbon2d-elec/graphene-band.png
    :width: 60%
    :align: center
    :alt: Band structure of graphene
@@ -363,7 +363,7 @@ nanoribbon.
 Calculting the density and DOS
 ------------------------------
 
-[Input: `recipes/transport/carbon2d-elect/zigzag/density/`]
+[Input: `recipes/defect/carbon2d-elect/zigzag/density/`]
 
 The initial geometry for the zigzag nanoribbon contains one chain of the
 structure, repeated periodically along the z-direction. The lattice vectors
@@ -384,10 +384,10 @@ and then issue ::
   ./checkgeo.sh
 
 to obtain the molecule shown in Figure
-:ref:`fig_transport_carbon2d-elec_zigzag-geo-114`.
+:ref:`fig_defect_carbon2d-elec_zigzag-geo-114`.
 
-.. _fig_transport_carbon2d-elec_zigzag-geo-114:
-.. figure:: ../_figures/transport/carbon2d-elec/zigzag-geo-114.png
+.. _fig_defect_carbon2d-elec_zigzag-geo-114:
+.. figure:: ../_figures/defect/carbon2d-elec/zigzag-geo-114.png
    :width: 60%
    :align: center
    :alt: Band structure of graphene
@@ -453,10 +453,10 @@ PDOS contributions. The necessary commands are collected in `showdos.sh`::
   ./showdos.sh
 
 When you zoom into the area around the Fermi level (-4.57 eV), you should obtain
-something like Figure :ref:`fig_transport_carbon2d-elec_zigzag-dos`.
+something like Figure :ref:`fig_defect_carbon2d-elec_zigzag-dos`.
 
-.. _fig_transport_carbon2d-elec_zigzag-dos:
-.. figure:: ../_figures/transport/carbon2d-elec/zigzag-dos.png
+.. _fig_defect_carbon2d-elec_zigzag-dos:
+.. figure:: ../_figures/defect/carbon2d-elec/zigzag-dos.png
    :width: 60%
    :align: center
    :alt: DOS of zigzag nanoribbon
@@ -473,7 +473,7 @@ between or from the H atoms to the Fermi level.
 Band structure
 --------------
 
-[Input: `recipes/transport/carbon2d-elect/zigzag/bands/`]
+[Input: `recipes/defect/carbon2d-elect/zigzag/bands/`]
 
 Now let's calculate the band structure of the zigzag nanoribbon. The commands
 are in the script `run.sh`, so just issue::
@@ -506,10 +506,10 @@ To look up the Fermi-level and plot the band structure use the commands in
   ./showbands.sh
 
 You should obtain a band structure similar to Figure
-:ref:`fig_transport_carbon2d-elec_zigzag-band`.
+:ref:`fig_defect_carbon2d-elec_zigzag-band`.
 
-.. _fig_transport_carbon2d-elec_zigzag-band:
-.. figure:: ../_figures/transport/carbon2d-elec/zigzag-band.png
+.. _fig_defect_carbon2d-elec_zigzag-band:
+.. figure:: ../_figures/defect/carbon2d-elec/zigzag-band.png
    :width: 70%
    :align: center
    :alt: Band structure of the zigzag nanoribbon
@@ -533,7 +533,7 @@ structure.
 Total energy and density of state
 ---------------------------------
 
-[Input: `recipes/transport/carbon2d-elect/armchair/perfect_density/`]
+[Input: `recipes/defect/carbon2d-elect/armchair/perfect_density/`]
 
 The steps to calculate the DOS of the perfect H-saturated armchair nanoribbon
 are the same as for the zigzag case. First check the geometry with the help of
@@ -542,10 +542,10 @@ repeated supercells::
   ./checkgeo.sh
 
 You will see a repeated image of the perfect armchair nanoribbon unit cell
-(Figure :ref:`fig_transport_carbon2d-elec_armchair-perfect-geo`).
+(Figure :ref:`fig_defect_carbon2d-elec_armchair-perfect-geo`).
 
-.. _fig_transport_carbon2d-elec_armchair-perfect-geo:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-perfect-geo.png
+.. _fig_defect_carbon2d-elec_armchair-perfect-geo:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-perfect-geo.png
    :width: 70%
    :align: center
    :alt: Perfect armchair nanoribbon geometry.
@@ -563,12 +563,12 @@ If you look up the calculated Fermi-level and then visualize the DOS ::
   ./showdos.sh
 
 you can immediately see (Figure
-:ref:`fig_transport_carbon2d-elec_armchair-perfect-dos`) that there are no
+:ref:`fig_defect_carbon2d-elec_armchair-perfect-dos`) that there are no
 states around the Fermi-energy (-4.4 eV), i.e. the investigated armchair
 nanoribbon is non-metallic.
 
-.. _fig_transport_carbon2d-elec_armchair-perfect-dos:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-perfect-dos.png
+.. _fig_defect_carbon2d-elec_armchair-perfect-dos:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-perfect-dos.png
    :width: 70%
    :align: center
    :alt: DOS of the perfect armchair nanoribbon
@@ -579,7 +579,7 @@ nanoribbon is non-metallic.
 Band structure
 --------------
 
-[Input: `recipes/transport/carbon2d-elect/armchair/perfect_bands/`]
+[Input: `recipes/defect/carbon2d-elect/armchair/perfect_bands/`]
 
 Let's have a quick look at the band structure of the armchair H-saturated
 ribbon. The steps are the same as for the zigzag case, so just issue::
@@ -588,15 +588,15 @@ ribbon. The steps are the same as for the zigzag case, so just issue::
   ./showbands.sh
 
 You should obtain a band structure like in Figure
-:ref:`fig_transport_carbon2d-elec_armchair-perfect-band`. You can read off the
+:ref:`fig_defect_carbon2d-elec_armchair-perfect-band`. You can read off the
 position of the band edges, when you zoom into the energy region around the gap:
 The valence band edge and the conduction band edge are in the Gamma point at
 -4.7 and -4.2 eV, respectively. You can also easily extract this information
 from the `band.out` file, when you look where to occupation goes from nearly 2.0
 to nearly 0.0 in the first k-point (the Gamma point).
 
-.. _fig_transport_carbon2d-elec_armchair-perfect-band:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-perfect-band.png
+.. _fig_defect_carbon2d-elec_armchair-perfect-band:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-perfect-band.png
    :width: 70%
    :align: center
    :alt: Band structure of perfect armchair nanoribbon.
@@ -612,8 +612,8 @@ Armchair nanoribbon with vacancy
 Density and DOS
 ---------------
 
-[Input: `recipes/transport/carbon2d-elect/armchair/vacancy1_density/`,
-`recipes/transport/carbon2d-elect/armchair/vacancy21_density/`]
+[Input: `recipes/defect/carbon2d-elect/armchair/vacancy1_density/`,
+`recipes/defect/carbon2d-elect/armchair/vacancy21_density/`]
 
 As next, we should investigate two armchair nanoribbons with a vacancy in
 each. The inputs can be found in the corresponding directories and you can
@@ -621,20 +621,20 @@ visualize both with the command ::
 
   ./showgeom_v12.sh
 
-As you can see on Figures :ref:`fig_transport_carbon2d-elec_armchair-v1-geo` and
-:ref:`fig_transport_carbon2d-elec_armchair-v1-geo`, the vacancy is in the two
+As you can see on Figures :ref:`fig_defect_carbon2d-elec_armchair-v1-geo` and
+:ref:`fig_defect_carbon2d-elec_armchair-v2-geo`, the vacancy is in the two
 cases on different sublattices.
 
-.. _fig_transport_carbon2d-elec_armchair-v1-geo:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-v1-geo.png
+.. _fig_defect_carbon2d-elec_armchair-v1-geo:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-v1-geo.png
    :width: 70%
    :align: center
    :alt: Armchair nanoribbon geometry with vacancy (structure 1)
 
    Armchair nanoribbon with vacancy (structure 1)
 
-.. _fig_transport_carbon2d-elec_armchair-v2-geo:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-v2-geo.png
+.. _fig_defect_carbon2d-elec_armchair-v2-geo:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-geo.png
    :width: 70%
    :align: center
    :alt: Armchair nanoribbon geometry with vacancy (structure 2)
@@ -662,10 +662,10 @@ in the script ``showdos_perf_v12.sh``. Execute it ::
 
   ./showdos_perf_v12.sh
 
-to obtain a figure like Figure :ref:`fig_transport_carbon2d-elec_armchair-dos`.
+to obtain a figure like Figure :ref:`fig_defect_carbon2d-elec_armchair-dos`.
 
-.. _fig_transport_carbon2d-elec_armchair-dos:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-dos.png
+.. _fig_defect_carbon2d-elec_armchair-dos:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-dos.png
    :width: 70%
    :align: center
    :alt: DOS of armchair nanoribbons without and with vacancy.
@@ -713,7 +713,7 @@ therefore, significantly higher than for the relaxed configurations.
 Defect levels
 -------------
 
-[Input: `recipes/transport/carbon2d-elect/armchair/vacancy2_wf/`]
+[Input: `recipes/defect/carbon2d-elect/armchair/vacancy2_wf/`]
 
 Finally we should identify the localised defect levels for vacancy 2 and plot
 the corresponding one-electron wavefunctions.
@@ -783,8 +783,8 @@ site. Note that in accordance with the overall symmetry of the system, the
 defect levels are either symmetric or antisymmetric with respect to the mirror
 plane in the middle of the ribbon.
 
-.. _fig_transport_carbon2d-elec_armchair-v2-def1:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-v2-def1.png
+.. _fig_defect_carbon2d-elec_armchair-v2-def1:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def1.png
    :width: 70%
    :align: center
    :alt: Wave function of the lowest defect level
@@ -793,8 +793,8 @@ plane in the middle of the ribbon.
    nanoribbon with a vacancy. Blue and red surfaces show indicate isosurfaces
    at +0.02 and -0.02 atomic units, respectively.
 
-.. _fig_transport_carbon2d-elec_armchair-v2-def2:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-v2-def2.png
+.. _fig_defect_carbon2d-elec_armchair-v2-def2:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def2.png
    :width: 70%
    :align: center
    :alt: Wave function of the second defect level
@@ -803,8 +803,8 @@ plane in the middle of the ribbon.
    armchair nanoribbon with a vacancy. Blue and red surfaces show indicate
    isosurfaces at +0.02 and -0.02 atomic units, respectively.
 
-.. _fig_transport_carbon2d-elec_armchair-v2-def3:
-.. figure:: ../_figures/transport/carbon2d-elec/armchair-v2-def3.png
+.. _fig_defect_carbon2d-elec_armchair-v2-def3:
+.. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def3.png
    :width: 70%
    :align: center
    :alt: Wave function of the lowest defect level

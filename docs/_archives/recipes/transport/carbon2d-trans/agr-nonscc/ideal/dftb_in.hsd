@@ -49,3 +49,6 @@ TunnelingAndDos {
  }
 }
 
+Parallel = {
+  UseOmpThreads = Yes  
+}

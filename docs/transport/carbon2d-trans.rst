@@ -99,32 +99,34 @@ build a 1D geometry with the right ordering.
 
 When you type::
 
-  buildwire 2cell_7.gen
+  buildwire 2cell_7.gen 3 2
 
-you will be asked to type the name of the file containing the input supercell
-(`2cell_7.gen`) and the number of principal layers in the device region (we will
-set this to be 2). `buildwire` will always give its output as a supercell
-structure, but in some cases we will need to manually modify this structure file
-so that it corresponds to the ordering explained in the previous paragraph.
+the code use the geometry contained in the input supercell (`2cell_7.gen`),
+assume direction 3=z is the transport direction and the number of principal layers 
+in the device region will set this to be 2. 
 
-The following output will be visualised::
+The code `buildwire` will produce the correct transport block for dftb_in.hsd::
 
-  Insert PL .gen file name:
-  2cell_7.gen
-  Insert number of PLs in channel: 2
-  structure built
-  *iatc=
-         137         272 0
-         273         408 0
-  *PLs=
-     1    69;
+  Transport{
+    Device{
+      AtomRange = 1 136
+      FirstLayerAtoms = 1 69
+    }
+    Contact{
+      Id = "source"
+      AtomRange = 137 272
+    }
+    Contact{
+      Id = "drain"
+      AtomRange = 273 408
+    }
+    Task= contactHamiltonian{
+      contactId = "source"
+    }
+  }
 
-The indexes **iatc** and **PLs** define the atoms belonging to the contacts, to
-the device region and to the PLs of the device region, and will be useful when
-we will write the input files. You should take a note of them (the iterative
-algorithm used in solving the Green function requires these values). A file
-`Ordered_2cell_7.gen` will have been created, and defined as a supercell format
-GEN file (``S``), which we will rename `device_7.gen` for the following::
+A file `Ordered_2cell_7.gen` will have been created, which we will rename 
+`device_7.gen` using the following::
 
   mv Ordered_2cell_7.gen device_7.gen
 
@@ -155,8 +157,8 @@ contact. When you build a structure yourself, it is always a good idea to use a
 visualiser and verify that the atomic indices are consistent with the transport
 setup definitions.
 
-The last step is to change the supercell definition in the gen structure
-file. From the point of view of an open boundary condition calculation,
+The last step is to make sure the structure is defined as a *Cluster*. 
+From the point of view of an open boundary condition calculation,
 Supercell (``S``) and Cluster (``C``) have a slightly different meaning with
 respect to a canonical DFTB calculation. By Supercell we mean any structure
 which is *periodic in any direction transverse to the transport direction*,
@@ -165,36 +167,9 @@ transverse to transport*. It follows that purely 1D systems, like nanowires and
 nanoribbons, should be regarded as clusters (``C``). Therefore we edit the
 structure file `device_7.gen`, changing in the first line the ``S`` (supercell)
 to be ``C`` (cluster) and remove the last four lines, which would normally only
-be defined for periodic systems.
-
-This is the file we get after running `buildwire`::
-
-  408  S
-  C    H
-    1    1     37.831463060000    -20.000000000000      0.710000000000
-    2    1     39.061219140000    -20.000000000000      1.420000000000
-    3    1     39.061219140000    -20.000000000000      2.840000000000
-    4    1     37.831463060000    -20.000000000000      3.550000000000
-    5    1     35.371950920000    -20.000000000000      0.710000000000
-    6    1     36.601706990000    -20.000000000000      1.420000000000
-    7    1     36.601706990000    -20.000000000000      2.840000000000
-    8    1     35.371950920000    -20.000000000000      3.550000000000
-    ........
-    65    2     20.880312110000    -20.000000000000    -11.870830122700
-    66    2     20.880312110000    -20.000000000000     -9.429169877000
-    67    2     40.025607920000    -20.000000000000    -11.870893735700
-    68    2     40.025607920000    -20.000000000000     -9.429106264000
-    0.000000000000000      0.000000000000000      0.000000000000000
-    59.676097169999998        0.0000000000000000        0.0000000000000000
-    0.0000000000000000       -40.000000000000000        0.0000000000000000
-    0.0000000000000000        0.0000000000000000        51.119999999999997
-
-Note that the numbering of atoms at the start of each line, as output by
-`buildwire` are sequential according to the numbering of the initial structure,
-not its global position in the output file.
-
-The corrected definition for the 1D ribbon with open boundary conditions is
-then::
+be defined for periodic systems. The newest versions of `buildwire` should 
+automatically do this. The corrected definition for the 1D ribbon with open 
+boundary conditions is then::
 
   408  C
   C    H
@@ -272,13 +247,14 @@ contacts. In this example we define a two terminal system, but in general N
 contacts are allowed. A contact is defined by an ``Id`` (mandatory), the range
 of atoms belonging to the contact specified in ``AtomRange`` (mandatory) and a
 ``FermiLevel`` (mandatory). The potential is set by default to 0.0, therefore
-need not be specified in this example. Note that according to equilibrium Green
-function theory, the Fermi level and the contact potential are not necessary to
-calculate the Transmission curve, but are required to calculate the current via
+need not be specified in this example. 
+Note that in non-SCC calculations that do not compute the Density Matrix of the system, 
+the Fermi level and the contact potential are not necessary to
+calculate the Transmission curve, but they are needed to calculate the current via
 the Landauer formula, as they would determine the occupation distribution in the
 contacts.
 
-Then we have the ``Hamiltonian`` block, which describes how the initial
+Then we have the ``Hamiltonian`` block, describing how the initial
 Hamiltonian and the SCC component, if any, will be calculated::
 
   Hamiltonian = DFTB {
@@ -347,36 +323,58 @@ therefore you know where the first sub-bands are (this is the correct way to do
 this), or you can run a quick calculation with a large energy step and on the
 basis of the transmission curve then refine the range of interest.
 
-Now that the input file is complete, we have to complete one last step. During a
-transport run, DFTB+ will look for two directories named `GS` and `contacts`. We
-have to create these directories in advance::
-
-  mkdir GS
-  mkdir contacts
-
 We can then start the calculation::
 
   dftb+ dftb_in.hsd | tee output.log
 
-We can take advantage of parallelisation over the energy points in the
-calculation by running the code with `mpirun`::
+Parallelism in transport calculations
+-------------------------------------
+
+Please have a look to the section ``Parallel Usage of dftb+`` for a general discussion.
+In transport calculations we can take advantage of parallelisation over 
+the energy points by running the code with `mpirun`::
 
   mpirun -n 4 dftb+ dftb_in.hsd | tee output.log
 
-where ``4`` should be substituted by the number of available nodes. Note that
-NEGF is parallelised over energy points, therefore a number of nodes larger than
+where ``4`` should be substituted by the number of available nodes. 
+Note that NEGF is parallelised over energy points, therefore a number of nodes larger than
 the energy grid will not improve performances and secondly that the memory
 consumption is proportional to the number of nodes used - this may be critical
 in shared memory systems with a small amount of memory per node.
+SMP parallelism use OpenMP multithreadings. This is exploited at low level linear
+algebra numerics such as Matrix-Matrix multiplications and Matrix inversions, especially
+when linking to Intel MKL library. 
+Multithreading is not enabled by default in dftb+ since this can easily collide with the
+parallel SCALAPACK diagonalizer.
+In order to enable OMP calculations you should explicitly look for ``Parallel`` block::
+
+  Parallel{
+    UseOmpThreads = Yes  
+  }
+
+Some experimentation can be done in order to find the optimal combination of MPI and OpenMP.
+Clearly the two schemes should not overlap on the same cpu(s). For instance with early days 
+Xeon Quad Cores CPUs the best performances could be obtained by running OpenMP with maximum 
+of 4 threads (``OMP_NUM_THREADS=4``) and MPI across as many separate nodes or sockes as available.
+As the number of cores on each socket has increased to 8, 10 or more, the most efficient 
+balance has to be seen. Typically openMP does not scale quite linearly but tend to saturate  
+at about 4 threads for typical transport calculations. Therefore it seems optimal to devide the
+total number of available cores modulo 4 threads giving the number of MPI processes. 
+So, for instance with 64 cores spread on 4 units with 2 sockets of 8 cores each, it should be fine 
+to set OMP_NUM_THREADS=4 and 16 MPI processes.
+
+
+Plotting Transmission and DOS
+-----------------------------
 
 When the calculation has finished, the transmission and density of states are
-saved to both the `detailed.out` file and to two separate `tunneling.dat` and
+saved to both the `detailed.out` file and to two separate `transmission.dat` and
 `localDOS.dat` files. These additional files both contain the energy points in
 the first column and the desired quantities as additional columns.
 
 We can plot the transmission by using the `plotxy` script::
 
-  plotxy --xlabel 'Energy [eV]' --ylabel 'Transmission' -L tunneling.dat
+  plotxy --xlabel 'Energy [eV]' --ylabel 'Transmission' -L transmission.dat
 
 The plot is shown in Figure :ref:`fig_transport_carbon2d-trans_nonscc-tunn`:
 
@@ -503,7 +501,7 @@ After running the calculation, we can compare the transmission curve for this
 structure with a single vacancy and the pristine ribbon by using plotxy::
 
   plotxy --xlabel 'Energy [eV]' --ylabel 'Transmission' -L --xlimits -6.5 -3 \
-  tunneling.dat ../ideal/tunneling.dat
+  transmission.dat ../ideal/transmission.dat
 
 .. _fig_transport_carbon2d-trans_nonscc-vac-tunn:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-vac-tunn.png
@@ -949,11 +947,8 @@ Landauer-Caroli formula. The Transmission will be of course be different due to
 the fact that the ground state charge density is now solution of the SCC
 Hamiltonian and we have slightly changed the energy range as the SCC component
 introduce a shift of the band-structure (try to compare the SCC and non-SCC
-transmission results when you are done). We can now run the calculation (after
-creating the directories GS and contacts)::
+transmission results when you are done). We can now run the calculation::
 
-  mkdir GS
-  mkdir contacts
   mpirun -n 4 dftb dftb_in.hsd | tee output.log
 
 Where ``-n 4`` should be adapted to the number of available nodes. As transport

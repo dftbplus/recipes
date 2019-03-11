@@ -11,5 +11,6 @@ defect calculations which can be helpful to understand the following chapter.
 .. toctree::
    :maxdepth: 1
 
-   carbon2d-elec.rst
+   specifying-geometry.rst
    carbon2d-trans.rst
+   molecule-junction.rst
