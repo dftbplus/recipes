@@ -1,13 +1,13 @@
-.. _sec-transport:
+.. _sec-defects:
 
-#################################
-Electronic Structure Calculations
-#################################
+############################
+Graphene defect calculations
+############################
 
-This chapter contains recipes for various electroninc calculations of graphene nanoribbons.
-It demonstrates some defect calculation with plot of PDOS and wavefunctions.
-It can be helpful in order to understand the first application of transport calculations 
-in the following chapter.
+This chapter contains recipes for various electronic calculations of graphene
+nanoribbons.  It demonstrates some defect calculation with plot of PDOS and
+wavefunctions.  These examples can be helpful in order to understand the first
+application of transport calculations in chapter :ref:`sec-transport`.
 
 .. toctree::
    :maxdepth: 1

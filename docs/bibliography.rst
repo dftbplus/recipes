@@ -1,3 +1,6 @@
+############
+Bibliography
+############
 
 ## .. [AHF2007] B. Aradi, B. Hourahine and T. Frauenheim, *DFTB+, A Sparse
 ##   Matrix-Based Implementation of the DFTB Method*, J. Phys. Chem. A
