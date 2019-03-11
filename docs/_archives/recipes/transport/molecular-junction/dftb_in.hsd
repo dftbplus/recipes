@@ -1,0 +1,90 @@
+Geometry = GenFormat {
+  <<< "str.gen"
+}
+
+
+Transport {
+    Device {
+      AtomRange = 1 95 
+    }
+    Contact {
+      Id = "Source"
+      AtomRange = 96 143
+      PLShiftTolerance = 0.01
+      FermiLevel [eV] = -4.665975
+      Potential [eV] = 0.5 
+    }
+    Contact {
+      Id = "Drain"
+      AtomRange = 144 191
+      PLShiftTolerance = 0.01
+      FermiLevel [eV] =  -4.665975
+      Potential [eV] = -0.5 
+    }
+  
+}
+
+
+
+Hamiltonian = DFTB {
+  SCC = yes
+  MaxSCCIterations = 100
+  ReadInitialCharges = Yes
+  OrbitalResolvedSCC = No 
+
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "./slako/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+
+  MaxAngularMomentum {
+    C = "p"
+    O = "p"
+    H = "s"
+  }
+
+  Filling = Fermi {
+    Temperature [Kelvin] = 0.0
+  }
+
+  KPointsAndWeights = SupercellFolding {
+     1  0   0
+     0  1   0
+     0  0   1
+    0.0 0.0 0.0
+  }
+
+  Electrostatics = Poisson {
+    MinimalGrid [Angstrom] = 0.4 0.4 0.4
+    AtomDensityTolerance = 1e-5
+    CutoffCheck = Yes   # Make sure you know what you are doing!
+    BuildBulkPotential = No 
+    SavePotential = Yes 
+    PoissonAccuracy = 1e-5
+  }
+
+  Eigensolver = GreensFunction{
+    Verbosity = 1
+    SaveSurfaceGFs = No    
+    Delta [eV] = 1e-4
+    ContourPoints = 30 40
+    RealAxisStep [eV] = 0.025
+    LowestEnergy [eV] = -40.0
+  }
+
+}
+
+Analysis{
+  TunnelingAndDos{
+    verbosity = 0
+    EnergyRange [eV] = -9.0  -2.0
+    EnergyStep [eV] = 0.02
+    Delta [eV] = 1e-4
+  }
+}
+
+Parallel = {
+  UseOMPThreads = Yes
+}
+
