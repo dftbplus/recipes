@@ -9,4 +9,5 @@ DFTB+ recipes
    basics/index.rst
    moleculardynamics/index.rst
    parallel/index.rst
+   properties/index.rst
    licence.rst
