@@ -47,7 +47,7 @@ XYZ format by using the `gen2xyz` script and visualised with `Jmol`::
   gen2xyz 2cell_7.gen
   jmol 2cell_7.xyz
 
-The structure is shown in Figure :ref:`fig_transport_carbon2d-trans_2cell-7`
+The structure is shown in :numref:`fig_transport_carbon2d-trans_2cell-7`
 
 .. _fig_transport_carbon2d-trans_2cell-7:
 .. figure:: ../_figures/transport/carbon2d-trans/2cell-7.png
@@ -77,13 +77,16 @@ a one unit cell long section of nanoribbon to be used as the PL.
 
    Layer definition
 
-As currently there is no way to damp out small interactions, the PL must contain
-two unit cells in this case, as shown in figure
+The PL must contain two unit cells, in this case, as shown in figure
 :ref:`fig_transport_carbon2d-trans_4cell-7`. It follows that the correct
 definition of a PL depends both on the geometry of the system and the
-interaction cut-off distance.
+interaction cut-off distance as defined in the SK files (In the first line of 
+the SK-files as grid spacing * grid points, in atomic units). 
+The cutoff distance can be shortened slightly using the option `SKTruncation`
+in the Hamiltonian section, however users should be aware that this impacts the
+electronic properties of the system, hence should be used by expert users only.
 
-After having defined a proper PL, we then build a structure consisting of a
+After having defined a proper PL, we then build a tructure consisting of a
 device region with 2 PLs and contacts at each end of this region, each with 2
 PLs.
 
@@ -141,7 +144,7 @@ first and second PLs)::
   > select atomno>204 && atomno<273
   > color red
 
-In Figure :ref:`fig_transport_carbon2d-trans_color-device-7` a `Jmol` export of
+In :numref:`fig_transport_carbon2d-trans_color-device-7` a `Jmol` export of
 the structure is shown.
 
 .. _fig_transport_carbon2d-trans_color-device-7:
@@ -263,15 +266,12 @@ Hamiltonian and the SCC component, if any, will be calculated::
       C = "p"
       H = "s"
     }
-
     SlaterKosterFiles = Type2FileNames {
       Prefix = "../../slako/"
       Separator = "-"
       Suffix = ".skf"
     }
-
     Eigensolver = TransportOnly{}
-
   }
 
 In this example we will calculate the transmission according to Caroli (referred
@@ -376,7 +376,7 @@ We can plot the transmission by using the `plotxy` script::
 
   plotxy --xlabel 'Energy [eV]' --ylabel 'Transmission' -L transmission.dat
 
-The plot is shown in Figure :ref:`fig_transport_carbon2d-trans_nonscc-tunn`:
+The plot is shown in :numref:`fig_transport_carbon2d-trans_nonscc-tunn`:
 
 .. _fig_transport_carbon2d-trans_nonscc-tunn:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-tunn.png
@@ -398,7 +398,7 @@ limits are chosen to focus on the first few sub-bands)::
   plotxy --xlabel 'Energy [eV]' --ylabel 'DOS [arbitrary units]' -L \
   --xlimits -6.5 -3 --ylimit 0 1400 localDOS.dat
 
-The result is shown in Figure :ref:`fig_transport_carbon2d-trans_nonscc-dos`:
+The result is shown in :numref:`fig_transport_carbon2d-trans_nonscc-dos`:
 
 .. _fig_transport_carbon2d-trans_nonscc-dos:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-dos.png
@@ -535,7 +535,7 @@ the density of states, as in Figure
    Non-SCC DOS for single vacancy in sublattice A (linear scale)
 
 The same density of states can be visualised on logarithmic scale as
-well, as in Figure :ref:`fig_transport_carbon2d-trans_nonscc-vac-semilog-dos`.
+well, as in :numref:`fig_transport_carbon2d-trans_nonscc-vac-semilog-dos`.
 
 .. _fig_transport_carbon2d-trans_nonscc-vac-semilog-dos:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-vac-semilog-dos.png
@@ -611,7 +611,7 @@ pristine system in green):
 We can see a very strong suppression of transmission in the first sub-bands,
 especially in the first valence band. Again, the absence of resonances may be
 due by gap states. In fact, we can verify it by plotting the density of states,
-as shown in Figure :ref:`fig_transport_carbon2d-trans_nonscc-vac2-dos`.
+as shown in :numref:`fig_transport_carbon2d-trans_nonscc-vac2-dos`.
 
 .. _fig_transport_carbon2d-trans_nonscc-vac2-dos:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-vac2-dos.png
@@ -755,9 +755,9 @@ for the ``KPointsAndWeights``, which deserves special attention.
 The bulk contact is of course a periodic structure, hence we need to specify a
 proper k-point sampling, as we would do in a regular periodic DFTB
 calculation. However, you should be careful about the way the lattice vector is
-internally defined. In the input system is a cluster (C), i.e. *it has no
+internally defined. When the input system is a **cluster** (C), i.e. *it has no
 periodicity in direction transverse to the transport directions*, the lattice
-vector of the contact is internally reconstructed and assigned to be the first
+vector of the contact is internally reconstructed and assigned to be the **first**
 lattice vector, *regardless the spatial orientation of the structure*. This
 means that the ``KPointsAndWeights`` for a cluster system are always defined as
 above: a finite number of k-points along the first reciprocal vector (according
@@ -880,6 +880,9 @@ In the ``Hamiltonian`` block now an SCC calculation has to be specified::
     ReadInitialCharges = No
     ...
 
+Poisson Solver
+--------------
+
 Differently from the non-SCC calculation, we now need to specify a way to solve
 the Hartree potential and the charge density self-consistently. In a NEGF
 calculation, we use a real-space Poisson solver to calculate the potential, and
@@ -892,15 +895,6 @@ a Green function integration method to calculate the density matrix::
     SavePotential = Yes
   }
 
-  Eigensolver = GreensFunction {
-    }
-
-  Mixer = Broyden {
-     MixingParameter = 0.02
-   }
-  }
-  ...
-
 The Poisson section contains the definition of the real space grid
 parameters. Note that differently from a normal DFTB+ calculation, simulating
 regions of vacuum is not for free, as the simulation domain must be spanned by
@@ -910,7 +904,7 @@ length along the transport direction is ignored as it is automatically
 determined by the code (in this case, z=30.0). The length along the transverse
 direction are relevant and *should be carefully set*. In order not to force
 unphysical boundary conditions, you may extend the grid at least 1 nm away. If a
-strong charge transfer is present, you may go for a larger grid according to
+strong charge transfer is present, you may go for a larger box, according to
 your available computational resources. A poorly defined grid can lead to no
 convergence at all, to a very strange (and slow) convergence path or to
 unphysical results. ``MinimalGrid`` specifies the minimum step size for the
@@ -919,20 +913,30 @@ value stands for higher precision. ``SavePotential = Yes`` will return a file
 containing the potential and charge density profile, for later reference. These
 files can be quite large, therefore the default is ``No``.
 
+Density Matrix Calculations - GreensFunction solver
+---------------------------------------------------
+
 The Eigensolver is now specified as ``GreensFunction``. With this definition, we
 instruct the code not to solve an eigenvalue problem but rather to calculate the
-density matrix by integration of the Keldysh Green function. This block provides
-the SCC charge density with or without applied bias. The options define the
-integration path. Usually the default options are good enough in most cases and
-advanced users may refer to the manual and references therein.
+density matrix by integration of the Keldysh Green function::
 
-The ``Mixer`` options is present in DFTB+ calculations as well. Convergence is
-known to be critical in NEGF schemes. In that case, a lower ``MixingParameter``
+  Eigensolver = GreensFunction{}
+
+This block provides the SCC charge density with or without applied bias. The options define the
+integration path. Usually the default options are good enough in most cases and
+advanced users may refer to the manual or other examples in this book.
+
+The ``Mixer`` options is present in DFTB+ calculations as well.::
+  
+   Mixer = Broyden {
+     MixingParameter = 0.02
+   }
+
+Convergence is known to be critical in NEGF schemes. In that case, a low ``MixingParameter``
 value will help to avoid strong oscillation in the SCC iterations.
 
 The last block is ``Analysis``::
 
-  ...
   Analysis {
     TunnelingAndDos {
       Verbosity = 101
@@ -960,7 +964,7 @@ An inspection of the file `detailed.out` reveals that we have additional
 information with respect to the non-SCC calculation, including a list of atomic
 charges and orbital population, as now the SCC density matrix has been
 calculated. The transmission is also saved as separate file, and is shown in
-Figure :ref:`fig_transport_carbon2d-trans_scc-tunn`.
+:numref:`fig_transport_carbon2d-trans_scc-tunn`.
 
 .. _fig_transport_carbon2d-trans_scc-tunn:
 .. figure:: ../_figures/transport/carbon2d-trans/scc-tunn.png
@@ -1013,7 +1017,7 @@ The `vtk` file can be obtained by simply running::
 
 An extensive explanation of `paraview` features is beyond the scope of this
 tutorial. Following some easy steps, you can produce the potential map shown in
-Figure :ref:`fig_transport_carbon2d-trans_clip-pot`.
+:numref:`fig_transport_carbon2d-trans_clip-pot`.
 
 1. Open paraview and import the file `pot.vtk` from File->Open
 2. Click on Properties->Apply (Properties are usually visualised on the left
@@ -1025,7 +1029,7 @@ Figure :ref:`fig_transport_carbon2d-trans_clip-pot`.
 4. In Properties, click on 'Y Normal' to produce a clip along the nanoribbon.
 5. Click on Properties->Apply.
 
-The plot shown in Figure :ref:`fig_transport_carbon2d-trans_clip-pot` above is
+The plot shown in :numref:`fig_transport_carbon2d-trans_clip-pot` above is
 the self-consistent potential along the nanoribbon. We can see that the charge
 transfer between carbon and hydrogen at the edges results in a non-flat
 potential. At a first glance, the potential looks quite homogeneous, meaning
@@ -1174,7 +1178,7 @@ resonances, as the additional levels are located in the gap.
 
 Note also that we previously recommended the use of large extended regions and
 to verify that the potential and charge density are smooth at interfaces. As you
-can see in Figure :ref:`fig_transport_carbon2d-trans_clip-vac-pot`, the impurity
+can see in :numref:`fig_transport_carbon2d-trans_clip-vac-pot`, the impurity
 is very close to the boundaries, resulting to a potential profile which varies
 significantly close in to the boundary. It is left to the reader to verify that
 the overall transmission does not change significantly if a longer extended

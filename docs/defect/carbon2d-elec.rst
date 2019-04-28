@@ -54,8 +54,8 @@ script) and visualize it::
   gen2xyz geo.441.gen
   jmol geo.441.xyz &
 
-You should then see a graphene sheet displayed, similar to Figure
-:ref:`fig_defect_carbon2d-elec_graphene-geo-441`.
+You should then see a graphene sheet displayed, similar to 
+:numref:`fig_defect_carbon2d-elec_graphene-geo-441`.
 
 .. _fig_defect_carbon2d-elec_graphene-geo-441:
 .. figure:: ../_figures/defect/carbon2d-elec/graphene-geo-441.png
@@ -235,8 +235,8 @@ help)::
   plotxy --xlabel "Energy [eV]"" -ylabel "DOS" dos.dat pdos.C.1.dat pdos.C.2.dat &
 
 You can use also any other program (gnuplot, xmgrace) which can visualize
-XY-data. You should see something similar to Figure
-:ref:`fig_defect_carbon2d-elec_graphene-dos`.
+XY-data. You should see something similar to 
+:numref:`fig_defect_carbon2d-elec_graphene-dos`.
 
 .. _fig_defect_carbon2d-elec_graphene-dos:
 .. figure:: ../_figures/defect/carbon2d-elec/graphene-dos.png
@@ -337,8 +337,8 @@ which yields -4.67 eV, and then visualize the band structure by invoking ::
 
   plotxy -L --xlabel "K points" --ylabel "Energy [eV]" band_tot.dat &
 
-This results in the band structure as shown in Figure
-:ref:`fig_defect_carbon2d-elec_graphene-band`.
+This results in the band structure as shown in 
+:numref:`fig_defect_carbon2d-elec_graphene-band`.
 
 .. _fig_defect_carbon2d-elec_graphene-band:
 .. figure:: ../_figures/defect/carbon2d-elec/graphene-band.png
@@ -383,8 +383,8 @@ and then issue ::
 
   ./checkgeo.sh
 
-to obtain the molecule shown in Figure
-:ref:`fig_defect_carbon2d-elec_zigzag-geo-114`.
+to obtain the molecule shown in 
+:numref:`fig_defect_carbon2d-elec_zigzag-geo-114`.
 
 .. _fig_defect_carbon2d-elec_zigzag-geo-114:
 .. figure:: ../_figures/defect/carbon2d-elec/zigzag-geo-114.png
@@ -453,7 +453,7 @@ PDOS contributions. The necessary commands are collected in `showdos.sh`::
   ./showdos.sh
 
 When you zoom into the area around the Fermi level (-4.57 eV), you should obtain
-something like Figure :ref:`fig_defect_carbon2d-elec_zigzag-dos`.
+something like :numref:`fig_defect_carbon2d-elec_zigzag-dos`.
 
 .. _fig_defect_carbon2d-elec_zigzag-dos:
 .. figure:: ../_figures/defect/carbon2d-elec/zigzag-dos.png
@@ -505,8 +505,8 @@ To look up the Fermi-level and plot the band structure use the commands in
 
   ./showbands.sh
 
-You should obtain a band structure similar to Figure
-:ref:`fig_defect_carbon2d-elec_zigzag-band`.
+You should obtain a band structure similar to 
+:numref:`fig_defect_carbon2d-elec_zigzag-band`.
 
 .. _fig_defect_carbon2d-elec_zigzag-band:
 .. figure:: ../_figures/defect/carbon2d-elec/zigzag-band.png
@@ -542,7 +542,7 @@ repeated supercells::
   ./checkgeo.sh
 
 You will see a repeated image of the perfect armchair nanoribbon unit cell
-(Figure :ref:`fig_defect_carbon2d-elec_armchair-perfect-geo`).
+(:numref:`fig_defect_carbon2d-elec_armchair-perfect-geo`).
 
 .. _fig_defect_carbon2d-elec_armchair-perfect-geo:
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-perfect-geo.png
@@ -562,8 +562,8 @@ If you look up the calculated Fermi-level and then visualize the DOS ::
 
   ./showdos.sh
 
-you can immediately see (Figure
-:ref:`fig_defect_carbon2d-elec_armchair-perfect-dos`) that there are no
+you can immediately see (
+:numref:`fig_defect_carbon2d-elec_armchair-perfect-dos`) that there are no
 states around the Fermi-energy (-4.4 eV), i.e. the investigated armchair
 nanoribbon is non-metallic.
 
@@ -587,8 +587,8 @@ ribbon. The steps are the same as for the zigzag case, so just issue::
   ./run.sh
   ./showbands.sh
 
-You should obtain a band structure like in Figure
-:ref:`fig_defect_carbon2d-elec_armchair-perfect-band`. You can read off the
+You should obtain a band structure like in 
+:numref:`fig_defect_carbon2d-elec_armchair-perfect-band`. You can read off the
 position of the band edges, when you zoom into the energy region around the gap:
 The valence band edge and the conduction band edge are in the Gamma point at
 -4.7 and -4.2 eV, respectively. You can also easily extract this information
@@ -621,8 +621,8 @@ visualize both with the command ::
 
   ./showgeom_v12.sh
 
-As you can see on Figures :ref:`fig_defect_carbon2d-elec_armchair-v1-geo` and
-:ref:`fig_defect_carbon2d-elec_armchair-v2-geo`, the vacancy is in the two
+As you can see on :numref:`fig_defect_carbon2d-elec_armchair-v1-geo` and
+:numref:`fig_defect_carbon2d-elec_armchair-v2-geo`, the vacancy is in the two
 cases on different sublattices.
 
 .. _fig_defect_carbon2d-elec_armchair-v1-geo:
@@ -662,7 +662,7 @@ in the script ``showdos_perf_v12.sh``. Execute it ::
 
   ./showdos_perf_v12.sh
 
-to obtain a figure like Figure :ref:`fig_defect_carbon2d-elec_armchair-dos`.
+to obtain a figure like :numref:`fig_defect_carbon2d-elec_armchair-dos`.
 
 .. _fig_defect_carbon2d-elec_armchair-dos:
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-dos.png

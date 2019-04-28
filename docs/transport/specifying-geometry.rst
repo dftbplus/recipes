@@ -56,7 +56,7 @@ subdivision into PLs is essential for the definition of the two contacts and
 becomes useful in the computation of all Green's functions that exploit a
 recursive algorithm. (See [PPD2008]_.)
 
-As shown in the :ref:`figure <fig_transport_geometry_principal_layers>`, the extended
+As shown in the :numref:`fig_transport_geometry_principal_layers`, the extended
 molecule can contain an arbitrary number of PLs (>=1), but the layers must
 follow a sequential ordering.  The ordering of the PLs follow directly from the
 ordering of the atoms in the DFTB+ structure.

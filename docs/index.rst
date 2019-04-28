@@ -9,7 +9,7 @@ DFTB+ recipes
    basics/index.rst
    moleculardynamics/index.rst
    defect/index.rst
-   transport/index.rst
    parallel/index.rst
+   transport/index.rst
    bibliography.rst
    licence.rst
