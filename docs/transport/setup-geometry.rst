@@ -95,13 +95,13 @@ Now you can select the contact atoms and then type in the console::
   ({45:60 69:84 93:108})
 
 The selected atoms are shown in a compact syntax that can be directly 
-copy-pasted into ``dftb_in.hsd``. 
+copy-pasted into ``setup_in.hsd``. 
 **NOTE that this jmol command show atom indices starting from 0 and not from 1**. 
-In this case use the following syntax in the ``dftb_in.hsd`` input file::
+In this case use the following syntax in the ``setup_in.hsd`` input file::
   
-  Atoms [+1] = {45:60 69:84 93:108}
+  Atoms [zeroBased] = {45:60 69:84 93:108}
 
-where the `+1` modifier does the job of adding 1 to all specified indices.
+where the modifier does the job of adding 1 to all specified indices.
 Repeat a similar sequence of commands for the other contact.
 
 ``ContactVector`` is needed so the code can understand the direction of the contact
