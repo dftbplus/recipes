@@ -4,16 +4,18 @@
 Setup Geometry utility
 ======================
 
-This feture of dftb+ helps preparing the structure as prescribed in the section before.
-The tool can be invoked in the dftb+ program. Here we give an example that works 
-most easily with the tool jmol. 
+This feature of dftb+ helps preparing the structure as prescribed in the section before.
+The tool can be invoked as a separate program `setupgeom` and requires an input file
+with name `setup_in.hsd`. 
+Here we give an example that works most easily with the help of the tool jmol 
+(jmol link `http://jmol.sourceforge.net/`_). 
 The example discussed here corresponds to the molecular junction that will be presented 
 in a section below.
 
 Input file
 ^^^^^^^^^^
 
-The tool works by setting up a minimal input file for dftb+ that looks like the following::
+The tool works by setting up an hsd input file like the following::
 
   Geometry = GenFormat{
     <<< "input.gen"
@@ -21,11 +23,13 @@ The tool works by setting up a minimal input file for dftb+ that looks like the 
   Transport{
     Contact{
       Id="s"
+      numPLsDefined = 2
       Atoms = {46:61 70:85 94:109}
       ContactVector [Angstrom] = 4.94 0.0 0.0  
     }
     Contact{
       Id="d"
+      numPLsDefined = 2
       Atoms = {118:133 142:157 166:181}
       ContactVector [Angstrom] = 4.94 0.0 0.0 
     }
@@ -40,6 +44,8 @@ Note that contacts must extend along either `x`, `y` or `z`.
 ``SetupGeometry``. This is the ``Task`` that must be invoked in order to 
 perform the geometry preparation for transport.
 
+``numPLsDefined``. It is used to specify how many contact PLs are provided. 
+Possible values are 1 or 2. See below for details.
 
 Selecting atoms using jmol  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -101,14 +107,57 @@ In this case use the following syntax in the ``setup_in.hsd`` input file::
   
   Atoms [zeroBased] = {45:60 69:84 93:108}
 
-where the modifier does the job of adding 1 to all specified indices.
+where the modifier `zeroBased` tells the code that atom indices start from 0. 
 Repeat a similar sequence of commands for the other contact.
 
 ``ContactVector`` is needed so the code can understand the direction of the contact
 and the supercell periodicity. Use the `measurements` tool of jmol in order to 
 get the vector length (See :numref:`fig_transport_setup-geometry_sel`).
 
-Once the input is ready convert the structure to `whatever.gen` and run dftb+
+The user should provide the Slater-Koster files so the code can elaborate the
+correct cutoff distances. These are specified in the same way as for the dftb+ code:: 
+
+    Task = SetupGeometry{
+      SlaterKosterFiles = Type2FileNames{
+         prefix =  "PATH/"
+         separator  = "-"
+         suffix  = ".skf"
+       }
+    }    
+
+The following behaviour are relevant.
+``numPLsDefined = 2``: In this case `setupgeom` reorders the second PL and check that 
+the distance between second-neighbour PLs is larger than the cutoff. An error is 
+shown if this is not the case.
+
+``numPLsDefined = 1``: In this case `setupgeom` build as many additional PLs as 
+needed to fulfill the contact requirements.
+
+In both cases the device region is further layered into PLs for the efficient 
+iterative Green's function algorithm.
+In most cases the SK tables have a rather large cutoff, extending as long as all 
+Hamiltonian matrix elements are below 1e-5 a.u. (about 1 meV). 
+In order to make transport calculations a little faster it is possible to shorten
+slightly the SK cutoffs. A small decrease easily results in PLs with half of the
+original value (the contact must be periodic) hence faster calculations, with very
+small effect on the final results (e.g., transmission, ldos, currents).
+The SK cutoff can be set with the block `TruncateSKRange` (see also dftb+ manual)::
+
+  Transport{
+    Task = SetupGeometry{
+        TruncateSKRange = {
+           SKMaxDistance [AA] = 5.0
+           HardCutOff = Yes
+        }
+    } 
+  }
+
+Clearly in doing this, accuracy is traded for speed. In the case of C-C interactions,
+the cutoff distance is about 5.17 Angstrom that is quite comparable with a 
+smalled cutoff of 5.0 Angstrom. In any case the user should check and validate 
+the results when selecting this option.
+
+Once the input is ready convert the structure to `whatever.gen` and run setupgeom
 As output you will find the structure ``processed.gen`` prepared for transport 
 calculations and a file ``transport.hsd`` containing the ``Transport`` block
 needed for the following contact calculations::
@@ -125,6 +174,9 @@ needed for the following contact calculations::
       AtomRange= 144 191
     }
   }
+
+For consistency, the user should specify exactly the same `SKMaxDistance` in the input
+file of dftb+.
 
 
 

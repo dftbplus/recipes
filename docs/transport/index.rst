@@ -14,3 +14,4 @@ calculations.
    setup-geometry.rst
    carbon2d-trans.rst
    molecule-junction.rst
+   local-currents.rst
