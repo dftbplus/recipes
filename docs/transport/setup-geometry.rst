@@ -23,13 +23,13 @@ The tool works by setting up an hsd input file like the following::
   Transport{
     Contact{
       Id="s"
-      numPLsDefined = 2
+      SpecifiedPLs = 2
       Atoms = {46:61 70:85 94:109}
       ContactVector [Angstrom] = 4.94 0.0 0.0  
     }
     Contact{
       Id="d"
-      numPLsDefined = 2
+      SpecifiedPLs = 2
       Atoms = {118:133 142:157 166:181}
       ContactVector [Angstrom] = 4.94 0.0 0.0 
     }
@@ -44,7 +44,7 @@ Note that contacts must extend along either `x`, `y` or `z`.
 ``SetupGeometry``. This is the ``Task`` that must be invoked in order to 
 perform the geometry preparation for transport.
 
-``numPLsDefined``. It is used to specify how many contact PLs are provided. 
+``SpecifiedPLs``. It is used to specify how many contact PLs are provided. 
 Possible values are 1 or 2. See below for details.
 
 Selecting atoms using jmol  
@@ -126,11 +126,11 @@ correct cutoff distances. These are specified in the same way as for the dftb+ c
     }    
 
 The following behaviour are relevant.
-``numPLsDefined = 2``: In this case `setupgeom` reorders the second PL and check that 
+``SpecifiedPLs = 2``: In this case `setupgeom` reorders the second PL and check that 
 the distance between second-neighbour PLs is larger than the cutoff. An error is 
 shown if this is not the case.
 
-``numPLsDefined = 1``: In this case `setupgeom` build as many additional PLs as 
+``SpecifiedPLs = 1``: In this case `setupgeom` build as many additional PLs as 
 needed to fulfill the contact requirements.
 
 In both cases the device region is further layered into PLs for the efficient 

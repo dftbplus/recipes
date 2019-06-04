@@ -23,6 +23,5 @@ Transport{
       SKMaxDistance [AA] = 4.90
       HardCutOff = Yes
     }
-    FoldToUnitCell = Yes
   }
 }
