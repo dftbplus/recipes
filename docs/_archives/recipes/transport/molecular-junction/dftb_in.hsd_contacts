@@ -10,12 +10,12 @@ Transport {
     Contact {
       Id = "Source"
       AtomRange = 96 143
-      #PLShiftTolerance = 0.0003
+      PLShiftTolerance = 0.0003
     }
     Contact {
       Id = "Drain"
       AtomRange = 144 191
-      #PLShiftTolerance = 0.0003
+      PLShiftTolerance = 0.0003
     }
   
   Task = ContactHamiltonian{
@@ -28,7 +28,6 @@ Transport {
 Hamiltonian = DFTB {
   SCC = yes
   MaxSCCIterations = 100
-  OrbitalResolvedSCC = No 
 
   SlaterKosterFiles = Type2FileNames {
     Prefix = "./slako/"

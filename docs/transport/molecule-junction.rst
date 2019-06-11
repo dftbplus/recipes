@@ -87,12 +87,12 @@ contact calculations tasks::
     Contact {
       Id = "source"
       AtomRange = 96 143
-      PLShiftTolerance = 0.01
+      PLShiftTolerance = 0.003
     }
     Contact {
       Id = "drain"
       AtomRange = 144 191
-      PLShiftTolerance = 0.01
+      PLShiftTolerance = 0.003
     }
     Task = ContactHamiltonian{
        ContactId = "source"
@@ -175,7 +175,7 @@ The ``Transport`` section must be modified::
   Transport {
     Device {
       AtomRange = 1 95
-      FirstLayerAtoms = 1, 21, 43, 54
+      FirstLayerAtoms = {1 43}
     }
     Contact {
       Id = "source"

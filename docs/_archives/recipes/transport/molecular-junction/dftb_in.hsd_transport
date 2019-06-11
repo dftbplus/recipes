@@ -5,21 +5,22 @@ Geometry = GenFormat {
 
 Transport {
     Device {
-      AtomRange = 1 95 
+      AtomRange = 1 95
+      FirstLayerAtoms ={1 43} 
     }
     Contact {
       Id = "Source"
       AtomRange = 96 143
-      PLShiftTolerance = 0.01
+      PLShiftTolerance = 0.0003
       FermiLevel [eV] = -4.665975
-      Potential [eV] = 0.5 
+      Potential [eV] = 0.0 
     }
     Contact {
       Id = "Drain"
       AtomRange = 144 191
-      PLShiftTolerance = 0.01
+      PLShiftTolerance = 0.0003
       FermiLevel [eV] =  -4.665975
-      Potential [eV] = -0.5 
+      Potential [eV] = -0.0 
     }
   
 }
@@ -29,8 +30,7 @@ Transport {
 Hamiltonian = DFTB {
   SCC = yes
   MaxSCCIterations = 100
-  ReadInitialCharges = Yes
-  OrbitalResolvedSCC = No 
+  #ReadInitialCharges = Yes
 
   SlaterKosterFiles = Type2FileNames {
     Prefix = "./slako/"

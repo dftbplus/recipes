@@ -1,6 +1,6 @@
 #!/bin/bash 
 
- export BIN=/home/pecchia/projects/dftb+/dftbplus/_build/prog/dftb+/dftb+
+BIN=$2
 
 if [[ $1 == *"c"* ]]; then
 
