@@ -11,5 +11,5 @@ DFTB+ recipes
    defect/index.rst
    parallel/index.rst
    transport/index.rst
-   bibliography.rst
    licence.rst
+   bibliography.rst

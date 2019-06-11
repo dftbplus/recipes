@@ -1,3 +1,5 @@
+.. _Parallel-dftb:
+
 ***********************
 Parallel usage of DFTB+
 ***********************

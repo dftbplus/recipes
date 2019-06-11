@@ -1,6 +1,5 @@
 .. highlight:: none
 
-
 *******************************************
 Electronic structure of 2D carbon materials
 *******************************************
@@ -605,6 +604,7 @@ to nearly 0.0 in the first k-point (the Gamma point).
    nanoribbon. The Fermi energy is at -4.4 eV.
 
 
+.. _defect-electronic-states:
 
 Armchair nanoribbon with vacancy
 ================================

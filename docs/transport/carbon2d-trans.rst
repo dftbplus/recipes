@@ -1,6 +1,5 @@
 .. highlight:: none
 
-
 *******************************************************
 Electron transport calculations in armchair nanoribbons
 *******************************************************
@@ -20,22 +19,22 @@ Non-SCC pristine armchair nanoribbon
 Preparing the structure
 ------------------------
 
-When we run a transport calculation with open boundary conditions, the geometric
-structure specified in the input needs to obey some rules. The system must
-consist of an extended device (or molecule) region, and two or more
-semi-infinite bulk contacts. The bulk contacts are described by providing two
-*principal layers* for each contact.
+When we run a transport calculation with open boundary conditions, the geometry
+specified in the input needs to obey some rules (see
+:ref:`specifying-geometry`). The system must consist of an extended device (or
+molecule) region, and two or more semi-infinite bulk contacts. The bulk contacts
+are described by providing two *principal layers* for each contact.
 
 A *Principal Layer (PL)* is defined as a contiguous group of atoms that have
 finite interaction only with atoms belonging to adjacent PLs. In a sense, a PL
 is a generalisation of the idea of nearest neighbour atoms to the idea of
 nearest neighbour blocks. The PL partitioning in the electrodes is used by the
 code to retrieve a description of the bulk system. PLs may be defined, as we
-will see, in the extended device region to take advantage of the iterative Green
-function solver algorithm.
+will see, in the extended device region to take advantage of the iterative
+Green's function solver algorithm.
 
 Additional information about the definition of PLs, contacts and extended device
-region can be found in the manual and in the on-line recipes.
+region can be found in the manual.
 
 In the case of an ideal one-dimensional system, all the PLs are identical. The
 system we start with is an infinite armchair graphene nanoribbon (AGR),
@@ -58,15 +57,15 @@ The structure is shown in :numref:`fig_transport_carbon2d-trans_2cell-7`
    Armchair nanoribbon principal layer (PL)
 
 As you may notice, we did not take a single unit cell length as a PL, but rather
-two unit cells. This choice is dictated by the definition of the PL itself, as
-we want to avoid non-zero interactions between second-neighbour PLs. This is
-better explained by referring to Figure
+two unit cells of the graphene conventional unit cell. This choice is dictated
+by the definition of the PL itself, as we want to avoid non-zero interactions
+between second-neighbour PLs. This is better explained by referring to Figure
 :ref:`fig_transport_carbon2d-trans_4cell-7`. The red carbon atoms represent the
 closest atoms which would belong to non-nearest neighbour PLs, and these have a
 separation of 0.568 nm, as shown in Figure
 :ref:`fig_transport_carbon2d-trans_4cell-7`. The carbon-carbon interaction is
-non zero up to a distance of 6 a.u., therefore the interaction between the two
-red atoms would be small, but non zero. Hence this is too small a separation for
+non-zero up to a distance of 6 a.u., therefore the interaction between the two
+red atoms would be small but non-zero. Hence this is too small a separation for
 a one unit cell long section of nanoribbon to be used as the PL.
 
 .. _fig_transport_carbon2d-trans_4cell-7:
@@ -77,38 +76,41 @@ a one unit cell long section of nanoribbon to be used as the PL.
 
    Layer definition
 
-The PL must contain two unit cells, in this case, as shown in figure
-:ref:`fig_transport_carbon2d-trans_4cell-7`. It follows that the correct
+In this case the PL must contain two unit cells, in this case, as shown in
+figure :ref:`fig_transport_carbon2d-trans_4cell-7`. It follows that the correct
 definition of a PL depends both on the geometry of the system and the
-interaction cut-off distance as defined in the SK files (In the first line of 
-the SK-files as grid spacing * grid points, in atomic units). 
-The cutoff distance can be shortened slightly using the option `SKTruncation`
-in the Hamiltonian section, however users should be aware that this impacts the
-electronic properties of the system, hence should be used by expert users only.
+interaction cut-off distance as defined in the SK files (In the first line of
+the SK-files this is given as the grid spacing in atomic units and the number of
+grid points in the file).  The cutoff distance can be shortened slightly using
+the option `TruncateSKRange` in the Hamiltonian section, however users should be
+aware that this impacts the electronic properties of the system, hence should be
+used by experts only.
 
-After having defined a proper PL, we then build a tructure consisting of a
-device region with 2 PLs and contacts at each end of this region, each with 2
-PLs.
+After having defined a proper PL, we then build a structure consisting of a
+device region with 2 PLs and contacts at each end of this region, each
+consisting of 2 PLs.
 
-*Note*: For the pristine system, the equilibrium results should not depend on
-the length of the device region, as the represented system is an infinite ideal
-nanoribbon with discrete translational symmetry along the ribbon.
+*Note*: For the pristine system, intensive properties in equilibrium
+calculations should not depend on the length of the device region, as the
+represented system is an infinite ideal nanoribbon with discrete translational
+symmetry along the ribbon.
 
 The input atomic structure must be defined according to a specific ordering: the
 device atoms come first, then each contact is specified, starting with the PL
 closer to the device region. For an ideal system defined by repetition of
-identical PLs, the tool `buildwire` (distributed with the code) can be used to
-build a 1D geometry with the right ordering.
+identical PLs, the tool `buildwire` (distributed with the DFTB+ code) can be
+used to build geometries with the right ordering.
 
 When you type::
 
   buildwire 2cell_7.gen 3 2
 
 the code use the geometry contained in the input supercell (`2cell_7.gen`),
-assume direction 3=z is the transport direction and the number of principal layers 
-in the device region will set this to be 2. 
+assuming direction 3 (=z) is the transport direction and that the number of
+principal layers in the device region will set this to be 2.
 
-The code `buildwire` will produce the correct transport block for dftb_in.hsd::
+The code `buildwire` then will produce the correct transport block for
+dftb_in.hsd::
 
   Transport{
     Device{
@@ -160,19 +162,18 @@ contact. When you build a structure yourself, it is always a good idea to use a
 visualiser and verify that the atomic indices are consistent with the transport
 setup definitions.
 
-The last step is to make sure the structure is defined as a *Cluster*. 
-From the point of view of an open boundary condition calculation,
-Supercell (``S``) and Cluster (``C``) have a slightly different meaning with
-respect to a canonical DFTB calculation. By Supercell we mean any structure
-which is *periodic in any direction transverse to the transport direction*,
-while for cluster we mean any structure *not periodic in any direction
-transverse to transport*. It follows that purely 1D systems, like nanowires and
-nanoribbons, should be regarded as clusters (``C``). Therefore we edit the
-structure file `device_7.gen`, changing in the first line the ``S`` (supercell)
-to be ``C`` (cluster) and remove the last four lines, which would normally only
-be defined for periodic systems. The newest versions of `buildwire` should 
-automatically do this. The corrected definition for the 1D ribbon with open 
-boundary conditions is then::
+The last step is to make sure the structure is defined as a *cluster*.  From the
+point of view of an open boundary condition calculation, supercells (``S``) and
+clusters (``C``) have slightly different meanings compare with canonical DFTB
+calculations. By supercell we mean any structure which is *periodic in any
+direction transverse to the transport direction*, while for cluster we mean any
+structure *not periodic in any direction transverse to transport*. It follows
+that purely 1D systems, like nanowires and nanoribbons, should be regarded as
+clusters (``C``). Therefore we edit the structure file `device_7.gen`, changing
+in the first line the ``S`` (supercell) to be ``C`` (cluster) and remove the
+last four lines, which would normally only be defined for periodic systems. The
+newest versions of `buildwire` should automatically do this. The corrected
+definition for the 1D ribbon with open boundary conditions is then::
 
   408  C
   C    H
@@ -199,13 +200,10 @@ tunnelling calculation.
 Transmission and density of states
 ----------------------------------
 
-In the DFTB+ input format, settings related to a transport calculation may be
-required to appear in separate sections of the `dftb_in.hsd` file, depending on
-the functionality they invoke. In the following we will set up the simplest open
-boundary condition calculation: a calculation of transmission coefficients
-according to the Landauer-Caroli formula, assuming a non-SCC DFTB
-hamiltonian. We will analyse and comment the different sections contained in the
-file `dftb_in.hsd`.
+In the following we will first set up the simplest open boundary condition
+calculation: transmission coefficients according to the Landauer-Caroli formula,
+assuming a non-SCC DFTB hamiltonian. We will discuss and comment the different
+sections contained in the file `dftb_in.hsd`.
 
 First, we have the specification of the geometry::
 
@@ -250,11 +248,12 @@ contacts. In this example we define a two terminal system, but in general N
 contacts are allowed. A contact is defined by an ``Id`` (mandatory), the range
 of atoms belonging to the contact specified in ``AtomRange`` (mandatory) and a
 ``FermiLevel`` (mandatory). The potential is set by default to 0.0, therefore
-need not be specified in this example. 
-Note that in non-SCC calculations that do not compute the Density Matrix of the system, 
-the Fermi level and the contact potential are not necessary to
-calculate the Transmission curve, but they are needed to calculate the current via
-the Landauer formula, as they would determine the occupation distribution in the
+need not be specified in this example.
+
+Note that in non-SCC calculations that do not compute the Density Matrix of the
+system, the Fermi level and the contact potential are not necessary to calculate
+a transmission curve, but they are needed to calculate the current via the
+Landauer formula, as they would determine the occupation distribution in the
 contacts.
 
 Then we have the ``Hamiltonian`` block, describing how the initial
@@ -274,19 +273,19 @@ Hamiltonian and the SCC component, if any, will be calculated::
     Eigensolver = TransportOnly{}
   }
 
-In this example we will calculate the transmission according to Caroli (referred
-by some authors as Fisher Lee) formula in a non-SCC approximation, i.e. the
-Hamiltonian is directly assembled from the Slater-Koster files and used "as is"
-to build the contact self energies and the extended device Green function.  The
-definition of an eigensolver is not meaningful in an open boundary setup, as the
-system is instead solved by the Green function technique. Therefore we just use
-a keyword ``TransportOnly`` to indicate that we do not want to solve an
-Eigenvalue problem. The other fields are filled up in the same way as for a
-regular DFTB calculation.
+In this example we will calculate the transmission according to the Caroli
+(referred by some authors as the Fisher Lee) formula in a non-SCC approximation,
+i.e. the Hamiltonian is directly assembled from the Slater-Koster files and used
+"as is" to build the contact self energies and the extended device Green
+function.  The definition of an eigensolver is not meaningful in an open
+boundary setup, as the system is instead solved by the Green function
+technique. Therefore we just use a keyword ``TransportOnly`` to indicate that we
+do not want to solve an Eigenvalue problem. The other fields are filled up in
+the same way as for a regular DFTB calculation.
 
-In general, in DFTB+ an Eigensolver is regarded as a calculator which can
-provide charge density in the SCC cycle, therefore we will define a Green
-function based eigensolver later, but only for SCC calculations.
+Usually in DFTB+ an eigensolver is regarded as a calculator which can provide
+the charge density in the SCC cycle, therefore we will instead define a Green's
+function based solver later, but only for SCC calculations.
 
 Note that as C-H bonds are present in the system, charge transfer should occur,
 hence the result will not be accurate at the non-SCC level. It is not *a-priori*
@@ -318,10 +317,10 @@ calculated when sub-blocks ``Region`` are defined. ``Region`` can be used to
 select some specific subsets of atoms or orbitals, according to the syntax
 explained in the manual. In this example, we are specifying the whole extended
 device region (atoms 1 to 136). Note that the energy range of interest is not
-known a priori. Either you have a reference band structure calculation,
-therefore you know where the first sub-bands are (this is the correct way to do
-this), or you can run a quick calculation with a large energy step and on the
-basis of the transmission curve then refine the range of interest.
+known *a-priori*. Either you have a reference band structure calculation so
+therefore know where the first sub-bands are (the correct way to do this), or
+you can run a quick calculation with a large energy step and on the basis of the
+transmission curve then refine the range of interest.
 
 We can then start the calculation::
 
@@ -330,47 +329,50 @@ We can then start the calculation::
 Parallelism in transport calculations
 -------------------------------------
 
-Please have a look to the section ``Parallel Usage of dftb+`` for a general discussion.
-In transport calculations we can take advantage of parallelisation over 
-the energy points by running the code with `mpirun`::
+Please have have a look at the section :ref:`Parallel-dftb` for a general
+discussion.  In transport calculations we can take advantage of parallelisation
+over the energy points by running the (mpi enabled) code with `mpirun`::
 
   mpirun -n 4 dftb+ dftb_in.hsd | tee output.log
 
-where ``4`` should be substituted by the number of available nodes. 
-Note that NEGF is parallelised over energy points, therefore a number of nodes larger than
-the energy grid will not improve performances and secondly that the memory
-consumption is proportional to the number of nodes used - this may be critical
-in shared memory systems with a small amount of memory per node.
-SMP parallelism use OpenMP multithreadings. This is exploited at low level linear
-algebra numerics such as Matrix-Matrix multiplications and Matrix inversions, especially
-when linking to Intel MKL library. 
-Multithreading is not enabled by default in dftb+ since this can easily collide with the
-parallel SCALAPACK diagonalizer.
-In order to enable OMP calculations you should explicitly look for ``Parallel`` block::
+where ``4`` should be substituted by the number of available nodes.  Note that
+non-equilibrium Green's function (NEGF) calculations are parallelised over
+energy points, therefore a number of nodes larger than the energy grid will not
+improve performances and secondly that the memory consumption is proportional to
+the number of nodes used - this may be critical in shared memory systems with a
+small amount of memory per node.  SMP parallelism is also used via OpenMP
+multi-threading, this is exploited at low level linear algebra numerics such as
+Matrix-Matrix multiplications and Matrix inversions, especially when linking to
+libraries such as the Intel MKL.  Multi-threading is not enabled by default in
+DFTB+ since this can easily collide with the parallel SCALAPACK diagonaliser.
+In order to enable OMP calculations you should explicitly look for ``Parallel``
+block::
 
   Parallel{
     UseOmpThreads = Yes  
   }
 
-Some experimentation can be done in order to find the optimal combination of MPI and OpenMP.
-Clearly the two schemes should not overlap on the same cpu(s). For instance with early days 
-Xeon Quad Cores CPUs the best performances could be obtained by running OpenMP with maximum 
-of 4 threads (``OMP_NUM_THREADS=4``) and MPI across as many separate nodes or sockes as available.
-As the number of cores on each socket has increased to 8, 10 or more, the most efficient 
-balance has to be seen. Typically openMP does not scale quite linearly but tend to saturate  
-at about 4 threads for typical transport calculations. Therefore it seems optimal to devide the
-total number of available cores modulo 4 threads giving the number of MPI processes. 
-So, for instance with 64 cores spread on 4 units with 2 sockets of 8 cores each, it should be fine 
-to set OMP_NUM_THREADS=4 and 16 MPI processes.
+Some experimentation can be done in order to find the optimal combination of MPI
+and OpenMP.  Clearly the two schemes should not overlap on the same CPU(s). For
+instance in the early days Xeon Quad Cores CPUs the best performances could be
+obtained by running OpenMP with maximum of 4 threads (``OMP_NUM_THREADS=4``) and
+MPI across as many separate nodes or sockets as available.  As the number of
+cores on each socket has increased to 8, 10 or more, the most efficient balance
+has to be determined by testing. Typically openMP does not scale quite linearly
+but tend to saturate at about 4 threads for typical transport
+calculations. Therefore it seems optimal to divide the total number of available
+cores modulo 4 threads to get the number of MPI processes.  So, for instance
+with 64 cores spread on 4 units with 2 sockets of 8 cores each, it should be
+fine to set OMP_NUM_THREADS=4 and 16 MPI processes.
 
 
 Plotting Transmission and DOS
 -----------------------------
 
 When the calculation has finished, the transmission and density of states are
-saved to both the `detailed.out` file and to two separate `transmission.dat` and
-`localDOS.dat` files. These additional files both contain the energy points in
-the first column and the desired quantities as additional columns.
+saved to separate `transmission.dat` and `localDOS.dat` files. These additional
+files both contain the energy points in the first column and the desired
+quantities as additional columns.
 
 We can plot the transmission by using the `plotxy` script::
 
@@ -425,9 +427,9 @@ If you do so, you will obtain the plot shown in Figure
 
    Non-SCC density of states on logarithmic scale
 
-The density of states in the band-gap is not zero, but decreases by several
+The density of states inside the band-gap is not zero, but decreases by several
 orders of magnitude. This is a natural consequence of the quasi-particle nature
-of the Green function formalism: every state in the system has a finite
+of the Green's function formalism: every state in the system has a finite
 broadening in energy.
 
 
@@ -534,8 +536,8 @@ the density of states, as in Figure
 
    Non-SCC DOS for single vacancy in sublattice A (linear scale)
 
-The same density of states can be visualised on logarithmic scale as
-well, as in :numref:`fig_transport_carbon2d-trans_nonscc-vac-semilog-dos`.
+The same density of states can be visualised on logarithmic scale as well, as in
+:numref:`fig_transport_carbon2d-trans_nonscc-vac-semilog-dos`.
 
 .. _fig_transport_carbon2d-trans_nonscc-vac-semilog-dos:
 .. figure:: ../_figures/transport/carbon2d-trans/nonscc-vac-semilog-dos.png
@@ -546,14 +548,14 @@ well, as in :numref:`fig_transport_carbon2d-trans_nonscc-vac-semilog-dos`.
    Non-SCC DOS for single vacancy on sublattice A (semilog scale)
 
 The vacancy is adding some close energy levels in the gap, as verified already
-from the DFTB+ calculation in the first part of the tutorial. The Van Hove
-singularities are partially suppressed as the system no longer possesses
-translational symmetry along the transport direction. Even in a simple non-SCC
-approximation, the qualitative picture is consistent with the previous SCC
-periodic calculation. We will now consider a vacancy sitting on the other
+using a conventional DFTB+ calculation (:ref:`defect-electronic-states`). The
+Van Hove singularities are partially suppressed as the system no longer
+possesses translational symmetry along the transport direction. Even in a simple
+non-SCC approximation, the qualitative picture is consistent with the previous
+SCC periodic calculation. We will now consider a vacancy sitting on the other
 sublattice (B) and try to understand whether the relative position of the
 vacancy is relevant or not by calculating once more the non-SCC transmission and
-density of states
+density of states.
 
 
 Non-SCC armchair nanoribbon with vacancy (B)
@@ -566,7 +568,7 @@ Transmission and Density of States
 -----------------------------------
 
 We will now consider a vacancy sitting on the other sublattice (B), i.e. we can
-take the structure file we used for the ideal ribbon and delete the atom
+take the structure file we used for the ideal ribbon and instead delete the atom
 number 47. The structure file is::
 
   407  C
@@ -624,17 +626,17 @@ as shown in :numref:`fig_transport_carbon2d-trans_nonscc-vac2-dos`.
 We can clearly see that the vacancy induces some nearly degenerate gap states,
 and that the density of states at higher energies is largely unaffected. It is
 known that the relative position of a scattering centre in a graphene nanoribbon
-with respect to different sub-lattices strongly affects its scattering
+with respect to different sub-lattices strongly affects its transport
 properties, as is shown in these non-SCC calculation. Qualitatively, the picture
 is also consistent with periodic DFTB+ calculations, with the difference that we
-obtain directly information on the effect on transport properties via
+directly obtain information on the effect on transport properties via
 transmission function. This also ensures that we do not have to worry about
 choosing the right supercell or k-point sampling as the open boundary conditions
 represent exactly the infinite system with a single scattering centre. As
 already pointed out earlier, there is no warranty that a non-SCC calculation
-give the proper result in a system if relevant charge transfer is occurring, and
-in general it will not. Therefore in the next section we will repeat the same
-calculation by solving the SCC problem.
+will give the proper result in a system if relevant charge transfer is
+occurring, and in general it will not. Therefore in the next section we will
+repeat the same calculation by solving the SCC problem.
 
 
 SCC Pristine armchair nanoribbon
@@ -650,19 +652,19 @@ correction. The SCC correction is in general needed whenever there is a finite
 charge transfer between atoms, i.e. whenever there are bonds between atoms with
 different chemical species or with different coordination numbers. In our case,
 we can expect a finite charge transfer between the C and H atoms at the edges,
-and an SCC component may be relevant. While in the previous sections, we have
-only considered the non-SCC component :math:`H^{0}`, in the next sections we
-will compute the same calculation by including the correction given by the
-shifts :math:`H^{\text{shift}}`.
+and an SCC component may be relevant due to this charge transfer. While in the
+previous sections, we have only considered the non-SCC component :math:`H^{0}`,
+in the next sections we will compute the same calculation by including the
+correction given by the shifts :math:`H^{\text{shift}}`.
 
 Note that the equilibrium SCC problem can be tackled in two ways: we could apply
 the Landauer-Caroli to an SCC Hamiltonian taken, for example, from a periodic
 calculation (i.e. uploading the SCC component), or we can solve the problem as a
 full NEGF setup with 0 bias. The code flow is currently such that this second
 procedure has to be used (however, the first technique will be available in
-future release). Therefore we will need to learn to set the input related to two
-other components of the NEGF machinery: the real space Poisson solver and the
-Green function density matrix.
+future release). Therefore we will need to learn to set up the input related to
+two other components of the NEGF machinery: the real space Poisson solver and
+the Green's function solution of the density matrix.
 
 In this way we will introduce a first complete input file. It is important, from
 a didactic point of view, to be clear that as long as the applied bias is zero
@@ -744,27 +746,25 @@ The Hamiltonian block shows some differences, too::
   }
 
 The flags ``SCC = Yes`` and ``SCCTolerance = 1e-6`` enable the SCC calculation.
-A small tolerance in the contact calculation, and in general in transport
-calculation, helps to avoid artificial mismatches at device/contact boundaries.
-The parameter ``EwaldParameter`` needs to sometimes be set when using parallel
-calculations to reduce the size of the neighbour list. Typically, the code may
-complain about a too small parameter: in that case, setting a value of 0.1 is
-considered to be good practice. The other parameters are the usual ones, except
-for the ``KPointsAndWeights``, which deserves special attention.
+A tight tolerance in the contact calculation, and in general in transport
+calculations, helps to avoid artificial mismatches at device/contact boundaries.
+The other parameters are the usual ones, except for the ``KPointsAndWeights``,
+which deserves special attention.
 
 The bulk contact is of course a periodic structure, hence we need to specify a
 proper k-point sampling, as we would do in a regular periodic DFTB
 calculation. However, you should be careful about the way the lattice vector is
 internally defined. When the input system is a **cluster** (C), i.e. *it has no
-periodicity in direction transverse to the transport directions*, the lattice
-vector of the contact is internally reconstructed and assigned to be the **first**
-lattice vector, *regardless the spatial orientation of the structure*. This
-means that the ``KPointsAndWeights`` for a cluster system are always defined as
-above: a finite number of k-points along the first reciprocal vector (according
-to a 1D Monkhorst-Pack scheme) and a Gamma point sampling along the other two
-directions. The reason for this choice is that we do not want to assign a
-specific direction to the structures, i.e. at this level we do not assume in any
-way that the structure must be oriented along x,y or z direction.
+periodicity in directions transverse to the transport direction(s)*, the lattice
+vector of the contact is internally reconstructed and assigned to be the
+**first** lattice vector, *regardless the spatial orientation of the
+structure*. This means that the ``KPointsAndWeights`` for a cluster system are
+always defined as above: a finite number of k-points along the first reciprocal
+vector (according to a 1D Monkhorst-Pack scheme) and sampling with values of 0
+along the other two directions. The reason for this choice is that we do not
+want to assign a specific direction to the structures, i.e. at this level we do
+not assume in any way that the structure must be oriented along x,y or z
+direction.
 
 Note also that as the contact information is used in the transport calculation,
 it is a good idea to use a dense k point sampling and a low SCC tolerance, in
@@ -783,8 +783,8 @@ After running the calculation, we notice that a file `shiftcont_source.dat` is
 generated. This file contains the information useful for the transport
 calculation (shifts and charges of a bulk contact). It is suggested you also
 keep a copy of the `detailed.out` for later reference. We can obtain the value
-of the Fermi energy, which we will later need, from `detailed.out` as -4.7103
-eV.
+of the Fermi energy, which we will later need, from `detailed.out` as -4.7103 eV
+(this is also stored in the "shiftcont_*.dat" files).
 
 We can now run the same calculation for the drain contact by just modifying the
 ``Task`` block::
@@ -813,8 +813,8 @@ directory::
 
   cp ../contacts/shiftcont* .
 
-Then, we have to specify some additional blocks with respect to a non-SCC
-calculation. We first look at the ``Transport`` block::
+Then we have to specify some additional blocks with respect to a non-SCC
+transport calculation. We first look at the ``Transport`` block itself::
 
   Transport {
     Device {
@@ -848,22 +848,23 @@ Now that we are solving the full SCC scheme, we will allow for charge transfer
 between the open leads and the extended device region, therefore it is important
 to set a well-defined Fermi energy. While this does not make any difference in a
 non-SCC transmission calculation, it is crucial for the SCC calculation. A wrong
-or unphysical Fermi energy will lead to unphysical charge accumulation or
-depletion in the system.
+or unphysical Fermi energy will lead to incorrect charge accumulation or
+depletion of the system.
 
 To this end, you will have to pay some attention to the definition of the Fermi
 energy. As we are calculating a semiconductor system, the Fermi level should be
 in the energy gap. By calculating a band structure or by inspection of the
 eigenvalues in the file `detailed.out` you can verify that the value -4.7103 is
-on the edge of the conduction band. This can be explained as numerically the
-Fermi level is defined by filling the single particle states till the reference
-density is reached, therefore its position inside the gap of a semiconductor is
-arbitrary. Therefore, while in metallic system we may ensure consistency and use
-a well calculated Fermi level at some specific temperature during all our
-transport calculation, in the case of a semiconductor system we can manually set
-the Fermi level in the middle of the energy gap (for this system, roughly at
--4.45 eV) and freely vary the temperature as long as the gap is larger than
-several times the value of kT.
+on the edge of the valence band. This can be explained as numerically the Fermi
+level is defined by filling the single particle states till the reference
+density is reached. Its position inside the gap of a semiconductor is in some
+senses arbitrary within that range (a common convention which DFTB+ uses is to
+set it at the middle of the gap). Therefore, while in metallic system we may
+ensure consistency and use a well converged Fermi level at some specific
+temperature during all our transport calculation, in the case of a semiconductor
+system we can manually set the Fermi level in the middle of the energy gap (for
+this system, roughly at -4.45 eV) and freely vary the temperature as long as the
+gap is larger than several times the value of kT.
 
 We will see in the following that there are some ways to verify that the Fermi
 level is defined consistently, as this is often source of confusion. Note also
@@ -945,7 +946,7 @@ The last block is ``Analysis``::
     }
   }
 
-This block is identical to the non-scc calculation as the same task is
+This block is identical to the non-SCC calculation as the same task is
 performed: calculation of Transmission, current and DOS by using the
 Landauer-Caroli formula. The Transmission will be of course be different due to
 the fact that the ground state charge density is now solution of the SCC
@@ -981,7 +982,7 @@ shifted. Note that while the non-SCC calculation is very robust, meaning that
 you will always get step-like transmission for a 1D system, in the SCC
 calculation a poor definition of the boundary conditions, of the bulk contact
 properties or of the additional ``GreensFunction`` and ``Poisson`` blocks may
-induce numerical artifacts and scattering barriers which should not be there. As
+induce numerical artefacts and scattering barriers which should not be there. As
 a result, the transmission will not appear step-like but rather visibly smoothed
 out.
 
@@ -1171,7 +1172,7 @@ run the calculation.  The density of states and transmission are shown in Figure
    Transmission for vacancy (A)
 
 The vacancy states are located in the energy gap, consistently with the periodic
-calculation, and that the tunneling curve is qualitative similar to the non-scc
+calculation, and that the tunnelling curve is qualitative similar to the non-SCC
 calculation. The first conduction and valence band are weakly affected by the
 vacancy which does not act as a strong scatterer. There is no signature of
 resonances, as the additional levels are located in the gap.
@@ -1226,16 +1227,16 @@ The resulting transmission and density of states are shown in Figures
    Transmission for vacancy (B)
 
 We immediately notice that the Van Hove singularities are strongly suppressed
-and that the valence band is almost completely suppressed. Consistently with the
+and that the valence band is substantially suppressed. Consistently with the
 picture obtained by periodic calculation, a quasi-bounded vacancy level
-hybridise with the valence band edge causing a strong back-scattering. A
+hybridises with the valence band edge causing strong back-scattering. A
 comparison between all the three cases (see Figure
 :ref:`fig_transport_carbon2d-trans_scc-tunn-comparison`) shows that the
-scattering probability is deeply affected by the exact position of the
-vacancy. This is, in graphene nanoribbon, generally true for other kinds of
-short range scattering centres such as substitutional impurities. We can also
-notice that, in this particular case, the non-scc approximation is qualitatively
-consistent for two reasons: the vacancy level are not populated and the charge
+scattering probability is strongly affected by the exact position of the
+vacancy. This is generally true for other kinds of short range scattering
+centres in graphene nanoribbons, such as substitutional impurities. We can also
+notice that in this particular case the non-SCC approximation is qualitatively
+consistent for two reasons: the vacancy levels are not populated and the charge
 transfer at the edges is not critical as the edges contribute poorly to the
 transmission in an armchair ribbon.
 
