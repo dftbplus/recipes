@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = ~/ve/bin/sphinx-build
+SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = DFTBRecipes
 SOURCEDIR     = .
 BUILDDIR      = _build

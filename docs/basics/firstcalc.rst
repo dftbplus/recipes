@@ -68,6 +68,7 @@ capitalise the keywords and any physical units as you like, since they are
 case-insensitive. This is not valid however for string values, especially if
 they are specifying file names.
 
+.. _gen_format:
 
 Geometry
 --------
