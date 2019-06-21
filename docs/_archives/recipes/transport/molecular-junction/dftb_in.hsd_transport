@@ -64,7 +64,7 @@ Hamiltonian = DFTB {
     PoissonAccuracy = 1e-5
   }
 
-  Eigensolver = GreensFunction{
+  Solver = GreensFunction{
     Verbosity = 1
     SaveSurfaceGFs = No    
     Delta [eV] = 1e-4

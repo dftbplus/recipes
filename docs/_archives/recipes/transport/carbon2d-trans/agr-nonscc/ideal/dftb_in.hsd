@@ -11,13 +11,13 @@ Transport {
       Id = "source"
       AtomRange = 137 272
       FermiLevel [eV] = -4.7103
-      potential [eV] = 0.0
+      Potential [eV] = 0.0
     }
     Contact {
       Id = "drain"
       AtomRange = 273 408
       FermiLevel [eV] = -4.7103
-      potential [eV] = 0.0
+      Potential [eV] = 0.0
     }
 }
 
@@ -34,21 +34,25 @@ Hamiltonian = DFTB {
     Suffix = ".skf"
   }
 
-  Eigensolver = TransportOnly{}
+  Solver = TransportOnly{}
 
 }
 
 Analysis = {
-TunnelingAndDos {
-  Verbosity = 101
-  EnergyRange [eV] = -6.5  -3.0
-  EnergyStep [eV] = 0.01
-  Region = {
-    Atoms = 1:136
+  TunnelingAndDos {
+    Verbosity = 101
+    EnergyRange [eV] = -6.5  -3.0
+    EnergyStep [eV] = 0.01
+    Region = {
+      Atoms = 1:136
+    }
   }
- }
 }
 
 Parallel = {
   UseOmpThreads = Yes  
+}
+
+ParserOptions {
+  ParserVersion = 7
 }

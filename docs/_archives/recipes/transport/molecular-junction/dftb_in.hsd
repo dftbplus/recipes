@@ -64,7 +64,7 @@ Hamiltonian = DFTB {
     PoissonAccuracy = 1e-5
   }
 
-  Eigensolver = GreensFunction{
+  Solver = GreensFunction{
     Verbosity = 1
     SaveSurfaceGFs = No    
     Delta [eV] = 1e-4
@@ -77,10 +77,10 @@ Hamiltonian = DFTB {
 
 Analysis{
   TunnelingAndDos{
-    verbosity = 0
-    EnergyRange [eV] = -9.0  -2.0
+    Verbosity = 0
+    EnergyRange [eV] = -9.0 -2.0
     EnergyStep [eV] = 0.02
-    Delta [eV] = 1e-4
+    Delta [eV] = 1E-4
   }
 }
 
@@ -88,3 +88,6 @@ Parallel = {
   UseOMPThreads = Yes
 }
 
+ParserOptions {
+  ParserVersion = 7
+}

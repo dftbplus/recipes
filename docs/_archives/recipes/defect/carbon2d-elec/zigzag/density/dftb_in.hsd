@@ -78,5 +78,5 @@ Analysis {
 
 # input file version information
 ParserOptions {
-  ParserVersion = 4
+  ParserVersion = 7
 }

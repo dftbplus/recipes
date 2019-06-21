@@ -5,27 +5,27 @@ Geometry = GenFormat {
 Transport {
     Device {
       AtomRange = 1 135
-    FirstLayerAtoms =  1 68
+      FirstLayerAtoms =  1 68
     }
     Contact {
       Id = "source"
       AtomRange = 136 271
       FermiLevel [eV] = -4.45
-      potential [eV] = 0.0
+      Potential [eV] = 0.0
     }
     Contact {
       Id = "drain"
       AtomRange = 272 407
       FermiLevel [eV] = -4.45
-      potential [eV] = 0.0
+      Potential [eV] = 0.0
     }
-  Task = UploadContacts {
+    Task = UploadContacts {
   }
 }
 
 Hamiltonian = DFTB {
   SCC = Yes 
-  SCCTolerance = 1e-6
+  SCCTolerance = 1E-6
   ReadInitialCharges = No
   MaxAngularMomentum = {
     C = "p"
@@ -48,19 +48,21 @@ Hamiltonian = DFTB {
     SavePotential = Yes
   }
 
-  Eigensolver = GreensFunction {
-    }
+  Solver = GreensFunction {}
 
 }
 
 Analysis = {
-TunnelingAndDos {
+ TunnelingAndDos {
     Verbosity = 101
     EnergyRange [eV] = -6.0  -3.0
     EnergyStep [eV] = 0.025
     Region = {
       Atoms = 1:135
     }
-}
+ }
 }
 
+ParserOptions {
+  ParserVersion = 7
+}

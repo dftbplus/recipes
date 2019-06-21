@@ -29,7 +29,7 @@ Hamiltonian = DFTB {
     Separator = "-"
     Suffix = ".skf"
   }
-    
+  
   # 1x1x4 grid tested to be converged for energy
   KPointsAndWeights = SupercellFolding {
     1  0  0
@@ -41,5 +41,5 @@ Hamiltonian = DFTB {
 
 # input file version information
 ParserOptions {
-  ParserVersion = 4
+  ParserVersion = 7
 }

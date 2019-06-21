@@ -2,7 +2,6 @@ Geometry = GenFormat {
   <<< geo_end.gen
 }
 
-
 Hamiltonian = DFTB {
   SCC = Yes
   MaxAngularMomentum = {
@@ -24,4 +23,8 @@ Hamiltonian = DFTB {
   }
   ReadInitialCharges = Yes
   MaxSCCIterations = 1
+}
+
+ParserOptions {
+  ParserVersion = 7
 }

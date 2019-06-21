@@ -6,16 +6,18 @@ Transport{
   Contact{
     Id="s"
     Atoms [zeroBased] = {45:60 69:84 93:108}
-    ContactVector [Angstrom] = 4.94 0.0 0.0  
+    ContactVector [Angstrom] = 4.94 0.0 0.0
+    PLsDefined = 2
   }
   Contact{
     Id="d"
     Atoms [zeroBased] = {117:132 141:156 165:180}
-    ContactVector [Angstrom] = 4.94 0.0 0.0 
+    ContactVector [Angstrom] = 4.94 0.0 0.0
+    PLsDefined = 2
   }
   Task=SetupGeometry{
     #SlaterKosterFiles = Type2FileNames{
-    #  prefix =  "../../slako/mio-ext/"    
+    #  prefix =  "../../slako/mio-ext/"
     #  separator  = "-"
     #  suffix  = ".skf"
     #}

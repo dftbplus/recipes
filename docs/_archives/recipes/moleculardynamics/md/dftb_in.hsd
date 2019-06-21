@@ -100,7 +100,7 @@ Driver = VelocityVerlet{
 
 Hamiltonian = DFTB {
   SCC = Yes
-  SCCTolerance = 1e-6
+  SCCTolerance = 1E-6
   Filling = Fermi {
     Temperature [Kelvin] = 400
   }
@@ -129,7 +129,7 @@ Analysis {
 
 # This file uses the 5th input format
 ParserOptions = {
-  ParserVersion = 5
+  ParserVersion = 7
 }
 
 # if run in MPI parallel, allow openMP threads to be used

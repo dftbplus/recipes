@@ -270,17 +270,17 @@ Hamiltonian and the SCC component, if any, will be calculated::
       Separator = "-"
       Suffix = ".skf"
     }
-    Eigensolver = TransportOnly{}
+    Solver = TransportOnly{}
   }
 
 In this example we will calculate the transmission according to the Caroli
 (referred by some authors as the Fisher Lee) formula in a non-SCC approximation,
 i.e. the Hamiltonian is directly assembled from the Slater-Koster files and used
 "as is" to build the contact self energies and the extended device Green
-function.  The definition of an eigensolver is not meaningful in an open
-boundary setup, as the system is instead solved by the Green function
+function.  The use of an eigensolver is not meaningful in an open boundary
+setup, as the system is instead solved by the Green function
 technique. Therefore we just use a keyword ``TransportOnly`` to indicate that we
-do not want to solve an Eigenvalue problem. The other fields are filled up in
+do not want to solve an eigenvalue problem. The other fields are filled up in
 the same way as for a regular DFTB calculation.
 
 Usually in DFTB+ an eigensolver is regarded as a calculator which can provide
@@ -917,11 +917,11 @@ files can be quite large, therefore the default is ``No``.
 Density Matrix Calculations - GreensFunction solver
 ---------------------------------------------------
 
-The Eigensolver is now specified as ``GreensFunction``. With this definition, we
+The solver is now specified as ``GreensFunction``. With this definition, we
 instruct the code not to solve an eigenvalue problem but rather to calculate the
 density matrix by integration of the Keldysh Green function::
 
-  Eigensolver = GreensFunction{}
+  Solver = GreensFunction{}
 
 This block provides the SCC charge density with or without applied bias. The options define the
 integration path. Usually the default options are good enough in most cases and

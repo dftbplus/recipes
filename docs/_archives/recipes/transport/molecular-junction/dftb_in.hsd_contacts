@@ -52,7 +52,7 @@ Hamiltonian = DFTB {
     0.0 0.0 0.0
   }
 
-  Eigensolver = DivideAndConquer{}
+  Solver = DivideAndConquer{}
 }
 
 Parallel = {
