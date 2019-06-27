@@ -333,7 +333,7 @@ Green's function options
 Here we discuss the most important parameters to be set in the calculation of
 the system Green's functions::
 
-  Eigensolver = GreensFunction {
+  Solver = GreensFunction {
     Delta [eV] = 1e-4
     ContourPoints = 30 40
     RealAxisStep [eV] = 0.025

@@ -38,3 +38,7 @@ Analysis {
     }
   }
 }
+
+ParserOptions {
+  ParserVersion = 7
+}

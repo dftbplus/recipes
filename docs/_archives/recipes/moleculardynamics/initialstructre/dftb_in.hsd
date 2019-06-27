@@ -66,7 +66,7 @@ Hamiltonian = DFTB {
 
 # This file uses the 5th input format
 ParserOptions = {
-  ParserVersion = 5
+  ParserVersion = 7
 }
 
 # if run in MPI parallel, allow openMP threads to be used

@@ -42,3 +42,7 @@ Hamiltonian = DFTB {
   }
 	
 }
+
+ParserOptions {
+  ParserVersion = 7
+}

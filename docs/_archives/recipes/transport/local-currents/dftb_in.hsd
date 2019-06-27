@@ -62,7 +62,7 @@ Hamiltonian = DFTB {
     BuildBulkPotential = No
   }
 
-  Eigensolver = GreensFunction{
+  Solver = GreensFunction{
      LocalCurrents=Yes
      delta = 5e-4
      verbosity = 100
@@ -82,7 +82,7 @@ Options{
 }
 
 ParserOptions{
-  ParserVersion = 6
+  ParserVersion = 7
 }
 
 Parallel{
@@ -100,4 +100,3 @@ Parallel{
 #  }
 # }
 #}
-

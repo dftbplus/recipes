@@ -35,11 +35,14 @@ Hamiltonian = DFTB {
 }
 
 Options {
-  WriteEigenvectors = Yes    #  store the eigenstates to disc
   WriteDetailedXML = Yes     # required later for the waveplot program
   WriteDetailedOut = No     
 }
 
+Analysis {
+  WriteEigenvectors = Yes    #  store the eigenstates to disc
+}
+
 ParserOptions {
-  ParserVersion = 4
+  ParserVersion = 7
 }

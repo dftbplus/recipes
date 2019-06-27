@@ -60,7 +60,7 @@ looks as follows::
   }
 
   ParserOptions {
-    ParserVersion = 6
+    ParserVersion = 7
   }
 
 The order of the specified blocks in the HSD input is arbitrary. You are free to
@@ -299,7 +299,7 @@ The version number of the parser in the current DFTB+ code is always printed out
 at the program start. It is a good habit to set this value in your input files
 explicitly, like in our case::
 
-  ParserVersion = 5
+  ParserVersion = 7
 
 This allows you to use your input file with future versions of DFTB+ without
 adapting it by hand, if the input format has changed in the more recent version.
@@ -469,7 +469,7 @@ As already discussed above, it can be a good habit to set this version number
 explicitly in your input inside the ``ParserOptions`` block, so that::
 
   ParserOptions { 
-    ParserVersion = 5
+    ParserVersion = 7
   }
 
 Next, the parser starts to interpret your input, then reads in the

@@ -98,7 +98,7 @@ Nanoribbon example
 In order to obtain the local currents the user has to set the following input
 block::
 
-  EigenSolver = Greensfunction {
+  Solver = Greensfunction {
     localCurrents = Yes
   }
 
@@ -128,7 +128,7 @@ obtained for a supercell calculation based on usual DFTB. In order to converge
 the SCC loop we had to set a value for the delta-parameter in the Green's
 function definition larger than the default value::
 
-  EigenSolver = Greensfunction {
+  Solver = Greensfunction {
     delta = 5e-4
     localCurrents = Yes
   }

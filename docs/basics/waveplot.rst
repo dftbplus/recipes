@@ -58,7 +58,7 @@ optimised by DFTB+::
   }
   
   ParserOptions {
-    ParserVersion = 6
+    ParserVersion = 7
   }
 
 Running DFTB+ for this input, you should obtain the usual results, and
