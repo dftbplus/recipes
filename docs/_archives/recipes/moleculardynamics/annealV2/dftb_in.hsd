@@ -71,13 +71,15 @@ Options {
   #RandomSeed = 171108352  # Anneals to a different divacancy
   #RandomSeed = 1959391743 # Vacancies remain in place and oscillate
   #RandomSeed = 0          # Genuinely random seed choice
-  
+
   WriteDetailedOut = No # suppress writing detailed.out
+}
+
+Analysis {
   MullikenAnalysis = No
   WriteBandOut = No
-  
 }
 
 ParserOptions {
-  ParserVersion = 4
+  ParserVersion = 7
 }

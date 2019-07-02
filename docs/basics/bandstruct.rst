@@ -107,7 +107,7 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
   }
   
   ParserOptions {
-    ParserVersion = 6
+    ParserVersion = 7
   }
 
 In the input above, the coordinates have been specified in relative (fractional)

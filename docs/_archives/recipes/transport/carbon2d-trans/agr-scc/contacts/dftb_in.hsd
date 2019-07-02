@@ -1,0 +1,48 @@
+Geometry = GenFormat {
+<<< 'device_7.gen'
+}
+
+Transport {
+    Device {
+      AtomRange = 1 136
+    }
+    Contact {
+      Id = "source"
+      AtomRange = 137 272
+    }
+    Contact {
+      Id = "drain"
+      AtomRange = 273 408
+    }
+  Task = ContactHamiltonian{
+     ContactId = "source"
+  }
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes 
+  SCCTolerance = 1e-6
+  EwaldParameter = 0.1
+  MaxAngularMomentum = {
+    C ="p"
+    H = "s"
+  }
+
+  SlaterKosterFiles = Type2FileNames {
+  Prefix = "../../slako/"
+  Separator = "-"
+  Suffix = ".skf"
+}
+	
+  KpointsAndWeights = SupercellFolding{
+   25 0 0
+    0 1 0
+    0 0 1
+    0.0 0.0 0.0
+  }
+	
+}
+
+ParserOptions {
+  ParserVersion = 7
+}

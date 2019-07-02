@@ -48,7 +48,7 @@ Driver = VelocityVerlet{
  # extended Lagrangian dynamics, using the 'fast' option
  XlbomdFast {
    IntegrationSteps = 5
-   Scale = 0.5           # scalekappa (only for fast option with 1 scf cycle)
+   Scale = 0.5 # scalekappa (only for fast option with 1 scf cycle)
    TransientSteps = 10
  }
 
@@ -134,7 +134,7 @@ Analysis {
 
 # This file uses the 5th input format
 ParserOptions = {
-  ParserVersion = 5
+  ParserVersion = 7
 }
 
 # if run in MPI parallel, allow openMP threads to be used

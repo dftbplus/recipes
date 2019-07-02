@@ -1,0 +1,45 @@
+# Example input to calculate the self-consistent converged charges and
+# electronic levels for armchair graphene ribbon with hydrogen edge
+# termination with a defect in the ribbon
+
+Geometry = GenFormat {
+  # geometry of atoms and periodic boundaries read from external file:
+  <<< "geo.gen"
+}
+
+Hamiltonian = DFTB {
+    
+  # Self-consistent (default tolerances are being used)
+  SCC = Yes
+  
+  # Atomic states on the atoms
+  MaxAngularMomentum {
+    C = "p"
+    H = "s"
+  }
+    
+  # Using an electronic temperature
+  Filling = Fermi {
+    Temperature [Kelvin] = 300
+  }
+    
+  # Reading the parameters for the calculation
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slako/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+    
+  # 1x1x4 grid tested to be converged for energy
+  KPointsAndWeights = SupercellFolding {
+    1  0  0
+    0  1  0
+    0  0  4
+    0.0  0.0  0.5
+  }
+}
+
+# input file version information
+ParserOptions {
+    ParserVersion = 7
+}

@@ -1,0 +1,65 @@
+Geometry = GenFormat {
+<<< 'device_7.gen'
+}
+
+Transport {
+    Device {
+      AtomRange = 1 136
+      FirstLayerAtoms =  1 69
+    }
+    Contact {
+      Id = "source"
+      AtomRange = 137 272
+      FermiLevel [eV] = -4.45
+      Potential [eV] = 0.0
+    }
+    Contact {
+      Id = "drain"
+      AtomRange = 273 408
+      FermiLevel [eV] = -4.45
+      Potential [eV] = 0.0
+    }
+    Task = UploadContacts {
+  }
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes 
+  SCCTolerance = 1E-6
+  ReadInitialCharges = No
+  MaxAngularMomentum = {
+    C = "p"
+    H = "s"
+  }
+  
+  SlaterKosterFiles = Type2FileNames {
+  Prefix = "../../slako/"
+  Separator = "-"
+  Suffix = ".skf"
+  }
+
+  Electrostatics = Poisson {
+    Poissonbox [Angstrom] = 40.0 30.0 30.0
+    MinimalGrid [Angstrom] = 0.5 0.5 0.5
+    SavePotential = Yes
+  }
+
+  Solver = GreensFunction {}
+
+  Mixer = Broyden {
+    MixingParameter = 0.02
+  }
+	
+}
+
+Analysis = {
+  TunnelingAndDos {
+    Verbosity = 101
+    EnergyRange [eV] = -6.0 -3.0
+    EnergyStep [eV] = 0.01
+  }
+}
+
+ParserOptions {
+  ParserVersion = 7
+}

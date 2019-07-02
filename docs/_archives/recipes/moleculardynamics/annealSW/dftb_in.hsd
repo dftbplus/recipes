@@ -59,19 +59,19 @@ Hamiltonian = DFTB {
   KPointsAndWeights {
     0 0 0 1.0
   }
-  
 }
 
-Options {
-  
+Analysis {
   MullikenAnalysis = No
   WriteBandOut = No
-  
+}
+
+Options {  
   WriteDetailedOut = No
   RandomSeed = 589105024 # specify the rand number generator
   # starting seed
 }
 
 ParserOptions {
-  ParserVersion = 4
+  ParserVersion = 7
 }
