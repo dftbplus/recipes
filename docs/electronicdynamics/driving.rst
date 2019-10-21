@@ -37,7 +37,7 @@ We excite the Q band, in resonance, in the direction of maximum polarizability. 
 
 The dipole moment maxima and minuma grow in absolute value as a linear function of time after an initial transient, confirming that the applied field is in resonance with the excitation and within the lienar response regime. The slope of this growth is related to the transition dipole of the excitation.
 
-An *out of tune* excitation at 1.9 eV produces the following result for the dipole moment
+An *out of tune* excitation at 1.9 eV produces the following result for the dipole moment:
 
   .. figure:: ../_figures/elecdynamics/muvst-oot.png
      :height: 40ex
