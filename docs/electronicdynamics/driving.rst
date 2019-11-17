@@ -10,7 +10,7 @@ In this chapter we will decribe how to drive the Q band of Chlorophyl a using a 
 
 which produces the output::
 
-PolarizationDirection = -0.08808129 0.99564018 -0.03069709
+  PolarizationDirection = -0.08808129 0.99564018 -0.03069709
 
 this are the three cartesian components of the transition dipole moment vector. This vector points in the direction in which a driving laser in resonance with the excitation will have maximum absorption. This vector is the eigenvector of the polarizability tensor at that energy that has the largest eigenvalue. It is equivalent to a principal axis of inertia in rigid body rotation. 
 
