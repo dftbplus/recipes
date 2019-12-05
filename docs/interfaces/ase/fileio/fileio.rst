@@ -8,13 +8,10 @@ For calculations without heavy file-IO, i.e. systems whose wallclock time is
 dominated by the diagonalizations due to extensive SCC cycles, the 
 communication between DFTB+ and external software via file-IO may be suitable.
 
-Note: At this time, only the communication with ASE has been experimentally 
-verified.
-
 Calling DFTB+ via ASE
 =====================
 
-[Input: `recipes/interfaces/fileio/1_conjgrad/`]
+[Input: `recipes/interfaces/ase/fileio/1_conjgrad/`]
 
 In order for ASE to find the DFTB+ executable and Slater-Koster files, 
 environment variables must be set. Assuming the use of BASH, this is done as 
@@ -24,7 +21,7 @@ necessary)::
     $ DFTB_PREFIX=~/slakos/mio-0-1/
     $ DFTB_COMMAND=~/dftbplus/bin/dftb+
 
-In this case the geometry optimization of a simple water cluster serves as an 
+In this case the geometry optimization of a simple water molecule serves as an 
 example::
 
     3  C
@@ -34,7 +31,7 @@ example::
          3    2    0.00000000000E+00   0.00000000000E+00  -0.78306400000E+00
 
 Following the necessary imports, the main script defines the path to the DFTB+ 
-executable and the geometry .gen file containing the water cluster shown above. 
+executable and the geometry .gen file containing the water molecule shown above. 
 The main method then first reads in the geometry. Subsequently, a ``DFTB()`` 
 calculator object with options that are crucial for the actual calculation 
 is instantiated. Here we perform a self-consistent calculation with 
@@ -44,7 +41,9 @@ The calculator gets attached to the system or geometry respectively and the
 calculation is started.
 
 Finally, the convergent geometry as well as the forces and corresponding energy 
-of the system can be read out directly by ASE::
+of the system can be read out directly by ASE:
+
+.. code-block:: python
 
     from ase.io import read
     from ase.calculators.dftb import Dftb
@@ -74,7 +73,8 @@ of the system can be read out directly by ASE::
         forces = system.get_forces()
         energy = system.get_potential_energy()
 
-    main()
+    if __name__ == "__main__":
+        main()
 
 The script shown causes ASE to create an input file (`dftb_in.hsd`) with the 
 specified options and invokes DFTB+ in the corresponding directory.
@@ -82,12 +82,12 @@ specified options and invokes DFTB+ in the corresponding directory.
 Geometry Optimization by ASE
 ============================
 
-[Input: `recipes/interfaces/fileio/2_bfgs/`]
+[Input: `recipes/interfaces/ase/fileio/2_bfgs/`]
 
 Apart from the invocation of DFTB+ via file-IO, the use of DFTB+ as an energy/
 force engine in conjunction with an external geometry driver is possible. To do 
 so, again, set the required environment variables (see explanation above) and 
-consider a water cluster of the following geometry::
+consider a water molecule of the following geometry::
 
     3  C
      O H
@@ -99,7 +99,9 @@ Similar to the previous section, the path to the .gen file containing the
 geometry is defined first, followed by the calculator. Subsequently, the driver 
 of the geometry optimization is specified and where to write the trajectory and 
 the logfile. In this case, ``BFGS()`` is used, representative of all the 
-calculators provided by ASE::
+calculators provided by ASE:
+
+.. code-block:: python
 
     from ase.io import read
     from ase.optimize import BFGS
@@ -125,7 +127,8 @@ calculators provided by ASE::
         forces = system.get_forces()
         energy = system.get_potential_energy()
 
-    main()
+    if __name__ == "__main__":
+        main()
 
 The script shown causes ASE to generate appropriate input files for each step 
 of the geometry optimization. Note that this can lead to heavy file-IO and 

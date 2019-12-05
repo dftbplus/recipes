@@ -10,12 +10,11 @@ invoke DFTB+ via known software, such as the Atomic Simulation Environment -
 ASE.
 
 Furthermore, the interface communication offers the possibility of 
-expanding the application possibilities and the functionality of DFTB+. For 
-example, DFTB+ can serve as an energy/force engine, whereas an external driver 
-is used for geometry optimization.
+expanding the applications and functionality of DFTB+. For example, DFTB+ can 
+serve as an energy/force engine, whereas an external driver is used for 
+geometry optimization.
 
 .. toctree::
    :maxdepth: 1
 
-   sockets.rst
-   fileio.rst
+   ase/index.rst

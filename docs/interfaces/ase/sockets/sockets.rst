@@ -5,10 +5,10 @@
 Socket-Communication
 ********************
 
-[Input: `recipes/interfaces/sockets/`]
+[Input: `recipes/interfaces/ase/sockets/`]
 
 For calculations that heavily rely on file-IO, reference to the possibility of 
-communication between DFTB+ and external software, based on the i-PI protocol, 
+communication between DFTB+ and ASE, based on the i-PI protocol, 
 should be made. In these cases, the reduction of the wallclock time can be 
 significant.
 
@@ -18,23 +18,18 @@ protocol should be supported.
 
 .. note::
 
-    To enable socket-communication in DFTB+, the `WITH_SOCKETS` flag in the 
-    configuration file `config.cmake` must be set to TRUE before starting the 
+    To enable socket-communication in DFTB+ the `WITH_SOCKETS` flag in the 
+    configuration file `config.cmake` must be set to TRUE, before starting the 
     compilation process!
 
 Geometry Optimization by ASE
 ============================
 
-Before going through the following sections, please make sure that you have 
-installed a working version of the ASE package. If you are wondering how to 
-`install ASE <https://wiki.fysik.dtu.dk/ase/install.html>`_, please consult the 
-appropriate documentation.
-
 Providing the input for DFTB+
 -----------------------------
 
 To establish a connection via socket communication, DFTB+ is called with the 
-appropriate ``Socket{}`` driver option.::
+appropriate ``Socket{}`` driver option::
 
     Driver = Socket {
       File = "dftbplus"
@@ -56,7 +51,7 @@ mentioned errors::
       <<< "geo.gen"
     }
 
-The calculation of a water cluster is performed without self-consistency cycles 
+The calculation of a water molecule is performed without self-consistency cycles 
 and the required Slater-Koster files in the top-level directory (same folder as 
 `dftb_in.hsd`)::
 
@@ -75,10 +70,12 @@ and the required Slater-Koster files in the top-level directory (same folder as
       }
     }
 
+For the full input file assembled from the code snippets shown here, please 
+consult the archive, whose location is stated at the begin of the section.
 
 Geometry and main script
 ------------------------
-The geometry used is a simple water cluster, whose location is specified in the 
+The geometry used is a simple water molecule, whose location is specified in the 
 main script (`GEO_PATH`)::
 
     3  C
@@ -88,14 +85,16 @@ main script (`GEO_PATH`)::
          3    2    0.00000000000E+00   0.00000000000E+00  -0.78306400000E+00
 
 Following the necessary imports, the main script defines the type of socket to 
-be used (UNIX socket) as well as the path to the DFTB+ executable and the 
-geometry. The main method then first reads in the geometry and immediately 
-writes it out for the reasons mentioned above. Subsequently, the driver 
-``BFGS()`` of the geometry optimization is specified and where to write the 
-trajectory and the logfile.
+be used (UNIX socket) as well as the path to the DFTB+ executable (`DFTBP_PATH`)
+and the geometry (`GEO_PATH`). The main method then first reads in the geometry 
+and immediately writes it out for the reasons mentioned above. Subsequently, 
+the driver ``BFGS()`` of the geometry optimization is specified and where to 
+write the trajectory and the logfile.
 
 Finally, the convergent forces and the corresponding energy of the system can 
-be read out directly by ASE::
+be read out directly by ASE:
+
+.. code-block:: python
 
     import sys
     from subprocess import Popen
@@ -124,7 +123,8 @@ be read out directly by ASE::
         forces = system.get_forces()
         energy = system.get_potential_energy()
 
-    main()
+    if __name__ == "__main__":
+        main()
 
 .. note::
 

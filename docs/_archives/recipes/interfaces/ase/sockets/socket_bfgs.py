@@ -25,5 +25,6 @@ def main():
     forces = system.get_forces()
     energy = system.get_potential_energy()
 
-main()
+if __name__ == "__main__":
+    main()
 
