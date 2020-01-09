@@ -4,24 +4,25 @@
 File-IO
 *******
 
-For calculations without heavy file-IO, i.e. systems whose wallclock time is 
-dominated by the diagonalizations due to extensive SCC cycles, the 
-communication between DFTB+ and external software via file-IO may be suitable.
+For calculations without heavy file-IO, i.e. systems whose wallclock time is
+dominated by the electronic structure part of the calculation (due to extensive
+SCC cycles or large system size), the communication between DFTB+ and external
+software via file-IO may be suitable.
 
 Calling DFTB+ via ASE
 =====================
 
 [Input: `recipes/interfaces/ase/fileio/1_conjgrad/`]
 
-In order for ASE to find the DFTB+ executable and Slater-Koster files, 
-environment variables must be set. Assuming the use of BASH, this is done as 
-follows (in general an adaptation to the individual system is
-necessary)::
+In order for ASE to find the DFTB+ executable and Slater-Koster files,
+environment variables must be set. Assuming the use of the BASH shell, this is
+done as follows (in general an adaptation to your specific computing environment
+will be necessary)::
 
     $ DFTB_PREFIX=~/slakos/mio-0-1/
     $ DFTB_COMMAND=~/dftbplus/bin/dftb+
 
-In this case the geometry optimization of a simple water molecule serves as an 
+In this case the geometry optimization of a simple water molecule serves as an
 example::
 
     3  C
@@ -30,12 +31,12 @@ example::
          2    2    0.00000000000E+00   0.00000000000E+00   0.78306400000E+00
          3    2    0.00000000000E+00   0.00000000000E+00  -0.78306400000E+00
 
-Following the necessary imports, the main script defines the path to the DFTB+ 
-executable and the geometry .gen file containing the water molecule shown above. 
-The main method then first reads in the geometry. Subsequently, a ``DFTB()`` 
-calculator object with options that are crucial for the actual calculation 
-is instantiated. Here we perform a self-consistent calculation with 
-``ConjugateGradient{}`` as the driver.
+Following the necessary imports, the main script defines the path to the DFTB+
+executable and the geometry .gen file containing the water molecule shown above.
+The main method then first reads in the geometry. Subsequently, a ``DFTB()``
+calculator object with options that are crucial for the actual calculation is
+then instantiated. Here we perform a self-consistent calculation with the DFTB+
+``ConjugateGradient{}`` method as the driver.
 
 The calculator gets attached to the system or geometry respectively and the 
 calculation is started.
@@ -76,7 +77,7 @@ of the system can be read out directly by ASE:
     if __name__ == "__main__":
         main()
 
-The script shown causes ASE to create an input file (`dftb_in.hsd`) with the 
+The script above causes ASE to create an input file (`dftb_in.hsd`) with the
 specified options and invokes DFTB+ in the corresponding directory.
 
 Geometry Optimization by ASE
@@ -130,9 +131,10 @@ calculators provided by ASE:
     if __name__ == "__main__":
         main()
 
-The script shown causes ASE to generate appropriate input files for each step 
-of the geometry optimization. Note that this can lead to heavy file-IO and 
-thus a significant increase in wallclock time, depending on the speed of 
-the storage used. Therefore it is advisable to perform such calculations on a 
-ramdisk or even better via :ref:`sec-sockets`.
-
+The script shown causes ASE to generate appropriate input files for each step of
+the geometry optimization. Note that this can lead to heavy file-IO and thus a
+significant increase in wallclock time, depending on the speed of the storage
+used. Additionally, the self-consistency is started from fresh for each
+structure, substantially increasing the number of SCC cycles. Therefore it is
+advisable to perform such calculations on a ramdisk or even better via
+:ref:`sec-sockets`.

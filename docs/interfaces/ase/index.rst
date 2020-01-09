@@ -9,8 +9,8 @@ modules for setting up, manipulating, running, visualizing and analyzing
 atomistic simulations (cf. `ASE documentation 
 <https://wiki.fysik.dtu.dk/ase/>`_). 
 
-Thanks to mutual support of socket-communication and file-IO by ASE and DFTB+, 
-you can freely choose the most suitable communication type for you. Further 
+Thanks to mutual support of socket-communication and file-IO by ASE and DFTB+,
+you can freely choose the most suitable type of communication for you. Further
 information can be found in the sections linked below.
 
 Note: Before going through the following sections, please make sure that you have 
