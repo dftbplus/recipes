@@ -33,9 +33,18 @@ appropriate ``Socket{}`` driver option::
     Driver = Socket {
       File = "dftbplus"
       Protocol = i-PI {}
-      MaxSteps = -1 # continues until externally stopped
+      MaxSteps = 1000
       Verbosity = 0
     }
+
+Which instructs DFTB+ to read geometry driving commands via a named temporary
+communication file (stored in /tmp/). In this example, due to a bug in the
+current ASE implementation of the i-PI protocol, the code performs up to 1000
+geometry steps under control of the external interface then stops. For external
+driving codes that support the `EXIT` command in the protocol, instead DFTB+ can
+continue running until told to stop by using::
+
+  MaxSteps = -1
 
 Due to the nature of the i-PI protocol, a dummy geometry must be provided, from
 which the number and species of the atoms, as well as unit cell vectors will be

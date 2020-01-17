@@ -1,7 +1,7 @@
 Driver = Socket {
   File = "dftbplus"
   Protocol = i-PI {}
-  MaxSteps = -1
+  MaxSteps = 1000
   Verbosity = 0
 }
 
