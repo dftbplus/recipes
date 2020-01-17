@@ -69,10 +69,12 @@ Finally create a band structure in gnuplot format ::
   phonopy-bandplot --gnuplot band.yaml > band.dat
 
 The resulting band structure for the mio carbon model is shown in
-:numref:`_fig_phonopy_diamond`.
+:numref:`fig_phonopy_diamond`.
 
   .. _fig_phonopy_diamond:
   .. figure:: ../_figures/properties/phonopy/band.png
      :height: 40ex
      :align: center
      :alt: Resulting phonon band structure for diamond.
+     
+     The resulting phonon band structure for diamond.
