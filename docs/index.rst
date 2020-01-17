@@ -12,5 +12,6 @@ DFTB+ recipes
    parallel/index.rst
    properties/index.rst
    transport/index.rst
+   interfaces/index.rst
    licence.rst
    bibliography.rst
