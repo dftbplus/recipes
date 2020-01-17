@@ -1,8 +1,8 @@
 .. _sec-interfaces:
 
-##########
-Interfaces
-##########
+###########################
+Interfaces with other codes
+###########################
 
 In this section the methods for communication between DFTB+ and external
 software is shown. This improves the ease of use and enables the user to invoke

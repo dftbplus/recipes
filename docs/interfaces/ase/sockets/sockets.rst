@@ -39,10 +39,11 @@ appropriate ``Socket{}`` driver option::
 
 Which instructs DFTB+ to read geometry driving commands via a named temporary
 communication file (stored in /tmp/). In this example, due to a bug in the
-current ASE implementation of the i-PI protocol, the code performs up to 1000
-geometry steps under control of the external interface then stops. For external
-driving codes that support the `EXIT` command in the protocol, instead DFTB+ can
-continue running until told to stop by using::
+current ASE implementation of the i-PI protocol (see note below), the code is
+asked to perform up to 1000 geometry steps under control of the external
+interface then stop. For external driving codes that support the `EXIT` command
+in the protocol, instead DFTB+ can continue running until told to stop by
+using::
 
   MaxSteps = -1
 
