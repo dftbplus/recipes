@@ -20,3 +20,4 @@ or to explore the range of structural minima the system can adopt.
    xlbomd.rst
    analysis.rst
    annealing.rst
+   plumed2.rst
