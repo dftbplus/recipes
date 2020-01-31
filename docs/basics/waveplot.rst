@@ -147,9 +147,9 @@ Some notes to the input:
   50.  (``NrOfPoints``)
 
 * The basis defintion (``Basis``) is made by including the file containing the
-  approrpiate wave function coefficient definitions.  You must make sure that
+  appropriate wave function coefficient definitions.  You must make sure that
   you use the file for the same set, which you used during your DFTB+
-  calculation. Here, the ``mio-1-1`` set was using for calculating the H2O
+  calculation. Here, the ``mio-1-1`` set was used for calculating the H2O
   molecule, and therefore the file ``wfc.mio-1-1.hsd`` is included.
 
   The wavefuntion coefficients can be usually downloaded from the same place as
@@ -236,7 +236,7 @@ Some notes on the output:
   small or misplaced (``PlottedRegion``).
 
 * The output files for the individual levels (charge density, real part,
-  imaginary part) follow the naming convention `wp-KPOINT-SPN-LEVEL-TYPE.cube`.
+  imaginary part) follow the naming convention `wp-KPOINT-SPIN-LEVEL-TYPE.cube`.
 
   The total charge and the total charge difference are stored in the files
   `wp-abs2.cube` and `wp-abs2diff.cube`, respectively.
