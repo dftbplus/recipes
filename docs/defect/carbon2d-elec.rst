@@ -177,8 +177,7 @@ files created by the code:
 
 `detailed.out`
   Contains detailed information about the calculated physical quantities
-  (energies, forces, eigenlevels, fillings, charges, etc.) obtained in the last
-  SCC cycle performed.
+  (energies, forces, charges, etc.) obtained in the last SCC cycle performed.
 
 `band.out`
   Eigenvalues (in eV) and fillings for each k-point and spin channel.
