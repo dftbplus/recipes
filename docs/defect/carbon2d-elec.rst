@@ -12,8 +12,8 @@ First we will investigate some of the basic properties of the 2D graphene
 structure.
 
 
-Geometry, density of state
---------------------------
+Geometry, density of states
+---------------------------
 
 [Input: `recipes/defect/carbon2d-elect/graphene/latopt/`]
 
@@ -135,7 +135,7 @@ options within it:
     }
 
 * We also want to do some additional analysis by evaluating the contributions of
-  the *s*- and *p*-shells to the density of states (DOS). Accordingly, we
+  the s- and p-shells to the density of states (DOS). Accordingly, we
   instruct DFTB+ in the ``Analysis`` block to calculate the contribution of all
   C atoms to the DOS in a shell-wise manner (s and p) and store the
   shell-contributions in files starting with a prefix of `pdos.C`::
@@ -160,7 +160,7 @@ file `output`)::
 
   dftb+ | tee output
 
-You will see that DFTB+ optimizies the geometry of graphene by changing the
+You will see that DFTB+ optimizes the geometry of graphene by changing the
 lattice vectors and ion coordinates to locally minimise the total energy. As the
 starting geometry is quite close to the optimum one, the calculation should
 finish almost immediately.
@@ -168,27 +168,32 @@ finish almost immediately.
 Apart from the saved output file (`output`), you will find several other new
 files created by the code:
 
-`dftb_pin.hsd` Contains the parsed user input with all the default settings for
-  options which have not been explicitely set by the user. You should have look
-  at it if you are unsure whether the defaults DFTB+ used for your calculation
-  are appropriate, or if you want to know which other options you can use to
-  adjust your calculation.
+`dftb_pin.hsd`
+  Contains the parsed user input with all the default settings for options which
+  have not been explicitely set by the user. You should have look at it if you
+  are unsure whether the defaults DFTB+ used for your calculation are
+  appropriate, or if you want to know which other options you can use to adjust
+  your calculation.
 
-`detailed.out` Contains detailed information about the calculated physical
-  quantities (energies, forces, eigenlevels, fillings, charges, etc.)  obtained
-  in the last SCC cycle performed.
+`detailed.out`
+  Contains detailed information about the calculated physical quantities
+  (energies, forces, eigenlevels, fillings, charges, etc.) obtained in the last
+  SCC cycle performed.
 
-`band.out` Eigenvalues (in eV) and fillings for each k-point and spin channel.
+`band.out`
+  Eigenvalues (in eV) and fillings for each k-point and spin channel.
 
-`charges.bin` Charges of the atoms at the last iteration, stored in binary
-  format. You can use this file to restart a calculation with those atomic
-  charges.
+`charges.bin`
+  Charges of the atoms at the last iteration, stored in binary format. You can
+  use this file to restart a calculation with those atomic charges.
 
-`geo_end.xyz`, `geo_end.gen` Final geometry in both XYZ and GEN formats.
+`geo_end.xyz`, `geo_end.gen`
+  Final geometry in both XYZ and GEN formats.
 
-`pdos.C.1.out`, `pdos.C.2.out` Output files containing the projected density of
-  states for the first and second angular shells of carbon (in this case the
-  *2s* and *2p* shells). Their format is similar to `band.out`.
+`pdos.C.1.out`, `pdos.C.2.out`
+  Output files containing the projected density of states for the first and
+  second angular shells of carbon (in this case the 2s and 2p shells). Their
+  format is similar to `band.out`.
 
 
 Analysing results
@@ -222,16 +227,16 @@ to XY-format data ::
 
 Please note the flag ``-w``, which is mandatory when converting *partial*
 density of states data for plotting. You can obtain more information about
-various flags for dp_dos by issuing::
+various flags for `dp_dos` by issuing::
 
   dp_dos -h
 
-You can visualize the DOS and the PDOS for the *s*- and *p*-shells of carbon in
+You can visualize the DOS and the PDOS for the s- and p-shells of carbon in
 one picture using the `plotxy` tool, which is a simple command line wrapper
 around the matplotlib python library (issue the command ``plotxy -h`` for
 help)::
 
-  plotxy --xlabel "Energy [eV]"" -ylabel "DOS" dos.dat pdos.C.1.dat pdos.C.2.dat &
+  plotxy --xlabel "Energy [eV]" --ylabel "DOS" dos.dat pdos.C.1.dat pdos.C.2.dat &
 
 You can use also any other program (gnuplot, xmgrace) which can visualize
 XY-data. You should see something similar to 
@@ -248,11 +253,11 @@ XY-data. You should see something similar to
 The position of the Fermi level (at -4.67 eV) can be read out from the
 `detailed.out` file, either directly or by using an appropriate `grep` command::
 
-  grep "Fermi energy" detailed.out
+  grep "Fermi level" detailed.out
 
-As expected for graphene, the DOS vanishes at the Fermi-level. Around the
-Fermi-level, all states are composed of the *p*-orbitals of the carbons, the
-*s*-orbitals only contribute to energeticaly much lower and much higher
+As expected for graphene, the DOS vanishes at the Fermi level. Around the
+Fermi level, all states are composed of the p-orbitals of the carbons, the
+s-orbitals only contribute to energeticaly much lower and much higher
 states. Also, one can observe the van-Hove-singularties. The ``wiggles`` at
 around 0 eV and at higher energy are artifacts. Using more k-points for the
 Brillouin-zone sampling or using a slightly wider broadening function in
@@ -330,7 +335,7 @@ In order to investigate the band structure we first look up the position of the
 Fermi level in the previous calculation performed with the accurate k-sampling
 ::
 
-  grep "Fermi energy" ../latopt/detailed.out
+  grep "Fermi level" ../latopt/detailed.out
 
 which yields -4.67 eV, and then visualize the band structure by invoking ::
 
@@ -399,7 +404,7 @@ differences only:
 * We use the 1 x 1 x 24 Monkhorst-Pack k-point set to sample the Brillouin-zone,
   since the ribbon is only periodic along the direction of the third lattice
   vector. The two other lattice vectors have been choosen to be long enough to
-  avoid interaction between the artificially repeated ribons.::
+  avoid interaction between the artificially repeated ribbons.::
 
     KPointsAndWeights = SupercellFolding {
       1 0 0
@@ -409,9 +414,9 @@ differences only:
     }
 
 * In order to analyze, which atoms contribute to the states around the
-  Fermi-level, we create four projection regions containing the saturating
-  H-atoms, the C atoms in the outermost layer of the ribbon, the C atoms in the
-  second outermost layer and finally the C atoms in the thirds outermost layer,
+  Fermi level, we create four projection regions containing the saturating
+  H atoms, the C atoms in the outermost layer of the ribbon, the C atoms in the
+  second outermost layer and finally the C atoms in the third outermost layer,
   respectively. Since the ribbon is mirror symmetric, we include the
   corresponding atoms on both sides in each projection region::
 
@@ -446,7 +451,7 @@ You can run the program and convert the output files by issuing::
 
   ./run.sh
 
-When the program has finished, look up the Fermi-level and visualize the DOS and
+When the program has finished, look up the Fermi level and visualize the DOS and
 PDOS contributions. The necessary commands are collected in `showdos.sh`::
 
   ./showdos.sh
@@ -463,7 +468,7 @@ something like :numref:`fig_defect_carbon2d-elec_zigzag-dos`.
    DOS of the zigzag nanoribbon around the Fermi energy
 
 You can see that the structure is clearly metallic (displaying a non-zero
-density of states at the Fermi energy). The states around the Fermi-level are
+density of states at the Fermi energy). The states around the Fermi level are
 composed of the orbitals of the C atoms in the outermost and the third outermost
 layer of the ribbon. There is no contribution from the C atom in the layer in
 between or from the H atoms to the Fermi level.
@@ -496,10 +501,10 @@ requiring the program to stop after one SCC iteration. The charges are at this
 point not self consistent with respect to the k-point set used for sampling the
 band structure calculation. However, k-points along high symmetry lines of the
 Brillouin-zone, as used to obtain the band structures, usually represent a poor
-sampling. Therefore the a converged density obtained with an accurate k-sampling
+sampling. Therefore a converged density obtained with an accurate k-sampling
 should be used to obtain the eigenlevels, and no self consistency is needed.
 
-To look up the Fermi-level and plot the band structure use the commands in
+To look up the Fermi level and plot the band structure use the commands in
 `showbands.sh`::
 
   ./showbands.sh
@@ -557,7 +562,7 @@ density and extract the density of states::
 
   ./run.sh
 
-If you look up the calculated Fermi-level and then visualize the DOS ::
+If you look up the calculated Fermi level and then visualize the DOS ::
 
   ./showdos.sh
 
@@ -591,8 +596,8 @@ You should obtain a band structure like in
 position of the band edges, when you zoom into the energy region around the gap:
 The valence band edge and the conduction band edge are in the Gamma point at
 -4.7 and -4.2 eV, respectively. You can also easily extract this information
-from the `band.out` file, when you look where to occupation goes from nearly 2.0
-to nearly 0.0 in the first k-point (the Gamma point).
+from the `band.out` file, where the occupation goes from nearly 2.0 to nearly
+0.0 in the first k-point (the Gamma point).
 
 .. _fig_defect_carbon2d-elec_armchair-perfect-band:
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-perfect-band.png
@@ -696,12 +701,12 @@ case can be calculated as
    - 12 \times E_{\text{perf}}
 
 where :math:`E_{\text{vac}}` is the total energy of the nanoribbon with the
-vacancy present, :math:`E_{\text{C}}` is the energy of a C-atom in its standard
+vacancy present, :math:`E_{\text{C}}` is the energy of a C atom in its standard
 phase and :math:`E_{\text{perf}}` is the energy of the perfect nanoribbon. Since
-the defective nanoribbons contain 12 unit cell of the perfect one, the energy of
+the defective nanoribbons contain 12 unit cells of the perfect one, the energy of
 the perfect ribbon unit cell has to be multiplied by twelve. As a standard phase
 of carbon, we will take perfect graphene for simplicity. The energy of the
-C-atom in its standard phase is then obtained by dividing the total energy of
+C atom in its standard phase is then obtained by dividing the total energy of
 the perfect graphene primitive unit cell by two. (Look up this energy from
 `detailed.out` in the directory `elect/graphene/density`.)  By calculating the
 appropriate quantities you should obtain ~8.5 eV for the formation energy of
@@ -718,8 +723,8 @@ Defect levels
 Finally we should identify the localised defect levels for vacancy 2 and plot
 the corresponding one-electron wavefunctions.
 
-The vacancy was created by removing one C-atom, which had three first
-neighbors. Therefore, three *sp2* type dangling bonds remain in the lattice,
+The vacancy was created by removing one C atom, which had three first neighbors.
+Therefore, three :math:`\text{sp}^2` type dangling bonds remain in the lattice,
 which will then form some linear combinations to produce three defect levels,
 which may or may not be in the band gap. The DOS you have plotted before,
 indicates there are indeed defect levels in the gap, but due to the smearing it
@@ -748,11 +753,11 @@ and open the `band.out` file. You will see, that you have three levels (levels
 are between the energies of the band edge states of the perfect ribbon. We will
 visualize those three levels by using the `waveplot` tool.
 
-Waveplot reads the eigenvectors produced by DFTB+ and plots real space wave
-functions and densities. The input file `waveplot_in.hsd` can be used to control
-which levels and which region waveplot should visualize, and on what kind of
-grid. In the current example, we will project the real part of the wave
-functions for the levels 742, 743 and 744. In order to run Waveplot, enter::
+Waveplot reads the eigenvectors produced by DFTB+ and plots real space
+wavefunctions and densities. The input file `waveplot_in.hsd` can be used to
+control which levels and which region waveplot should visualize, and on what
+kind of grid. In the current example, we will project the real part of the
+wavefunctions for the levels 742, 743 and 744. In order to run Waveplot, enter::
 
   waveplot | tee output.waveplot
 
@@ -760,12 +765,12 @@ The calculation could again take a few minutes. At the end, you should see three
 files with the `.cube` prefix, containing the volumetric information for the
 three selected one-electron wavefunctions.
 
-We will use Jmol to visualize the various wave function
+We will use Jmol to visualize the various wavefunction
 components. Unfortunately, the visualization of iso-surfaces in Jmol needs some
 scripting. You can find the necessary commands in the files `show*.js`. You can
 either type in these commands in the Jmol console (which should be opened via
 the menu `File | Console...`) or pass it to Jmol using the `-s` option at
-start-up. For the case latter you will find prepared command to visualize the
+start-up. For the case latter you will find prepared commands to visualize the
 various orbitals in the files ::
 
   ./showdeflev1.sh
@@ -787,28 +792,28 @@ plane in the middle of the ribbon.
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def1.png
    :width: 70%
    :align: center
-   :alt: Wave function of the lowest defect level
+   :alt: Wavefunction of the lowest defect level
 
-   Wave function of the lowest defect level of the hydrogen saturated armchair
-   nanoribbon with a vacancy. Blue and red surfaces show indicate isosurfaces
+   Wavefunction of the lowest defect level of the hydrogen saturated armchair
+   nanoribbon with a vacancy. Blue and red surfaces indicate isosurfaces
    at +0.02 and -0.02 atomic units, respectively.
 
 .. _fig_defect_carbon2d-elec_armchair-v2-def2:
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def2.png
    :width: 70%
    :align: center
-   :alt: Wave function of the second defect level
+   :alt: Wavefunction of the second defect level
 
-   Wave function of the second lowest defect level of the hydrogen saturated
-   armchair nanoribbon with a vacancy. Blue and red surfaces show indicate
+   Wavefunction of the second lowest defect level of the hydrogen saturated
+   armchair nanoribbon with a vacancy. Blue and red surfaces indicate
    isosurfaces at +0.02 and -0.02 atomic units, respectively.
 
 .. _fig_defect_carbon2d-elec_armchair-v2-def3:
 .. figure:: ../_figures/defect/carbon2d-elec/armchair-v2-def3.png
    :width: 70%
    :align: center
-   :alt: Wave function of the lowest defect level
+   :alt: Wavefunction of the lowest defect level
 
-   Wave function of the highest defect level of the hydrogen saturated
-   armchair nanoribbon with a vacancy. Blue and red surfaces show indicate
+   Wavefunction of the highest defect level of the hydrogen saturated
+   armchair nanoribbon with a vacancy. Blue and red surfaces indicate
    isosurfaces at +0.02 and -0.02 atomic units, respectively.
