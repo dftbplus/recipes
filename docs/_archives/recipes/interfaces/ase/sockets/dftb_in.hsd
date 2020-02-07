@@ -23,3 +23,7 @@ Hamiltonian = DFTB {
     Suffix = ".skf"
   }
 }
+
+ParserOptions {
+  ParserVersion = 8
+}

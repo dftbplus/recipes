@@ -1,5 +1,5 @@
 .. highlight:: none
-.. _sec-sockets:
+.. _sec-interfaces-ase-sockets:
 
 ********************
 Socket-Communication
@@ -20,6 +20,8 @@ should be supported.
     To enable socket-communication in DFTB+ the `WITH_SOCKETS` flag in the
     configuration file `config.cmake` must be set to TRUE, before starting the
     compilation process!
+
+.. _sec_interfaces_ase_sockets-geoopt-input:
 
 Geometry Optimization by ASE
 ============================
@@ -84,8 +86,8 @@ consult the archive, whose location is stated at the begin of this section.
 
 Geometry and main script
 ------------------------
-The geometry used is a simple water molecule, whose file location is specified in the
-main script (`GEO_PATH`)::
+The geometry used is a simple water molecule, whose file location is specified
+in the main script (`GEO_PATH`)::
 
     3  C
      O H
