@@ -138,4 +138,4 @@ significant increase in wallclock time, depending on the speed of the storage
 used. Additionally, the self-consistency is started from fresh for each
 structure, substantially increasing the number of SCC cycles. Therefore it is
 advisable to perform such calculations on a ramdisk or even better via
-:ref:`sec-sockets`.
+:ref:`sec-interfaces-ase-sockets`.
