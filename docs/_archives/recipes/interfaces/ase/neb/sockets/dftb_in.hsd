@@ -1,0 +1,30 @@
+Geometry = GenFormat {
+    <<< "../../dummy.gen"
+}
+
+Driver = Socket {
+    File = "dftbplus"
+    Protocol = i-PI {}
+    MaxSteps = -1
+    Verbosity = 10
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1.0e-06
+
+  MaxAngularMomentum = {
+    H = "s"
+    N = "p"
+  }
+
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../../../../../slakos/mio-ext/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+}
+
+ParserOptions {
+  ParserVersion = 8
+}

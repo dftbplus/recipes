@@ -1,4 +1,4 @@
-.. _sec-ase:
+.. _sec-interfaces-ase:
 
 ###################################
 Atomic Simulation Environment - ASE
@@ -21,5 +21,6 @@ appropriate documentation.
 .. toctree::
    :maxdepth: 1
 
-   sockets/sockets.rst
    fileio/fileio.rst
+   sockets/sockets.rst
+   neb/index.rst
