@@ -9,3 +9,5 @@ DFTB+, in some cases via the use of external packages and tools.
    :maxdepth: 1
 
    phonopy.rst
+   barriers.rst
+
