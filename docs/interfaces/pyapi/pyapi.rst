@@ -1,41 +1,58 @@
 .. highlight:: none
 .. _sec-interfaces-pyapi:
 
-#########################
-Python Interface - ctypes
-#########################
+****************
+Python Interface
+****************
 
-ctypes is a foreign function library for Python. It provides C compatible data
-types, and allows calling functions in DLLs or shared libraries. It can be used
-to wrap these libraries in pure Python (cf. `ctypes documentation 
-<https://docs.python.org/3/library/ctypes.html>`_).
-
-Before going through the following sections, please make sure that you have
-installed a working version of the ctypes package, using your preferred
-installation procedure. Also, consider adding the Python file
-`tools/pythonapi/dftbplus.py`, which contains the actual ctypes interface,
-to your PYTHONPATH environment variable or symlink it. The scripts below assume
-that the interface can be imported by invoking ``import dftbplus``.
+The provided interface enables calculations, initiated out of Python. The
+extraction of main results such as system energy, atomic forces and Mulliken
+charges directly in Python is just as possible as defining population
+(in)dependent external potentials. At the current state, an existing input file
+(`dftb_in.hsd`), which contains parameters apart from the geometry, is required
+for the initialization of DFTB+.
 
 Regarding the **units**: Just like DFTB+, the interface expects and delivers
 values in **atomic units**!
 
-.. note::
+Setting up DFTB+
+================
 
-    To instruct DFTB+ that a dynamically linked shared library should be
-    created, the `WITH_API` and `BUILD_SHARED_LIBS` flag in the cmake
-    configuration file `config.cmake` must be set to TRUE, before starting
-    the compilation process!
-    If you don't want to mess around with files, a construct like the
-    following is a convenient way to specify these flags, while configuring
-    cmake:
-    ``cmake -DBUILD_SHARED_LIBS=1 -DWITH_API=1 -DCMAKE_TOOLCHAIN_FILE=../sys/gnu.cmake ..``
+For this special usecase, DFTB+ has to get compiled as a shared library and with
+API support enabled. At this point, a basic understanding of how to build DFTB+
+is assumed. All necessary steps are explained in the INSTALL.rst file in the
+top level directory of DFTB+, which may be consulted. In addition, only the
+explicit setting of the flags for API support and the creation of a shared
+library is necessary. To instruct DFTB+ that a dynamically linked shared
+library with API support should be created, the `WITH_API` and
+`BUILD_SHARED_LIBS` flag in the cmake configuration file `config.cmake` must be
+set to TRUE, before starting the compilation process! If you don't want to mess
+around with files, a construct like the following is a convenient way to specify
+these flags, while configuring CMake:
+
+``cmake -DBUILD_SHARED_LIBS=1 -DWITH_API=1 -DCMAKE_TOOLCHAIN_FILE=../sys/gnu.cmake ..``
+
+Since the path to the shared library must be passed to the interface, a word
+about the expected location of the corresponding file should be lost:
+If only the pure compilation process was carried out, the library is located
+under `prog/dftb+/libdftbplus.*` in the target installation directory. If
+``make install`` was executed in addition, there is also a copy under
+`_install/lib/libdftbplus.*`.
+
+Setting up the interface
+========================
+
+A convenient way to install the interface is provided. By simply issuing
+``python setup.py`` in the directory `tools/pythonapi/` you can install it
+system-wide into your normal Python installation. Alternatively, to install it
+locally in your home space, use ``python setup.py install --user``. If the
+local Python installation directory is not in your PATH, you should add it
+accordingly.
 
 .. _sec-interfaces-pyapi-input:
 
-*****************************
 Providing the input for DFTB+
-*****************************
+=============================
 
 [Input: `recipes/interfaces/pyapi/`]
 
@@ -112,7 +129,7 @@ compatibility of the input, the parser version is also specified::
 .. _sec-interfaces-pyapi-mainscript:
 
 Main script
------------
+===========
 
 The script shown here serves to illustrate the use of the interface, based on
 the calculation of |TiO2|.
@@ -219,7 +236,7 @@ potential. This is covered in the following two sections
 .. _sec-interfaces-pyapi-extpot:
 
 Population independent external potential
------------------------------------------
+=========================================
 
 [Input: `recipes/interfaces/pyapi/extpot/`]
 
@@ -253,7 +270,7 @@ inserted:
 .. _sec-interfaces-pyapi-qdepextpot:
 
 Population dependent external potential
----------------------------------------
+=======================================
 
 [Input: `recipes/interfaces/pyapi/qdepextpot/`]
 
