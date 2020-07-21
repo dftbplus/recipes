@@ -29,38 +29,18 @@
    Filling = Fermi {
      Temperature [k] = 300 
    }
-   ElectricField = {}
-   OrbitalResolvedSCC = No
-   ReadInitialCharges =  No
-   Eigensolver = DivideAndConquer {}
-   OldSKInterpolation = No
-   Dispersion = {}
+   Solver = DivideAndConquer {}
  }
- Options = {
-   WriteAutotestTag = No
-   WriteDetailedXML = Yes
-   WriteResultsTag = Yes
-   WriteDetailedOut = Yes
-   RandomSeed = 0
- }
- ParserOptions = {
-   ParserVersion = 5
-   WriteHSDInput = Yes
-   WriteXMLInput = No
-   StopAfterParsing = No
- }
- Analysis = {
-    ElectronDynamics = {
-      Steps = 60000
-      TimeStep [au] = 0.2
-      Perturbation = Laser {
-        PolarizationDirection = -0.08808129 0.99564018 -0.03069709 
-        LaserEnergy [eV] = 1.94944 
-        }
-      FieldStrength [v/a] = 0.0001
-      Populations = Yes
-      WriteFrequency = 100
-    }
-  }
+ElectronDynamics = {
+   Steps = 60000
+   TimeStep [au] = 0.2
+   Perturbation = Laser {
+     PolarizationDirection = -0.08808129 0.99564018 -0.03069709 
+     LaserEnergy [eV] = 1.94944 
+     }
+   FieldStrength [v/a] = 0.0001
+   Populations = Yes
+   WriteFrequency = 100
+}
 
   
