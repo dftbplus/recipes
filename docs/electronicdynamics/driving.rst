@@ -14,19 +14,18 @@ PolarizationDirection = -0.08808129 0.99564018 -0.03069709
 
 this are the three cartesian components of the transition dipole moment vector. This vector points in the direction in which a driving laser in resonance with the excitation will have maximum absorption. This vector is the eigenvector of the polarizability tensor at that energy that has the largest eigenvalue. It is equivalent to a principal axis of inertia in rigid body rotation. 
 
-Using the ``Analysis`` block that follows::
+Using the ``ElectronDynamics`` block that follows::
 
- Analysis = {
-    ElectronDynamics = {
-      Steps = 60000
-      TimeStep [au] = 0.2
-      Perturbation = Laser {
-        PolarizationDirection = -0.08808129 0.99564018 -0.03069709
-        LaserEnergy [eV] = 1.94944
-        }
-      FieldStrength [v/a] = 0.0001
-    }
-  }
+
+  ElectronDynamics = {
+    Steps = 60000
+    TimeStep [au] = 0.2
+    Perturbation = Laser {
+      PolarizationDirection = -0.08808129 0.99564018 -0.03069709
+      LaserEnergy [eV] = 1.94944
+      }
+  FieldStrength [v/a] = 0.0001
+}
 
 We excite the Q band, in resonance, in the direction of maximum polarizability. The obtained dipole moment modulus as a function of time is shown in the following figure:
 
