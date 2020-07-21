@@ -13,47 +13,47 @@ The input
 
 The following input can be used to calculate the absorption spectrum of Chlorophyl a::
 
-Geometry = GenFormat {
- <<< "coords.gen"
- }
- Driver = {}
- Hamiltonian = DFTB {
-   SCC = Yes
-   SCCTolerance = 1.0e-7
-   MaxSCCIterations = 1000
-   Mixer = Broyden {
-     MixingParameter = 0.051
-     InverseJacobiWeight = 0.01
-     MinimalWeight = 1.
-     MaximalWeight = 100000.
-     WeightFactor = 0.01
+  Geometry = GenFormat {
+   <<< "coords.gen"
    }
-   SlaterKosterFiles = Type2FileNames {
-     Prefix = "../skf/"
-     Separator = "-"
-     Suffix = ".skf"
+   Driver = {}
+   Hamiltonian = DFTB {
+     SCC = Yes
+     SCCTolerance = 1.0e-7
+     MaxSCCIterations = 1000
+     Mixer = Broyden {
+       MixingParameter = 0.051
+       InverseJacobiWeight = 0.01
+       MinimalWeight = 1.
+       MaximalWeight = 100000.
+       WeightFactor = 0.01
+     }
+     SlaterKosterFiles = Type2FileNames {
+       Prefix = "../skf/"
+       Separator = "-"
+       Suffix = ".skf"
+     }
+     MaxAngularMomentum = {
+       Mg = "p"
+       C = "p"
+       N = "p"
+       O = "p"
+       H = "s"
+     }
+     Charge = 0.0
+     Filling = Fermi {
+       Temperature [k] = 300
+     }
+     Solver = DivideAndConquer {}
    }
-   MaxAngularMomentum = {
-     Mg = "p"
-     C = "p"
-     N = "p"
-     O = "p"
-     H = "s"
-   }
-   Charge = 0.0
-   Filling = Fermi {
-     Temperature [k] = 300
-   }
-   Solver = DivideAndConquer {}
- }
-ElectronDynamics = {
-   Steps = 20000
-   TimeStep [au] = 0.2
-   Perturbation = Kick {
-     PolarizationDirection = all
-   }
-   FieldStrength [v/a] = 0.001
-} 
+  ElectronDynamics = {
+     Steps = 20000
+     TimeStep [au] = 0.2
+     Perturbation = Kick {
+       PolarizationDirection = all
+     }
+     FieldStrength [v/a] = 0.001
+  } 
 
 The optimized geometry is located in the *coords.gen* file. Note that for this example the long *phytol* chain present in the natural molecule has been replaced by a hydrogen atom since it does not have a signifficant influence on the absorption spectrum. 
 
