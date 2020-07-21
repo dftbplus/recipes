@@ -1,0 +1,38 @@
+Geometry = GenFormat {
+<<< "coords.gen"
+}
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1.0E-9 
+  MaxAngularMomentum = {
+    C = "p"
+    H = "s"
+  }
+  Charge = 0.0
+  Filling = Fermi {
+    Temperature [Kelvin] = 30 
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../skf/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  Differentiation = FiniteDiff {}
+}
+
+ElectronDynamics = {
+  Steps = 100000
+  TimeStep [au] = 0.1
+  Perturbation = Laser {
+    PolarizationDirection = 0.00000001 0.61419463 -0.78915459 
+    LaserEnergy [eV] = 6.834
+  }
+  EnvelopeShape = Sin2 {
+    Time1 [fs] = 10.0
+  }
+  FieldStrength [v/a] = 0.10
+  IonDynamics = Yes
+  InitialTemperature [k] = 0.0
+  Populations = Yes
+}
+
