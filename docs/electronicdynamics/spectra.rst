@@ -13,7 +13,7 @@ The input
 
 The following input can be used to calculate the absorption spectrum of Chlorophyl a::
 
- Geometry = GenFormat {
+Geometry = GenFormat {
  <<< "coords.gen"
  }
  Driver = {}
@@ -42,38 +42,18 @@ The following input can be used to calculate the absorption spectrum of Chloroph
    }
    Charge = 0.0
    Filling = Fermi {
-     Temperature [k] = 300 
+     Temperature [k] = 300
    }
-   ElectricField = {}
-   OrbitalResolvedSCC = No
-   ReadInitialCharges =  No
-   Eigensolver = DivideAndConquer {}
-   OldSKInterpolation = No
-   Dispersion = {}
+   Solver = DivideAndConquer {}
  }
- Options = {
-   WriteAutotestTag = No
-   WriteDetailedXML = Yes
-   WriteResultsTag = Yes
-   WriteDetailedOut = Yes
-   RandomSeed = 0
- }
- ParserOptions = {
-   ParserVersion = 5
-   WriteHSDInput = Yes
-   WriteXMLInput = No
-   StopAfterParsing = No
- }
- Analysis = {
-    ElectronDynamics = {
-      Steps = 20000
-      TimeStep [au] = 0.2
-      Perturbation = Kick {
-        PolarizationDirection = 4
-      }
-      FieldStrength [v/a] = 0.001
-    }
- }
+ElectronDynamics = {
+   Steps = 20000
+   TimeStep [au] = 0.2
+   Perturbation = Kick {
+     PolarizationDirection = all
+   }
+   FieldStrength [v/a] = 0.001
+} 
 
 The optimized geometry is located in the *coords.gen* file. Note that for this example the long *phytol* chain present in the natural molecule has been replaced by a hydrogen atom since it does not have a signifficant influence on the absorption spectrum. 
 
@@ -129,7 +109,7 @@ After self consistency has been achieved and the ground state density matrix is 
   Step    20000  elapsed loop time: 216.208694  average time per loop   0.010810
   Dynamics finished OK!
 
-The resulting dipole moment in every Cartessian direction produced by each *Kick* is stored in three separate output files *mux.dat*, *muy.dat* and *muz.dat*.
+The resulting dipole moment in every Cartessian direction produced by each *Kick* is stored in the *mu,dat* output file.
 
 The calculation of the spectrum makes use of the fact that the Fourier transform of induced dipole moment of the molecule in the presence of an external time dependent field (within the linear response range) is related to the Fourier transform of said field in the following manner:
 
@@ -137,7 +117,7 @@ The calculation of the spectrum makes use of the fact that the Fourier transform
 
 since the Fourier transform of a Dirac delta is a constant, the polarizability tensor :math:`\overset\leftrightarrow{\alpha}(\omega)` can be obtained from the time dependent response. The absorption is proportional to the imaginary part of the trace of the polarizability tensor. 
 
-The calculation of the absorption spectrum is carried out using the script ``calc_timeprop_spectrum`` located in the ``utils`` directory under the ``dftbplus`` source tree. The invocation of the script is as follows::
+The calculation of the absorption spectrum is carried out using the script ``calc_timeprop_spectrum`` located in the ``tools/misc`` directory under the ``dftbplus`` source tree. The invocation of the script is as follows::
 
   calc_timeprop_spectrum -d 20.0 -f 0.001
 
