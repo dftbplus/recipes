@@ -1,0 +1,38 @@
+InputVersion = 20.1
+
+Geometry = GenFormat {
+    <<< "coords.gen"
+}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1.0E-9
+    MaxAngularMomentum = {
+        C = "p"
+        H = "s"
+    }
+    Filling = Fermi {
+        Temperature [Kelvin] = 30
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../slakos/download/3ob/3ob-3-1/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+}
+
+ElectronDynamics = {
+    Steps = 100000
+    TimeStep [au] = 0.1
+    Perturbation = Laser {
+        PolarizationDirection = 0.00000001 0.61419463 -0.78915459
+        LaserEnergy [eV] = 6.834
+    }
+    EnvelopeShape = Sin2 {
+        Time1 [fs] = 10.0
+    }
+    FieldStrength [V/A] = 0.10
+    IonDynamics = Yes
+    InitialTemperature [K] = 0.0
+    Populations = Yes
+}
