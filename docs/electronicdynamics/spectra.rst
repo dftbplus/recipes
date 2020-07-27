@@ -4,48 +4,41 @@
 Calculation of electronic absorption spectra
 ********************************************
 
-This chapter serves as a tutorial on using the real time propagation of electronic dynamics as implemented in DFTB+ for the calculation of electronic absorption spectra.
+This section discusses the calculation of electronic absorption spectra using
+the real time propagation of electronic dynamics as implemented in DFTB+.
 
-Unless some good reason exists for not doing so, the electronic spectrum should be calculated at the equilibrium geometry. For this example we will use an optimized Chlorophyl a molecule. The example reproduces the results in `Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation of the optical response of photosynthetic pigments. Physical Chemistry Chemical Physics : PCCP, 12(25), 6706–6711. <http://doi.org/10.1039/b926051j>`_
+Unless some good reason exists for not doing so, the electronic spectrum should
+be calculated at the equilibrium geometry. For this example we will use an
+optimised chlorophyll a molecule. This example reproduces the results in
+`Oviedo, M. B., Negre, C. F. A., & Sánchez, C. G. (2010). Dynamical simulation
+of the optical response of photosynthetic pigments. Physical Chemistry Chemical
+Physics : PCCP, 12(25), 6706–6711. <http://doi.org/10.1039/b926051j>`_
 
 The input
 =========
 
-The following input can be used to calculate the absorption spectrum of Chlorophyl a::
+The following input can be used to calculate the absorption spectrum of
+chlorophyll a::
 
   Geometry = GenFormat {
-   <<< "coords.gen"
-   }
-   Driver = {}
-   Hamiltonian = DFTB {
-     SCC = Yes
-     SCCTolerance = 1.0e-7
-     MaxSCCIterations = 1000
-     Mixer = Broyden {
-       MixingParameter = 0.051
-       InverseJacobiWeight = 0.01
-       MinimalWeight = 1.
-       MaximalWeight = 100000.
-       WeightFactor = 0.01
-     }
-     SlaterKosterFiles = Type2FileNames {
-       Prefix = "../skf/"
-       Separator = "-"
-       Suffix = ".skf"
-     }
-     MaxAngularMomentum = {
-       Mg = "p"
-       C = "p"
-       N = "p"
-       O = "p"
-       H = "s"
-     }
-     Charge = 0.0
-     Filling = Fermi {
-       Temperature [k] = 300
-     }
-     Solver = DivideAndConquer {}
-   }
+    <<< "coords.gen"
+  }
+  
+  Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1.0e-7
+    MaxAngularMomentum = {
+      Mg = "p"
+      C = "p"
+      N = "p"
+      O = "p"
+      H = "s"
+    }
+    Filling = Fermi {
+      Temperature [K] = 300
+    }
+  }
+  
   ElectronDynamics = {
      Steps = 20000
      TimeStep [au] = 0.2
@@ -55,13 +48,22 @@ The following input can be used to calculate the absorption spectrum of Chloroph
      FieldStrength [v/a] = 0.001
   } 
 
-The optimized geometry is located in the *coords.gen* file. Note that for this example the long *phytol* chain present in the natural molecule has been replaced by a hydrogen atom since it does not have a signifficant influence on the absorption spectrum. 
+The optimised geometry is located in the *coords.gen* file. Note that for this
+example the long *phytol* chain present in the natural molecule has been
+replaced by a terminating hydrogen atom since it does not have a significant
+influence on the absorption spectrum.
 
-For the calculation of absorption spectra an initial Dirac Delta type perturbation is used, as mentioned before the input is included in the ``Analysis`` block.
+For the calculation of absorption spectra, an initial kick of the system is made
+using a Dirac delta type perturbation. The input specifies that after the
+initial perturbation of *Kick* type, twenty thousand steps of dynamics will be
+executed using a time step of 0.2 atomic units. The *Kick* perturbation can be
+applied in any of the Cartesian directions (*x*, *y* or *z*). The use of *all*
+here in the input instructs the code to run three independent dynamic
+calculations, one with an initial *Kick* in each Cartesian direction.
 
-The input specifies that after the initial perturbation of *Kick* type, twenty thousand steps of dynamics will be executed using a time step of 0.2 atomic units. The *Kick* perturbation can be applied in any of the cartesian directions, the use of 4 here in the input instructs the code to run three independent dynamics, one with an initial *Kick* in each Cartessian direction. 
-
-After self consistency has been achieved and the ground state density matrix is obtained, the perturbation is applied and then the propagation starts, the output produced is the following::
+After self consistency has been achieved and the ground state density matrix is
+obtained, the perturbation is applied and then the propagation starts, the
+output produced is the following::
 
   S inverted
   Density kicked along x!
@@ -109,60 +111,45 @@ After self consistency has been achieved and the ground state density matrix is 
   Step    20000  elapsed loop time: 216.208694  average time per loop   0.010810
   Dynamics finished OK!
 
-The resulting dipole moment in every Cartessian direction produced by each *Kick* is stored in the *mu,dat* output file.
+The resulting time dependent dipole moment along each Cartesian direction
+produced the kicks are stored in the *mu\*.dat* output files.
 
-The calculation of the spectrum makes use of the fact that the Fourier transform of induced dipole moment of the molecule in the presence of an external time dependent field (within the linear response range) is related to the Fourier transform of said field in the following manner:
+The calculation of the spectrum makes use of the fact that the Fourier transform
+of induced dipole moment of the molecule in the presence of an external time
+dependent field (within the linear response range) is related to the Fourier
+transform of said field in the following manner:
 
 :math:`\mathbf{mu}(\omega)=\overset\leftrightarrow{\alpha}(\omega)\mathbf{E}(\omega)`
 
-since the Fourier transform of a Dirac delta is a constant, the polarizability tensor :math:`\overset\leftrightarrow{\alpha}(\omega)` can be obtained from the time dependent response. The absorption is proportional to the imaginary part of the trace of the polarizability tensor. 
+since the Fourier transform of a Dirac delta is a constant at all frequencies,
+the polarizability tensor :math:`\overset\leftrightarrow{\alpha}(\omega)` can be
+obtained from the time dependent response. The absorption is proportional to the
+imaginary part of the trace of the polarizability tensor.
 
-The calculation of the absorption spectrum is carried out using the script ``calc_timeprop_spectrum`` located in the ``tools/misc`` directory under the ``dftbplus`` source tree. The invocation of the script is as follows::
+The calculation of the absorption spectrum is carried out using the script
+``calc_timeprop_spectrum`` either available after `make install` of DFTB+, or
+located in the ``tools/misc`` directory under the ``dftbplus`` source tree. The
+invocation of the script is as follows::
 
   calc_timeprop_spectrum -d 20.0 -f 0.001
 
-The exciting field is specified with the *-f* flag, the *-d* flag specifies a damping constant used to exponentially damp the dipole signal to zero within the simulation time. This damping time is expressed in femtoseconds. The effect of damping the dipole moment is to add a uniform with to every spectral line and is neccesary to smooth out any *ringing* int he spectrum peaks after the transform. In essence this damping procedure is equivalent to using a *windowing* function.
+The exciting field strength is specified with the *-f* flag, the *-d* flag
+specifies a damping constant used to exponentially damp the dipole signal to
+zero within the simulation time. This damping time is expressed in
+femtoseconds. The effect of damping the dipole moment is to add a uniform width
+to every spectral line and is necessary to smooth out any *ringing* in the
+spectrum peaks after the transform. In essence this damping procedure is
+equivalent to using a *windowing* function.
 
-The spectrum is located in the output files *spec-ev* and *spec-nm*. In this case the spectrum looks as follows:
+The spectrum is located in the output files *spec-ev* and *spec-nm*. In this
+case the spectrum looks as follows:
 
   .. figure:: ../_figures/elecdynamics/spectrum.png
      :height: 40ex
      :align: center
-     :alt: Absorption spectrum of Chlorophyl a.
+     :alt: Absorption spectrum of chlorophyll a.
 
-The band between 400 and 500 nm is called the Soret band and the one between 600 and 700 nm is the Q band. This band is the band that provides is responsible for the photobiologic activity of chlorophyls as antenae capable of capturing solar energy in the primary process of photosynthesis. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The band between 400 and 500 nm is called the Soret band and the one between 600
+and 700 nm is the Q band. This band is the band that provides is responsible for
+the photo-biologic activity of chlorophylls as antennae capable of capturing solar
+energy in the primary process of photosynthesis.

@@ -1,44 +1,37 @@
- Geometry = GenFormat {
- <<< "coords.gen"
- }
- Driver = {}
- Hamiltonian = DFTB {
-   SCC = Yes
-   SCCTolerance = 1.0e-7
-   MaxSCCIterations = 1000
-   Mixer = Broyden {
-     MixingParameter = 0.051
-     InverseJacobiWeight = 0.01
-     MinimalWeight = 1.
-     MaximalWeight = 100000.
-     WeightFactor = 0.01
-   }
-   SlaterKosterFiles = Type2FileNames {
-     Prefix = "../skf/"
-     Separator = "-"
-     Suffix = ".skf"
-   }
-   MaxAngularMomentum = {
-     Mg = "p"
-     C = "p"
-     N = "p"
-     O = "p"
-     H = "s"
-   }
-   Charge = 0.0
-   Filling = Fermi {
-     Temperature [k] = 300 
-   }
-   Solver = DivideAndConquer {}
- }
-ElectronDynamics = {
-  Steps = 60000
-  TimeStep [au] = 0.2
-  Perturbation = Laser {
-    PolarizationDirection = -0.08808129 0.99564018 -0.03069709 
-    LaserEnergy [eV] = 1.9 
-    }
-  FieldStrength [v/a] = 0.0001
+InputVersion = 20.1
+
+Geometry = GenFormat {
+    <<< "coords.gen"
 }
 
-  
+Driver = {}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1.0e-7
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../slakos/download/3ob/3ob-3-1/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+    MaxAngularMomentum = {
+        Mg = "p"
+        C = "p"
+        N = "p"
+        O = "p"
+        H = "s"
+    }
+    Filling = Fermi {
+        Temperature [K] = 300
+    }
+}
+
+ElectronDynamics = {
+    Steps = 60000
+    TimeStep [au] = 0.2
+    Perturbation = Laser {
+        PolarizationDirection = -0.08808129 0.99564018 -0.03069709
+        LaserEnergy [eV] = 1.9
+    }
+    FieldStrength [V/A] = 0.0001
+}
