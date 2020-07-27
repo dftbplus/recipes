@@ -16,6 +16,11 @@ situations; however, the neglected electron-ion correlations might be essential
 for some processes. The crossing of conical intersections, for example, is where
 the approximation breaks down drastically.
 
+Benzene example
+===============
+
+[Input: `recipes/electronicdynamics/ehrenfest/`]
+
 As an example of Ehrenfest dynamics, starting from the equilibrium geometry we
 can excite the lowest-lying :math:`\pi-\pi^*` excitation of a benzene molecule
 using a short laser pulse, and explicitly allow the ions to move. In this case,

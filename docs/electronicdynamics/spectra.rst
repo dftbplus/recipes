@@ -17,6 +17,8 @@ Physics : PCCP, 12(25), 6706–6711. <http://doi.org/10.1039/b926051j>`_
 The input
 =========
 
+[Input: `recipes/electronicdynamics/spectrum/`]
+
 The following input can be used to calculate the absorption spectrum of
 chlorophyll a::
 

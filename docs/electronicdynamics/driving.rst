@@ -4,7 +4,9 @@
 Driving electronic dynamics with external fields
 ************************************************
 
-In this chapter we will describe how to drive the Q band of chlorophyll a using
+[Input: `recipes/electronicdynamics/driving/`]
+
+In this section we will describe how to drive the Q band of chlorophyll a using
 both a continuous and pulsed laser. The first step is to find the transition
 dipole moment direction of the Q band. This is done using the
 ``calc_timeprop_maxpoldir`` script either available after `make install` of
@@ -50,6 +52,11 @@ as a linear function of time after, confirming that the applied field is in
 resonance with the excitation and within the linear response regime. The slope
 of this growth is related to the transition dipole of the excitation.
 
+Off-resonant excitation
+=======================
+
+[Input: `recipes/electronicdynamics/driving-oot/`]
+
 An *off resonance* excitation at 1.9 eV produces the following result for the
 dipole moment:
 
@@ -57,7 +64,7 @@ dipole moment:
      :height: 40ex
      :align: center
      :alt: Dipole moment as a function of time.
-
+	   
 showing characteristic *beats*, the frequency of which are related to the amount
 of *detuning*. The amplitude of the dipole moment change caused by the
 illumination is also much smaller that when the laser is *in tune* with the
