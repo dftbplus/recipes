@@ -1,0 +1,30 @@
+Geometry = GenFormat {
+  <<< geo_end.gen
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  MaxAngularMomentum = {
+    C = "p"
+  }
+  Filling = Fermi {
+    Temperature [Kelvin] = 100
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slako/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  KPointsAndWeights = KLines {
+    1    0.33333333  0.66666666 0.0
+   20    0.0  0.0  0.0
+   20    0.5  0.0  0.0
+   10    0.33333333  0.66666666 0.0
+  }
+  ReadInitialCharges = Yes
+  MaxSCCIterations = 1
+}
+
+ParserOptions {
+  ParserVersion = 7
+}

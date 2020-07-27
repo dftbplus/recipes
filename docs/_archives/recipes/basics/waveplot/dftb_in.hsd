@@ -15,7 +15,7 @@ Driver = ConjugateGradient {
 
 Hamiltonian = DFTB {
   Scc = Yes
-  SccTolerance = 1.0e-5
+  SccTolerance = 1.0E-5
   SlaterKosterFiles = Type2FileNames {
     Prefix = "../../slakos/mio-ext/"
     Separator = "-"
@@ -36,5 +36,5 @@ Analysis {
 }
 
 ParserOptions {
-  ParserVersion = 5
+  ParserVersion = 7
 }
