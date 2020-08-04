@@ -35,6 +35,43 @@ In each recipe we indicate where to find the corresponding directories in the
 archive with square brackets after the section title (e.g. [Input:
 `recipes/basics/firstcalc/`]).
 
+
+Installing from conda-forge
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+   To bootstrap a conda installation we recommend to either use
+   the conda-forge distribution
+   `miniforge <https://github.com/conda-forge/miniforge/releases/latest>`_
+   or the anaconda distribution
+   `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_.
+
+Installing ``dftb+`` from the conda-forge channel can be achieved by adding conda-forge to your channels with:
+
+.. code-block:: none
+
+   conda config --add channels conda-forge
+
+Once the conda-forge channel has been enabled, ``dftb+`` can be installed with:
+
+.. code-block:: none
+
+   conda install dftbplus
+
+It is possible to list all of the versions of ``dftb+`` available on your platform with:
+
+.. code-block:: none
+
+   conda search dftbplus --channel conda-forge
+
+If you prefer to install an MPI parallel version you have to explicitly request it with
+
+.. code-block:: none
+
+   conda install 'dftbplus=*=mpi_*'
+
+
 Getting Slater-Koster data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
