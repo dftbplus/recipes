@@ -18,3 +18,4 @@ geometry optimization.
    :maxdepth: 1
 
    ase/index.rst
+   pyapi/pyapi.rst
