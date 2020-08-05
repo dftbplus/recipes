@@ -39,13 +39,8 @@ archive with square brackets after the section title (e.g. [Input:
 Installing from conda-forge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
-
-   To bootstrap a conda installation we recommend to either use
-   the conda-forge distribution
-   `miniforge <https://github.com/conda-forge/miniforge/releases/latest>`_
-   or the anaconda distribution
-   `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_.
+DFTB+ is available with the cross platform package manager `conda <https://en.wikipedia.org/wiki/conda>`_ on the `conda-forge <https://conda-forge.org>`_ channel.
+If you have no conda installation yet, we recommend to bootstrap an installation with the conda-forge distribution `miniforge <https://github.com/conda-forge/miniforge/releases/latest>`_ or the anaconda distribution `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_.
 
 Installing ``dftb+`` from the conda-forge channel can be achieved by adding conda-forge to your channels with:
 
@@ -59,17 +54,24 @@ Once the conda-forge channel has been enabled, ``dftb+`` can be installed with:
 
    conda install dftbplus
 
-It is possible to list all of the versions of ``dftb+`` available on your platform with:
-
-.. code-block:: none
-
-   conda search dftbplus --channel conda-forge
-
 If you prefer to install an MPI parallel version you have to explicitly request it with
 
 .. code-block:: none
 
    conda install 'dftbplus=*=mpi_*'
+
+Additional components, like the dptools and the Python API, are available as separate packages on the same channel.
+You can install them with
+
+.. code-block:: none
+
+   conda install dftbplus-tools dftbplus-python
+
+It is possible to list all of the versions of ``dftb+`` and its additional components available on your platform with:
+
+.. code-block:: none
+
+   conda search 'dftbplus*' --channel conda-forge
 
 
 Getting Slater-Koster data
