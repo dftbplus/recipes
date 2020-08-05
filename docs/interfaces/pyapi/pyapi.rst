@@ -5,12 +5,12 @@
 Python Interface
 ****************
 
-The provided interface enables calculations, initiated out of Python. The
-extraction of main results such as system energy, atomic forces and Mulliken
-charges directly in Python is just as possible as defining population
-(in)dependent external potentials. At the current state, an existing input file
-(`dftb_in.hsd`), which contains parameters apart from the geometry, is required
-for the initialization of DFTB+.
+The Python interface enables DFTB calculations to be performed by external
+programs. Results such as system energy, atomic forces and Mulliken charges can
+be extracted directly, along with performing tasks like defining calculations in
+external potentials or updating the geometry. With the pythonapi (version 0.1)
+an existing input file (`dftb_in.hsd`), which contains settings in addition to
+the geometry, is required for the initialization of DFTB+.
 
 Regarding the **units**: Just like DFTB+, the interface expects and delivers
 values in **atomic units**!
@@ -18,36 +18,36 @@ values in **atomic units**!
 Setting up DFTB+
 ================
 
-For this special usecase, DFTB+ has to get compiled as a shared library and with
+For this special use case, DFTB+ needs to be compiled as a shared library with
 API support enabled. At this point, a basic understanding of how to build DFTB+
-is assumed. All necessary steps are explained in the INSTALL.rst file in the
-top level directory of DFTB+, which may be consulted. In addition, only the
-explicit setting of the flags for API support and the creation of a shared
-library is necessary. To instruct DFTB+ that a dynamically linked shared
-library with API support should be created, the `WITH_API` and
-`BUILD_SHARED_LIBS` flag in the cmake configuration file `config.cmake` must be
-set to TRUE, before starting the compilation process! If you don't want to mess
-around with files, a construct like the following is a convenient way to specify
-these flags, while configuring CMake:
+is assumed (all necessary steps are explained in the INSTALL.rst file in the top
+level directory of the DFTB+ repository). The CMake configuration for this case
+can be done by settining the WITH_API and BUILD_SHARED_LIBS flags to be TRUE in
+the file config.cmake, before starting the configuration and compilation
+process. Alternatively, if you do not want to modify files, a construct like the
+following is a convenient way to specify these flags on the command line while
+configuring with CMake:
 
-``cmake -DBUILD_SHARED_LIBS=1 -DWITH_API=1 -DCMAKE_TOOLCHAIN_FILE=../sys/gnu.cmake ..``
+``cmake -DBUILD_SHARED_LIBS=1 -DWITH_API=1 ..``
 
-Since the path to the shared library must be passed to the interface, a word
-about the expected location of the corresponding file should be lost:
-If only the pure compilation process was carried out, the library is located
-under `prog/dftb+/libdftbplus.*` in the target installation directory. If
-``make install`` was executed in addition, there is also a copy under
-`_install/lib/libdftbplus.*`.
+If only the pure compilation process is carried out, the resulting library is
+located inside the buid directory at `prog/dftb+/`. If ``make install`` was
+executed in addition, there is also a copy placed in the `CMAKE_INSTALL_PREFIX`
+path, which defaults to `install/lib/` inside the build directory. Within these
+locations, the library files `libdftbplus.*` will be installed.
+
+The path to the resulting shared library must be passed to the interface, so you
+will need to know where the `libdftbplus.so` file ends up.
 
 Setting up the interface
 ========================
 
-A convenient way to install the interface is provided. By simply issuing
-``python setup.py`` in the directory `tools/pythonapi/` you can install it
-system-wide into your normal Python installation. Alternatively, to install it
-locally in your home space, use ``python setup.py install --user``. If the
-local Python installation directory is not in your PATH, you should add it
-accordingly.
+You can install the script package via the standard 'python setup' mechanism. If
+you want to install it system-wide into your normal python installation, with
+the appropriate permissions you can simply issue ``python setup.py`` in the
+directory `tools/pythonapi/`. Alternatively, to install it locally in your home
+space, use ``python setup.py install --user``. If the local Python installation
+directory is not in your PATH, you should add it accordingly.
 
 .. _sec-interfaces-pyapi-input:
 
@@ -56,13 +56,17 @@ Providing the input for DFTB+
 
 [Input: `recipes/interfaces/pyapi/`]
 
-Although the geometry of the structure to be calculated is later handed over
-by the main script, first off it is necessary to pass a dummy geometry (suitable
-for the desired number of atoms and boundary conditions). It is important to
-ensure that the number of coordinates matches the number of atoms of the real
+To initialize an instance of the dftbplus calculator, you will need an initial
+file formatted according to the HSD structure for the usual `dftb_in.hsd` input
+of DFTB+.
+
+Although the geometry of the structure to be calculated can be later replaced by
+your main script, it is necessary first to supply a dummy geometry (suitable for
+the desired number of atoms and boundary conditions). It is important to ensure
+that the total number of coordinates matches the number of atoms of the real
 geometry and that any specified lattice vectors are linearly independent,
-otherwise DFTB+ will return an error message. In the case of |TiO2| the
-following geometry block of `dftb_in.hsd` would be appropriate::
+otherwise DFTB+ will return an error message. In the case of the supplied |TiO2|
+example the following geometry block of `dftb_in.hsd` would be appropriate::
 
     Geometry = GenFormat {
 
@@ -113,7 +117,7 @@ of a |TiO2| supercell::
 To be able to also extract the forces via the interface, it is advisable to
 specify the corresponding entry in the ``Analysis{}`` block. Otherwise DFTB+
 will issue an error message, asking the user to do so. To ensure backwards
-compatibility of the input, the parser version is also specified::
+compatibility of the input, the parser version should also be specified::
 
     Analysis {
       CalculateForces = Yes
@@ -131,13 +135,15 @@ compatibility of the input, the parser version is also specified::
 Main script
 ===========
 
-The script shown here serves to illustrate the use of the interface, based on
-the calculation of |TiO2|.
+The script shown here serves to illustrate the use of the Python interface,
+based on the calculation of |TiO2|.
 
 In order to be able to use the interface, the package `dftbplus` must be
-imported as the first step. The path `LIB_PATH` to the shared library is
-defined, as well as conversion factors to convert the atom coordinates
-from Ångström into atomic units (Bohr), required by the interface.
+imported as the first step. The path `LIB_PATH` to the DFTB+ shared library is
+defined (note that the name prefix of the libray file name should also be part
+of the path), as well as conversion factors to convert the atom coordinates we
+will list in from Ångström into the atomic units (Bohr) required by the
+interface.
 
 .. code-block:: python
 
@@ -153,9 +159,8 @@ from Ångström into atomic units (Bohr), required by the interface.
     AA__BOHR = 1 / BOHR__AA
 
 At the beginning of the ``main()`` function, the atom coordinates and lattice
-vectors are defined. In this case, a conversion to atomic units is
-necessary, since a `.gen` block is used whose values usually have the unit
-Ångström.
+vectors are defined. In this case, a conversion to atomic units is necessary,
+since a `.gen` block is used whose values are usually in units of Ångström.
 
 .. _sec-interfaces-pyapi-codeblock1:
 
@@ -183,17 +188,17 @@ necessary, since a `.gen` block is used whose values usually have the unit
 	coords *= AA__BOHR
 	latvecs *= AA__BOHR
 
-An object of the DftbPlus class is instantiated, whereby the path to the
-shared library `libpath`, the path to the HSD input file `hsdpath` and the
-name of the log file `logfile` can be specified. These are optional keyword
-arguments with the default values './libdftbplus', './dftb_in.hsd' and None.
-Note, that adding the shared library extension to `libpath` is not essential.
-Since the extension is primarily system dependent, it is guessed by the
-interface if missing. If logfile=None is specified, the output gets printed
-to stdout.
+An object of the DftbPlus class is instantiated, which requires the location of
+the shared library `libpath`, the HSD input file `hsdpath` and the name of the
+log file `logfile` to be optionally specified. These keywords have default
+values './libdftbplus', './dftb_in.hsd' and None if not set explicitly.  Note,
+that adding the shared library extension to `libpath` is not essential.  Since
+the extension can be system dependent, it is guessed by the interface if
+missing. If logfile=None is specified, the output of the calculation gets
+printed to stdout.
 
-After the instantiation, the geometry is set; for periodic structures, lattice
-vectors have to be specified in addition to the absolute coordinates.
+After instantiation, the geometry can set or replaced; for periodic structures,
+lattice vectors can be specified in addition to the absolute coordinates.
 
 The DFTB+ calculations are carried out automatically, as soon as the
 corresponding get_* methods are called. To correctly finalize the DFTB+ object,
@@ -235,25 +240,25 @@ potential. This is covered in the following two sections
 
 .. _sec-interfaces-pyapi-extpot:
 
-Population independent external potential
-=========================================
+Using a population independent external potential
+=================================================
 
 [Input: `recipes/interfaces/pyapi/extpot/`]
 
-If a population independent external potential is to be taken into account in
-the calculation, only a small addition in the script is necessary. The DFTB+
-object has a method ``set_external_potential()``, which should be kind of
+A external potential which does not depend on the Mulliken charges in the
+calculation can be included with only a small addition in the script. The DFTB+
+object has a method ``set_external_potential()``, which should be relatively
 self-explanatory. The external potential at the position of the QM-atoms is
-given as a positional argument. If forces matter to you, the gradient of the
-external potential at each atom can be passed as the keyword argument
-`extpotgrad` in addition.
+given as a positional argument. If forces are required, the gradient of the
+external potential at each atom can be passed additionally as the keyword
+argument `extpotgrad`.
 
 Therefore, after the initialization of the DFTB+ object, the following code is
 inserted:
 
 .. code-block:: python
 
-    # exemplary values of extpot and extpotgrad used here were
+    # example values of extpot and extpotgrad used here were
     # taken from file: test/api/mm/testers/test_extpot.f90
     extpot = np.array([-0.025850198503435,
                        -0.005996294763958,
@@ -274,19 +279,20 @@ Population dependent external potential
 
 [Input: `recipes/interfaces/pyapi/qdepextpot/`]
 
-This section deals with the capability of the interface to run calculations
-with a population dependent external potential. Since in general only the user
-knows how to calculate it, callback functions can be defined, which will be
-executed at runtime.
+This section deals with the capability of the interface to run calculations with
+a population dependent external potential, i.e. arrising in cases like
+polarizable surroundings where the applied field responds to the state of the QM
+calculation. Since in general only the user knows how to calculate this type of
+potential, callback functions can be defined which will then be executed at runtime.
 
 The DFTB+ object provides a method ``register_ext_pot_generator()`` that takes
 care of the registration of the callback functions. As the first positional
-argument of this method, an arbitrary pointer can be specified. DFTB+ will
-pass back this pointer unaltered when calling the registered functions. You
-can typically use it to pass a pointer to the data or a Python object (class)
-which contains the necessary data for the potential calculation. If your data is
-in the global space and you do not need it, pass None (or equivalent). The
-second and third positional argument has to be the function that provides the
+argument of this method, an arbitrary pointer can be specified. DFTB+ will pass
+back this pointer unaltered when calling the registered functions. You can
+typically use it to pass a pointer to the data or a Python object (class) which
+contains the necessary data for the potential calculation. If your data is in
+the global space and you do not need it, pass None (or equivalent). The second
+and third positional arguments have to be the function that provides the
 external potential and its gradients.
 
 Furthermore, the auxiliary class ``PotentialCalculator`` is defined to perform
@@ -439,4 +445,5 @@ registration of the callback functions is still missing:
     # register callback functions for a qdepextpot calculation
     cdftb.register_ext_pot_generator(potcalc, get_extpot, get_extpotgrad)
 
-Please consult the archive to obtain the full corresponding example.
+Please consult the associated archive with this tutorial to obtain the full
+corresponding example.
