@@ -22,8 +22,8 @@ For this special use case, DFTB+ needs to be compiled as a shared library with
 API support enabled. At this point, a basic understanding of how to build DFTB+
 is assumed (all necessary steps are explained in the INSTALL.rst file in the top
 level directory of the DFTB+ repository). The CMake configuration for this case
-can be done by settining the WITH_API and BUILD_SHARED_LIBS flags to be TRUE in
-the file config.cmake, before starting the configuration and compilation
+can be done by setting the WITH_API and BUILD_SHARED_LIBS flags to be TRUE in
+the file `config.cmake`, before starting the configuration and compilation
 process. Alternatively, if you do not want to modify files, a construct like the
 following is a convenient way to specify these flags on the command line while
 configuring with CMake:
@@ -32,22 +32,23 @@ configuring with CMake:
 
 If only the pure compilation process is carried out, the resulting library is
 located inside the buid directory at `prog/dftb+/`. If ``make install`` was
-executed in addition, there is also a copy placed in the `CMAKE_INSTALL_PREFIX`
-path, which defaults to `install/lib/` inside the build directory. Within these
-locations, the library files `libdftbplus.*` will be installed.
+executed, there is also a copy placed in the `CMAKE_INSTALL_PREFIX` path, which
+defaults to `install/lib/` inside the build directory. Within these locations,
+the library files `libdftbplus.*` will be installed.
 
 The path to the resulting shared library must be passed to the interface, so you
-will need to know where the `libdftbplus.so` file ends up.
+will need to know where the `libdftbplus.*` files ends up.
 
 Setting up the interface
 ========================
 
-You can install the script package via the standard 'python setup' mechanism. If
-you want to install it system-wide into your normal python installation, with
-the appropriate permissions you can simply issue ``python setup.py`` in the
-directory `tools/pythonapi/`. Alternatively, to install it locally in your home
-space, use ``python setup.py install --user``. If the local Python installation
-directory is not in your PATH, you should add it accordingly.
+You can install the associated Python package via the standard 'python setup'
+mechanism. If you want to install it system-wide into your normal python
+installation, with the appropriate permissions you can simply issue ``python
+setup.py`` in the directory `tools/pythonapi/`. Alternatively, to install it
+locally in your home space, use ``python setup.py install --user``. If the local
+Python installation directory is not in your PATH, you should add it
+accordingly.
 
 .. _sec-interfaces-pyapi-input:
 
