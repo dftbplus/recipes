@@ -39,7 +39,7 @@ archive with square brackets after the section title (e.g. [Input:
 Installing from conda-forge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-DFTB+ is available with the cross platform package manager `conda <https://en.wikipedia.org/wiki/conda>`_ on the `conda-forge <https://conda-forge.org>`_ channel.
+DFTB+ is available with the cross platform package manager `conda <https://en.wikipedia.org/wiki/Conda_(package_manager)>`_ on the `conda-forge <https://conda-forge.org>`_ channel.
 If you have no conda installation yet, we recommend to bootstrap an installation with the conda-forge distribution `miniforge <https://github.com/conda-forge/miniforge/releases/latest>`_ or the anaconda distribution `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_.
 
 Installing ``dftb+`` from the conda-forge channel can be achieved by adding conda-forge to your channels with:
