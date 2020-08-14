@@ -7,17 +7,19 @@ Error handling with REKS
 Oscillation of energy
 ************************
 
+[Input: `recipes/reks/oscillation_energy/`]
+
 The oscillation of SA-REKS energy in SCC process may appear as follows::
 
-    646       -8.9586042136       0.0000229868     0.621642    0.00993712
-    647       -8.9586272004      -0.0000229868     0.601626    0.00993712
-    648       -8.9586042136       0.0000229868     0.621642    0.00993712
-    649       -8.9586272004      -0.0000229868     0.601626    0.00993712
-    650       -8.9586042136       0.0000229868     0.621642    0.00993712
-    651       -8.9586272004      -0.0000229868     0.601626    0.00993712
-    652       -8.9586042136       0.0000229868     0.621642    0.00993712
-    653       -8.9586272004      -0.0000229868     0.601626    0.00993712
-    654       -8.9586042136       0.0000229868     0.621642    0.00993712
+    646       -8.9586042135       0.0000229869     0.621642    0.00993712
+    647       -8.9586272004      -0.0000229869     0.601626    0.00993712
+    648       -8.9586042135       0.0000229869     0.621642    0.00993712
+    649       -8.9586272004      -0.0000229869     0.601626    0.00993712
+    650       -8.9586042135       0.0000229869     0.621642    0.00993712
+    651       -8.9586272004      -0.0000229869     0.601626    0.00993712
+    652       -8.9586042135       0.0000229869     0.621642    0.00993712
+    653       -8.9586272004      -0.0000229869     0.601626    0.00993712
+    654       -8.9586042135       0.0000229869     0.621642    0.00993712
 
 These oscillations mostly arise from the degeneracy of frontier orbitals. As the difference
 between frontier orbitals gets smaller, it is hard to determine the order of frontier orbitals
@@ -59,12 +61,14 @@ following irregular pattern::
 Selection of minimized energy functional
 ******************************************
 
+[Input: `recipes/reks/benzene/`]
+
 A benzene has two degenerate :math:`\pi` orbitals and two degenerate :math:`\pi^*` orbitals. Thus,
 if one want to calculate a benzene molecule, then the active space should include two :math:`\pi`
 and two :math:`\pi^*` orbitals. Hence, (2,2) active space may be insufficient to investigate this
 system, but the ground state can be optimized with DFTB/SSR(2,2). Since there is a ambiguous point
 to decide the active space, the OSS state cannot be correctly generated. Thus, only single-state
-REKS can be used for a benzene molecule, and the resulting energy of PPS state is given in::
+REKS is recommended for a benzene molecule, and the resulting energy of PPS state is given in::
 
   --------------------------------------------------
     Final REKS(2,2) energy:     -12.56867223
@@ -92,6 +96,8 @@ functional is recommended, then the geometry will be optimized successfully.
 ***************************
 Fail of CP-REKS equations
 ***************************
+
+[Input: `recipes/reks/acetylene/`]
 
 In general, preconditioned conjugate-gradient algorithm is used to solve CP-REKS equations in analytic
 gradient. It calculates quickly and accurately for most molecules, but it may fail to calculate a

@@ -8,6 +8,8 @@ Energy and gradient calculations with REKS
 Single-state REKS
 *******************
 
+[Input: `recipes/reks/single_state_reks/`]
+
 In single-state REKS, only ground state is calculated and it can treat the
 state with multireference character. For example, a ethylene molecule
 with torsional angle of 90 degrees shows degenerate :math:`{\pi}` and
@@ -40,7 +42,7 @@ following input that follows::
   Hamiltonian = DFTB {
     SCC = Yes
     SCCTolerance = 1e-6
-    MaxSCCIterations = 1000
+    MaxSCCIterations = 10000
     Charge = 0.0
     SpinConstants = {
       ShellResolvedSpin = Yes
@@ -54,8 +56,8 @@ following input that follows::
       Functional = { "PPS" }
     }
     TargetState = 1
-    FonMaxIter = 30
-    Shift = 0.3
+    FonMaxIter = 100
+    Shift = 1.0
     VerbosityLevel = 1
   }
 
@@ -83,13 +85,14 @@ the FONs contributing the state. The minimized geometry for ethylene is a planar
 and the resulting energy and FONs are given in the standard output::
 
   --------------------------------------------------
-    Final REKS(2,2) energy:      -4.90451694
+    Final REKS(2,2) energy:      -4.89357215
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.90451694   1.999998  0.000002  0.00
+    PPS   -4.89357215   1.999990  0.000010  0.00
   --------------------------------------------------
 
-The energy of PPS state is -4.9045 Hartree and the FONs of frontier orbitals are ~2.0 and ~0.0,
+
+The energy of PPS state is -4.8936 Hartree and the FONs of frontier orbitals are ~2.0 and ~0.0,
 respectively. The orbital character for HOMO is :math:`\pi` and the character for LUMO is
 :math:`\pi^*`, so the two electrons are occupied in the HOMO. When the =CH2 begins to rotate into
 90 degree, the molecular orbitals change from :math:`\pi`, :math:`\pi^*` orbitals to two localized
@@ -97,22 +100,25 @@ single :math:`\pi` orbitals. This means the frontier orbitals are now almost deg
 is well described with REKS(2,2) calculations. The resulting energy and FONs are given in::
 
   --------------------------------------------------
-    Final REKS(2,2) energy:      -4.76380101
+    Final REKS(2,2) energy:      -4.77774313
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.76380101   1.244777  0.755223  0.00
+    PPS   -4.77774313   1.000004  0.999996  0.00
   --------------------------------------------------
 
-Now, the energy of PPS state becomes -4.7638 Hartree and the FONs become ~1.25 and ~0.75,
+
+Now, the energy of PPS state becomes -4.7777 Hartree and the FONs become ~1.0 and ~1.0,
 respectively. In addition, the user can check the energy contribution for the PPS state from
 *detailed.out* file. The energy for spin contribution is ~0.0 Hartree for planar structure,
-while the energy becomes now -0.017 Hartree for 90 degree rotated structure. Overall, we can
+while the energy becomes now -0.0188 Hartree for 90 degree rotated structure. Overall, we can
 conclude that the planar structure is almost consisted of only first microstate, while the
 rotated structure is consisted of several microstates.
 
 *******************
 SA-REKS
 *******************
+
+[Input: `recipes/reks/sa_reks/`]
 
 Single-state REKS can treat only ground state, thus the vertical excitation energy cannot be
 calculated with this method. From the restricted open-shell Kohn-Sham scheme, we can construct
@@ -131,8 +137,8 @@ PPS and OSS states of a ethylene molecule with SA-REKS. The ``REKS`` block has n
       Functional = { "PPS" "OSS" }
     }
     TargetState = 1
-    FonMaxIter = 30
-    Shift = 0.3
+    FonMaxIter = 100
+    Shift = 1.0
     Gradient = ConjugateGradient {
       CGmaxIter = 100
       Tolerance = 1.0E-8
@@ -146,28 +152,28 @@ At first the user now have to include the OSS state in ``Functional`` block so t
 of OSS state is calculated. The resulting energy and additional information is given by::
 
   --------------------------------------------------
-   Final SA-REKS(2,2) energy:      -4.77766412
+   Final SA-REKS(2,2) energy:      -4.78921495
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.90451694   1.999998  0.000002  0.00
-    OSS   -4.65081130   1.000000  1.000000  0.00
-   Trip   -4.69681085   1.000000  1.000000  1.00
+    PPS   -4.89357215   1.999990  0.000010  0.00
+    OSS   -4.68485776   1.000000  1.000000  0.00
+   Trip   -4.73085776   1.000000  1.000000  1.00
   --------------------------------------------------
 
-   Lagrangian Wab:  -0.00000000 -0.00000000
+   Lagrangian Wab:   0.00000000  0.00000000
 
   --------------------------------------------------
    SSR: 2SI-2SA-REKS(2,2) Hamiltonian matrix
                  PPS           OSS
-     PPS    -4.90451694   -0.00000000
-     OSS    -0.00000000   -4.65081130
+     PPS    -4.89357215    0.00000000
+     OSS     0.00000000   -4.68485776
   --------------------------------------------------
 
-   unrelaxed SA-REKS FONs for S0:  1.999998  0.000002
+   unrelaxed SA-REKS FONs for S0:  1.999990  0.000010
 
 Here, Final SA-REKS(2,2) energy is the energy of ensemble of PPS and OSS states, which is the quantity
 to be minimized in SA-REKS formalism. For the planar structure of a ethylene molecule, the energies of
-two states are -4.9045 and -4.6508 Hartree, respectively. The FONs for PPS state are ~2.0 and ~0.0, while
+two states are -4.8936 and -4.6849 Hartree, respectively. The FONs for PPS state are ~2.0 and ~0.0, while
 those for OSS state are ~1.0 and ~1.0. In addition, the energy of triplet configuration which corresponds
 to 5th or 6th microstate is now given in the standard output. Note that this energy is not the energy
 of the triplet state. The user can check the successful convergence by comparing two Lagrangian Wab values.
@@ -185,26 +191,26 @@ Similar to the one above, the distorted structure can be calculated using SA-REK
 in the following::
 
   --------------------------------------------------
-   Final SA-REKS(2,2) energy:      -4.74617355
+   Final SA-REKS(2,2) energy:      -4.75910919
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.76360999   1.244973  0.755027  0.00
-    OSS   -4.72873711   1.000000  1.000000  0.00
-   Trip   -4.76302402   1.000000  1.000000  1.00
+    PPS   -4.77753765   1.000000  1.000000  0.00
+    OSS   -4.74068073   1.000000  1.000000  0.00
+   Trip   -4.77753837   1.000000  1.000000  1.00
   --------------------------------------------------
 
-   Lagrangian Wab:  -0.00002244 -0.00002226
+   Lagrangian Wab:  -0.00004046  0.00004230
 
   --------------------------------------------------
    SSR: 2SI-2SA-REKS(2,2) Hamiltonian matrix
                  PPS           OSS
-     PPS    -4.76360999   -0.00000554
-     OSS    -0.00000554   -4.72873711
+     PPS    -4.77753765   -0.00000000
+     OSS    -0.00000000   -4.74068073
   --------------------------------------------------
 
-   unrelaxed SA-REKS FONs for S0:  1.244973  0.755027
+   unrelaxed SSR FONs for S0:  1.000000  1.000000
 
-Now the energy of OSS state is -4.7287 Hartree and the coupling between PPS and OSS states becomes non-zero value.
+Now the energy of OSS state is -4.7407 Hartree and the coupling between PPS and OSS states becomes non-zero value.
 The energy of triplet configuration is similar with the energy of PPS state. Since REKS can consider the static
 electronic correlations, it can show a correct shape for the potential energy curve with respect to the torsional
 angle of C=C bond. If you want to calculate the energy of DES state, then ``IncludeAllStates = Yes`` keyword in
@@ -213,6 +219,8 @@ the ``Energy`` block will show the energy of DES state as well as the FONs.
 *******************
 SI-SA-REKS
 *******************
+
+[Input: `recipes/reks/si_sa_reks/`]
 
 State-interaction SA-REKS (SI-SA-REKS, briefly SSR) energies are obtained by solveing 2 :math:`\times` 2 secular
 equation with the possible couplings between the electronic states.
@@ -226,18 +234,11 @@ By considering the state-interaction terms, SSR states become more reliable stat
 included. SSR states can be calculated with the ``StateInteractions = Yes`` in ``Energy`` block. For the
 planar structure, the resulting energies are given by::
 
-  --------------------------------------------------
-   SSR: 2SI-2SA-REKS(2,2) Hamiltonian matrix
-                 PPS           OSS
-     PPS    -4.76360999   -0.00000554
-     OSS    -0.00000554   -4.72873711
-  --------------------------------------------------
-
   ----------------------------------------------------------------
    SSR: 2SI-2SA-REKS(2,2) states
                       E_n       C_{PPS}    C_{OSS}
-   SSR state  1   -4.90451694  -1.000000  -0.000000
-   SSR state  2   -4.65081130   0.000000  -1.000000
+   SSR state  1   -4.89357215  -1.000000   0.000000
+   SSR state  2   -4.68485776  -0.000000  -1.000000
   ----------------------------------------------------------------
 
 In this case the ground state is consisted of PPS state, while the lowest excited state is consisted of

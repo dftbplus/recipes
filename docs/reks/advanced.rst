@@ -7,6 +7,8 @@ Advanced calculations
 Nonadiabatic couplings
 ************************
 
+[Input: `recipes/reks/nonadiabatic_coupling/`]
+
 The nonadiabatic coupling vectors between the states can be calculated with SSR method.
 By setting ``NonAdiabaticCoupling = Yes`` in ``REKS`` block, the user can easily
 calculate the nonadiabatic coupling vectors. When this option is turned on, SSR shows
@@ -16,56 +18,56 @@ the gradients for all states and possible coupling vectors::
    Gradient Information
   --------------------------------------------------
    1 st state (SSR)
-       0.00008470    -0.00007273    -0.00001868
-      -0.00008072     0.00008276     0.00002092
-      -0.00001026     0.00004220    -0.00002731
-       0.00004647    -0.00001374     0.00003727
-       0.00001848     0.00000383     0.00002557
-      -0.00005867    -0.00004232    -0.00003777
+       0.09734680    -0.00000000     0.00000000
+      -0.09734682    -0.00000000    -0.00000000
+       0.00639517     0.00417744    -0.00000000
+       0.00639517    -0.00417744     0.00000000
+      -0.00639516     0.00417743    -0.00000000
+      -0.00639516    -0.00417743     0.00000000
 
    2 st state (SSR)
-       0.28581286    -0.00360737     0.00128038
-      -0.28580887     0.00361741    -0.00128220
-      -0.00001066     0.00004477     0.00015391
-       0.00004763    -0.00001656    -0.00016019
-       0.00001888     0.00000173    -0.00015362
-      -0.00005984    -0.00003999     0.00016172
+      -0.12803706    -0.00000000    -0.00000000
+       0.12803704    -0.00000000     0.00000000
+       0.00639486     0.00417837    -0.00000000
+       0.00639486    -0.00417837     0.00000000
+      -0.00639485     0.00417836    -0.00000000
+      -0.00639485    -0.00417836     0.00000000
   --------------------------------------------------
    Coupling Information
   --------------------------------------------------
    between  1 and  2 states
   --------------------------------------------------
    g vector - difference gradient
-      -0.14286408     0.00176732    -0.00064953
-       0.14286407    -0.00176733     0.00065156
-       0.00000020    -0.00000129    -0.00009061
-      -0.00000058     0.00000141     0.00009873
-      -0.00000020     0.00000105     0.00008960
-       0.00000059    -0.00000117    -0.00009975
+       0.11269193    -0.00000000     0.00000000
+      -0.11269193     0.00000000    -0.00000000
+       0.00000016    -0.00000046     0.00000000
+       0.00000016     0.00000046     0.00000000
+      -0.00000016    -0.00000046     0.00000000
+      -0.00000016     0.00000046     0.00000000
 
    h vector - derivative coupling
-      -0.00052064     0.00000662    -0.00000429
-      -0.00052061     0.00000625    -0.00000486
-       0.00025848    -0.00015640     0.00000578
-       0.00026214     0.00014996    -0.00000135
-       0.00026234     0.00015000     0.00000197
-       0.00025828    -0.00015643     0.00000276
+      -0.00031874    -0.00000000     0.00000000
+      -0.00031874     0.00000000    -0.00000000
+       0.00015937     0.00007242     0.00000000
+       0.00015937    -0.00007242     0.00000000
+       0.00015937    -0.00007242     0.00000000
+       0.00015937     0.00007242     0.00000000
 
    G vector - GDV
-      -0.14286408     0.00176732    -0.00064953
-       0.14286407    -0.00176733     0.00065156
-       0.00000020    -0.00000129    -0.00009061
-      -0.00000058     0.00000141     0.00009873
-      -0.00000020     0.00000105     0.00008960
-       0.00000059    -0.00000117    -0.00009975
+       0.11269193    -0.00000000     0.00000000
+      -0.11269193     0.00000000    -0.00000000
+       0.00000016    -0.00000046     0.00000000
+       0.00000016     0.00000046     0.00000000
+      -0.00000016    -0.00000046     0.00000000
+      -0.00000016     0.00000046     0.00000000
 
    H vector - DCV - non-adiabatic coupling
-      -0.00205212     0.00002609    -0.00001692
-      -0.00205203     0.00002462    -0.00001917
-       0.00101884    -0.00061646     0.00002279
-       0.00103324     0.00059107    -0.00000534
-       0.00103403     0.00059125     0.00000776
-       0.00101804    -0.00061657     0.00001087
+      -0.00152718    -0.00000000     0.00000000
+      -0.00152718     0.00000000    -0.00000000
+       0.00076359     0.00034700     0.00000000
+       0.00076359    -0.00034700     0.00000000
+       0.00076359    -0.00034700     0.00000000
+       0.00076359     0.00034700     0.00000000
   --------------------------------------------------
 
 These gradients and coupling vectors are obtained with planar structure of a ethylene molecule.
@@ -84,6 +86,8 @@ can be used for minimum energy conical intersction (MECI) optimisation.
 Relaxed Density
 ************************
 
+[Input: `recipes/reks/relaxed_density/`]
+
 The relaxed density is calculated according to ``TargetState`` when the user sets ``RelaxedDensity``
 to ``Yes``. The calculation of relaxed density requires the information about gradient, thus it
 can be calculated when the input includes calculation of gradient. When this option is turned on,
@@ -95,12 +99,12 @@ This example shows relaxed charges for ground state::
 
   relaxed S0 atomic charge (e)
      atom        charge
-        1      -0.17586135
-        2      -0.17586344
-        3       0.08793393
-        4       0.08792776
-        5       0.08797812
-        6       0.08788497
+        1      -0.18168616
+        2      -0.18168616
+        3       0.09084308
+        4       0.09084308
+        5       0.09084308
+        6       0.09084308
 
 If one want to exploit SSR with QM/MM approach, ``RelaxedDensity`` option should be used to
 obtain the gradient of external point charges. Then, the gradient of external point charges
@@ -184,18 +188,20 @@ by using ``SpinTuning`` keyword in ``REKS`` block as follows::
 Microstate calculation
 ************************
 
+[Input: `recipes/reks/microstate/`]
+
 Obviously SSR method treats only singlet state such as PPS or OSS state. If one want to compare
 the energy of singlet and triplet states, SSR provides the energy of triplet configuration as
 an alternative which corresponds to 5th or 6th configuration in (2,2) active space. Thus, the user
 can easily compare the energy of singlet states and triplet microstate.::
 
   --------------------------------------------------
-   Final SA-REKS(2,2) energy:      -4.74617355
+   Final SA-REKS(2,2) energy:      -4.78921495
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.76360999   1.244973  0.755027  0.00
-    OSS   -4.72873711   1.000000  1.000000  0.00
-   Trip   -4.76302402   1.000000  1.000000  1.00
+    PPS   -4.89357215   1.999990  0.000010  0.00
+    OSS   -4.68485776   1.000000  1.000000  0.00
+   Trip   -4.73085776   1.000000  1.000000  1.00
   --------------------------------------------------
 
 In this example showing the resulting energy of distorted structure of ethylene, the energy of
@@ -211,12 +217,12 @@ results are obtained from the distorted structure of ethylene molecule::
    Gradient Information
   --------------------------------------------------
    5 microstate
-       0.28582859    -0.00360772     0.00127630
-      -0.28582459     0.00361760    -0.00127747
-      -0.00001027     0.00004031    -0.00020014
-       0.00004510    -0.00001196     0.00019623
-       0.00001850     0.00000643     0.00020011
-      -0.00005733    -0.00004467    -0.00019502
+      -0.12804078    -0.00000000    -0.00000000
+       0.12804075    -0.00000000     0.00000000
+       0.00639517     0.00417744    -0.00000000
+       0.00639517    -0.00417744     0.00000000
+      -0.00639516     0.00417743    -0.00000000
+      -0.00639516    -0.00417743     0.00000000
   --------------------------------------------------
 
 The gradient is now calculated for 5th microstate. In addition, the energy of spin contribution
@@ -233,15 +239,14 @@ This example shows input file for calculation of triplet microstate::
     }
     TargetState = 1
     TargetMicrostate = 5
-    FonMaxIter = 30
-    shift = 0.3
+    FonMaxIter = 100
+    shift = 1.0
     Gradient = ConjugateGradient {
       CGmaxIter = 100
       Tolerance = 1.0E-8
       Preconditioner = Yes
       SaveMemory = Yes
     }
-    RelaxedDensity = Yes
     VerbosityLevel = 1
   }
 

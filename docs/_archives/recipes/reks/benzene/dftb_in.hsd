@@ -1,0 +1,59 @@
+Geometry = GenFormat {
+ 12  C
+ C H
+    1  1   -0.2712057571E+01    0.1842948241E+01   -0.1849908732E-05
+    2  1   -0.2716478295E+01    0.4464826549E+00    0.1543723580E-05
+    3  1   -0.1509301814E+01   -0.2556267657E+00    0.7181989964E-06
+    4  1   -0.2932534437E+00    0.1835323860E+01   -0.3995097450E-05
+    5  1   -0.1500413874E+01    0.2537363515E+01   -0.4781184700E-05
+    6  2    0.6597981733E+00    0.2381533189E+01   -0.4567035021E-05
+    7  2   -0.1512737373E+01   -0.1354149815E+01    0.2573690416E-05
+    8  2    0.6519551255E+00   -0.1133740209E+00   -0.3168664859E-05
+    9  2   -0.3669557546E+01   -0.9968670627E-01    0.4578352576E-05
+   10  1   -0.2977252655E+00    0.4388036861E+00   -0.2107815776E-05
+   11  2   -0.3661640434E+01    0.2395144251E+01   -0.1931420269E-05
+   12  2   -0.1496924682E+01    0.3635855911E+01   -0.8012838761E-05
+}
+
+Hamiltonian = DFTB { 
+  SCC = Yes
+  SCCTolerance = 1e-6
+  MaxSCCIterations = 10000
+  Charge = 0.0
+  MaxAngularMomentum = {
+    H = "s"
+    C = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slakos/mio-ext/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  SpinConstants = {
+    ShellResolvedSpin = Yes
+    H = { -0.072 }
+    C = { -0.031 -0.025 -0.025 -0.023 }
+  }
+}
+
+Reks = SSR22 {
+  Energy = {
+    Functional = { "PPS" }
+  }
+  TargetState = 1
+  FonMaxIter = 30
+  Shift = 0.3
+  VerbosityLevel = 1
+}
+
+Analysis {
+  CalculateForces = Yes
+}
+
+Options {
+  WriteAutotestTag = Yes
+}
+
+ParserOptions {
+  ParserVersion = 8
+}
