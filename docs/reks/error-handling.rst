@@ -81,10 +81,10 @@ Note that the orbital energy of upper frontier orbital (in this case, 16th orbit
 is not correctly provided since there is a ambiguous part in single-state REKS method when the Fock
 matrix is constructed as follows::
 
-  14    -6.700  2.00000
-  15    -6.700  2.00000
-  16    -7.583  0.00000
-  17    -1.399  0.00000
+    14    -6.700  2.00000
+    15    -6.700  2.00000
+    16    -7.583  0.00000
+    17    -1.399  0.00000
 
 This problem only occurs in single-state REKS, thus the band energies are correctly calculated for
 SA-REKS or SSR method.

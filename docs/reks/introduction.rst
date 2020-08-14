@@ -91,7 +91,6 @@ and the resulting energy and FONs are given in the standard output::
     PPS   -4.89357215   1.999990  0.000010  0.00
   --------------------------------------------------
 
-
 The energy of PPS state is -4.8936 Hartree and the FONs of frontier orbitals are ~2.0 and ~0.0,
 respectively. The orbital character for HOMO is :math:`\pi` and the character for LUMO is
 :math:`\pi^*`, so the two electrons are occupied in the HOMO. When the =CH2 begins to rotate into
@@ -105,7 +104,6 @@ is well described with REKS(2,2) calculations. The resulting energy and FONs are
    State     Energy      FON(1)    FON(2)   Spin
     PPS   -4.77774313   1.000004  0.999996  0.00
   --------------------------------------------------
-
 
 Now, the energy of PPS state becomes -4.7777 Hartree and the FONs become ~1.0 and ~1.0,
 respectively. In addition, the user can check the energy contribution for the PPS state from
