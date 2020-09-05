@@ -28,7 +28,7 @@ determine the order of the frontier orbitals during the SCC process. As a
 result, oscillating phenomena appear in these cases. To solve this, the user can
 increase the shift value by setting ``Shift`` in ``REKS`` block, which increases
 the separation in energy between the lower and upper orbital, stabilising the
-convergence. Smother variational convergence of the SA-REKS energy can occur in
+convergence. Smoother variational convergence of the SA-REKS energy can occur in
 the SCC process::
 
     111       -8.9586871392      -0.0000000004     0.610476    0.00000117
@@ -46,7 +46,7 @@ the SCC process::
   --------------------------------------------------
 
 Thus, one can check the FONs for the PPS state become :math:`n_a` ~1.2 and
-:math:`n_b` ~0.8 in this example. As the orbital energies of frontier PPS and
+:math:`n_b` ~0.8 in this example. As the orbital energies of the active PPS and
 OSS orbitals are close each other, the user should increase the shift value as
 well as the number of ``MaxSCCIterations``.
 

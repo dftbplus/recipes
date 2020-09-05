@@ -64,12 +64,12 @@ calculation, so is not included in the ``Hamiltonian`` block. In a REKS
 calculation, the ``Hamiltonian`` only controls detailed Hamiltonian settings
 such as use of a range-separated hybrid functional or dispersion
 corrections. Three singlet states can be generated from a (2,2) active
-space. These are the single particle perfectly spin-paired singlet state (PPS),
-an open-shell singlet state (OSS) and the doubly excited singlet state
-(DES). Combining these singlet states, we can find the many-particle singlet
-state which minimises the energy functional. In the single-state REKS case we
-treat only one singlet state of PPS symmetry, thus this is the only possibility
-that can be selected in the ``Functional`` block of the ``Energy`` in this case.
+space. These are the perfectly spin-paired singlet state (PPS), an open-shell
+singlet state (OSS) and the doubly excited singlet state (DES). Combining these
+singlet states, we can find the many-particle singlet state which minimises the
+energy functional. In the single-state REKS case we treat only one singlet state
+of PPS symmetry, thus this is the only possibility that can be selected in the
+``Functional`` block of the ``Energy`` in this case.
 
 The energy for the PPS state is expressed as
 
