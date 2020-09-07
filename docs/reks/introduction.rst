@@ -196,7 +196,7 @@ by comparing the two Lagrangian *Wab* values, these will become almost the same
 if the energy is well converged.
 
 After the energy calculation is finished, the gradient for the target state
-(TargetState = 1, which is the PPS state in this example) is calculated and the
+(``TargetState = 1``, which is the PPS state in this example) is calculated and the
 final gradient appears at the bottom of the standard output. The keywords in the
 ``Gradient`` block affect coupled-perturbed REKS (CP-REKS) equations which are
 used to calculate the gradient of target state. Here we choose a conjugate
@@ -244,7 +244,7 @@ SI-SA-REKS
 
 State-interaction SA-REKS (SI-SA-REKS, briefly `SSR`) energies are obtained by
 solving a 2 :math:`\times` 2 secular equation with the possible couplings
-between the electronic states.
+between the SA-REKS states.
 
 .. math:: \left(\begin{array}{cc} E^{PPS} & \Delta^{SA} \\ \Delta^{SA} & E^{OSS} \end{array}\right)
           \left(\begin{array}{cc} a_{00} & a_{01} \\ a_{10} & a_{11} \end{array}\right) =

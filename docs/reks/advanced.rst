@@ -210,12 +210,12 @@ energy of a triplet configuration as an alternative which corresponds to the 5\
 user can easily compare the energy of singlet and triplet microstates.::
 
   --------------------------------------------------
-   Final SA-REKS(2,2) energy:      -4.78921495
+   Final SA-REKS(2,2) energy:      -4.75910919
 
    State     Energy      FON(1)    FON(2)   Spin
-    PPS   -4.89357215   1.999990  0.000010  0.00
-    OSS   -4.68485776   1.000000  1.000000  0.00
-   Trip   -4.73085776   1.000000  1.000000  1.00
+    PPS   -4.77753765   1.000000  1.000000  0.00
+    OSS   -4.74068073   1.000000  1.000000  0.00
+   Trip   -4.77753837   1.000000  1.000000  1.00
   --------------------------------------------------
 
 In this example, for a distorted structure of ethylene, the energy of triplet
@@ -233,12 +233,12 @@ distorted structure of ethylene molecule::
    Gradient Information
   --------------------------------------------------
    5 microstate
-      -0.12804078    -0.00000000    -0.00000000
-       0.12804075    -0.00000000     0.00000000
-       0.00639517     0.00417744    -0.00000000
-       0.00639517    -0.00417744     0.00000000
-      -0.00639516     0.00417743    -0.00000000
-      -0.00639516    -0.00417743     0.00000000
+      -0.00926010    -0.00000000     0.00000000
+       0.00926011     0.00000000    -0.00000000
+       0.00096561     0.00066166     0.00000008
+       0.00096561    -0.00066166    -0.00000008
+      -0.00096562    -0.00000009     0.00066176
+      -0.00096562     0.00000009    -0.00066176
   --------------------------------------------------
 
 The gradient is now calculated for the 5\ :sup:`th` microstate. In addition, the
@@ -258,7 +258,7 @@ This example shows an input file for calculation of a triplet microstate::
     TargetState = 1
     TargetMicrostate = 5
     FonMaxIter = 100
-    shift = 1.0
+    shift = 20.0
     Gradient = ConjugateGradient {
       CGmaxIter = 100
       Tolerance = 1.0E-8

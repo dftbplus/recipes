@@ -46,8 +46,8 @@ the SCC process::
   --------------------------------------------------
 
 Thus, one can check the FONs for the PPS state become :math:`n_a` ~1.2 and
-:math:`n_b` ~0.8 in this example. As the orbital energies of the active PPS and
-OSS orbitals are close each other, the user should increase the shift value as
+:math:`n_b` ~0.8 in this example. As the orbital energies of the active
+orbitals are close each other, the user should increase the shift value as
 well as the number of ``MaxSCCIterations``.
 
 Oscillation of SA-REKS energy can also occur with the following irregular
