@@ -1,18 +1,20 @@
+.. _sec-advanced_REKS:
 
-============================================
+*********************
 Advanced calculations
-============================================
+*********************
 
-************************
-Nonadiabatic couplings
-************************
+
+Non-adiabatic couplings
+=======================
 
 [Input: `recipes/reks/nonadiabatic_coupling/`]
 
-The nonadiabatic coupling vectors between the states can be calculated with SSR method.
-By setting ``NonAdiabaticCoupling = Yes`` in ``REKS`` block, the user can easily
-calculate the nonadiabatic coupling vectors. When this option is turned on, SSR shows
-the gradients for all states and possible coupling vectors::
+The non-adiabatic coupling vectors between the states can be calculated with the
+SSR method. By setting ``NonAdiabaticCoupling = Yes`` in ``REKS`` block, the
+user can easily calculate the non-adiabatic coupling vectors. When this option is
+turned on, SSR shows the gradients for all states and possible coupling
+vectors::
 
   --------------------------------------------------
    Gradient Information
@@ -70,30 +72,34 @@ the gradients for all states and possible coupling vectors::
        0.00076359     0.00034700     0.00000000
   --------------------------------------------------
 
-These gradients and coupling vectors are obtained with planar structure of a ethylene molecule.
-The g vector is defined as gradient difference vector, thus it can be calculated from the
-difference of SA-REKS gradients. Similarly to this, G vector is calculated from the difference
-of SSR gradients. The h vector is defined as coupling gradient, so it can be simply calculated
-from the gradient of state-interaction terms. The H vector is defined as derivative coupling
-vectors, thus its norm increases as the energy gap becomes smaller.
+The above gradients and coupling vectors are obtained with the planar structure
+of a ethylene molecule.  The *g* vector is defined as gradient difference
+vector, thus it can be calculated from the difference of SA-REKS
+gradients. Similarly to this, *G* vector is calculated from the difference of
+SSR gradients. The *h* vector is defined as coupling gradient, so it can be
+simply calculated from the gradient of state-interaction terms. The *H* vector
+is defined as the derivative of the coupling vectors, thus its norm increases as
+the energy gap becomes smaller.
 
-The g and h vectors can be regarded as the vectors defined through diabatic states, and G and
-H vectors are defined through the adiabatic (SSR) states. In general, the nonadiabatic coupling
-vectors can be used for Ehrenfest or surface hopping molecular dynamics, while the g and h vectors
-can be used for minimum energy conical intersction (MECI) optimisation.
+The *g* and *h* vectors can be regarded as the vectors defined through diabatic
+states, and the *G* and *H* vectors are defined through the adiabatic (SSR)
+states. In general, the non-adiabatic coupling vectors can be used for surface
+hopping molecular dynamics, while the *g* and *h* vectors can be used for
+minimum energy conical intersection (MECI) optimisation.
 
-************************
 Relaxed Density
-************************
+===============
 
 [Input: `recipes/reks/relaxed_density/`]
 
-The relaxed density is calculated according to ``TargetState`` when the user sets ``RelaxedDensity``
-to ``Yes``. The calculation of relaxed density requires the information about gradient, thus it
-can be calculated when the input includes calculation of gradient. When this option is turned on,
-the relaxed FONs are given in the bottom of standard output and *relaxed_charge.dat* file is
-generated. It includes total charge as well as the mulliken charges of each atom for target state.
-This example shows relaxed charges for ground state::
+The relaxed density is calculated for the ``TargetState`` when the user sets
+``RelaxedDensity`` to ``Yes``. The calculation of a relaxed density requires the
+information about gradient, thus it can be calculated when the input enables
+gradient calculation. When this option is turned on, the relaxed FONs are given
+in the bottom of standard output and the *relaxed_charge.dat* file is
+generated. It includes the total charge as well as the Mulliken charges of each
+atom for target state.  This example shows relaxed charges for the ground
+state::
 
   total charge:     -0.00000000 (e)
 
@@ -106,35 +112,42 @@ This example shows relaxed charges for ground state::
         5       0.09084308
         6       0.09084308
 
-If one want to exploit SSR with QM/MM approach, ``RelaxedDensity`` option should be used to
-obtain the gradient of external point charges. Then, the gradient of external point charges
-for target state are given in *detailed.out* file. Therefore, this option can be used to run
-Ehrenfest or surface hopping dynamics with QM/MM approach.
+If one want to exploit SSR with a QM/MM approach, the ``RelaxedDensity`` option
+should be used to obtain the gradient of external point charges. Then, the
+gradient of external point charges for target state are given in *detailed.out*
+file. Therefore, this option can be used to run surface hopping dynamics with a
+QM/MM approach.
 
-************************
 Spin tuning constants
-************************
+=====================
 
-DFTB/SSR method can well describe equilibrium geometries as well as vertical excitation energies
-compared with SSR/wPBEh result. (See the paper `JCTC, 2019, 15, 3021-3032.
-<https://pubs.acs.org/doi/10.1021/acs.jctc.9b00132>`_) However, the behaviours at MECI points
-does not sometimes match those obtained with SSR/wPBEh. For example, n/:math:`\pi^*` type MECI
-geometry of ethylene or methyliminium molecule cannot be located with DFTB/SSR, and different
-calculation results mainly originate from an incorrect description of the relative stability of
-the PPS and OSS states. Their relative stability depends on the splitting between the open-shell
-singlet microstates and the triplet microstates in the PPS and OSS energies.
+The DFTB/SSR method well describes equilibrium geometries and vertical
+excitation energies as compared with SSR/wPBEh results. (See the paper `JCTC,
+2019, 15, 3021-3032.  <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00132>`_)
+However, the behaviours at MECI points sometimes does not match those obtained
+with SSR/wPBEh. For example, the n/:math:`\pi^*` type MECI geometry of ethylene
+or methyliminium molecule cannot be located with DFTB/SSR, with an incorrect
+description of the relative stability of the PPS and OSS states being mostly
+responsible. Their relative stability depends on the splitting between the
+open-shell singlet microstates and the triplet microstates in the PPS and OSS
+energies.
 
-In principle, DFTB/SSR employs spin-polarized DFTB formalism, in which the spin-polarization
-contribution is obtained from the second-order expansion of the magnetization density with 
-respect to zero magnetization electronic structure. At the n/:math:`\pi^*` type MECI geometries,
-both frontier orbitals are located on the same atom. In such a case, the second-order expansion
-of magnetization may not be suitable for the triplet microstates, as the spin density becomes
-too large. As a simple solution, the stability between the PPS and OSS states can be adjusted
-by scaling the atomic spin constants. For most molecules the FONs for PPS state become :math:`n_a`
-~ 2.0 and :math:`n_b` ~ 0.0, hence the energy of the PPS state is determined by 1st microstate
-alone and it is the energy of the OSS state that depends the atomic spin constants. If the user
-run the test calculation included in $DFTB/test/prog/dftb+/reks/PSB3_2SSR_rangesep_tuning directory,
-then followng results can be given in the standard output::
+In principle, DFTB/SSR employs spin-polarised DFTB formalism, in which the
+spin-polarisation contribution is obtained from the second-order expansion of
+the magnetisation density with respect to zero magnetisation electronic
+structure. At the n/:math:`\pi^*` type MECI geometries, both frontier orbitals
+are located on the same atom. In such a case, the second-order expansion of
+magnetisation may not be suitable for the triplet microstates, as the spin
+density becomes too large. As a simple solution, the stability between the PPS
+and OSS states can be adjusted by scaling the atomic spin constants. For most
+molecules the FONs for the PPS state become :math:`n_a` ~ 2.0 and :math:`n_b` ~
+0.0, hence the energy of the PPS state is determined by the 1\ :sup:`st`
+microstate alone and it is only the energy of the OSS state that depends on the
+atomic spin constants.
+
+If the user runs the test calculation included with the main DFTB+ repository in
+the `test/prog/dftb+/reks/PSB3_2SSR_rangesep_tuning` directory, the following
+results are given in the standard output::
 
   ----------------------------------------------------------------
    SSR: 2SI-2SA-REKS(2,2) states
@@ -159,9 +172,10 @@ then followng results can be given in the standard output::
       0.04971872    -0.03074284     0.01547016
       0.06968625     0.18189801     0.04542884
 
-It shows the energies at MECI point of PSB3 molecule, thus the nonadiabatic coupling vectors show
-large elements near center C=C bond. Similary to this, the atomic spin constants can be modified
-by using ``SpinTuning`` keyword in ``REKS`` block as follows::
+It shows the energies at MECI point of a PSB3 molecule, thus the non-adiabatic
+coupling vectors show large elements near to the centre C=C bond. The atomic
+spin constants can be modified by using ``SpinTuning`` keyword in ``REKS`` block
+as follows::
 
   Reks = SSR22 {
     Energy = {
@@ -184,16 +198,16 @@ by using ``SpinTuning`` keyword in ``REKS`` block as follows::
     VerbosityLevel = 1
   }
 
-************************
 Microstate calculation
-************************
+======================
 
 [Input: `recipes/reks/microstate/`]
 
-Obviously SSR method treats only singlet state such as PPS or OSS state. If one want to compare
-the energy of singlet and triplet states, SSR provides the energy of triplet configuration as
-an alternative which corresponds to 5th or 6th configuration in (2,2) active space. Thus, the user
-can easily compare the energy of singlet states and triplet microstate.::
+Obviously, the SSR method treats only singlet states like PPS or OSS. If one
+want to compare the energy of singlet and triplet states, SSR provides the
+energy of a triplet configuration as an alternative which corresponds to the 5\
+:sup:`th` or 6\ :sup:`th` configuration in the (2,2) active space. Thus, the
+user can easily compare the energy of singlet and triplet microstates.::
 
   --------------------------------------------------
    Final SA-REKS(2,2) energy:      -4.78921495
@@ -204,14 +218,16 @@ can easily compare the energy of singlet states and triplet microstate.::
    Trip   -4.73085776   1.000000  1.000000  1.00
   --------------------------------------------------
 
-In this example showing the resulting energy of distorted structure of ethylene, the energy of
-triplet microstate is almost similar with that of PPS state since the frontier orbitals are the
-localized :math:`\pi` orbitals in this system. If one want to know the gradient of triplet
-microstate as well as relaxed density, then they can be obtained by using ``TargetMicrostate``
-keyword in ``REKS`` block. If the value for this keyword sets to ``5``, then the properties will
-be calculated according to the index of microstate. In (2,2) active space, 5th microstate indicates
-triplet configuration, thus the output shows the quantities for this microstate. The following
-results are obtained from the distorted structure of ethylene molecule::
+In this example, for a distorted structure of ethylene, the energy of triplet
+microstate is close to that of the PPS state, since the frontier orbitals are
+the localised :math:`\pi` orbitals in this system. If one want to know the
+gradient of the triplet microstate as well as its relaxed density, these can be
+obtained by using ``TargetMicrostate`` keyword in ``REKS`` block. If the value
+for this keyword is to ``5``, then the properties will be calculated according
+to the index of the microstate. In a (2,2) active space, the 5\ :sup:`th`
+microstate indicates a triplet configuration, thus the output shows the
+quantities for this microstate. The following results are obtained from the
+distorted structure of ethylene molecule::
 
   --------------------------------------------------
    Gradient Information
@@ -225,13 +241,15 @@ results are obtained from the distorted structure of ethylene molecule::
       -0.00639516    -0.00417743     0.00000000
   --------------------------------------------------
 
-The gradient is now calculated for 5th microstate. In addition, the energy of spin contribution
-in *detailed.out* file is -0.023 Hartree which corresponds to the spin constant :math:`W_{pp}` for
-carbon atom. In this case the frontier orbitals are consisted of only p orbitals of carbon atom,
-thus the energy of spin contribution is mostly consisted of interactions between p orbitals of
-carbon atom. With this option, one can run the molecular dynamics simulation for triplet microstate.
+The gradient is now calculated for the 5\ :sup:`th` microstate. In addition, the
+energy of spin contribution in the *detailed.out* file is -0.023, Hartree which
+corresponds to the spin constant :math:`W_{pp}` for a carbon atom. In this case
+the frontier orbitals consisted of only `p` orbitals of a carbon atom, thus the
+energy of the spin contribution mostly consists of interactions between these
+orbitals. With this option, one can run the molecular dynamics simulation for
+the triplet microstate.
 
-This example shows input file for calculation of triplet microstate::
+This example shows an input file for calculation of a triplet microstate::
 
   Reks = SSR22 {
     Energy = {
@@ -250,6 +268,5 @@ This example shows input file for calculation of triplet microstate::
     VerbosityLevel = 1
   }
 
-Note that ``TargetMicrostate`` keyword can be used with only SA-REKS input settings as above.
-
-
+Note that ``TargetMicrostate`` keyword can be used only with the SA-REKS input
+settings discussed above.
