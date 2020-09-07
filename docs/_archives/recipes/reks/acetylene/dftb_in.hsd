@@ -1,0 +1,59 @@
+Geometry = GenFormat {
+ 4  C
+ C H
+    1  1    0.0000000000E+00    0.0000000000E+00    0.6003770000E+00
+    2  1    0.0000000000E+00    0.0000000000E+00   -0.6003770000E+00
+    3  2    0.0000000000E+00    0.0000000000E+00    0.1660213000E+01
+    4  2    0.0000000000E+00    0.0000000000E+00   -0.1660213000E+01
+}
+
+Hamiltonian = DFTB { 
+  SCC = Yes
+  SCCTolerance = 1e-6
+  MaxSCCIterations = 10000
+  Charge = 0.0
+  MaxAngularMomentum = {
+    H = "s"
+    C = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slakos/mio-ext/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  SpinConstants = {
+    ShellResolvedSpin = Yes
+    H = { -0.072 }
+    C = { -0.031 -0.025 -0.025 -0.023 }
+  }
+}
+
+Reks = SSR22 {
+  Energy = {
+    Functional = { "PPS" "OSS" }
+    StateInteractions = Yes
+  }
+  TargetState = 1
+  FonMaxIter = 30
+  Shift = 0.3
+  TransitionDipole = Yes
+  Gradient = ConjugateGradient {
+    CGmaxIter = 100
+    Tolerance = 1.0E-8
+    Preconditioner = Yes
+    SaveMemory = Yes
+  }
+  VerbosityLevel = 1
+}
+
+Analysis {
+  CalculateForces = Yes
+}
+
+Options {
+  WriteAutotestTag = Yes
+}
+
+ParserOptions {
+  ParserVersion = 8
+}

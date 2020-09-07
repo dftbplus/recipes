@@ -12,6 +12,7 @@ DFTB+ recipes
    electronicdynamics/index.rst
    parallel/index.rst
    properties/index.rst
+   reks/index.rst
    transport/index.rst
    interfaces/index.rst
    licence.rst

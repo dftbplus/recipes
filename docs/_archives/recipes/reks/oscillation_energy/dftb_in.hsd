@@ -1,0 +1,65 @@
+Geometry = GenFormat {
+ 10  C
+ C H
+    1  1   -0.4591489661E+01    0.7595717272E+00    0.2667722720E-01
+    2  1   -0.3365683039E+01    0.1386518046E+01    0.1126583744E+00
+    3  1   -0.8490203628E+00    0.1300595200E+01   -0.6968541510E-02
+    4  2   -0.3209033317E+00    0.1583228753E+01   -0.9318534482E+00
+    5  2   -0.5519624480E+01    0.1313576339E+01    0.1680855581E+00
+    6  2   -0.4655855304E+01   -0.3108391101E+00   -0.1853197901E+00
+    7  1   -0.2155108385E+01    0.7094563977E+00   -0.8143484437E-01
+    8  2   -0.2134506625E+00    0.1131957834E+01    0.8767532325E+00
+    9  2   -0.3327911585E+01    0.2460881572E+01    0.3467572684E+00
+   10  2   -0.2222753190E+01   -0.3768787580E+00   -0.3253630363E+00
+}
+
+Hamiltonian = DFTB { 
+  SCC = Yes
+  SCCTolerance = 1e-6
+  MaxSCCIterations = 1000
+  Charge = 0.0
+  MaxAngularMomentum = {
+    H = "s"
+    C = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slakos/mio-ext/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  SpinConstants = {
+    ShellResolvedSpin = Yes
+    H = { -0.072 }
+    C = { -0.031 -0.025 -0.025 -0.023 }
+  }
+}
+
+Reks = SSR22 {
+  Energy = {
+    Functional = { "PPS" "OSS" }
+    StateInteractions = Yes
+  }
+  TargetState = 2
+  FonMaxIter = 30
+  Shift = 0.3 # This value shows oscillation of energy
+#  Shift = 1.0 # This value shows normal termination
+  Gradient = ConjugateGradient {
+    CGmaxIter = 100
+    Tolerance = 1.0E-8
+    Preconditioner = Yes
+    SaveMemory = Yes
+  }
+  VerbosityLevel = 1
+}
+
+Analysis {
+  CalculateForces = Yes
+}
+
+Options {
+  WriteAutotestTag = Yes
+}
+
+ParserOptions {
+  ParserVersion = 8
+}
