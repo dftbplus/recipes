@@ -11,3 +11,4 @@ free space or periodic supercells.
    :maxdepth: 1
 
    helical.rst
+   surfaces.rst

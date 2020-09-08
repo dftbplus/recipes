@@ -1,0 +1,45 @@
+Geometry = GenFormat {
+<<< Si_2x1.gen
+}
+
+Transport{
+  Device{
+    AtomRange = 1 48
+  }
+  Contact{
+    Id = "bulk"
+    AtomRange = 49 112
+  }
+  Task= contactHamiltonian{
+    contactId = "bulk"
+  }
+}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    MaxAngularMomentum {
+        Si = "p"
+    }
+    Filling = Fermi {
+      Temperature [K] = 500
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "slakos/origin/pbc-0-3/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+    KPointsAndWeights = SupercellFolding {
+        10 0 0
+        0 10 0
+        0 0 10
+        0.5 0.5 0.5
+    }
+}
+
+ParserOptions {
+    ParserVersion = 11
+}
+
+Parallel {
+    Groups = 4
+}

@@ -1,0 +1,56 @@
+Geometry = GenFormat {
+<<< Si_2x1.gen
+}
+
+Driver = LBFGS {
+    # top layer of the surface only
+    MovedAtoms = 1:16
+    AppendGeometries = Yes
+}
+
+Transport{
+  Device{
+    AtomRange = 1 48
+  }
+  Contact{
+    Id = "bulk"
+    AtomRange = 49 112
+  }
+}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    MaxAngularMomentum {
+        Si = "p"
+    }
+    Filling = Fermi {
+      Temperature [K] = 500
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "slakos/origin/pbc-0-3/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+    KPointsAndWeights = SupercellFolding {
+        # x and y sampling too low for speed, use ~10 to be converged:
+        4 0 0
+        0 4 0
+        0 0 1
+        0.5 0.5 0.0
+    }
+    Solver = GreensFunction{
+      Verbosity = 1
+    }
+    Electrostatics = Poisson {
+      MinimalGrid [Angstrom] = 0.3 0.3 0.3
+      PoissonThickness [AA] = 50
+    }
+}
+
+ParserOptions {
+    ParserVersion = 11
+}
+
+Parallel {
+    Groups = 6
+}
