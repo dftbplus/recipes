@@ -54,11 +54,14 @@ optimised by DFTB+::
   
   Options {
     WriteDetailedXml = Yes
+  }
+
+  Analysis {
     WriteEigenvectors = Yes
   }
   
   ParserOptions {
-    ParserVersion = 7
+    ParserVersion = 9
   }
 
 Running DFTB+ for this input, you should obtain the usual results, and
