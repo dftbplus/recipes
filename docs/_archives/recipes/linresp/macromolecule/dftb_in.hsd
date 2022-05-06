@@ -1,0 +1,70 @@
+Geometry = GenFormat {
+    <<< "geo_in.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+    
+    SCC = Yes
+    SCCTolerance = 1.0E-10
+    MaxSCCIterations = 1000
+    Mixer = Anderson {
+        MixingParameter = 5.000000000000000E-002
+        Generations = 8
+    }
+    MaxAngularMomentum = {
+        O = "p"
+        N = "p"
+        C = "p"
+        H = "s"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../slakos/mio-ext/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+    
+    Filling = Fermi {
+        Temperature [K] = 0
+    }
+
+    Dispersion = SlaterKirkwood {
+    PolarRadiusCharge = HybridDependentPol {
+      C = {
+	CovalentRadius [Angstrom] = 0.6
+	HybridPolarisations [Angstrom^3,Angstrom,] = {
+	  1.382 1.382 1.382 1.382 1.382 1.382 3.8 3.8 3.8 3.8 3.8 3.8 2.50
+	}
+      }
+      O = {
+	CovalentRadius [Angstrom] = 0.6
+	HybridPolarisations [Angstrom^3,Angstrom,] = {
+	  0.56 0.56 0.00 0.00 0.00 0.00  3.8 3.8 3.8 3.8 3.8 3.8  3.15
+	}
+      }
+      N = {
+	CovalentRadius [Angstrom] = 0.6
+	HybridPolarisations [Angstrom^3,Angstrom,] = {
+	  1.03 1.03 1.03 1.03 1.03 1.03  3.8 3.8 3.8 3.8 3.8 3.8  2.82
+	}
+      }
+      H = {
+	CovalentRadius [Angstrom] = 0.6
+	HybridPolarisations [Angstrom^3,Angstrom,] = {
+	  0.386 0.386 0.000 0.000 0.000 0.000  3.5 3.5 3.5 3.5 3.5 3.5  0.8
+	}
+      }
+    }
+    }
+}
+
+ExcitedState {
+    Casida {
+        NrOfExcitations = 20
+        Symmetry = singlet
+        EnergyWindow = 0.1
+        OscillatorWindow = 0.001
+    }
+}
+
