@@ -30,7 +30,6 @@ Hamiltonian = DFTB {
   SCC = yes
   MaxSCCIterations = 100
   ReadInitialCharges = Yes
-  OrbitalResolvedSCC = No 
 
   SlaterKosterFiles = Type2FileNames {
     Prefix = "./slako/"

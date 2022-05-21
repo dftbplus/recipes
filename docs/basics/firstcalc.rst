@@ -618,19 +618,20 @@ set::
     Constraints {}
   }
 
-Similarly, in the ``DFTB{}`` block the switch for the orbital resolved SCC, for
-example, had been set to the default value of ``No``::
+Similarly, in the ``DFTB{}`` block the switch for the shell resolved SCC, for
+example, has been set to the default value of ``No``::
 
-  OrbitalResolvedScc = No
+  ShellResolvedScc = No
 
-Options which have been explicitly set in the input are unchanged. The file
-`dftb_pin.hsd` is itself a valid HSD input file, and you can use it as input
-(after renaming it to `dftb_in.hsd`) to re-run the calculation. It is always in
-the format suitable for the current parser, even if the input in `dftb_in.hsd`
-was for an older format (indicated by the appropriate ``ParserVersion``
-option). Therefore, the ``ParserVersion`` option in the processed input file
-`dftb_pin.hsd` is always set to the current version of the parser which
-generated the file.
+Options which have been explicitly set in the original input file are
+unchanged. The file `dftb_pin.hsd` is itself a valid HSD input file,
+and you can use it as input (after renaming it to `dftb_in.hsd`) to
+re-run the calculation. It is always in the format suitable for the
+current parser, even if the input in `dftb_in.hsd` was for an older
+format (indicated by the appropriate ``ParserVersion``
+option). Therefore, the ``ParserVersion`` option in the processed
+input file `dftb_pin.hsd` is always set to the parser version
+corresponding to the version of DFTB+ which generated the file.
 
 
 detailed.out
