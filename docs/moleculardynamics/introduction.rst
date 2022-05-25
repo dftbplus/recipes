@@ -4,14 +4,16 @@
 Molecular dynamics
 ******************
 
-Classical molecular dynamics treats the position and motion of the atoms (the
-ion cores) as with Newtonian dynamics. Often this is with modifications to
-include the effect of contact with a thermal reservoir (NVT) or additionally
-treats the system as though it is in a piston that controls the pressure (NPT).
+Classical molecular dynamics (MD) treats the position and motion of
+the atoms (the ion cores) as with Newtonian dynamics. Often this is
+with modifications to include the effect of contact with a thermal
+reservoir (NVT) or additionally treats the system as though it is in a
+piston that controls the pressure (NPT).
 
-DFTB+ has several options for basic molecular dynamics, but also can use an
-accelerated form of SCC-DFTB which has similar performance properties to non-SCC
-for suitable systems.
+DFTB+ has several built in options for basic molecular dynamics, but
+also can use an accelerated form of SCC-DFTB which has similar
+performance properties to non-SCC for suitable systems. More advanced
+MD calculations can be driven by external :ref:`sec-interfaces`.
 
 The basic method adopted for molecular dynamics in DFTB+ is the Velocity Verlet
 integrator (Probably more correctly called the Newton-Stormer-Verlet method, as
@@ -21,7 +23,8 @@ for separable Hamilton systems with energy of the form :math:`H(p, q) = T(p) +
 U(q)` where :math:`p` and :math:`q` are conjugate momenta and positions of the
 atoms.
 
-The form of the integrator is an update for the positions at step :math:`n+1`:
+The form of the integrator is an update for the positions at step
+:math:`n+1` by:
 
 :math:`x_{n+1} = x_n + \tau v_n + \tau^2 F_n / 2 m`,
 

@@ -1,4 +1,5 @@
 .. highlight:: none
+.. _md-sim-anneal:
 
 *******************
 Simulated annealing
@@ -13,6 +14,20 @@ be found. If the cooling is sufficiently (logarithmically) slow, then the global
 minima will be found, however this is not usually practical. More realistically,
 several heating and cooling experiments can find some stable structures, or
 investigate the stability of known geometries.
+
+DFTB+ can set a sequence of temperatures during an MD calculation
+inside the thermostat input block ::
+
+  Temperature [Kelvin] = TemperatureProfile {
+    constant      1    100.0
+    linear      499   5500.0
+    constant    200   5500.0
+    linear      500    100.0
+  }
+
+Here, a starting temperature of 1 K is heated over 500 steps up to
+5500 K, held at that temperature for 200 steps and then cooled down
+again to 100 K in 500 steps.
 
 The first example anneals away a Stone-Wales defect in a graphene sheet. This is
 acheived by heating the system up to a high (5000K) temperature where C-C bonds

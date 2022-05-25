@@ -25,7 +25,9 @@ DFTB+ by setting the input geometry driver to be `VelocityVerlet` ::
 The velocity Verlet driver should have a time step on the scale of ~10x the
 highest vibrational period in the system. 1 fs is a common choice. The  
 
-The input file specifies initial velocities of the atoms ::
+This input file specifies the initial velocities of the atoms
+(alternatively they can be generated from a Maxwell-Boltzmann
+distribution, see the next section) ::
   
   Velocities [AA/ps] {
     0.63060001     10.71652407      0.41599521
@@ -34,12 +36,15 @@ The input file specifies initial velocities of the atoms ::
     .
   }
 
+(see :ref:`md-restart` for restarting calculations from a previous MD
+simulation)
+
 Thermalising a system
 ---------------------
 
 .. only :: builder_html or readthedocs
 
-   [Input: `recipes/moleculardynamics/thermalise/`]
+[Input: `recipes/moleculardynamics/thermalise/`]
   
 The initial velocities of atoms can be user supplied, however it is more common
 to generate them by thermalising the system starting from an initial
