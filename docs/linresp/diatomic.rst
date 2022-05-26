@@ -39,10 +39,6 @@ geometry. All this is done in a single DFTB run (one single input file). The
           Separator = "-"
           Suffix = ".skf"
       }
-
-      Filling = Fermi {
-          Temperature [K] = 40
-      }
       SpinConstants = {
           N = {-0.026} # HOMO Wpp
       }
@@ -112,6 +108,8 @@ as well as other valuable information. It should look like this::
 The triplet transitions are listed first, followed by the singlet ones. They can
 be identified by the letter *T* or *S* in the last column.
 
+The first column *w [eV]* is the excited state energy we are looking for, the second one *Osc.Str.* lists the corresponding oscillator strength. The column *Transition* reports the indices of molecular orbitals involved in the electronic transition. In our example, the singlet state at 12.75 eV features a transition from the occupied orbital 3 (HOMO-2) to the virtual orbital 6 (the LUMO). The next column *Weight* indicates the weight of the corresponding singly excited determinant in the CIS expansion of the excited state. Values close to one indicate that the excited state is well described by a single electronic excitation, while small values speak for a collective excitation. Column *KS [eV]* provides the Kohn-Sham energy difference  :math:`\omega_{ia\sigma} = \epsilon_{a\sigma} - \epsilon_{i\sigma}` (see above).     
+
 Oxygen molecule
 =================
 
@@ -165,7 +163,17 @@ Nitric oxide molecule
 
 [Input: `recipes/linresp/diatomic/NO`]
 
-Finally, we have the NO molecule, with one unpaired electron (doublet ground state).
+Finally, we have the NO molecule, with one unpaired electron (doublet ground state). The symmetry of NO leads to degenerate orbitals, which causes problems with the SCC convergence.  
+We therefore additionally provide a small electronic temperature to ease the ground state computation::
+
+  Filling = Fermi {
+        Temperature [K] = 40
+  }
+
+NOTE: If your structure features a band gap, it is typically neither necessary nor advisable to set the electronic temperature different from 0 K. The code also works with fractional occupations, but the response matrix will be much larger then necessary and this will cause long calculations. In addition, the memory need increases significantly.    
+
+
+
 In this case, the first 10 excitations are::
 
   w [eV]       Osc.Str.         Transition         Weight      KS [eV]    D<S*S>

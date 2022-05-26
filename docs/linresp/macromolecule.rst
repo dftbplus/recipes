@@ -36,7 +36,7 @@ what is plotted is the molar extinction coefficient, defined as
    \frac{\Gamma/2}{(\omega-\omega_I)^2 + (\Gamma/2)^2}
 
 The sum runs over all computed excitations :math:`I`, with energy :math:`\omega_I`
-and oscillator strength :math:`f_I`. The factor :math:`C` = 3.5 × 10^{−5} M cm/eV.
+and oscillator strength :math:`f_I`. The factor :math:`C` = 3.5 × :math:`10^{-5}` M cm/eV.
 
 Windowing
 =========
@@ -45,7 +45,7 @@ For the study of excitations with low-to-medium collective character, as in our 
 it is possible to reduce considerably the dimension of the response matrix by
 disregarding Kohn-Sham (KS) transitions with small coupling to the excitations in question. This
 can be achieved in practice by systematically discarding those orbital pairs
-:math:`\phi_{p\sigma}` and :math:`\phi_{q\sigma}` with energy differences :math:`E_{p\sigma} - E_{q\sigma}` away
+:math:`\phi_{p\sigma}` and :math:`\phi_{q\sigma}` with energy differences :math:`\epsilon_{p\sigma} - \epsilon_{q\sigma}` away
 from the excitation energies of interest. In DFTB+, this is done by defining an
 energy windows that sets a threshold for all KS transitions entering the Casida
 equation. For the computation of excitation energies, energy windows can often

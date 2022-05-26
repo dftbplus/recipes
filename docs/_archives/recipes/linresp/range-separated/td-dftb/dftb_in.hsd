@@ -1,5 +1,5 @@
 Geometry = GenFormat {
-    <<< "geo_in.gen"
+    <<< "in.gen"
 }
 
 Driver = {}
@@ -10,21 +10,24 @@ Hamiltonian = DFTB {
     SCCTolerance = 1.0E-10
     MaxAngularMomentum = {
         N = "p"
+        C = "p"
+	H = "s"
     }
     SlaterKosterFiles = Type2FileNames {
-        Prefix = "../../../slakos/mio-ext/"
+        Prefix = "../../../slakos/download/mio/mio-1-1/"
         Separator = "-"
         Suffix = ".skf"
-    }
-    SpinConstants = {
-        N = {-0.026} # HOMO Wpp
     }
 }
 
 ExcitedState {
     Casida {
         NrOfExcitations = 10
-        Symmetry = Both
+        Symmetry = Singlet
+    	Diagonaliser = Stratmann {SubSpaceFactor = 30}
     }
 }
 
+ParserOptions = {
+    ParserVersion = 10
+}

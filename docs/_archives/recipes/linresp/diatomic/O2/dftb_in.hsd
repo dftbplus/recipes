@@ -16,10 +16,6 @@ Hamiltonian = DFTB {
         Separator = "-"
         Suffix = ".skf"
     }
-    
-    Filling = Fermi {
-        Temperature [K] = 40
-    }
     SpinPolarisation = Colinear {
         UnpairedElectrons = 2
     }

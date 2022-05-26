@@ -12,7 +12,7 @@ obtained by solving the so-called Casida equation:
 :math:`\boldsymbol{\Omega}` is called the response matrix and its elements depend
 on the occupied and virtual Kohn-Sham orbitals (:math:`\phi_{i\sigma}` and
 :math:`\phi_{a\sigma}`, respectively) and their energy difference,
-:math:`\omega_{ia\sigma} = E_{a\sigma} - E_{i\sigma}`:
+:math:`\omega_{ia\sigma} = \epsilon_{a\sigma} - \epsilon_{i\sigma}`:
 
 .. math:: \Omega_{ia\sigma,jb\tau} =  \delta_{ij} \delta_{ab} \delta_{\sigma \tau}
    \omega_{jb\tau}^2 + 2 \sqrt{\omega_{ia\sigma} \omega_{jb\tau}} K_{ia\sigma, jb\tau}

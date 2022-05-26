@@ -34,3 +34,5 @@ the real power and efficiency of TD-DFTB will be exploited.
    diatomic.rst
    macromolecule.rst
    no-titania.rst
+   rangeseparated.rst
+   relax.rst
