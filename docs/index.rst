@@ -15,6 +15,7 @@ DFTB+ recipes
    properties/index.rst
    reks/index.rst
    transport/index.rst
+   boundaryconditions/index.rst
    interfaces/index.rst
    licence.rst
    bibliography.rst
