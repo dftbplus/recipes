@@ -1,0 +1,36 @@
+Geometry = GenFormat {
+    <<< "in.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+    
+    SCC = Yes
+    SCCTolerance = 1.0E-10
+    MaxAngularMomentum = {
+        N = "p"
+        C = "p"
+	H = "s"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../../slakos/download/ob2/ob2-1-1/shift/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+    RangeSeparated = LC {
+        Screening = MatrixBased {}
+    }
+}
+
+ExcitedState {
+    Casida {
+        NrOfExcitations = 10
+        Symmetry = Singlet
+	Diagonaliser = Stratmann {SubSpaceFactor = 30}
+    }
+}
+
+ParserOptions = {
+    ParserVersion = 10
+}
