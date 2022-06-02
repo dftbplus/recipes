@@ -5,7 +5,7 @@ Geometry = GenFormat {
 Driver = {}
 
 Hamiltonian = DFTB {
-    
+
     SCC = Yes
     SCCTolerance = 1.0E-10
     MaxAngularMomentum = {
@@ -25,6 +25,10 @@ ExcitedState {
     Casida {
         NrOfExcitations = 10
         Symmetry = Both
+        Diagonaliser = Arpack{}
     }
 }
 
+ParserOptions = {
+    ParserVersion = 10
+}

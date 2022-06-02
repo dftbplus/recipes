@@ -5,7 +5,7 @@ Geometry = GenFormat {
 Driver = {}
 
 Hamiltonian = DFTB {
-    
+
     SCC = Yes
     SCCTolerance = 1.0E-10
     MaxSCCIterations = 1000
@@ -24,7 +24,7 @@ Hamiltonian = DFTB {
         Separator = "-"
         Suffix = ".skf"
     }
-    
+
     Filling = Fermi {
         Temperature [K] = 0
     }
@@ -65,6 +65,9 @@ ExcitedState {
         Symmetry = singlet
         EnergyWindow = 0.1
         OscillatorWindow = 0.001
+        Diagonaliser = Arpack{}
     }
 }
-
+ParserOptions = {
+    ParserVersion = 10
+}

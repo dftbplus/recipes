@@ -17,6 +17,7 @@ energies and oscillator strengths. This is computed as usual::
       Casida {
           NrOfExcitations = 20
           Symmetry = singlet
+          Diagonaliser = Arpack{}
       }
   }
 
@@ -73,6 +74,7 @@ specified in the *Casida* block using the *EnergyWindow* and *OscillatorWindow* 
           Symmetry = singlet
           EnergyWindow = 0.1
           OscillatorWindow = 0.001
+          Diagonaliser = Arpack{}
       }
   }
 

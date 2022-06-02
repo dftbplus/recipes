@@ -32,6 +32,7 @@ to 1200 to cover a region of up to 4 eV::
       Casida {
           NrOfExcitations = 1200
           EnergyWindow = 0.01
+          Diagonaliser = Arpack{}
       }
   }
 
