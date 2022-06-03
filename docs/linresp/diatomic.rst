@@ -1,12 +1,15 @@
 .. highlight:: none
 
+.. |N2| replace:: N\ :sub:`2`
+.. |O2| replace:: O\ :sub:`2`
+
 ***************************************************
 Excitation energies of diatomic molecules
 ***************************************************
 
 In this section, we show how to compute the first electronic excitation
 energies and oscillator strengths of three diatomic molecules, namely NO, |N2| and
-O2. These simple examples cover three different spin multiplicities of the ground
+|O2|. These simple examples cover three different spin multiplicities of the ground
 state: doublet, singlet and triplet, respectively.
 
 Nitrogen molecule
@@ -14,7 +17,7 @@ Nitrogen molecule
 
 [Input: `recipes/linresp/diatomic/N2`]
 
-First, we examine the N2 case. This is a close-shell diatomic molecule. We are
+First, we examine the |N2| case. This is a close-shell diatomic molecule. We are
 interested in the low-lying electronic transitions to excited states with both
 singlet and triplet multiplicities. The solution of the Casida equation is
 performed after a single-point (static) DFTB ground-state calculation for the optimised
@@ -71,7 +74,7 @@ to compute. In *Symmetry* we specify the multiplicity of the transition (either
 singlet, triplet or both). The multiplicity of the transition is the difference
 between the multiplicities of the excited state and the ground state. In our
 example, we are instructing DFTB+ to calculate the first 10 excitations with singlet
-symmetry and the first 10 excitations with triplet symmetry. Since the N2 ground
+symmetry and the first 10 excitations with triplet symmetry. Since the |N2| ground
 state has multiplicity 1, this means the first 10 singlet-to-singlet and 10
 singlet-to-triplet transitions.
 
@@ -116,7 +119,7 @@ Oxygen molecule
 
 [Input: `recipes/linresp/diatomic/O2`]
 
-For the O2 molecule, we will consider its triplet ground state. This is
+For the |O2| molecule, we will consider its triplet ground state. This is
 specified in the input file through the *Hamiltonian/SpinPolarisation* block::
 
   SpinPolarisation = Colinear {
