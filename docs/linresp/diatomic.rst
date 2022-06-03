@@ -5,7 +5,7 @@ Excitation energies of diatomic molecules
 ***************************************************
 
 In this section, we show how to compute the first electronic excitation
-energies and oscillator strengths of three diatomic molecules, namely NO, N2 and
+energies and oscillator strengths of three diatomic molecules, namely NO, |N2| and
 O2. These simple examples cover three different spin multiplicities of the ground
 state: doublet, singlet and triplet, respectively.
 
