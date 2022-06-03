@@ -9,7 +9,7 @@ Absorption spectrum of a macromolecule
 In this recipe, we increase significantly the dimension of our system, and hence
 of our eigenvalue problem. The structure in question is :math:`C_{66}O_{10}N_{4}H_{44}`.
 This is a more realistic target system for a TD-DFTB calculation. Our goal is to
-compute the absorption spectrum of this molecule up to approximately 1 Hartree.
+compute the absorption spectrum of this molecule up to energies of approximately 1 Hartree.
 To cover this energy range, we will need to obtain the first 20 singlet excitation
 energies and oscillator strengths. This is computed as usual::
 
