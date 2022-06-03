@@ -155,9 +155,9 @@ In reality, finite problems can only be meaningfully broken down to
 some lower limit of sub-problem size. Similarly, operations that
 require different processes to cooperate can find them waiting for
 each other to complete (an example of `spinlock
-<https://en.wikipedia.org/wiki/Spinlock>`_ behaviour), then release
-the resulting data with the latency of moving it around between
-different levels of the `memory hierarchy
+<https://en.wikipedia.org/wiki/Spinlock>`_/contention behaviour), then
+release the resulting data with the latency of moving it around
+between different levels of the `memory hierarchy
 <https://en.wikipedia.org/wiki/Memory_hierarchy>`_.
 
 This leads in practice to the performance of a calculation actually
@@ -165,8 +165,11 @@ degrading if too many processors are requested. This will depend on
 the particular hardware and libraries being used.
 
 Below are examples for an excited state calculation of a C\ :sub:`60`
-molecule using OpenMP, where being too greedy in requesting processes
-leads to worse parallelism (or even a *slower* calculation):
+molecule using OpenMP parallelism. See the :ref:`linear-response`
+section for details about this type of calculation.
+
+In this example, being too greedy in requesting processes leads to
+worse parallelism (or even a *slower* calculation):
 
   .. figure:: ../_figures/parallel/spinlock.png
      :height: 40ex
@@ -213,7 +216,8 @@ the relevant shell variable::
   export OMP_NUM_THREADS=4
   dftb+
 
-Producing output of timings like::
+You can also use the system timer `time dftb+`, but the internal
+timers produce a more finegrained output of timings ::
   
   DFTB+ running times                          cpu [s]             wall clock [s]
   --------------------------------------------------------------------------------
