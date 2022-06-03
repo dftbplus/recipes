@@ -86,7 +86,7 @@ Benzene-Tetracyanoethylene dimer (TD-LC-DFTB)
 
 [Input: `recipes/linresp/range-separated/td-lc-dftb`] 
 
-We are now repeating the calculation using the TD-LC-DFTB method. The input looks like this::
+We now repeat the calculation using the TD-LC-DFTB method. The input looks like this::
 
   Geometry = GenFormat {
       <<< "in.gen"
