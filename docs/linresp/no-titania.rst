@@ -36,7 +36,7 @@ to 1200 to cover a region of up to 4 eV::
       }
   }
 
-we have set *EnergyWindow = 0.01* to save in computational time. We can
+we have set *EnergyWindow = 0.01* to save computational time. We can
 choose such a small energy cutoff as titania band-to-band transitions have a
 rather low collective character. The visible range of the spectrum, which is of
 most interest, is negligibly affected by this truncation, as the CT absorption
