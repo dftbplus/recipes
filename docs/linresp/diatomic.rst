@@ -134,7 +134,7 @@ Our excited state block will in this case looks like this::
 
 We are instructing DFTB+ to compute the first 10 excitations. Note that since
 our system is not closed-shell, we can no longer separate our eigenvalue problem
-in two independent singlet and triplet equations, so we have to build and
+into two independent singlet and triplet equations, so we have to build and
 diagonalise the entire response matrix in this case. But, how do we know the
 spin multiplicities of the computed transitions? We get this information from
 the last column of the *EXC.DAT* file::
