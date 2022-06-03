@@ -54,7 +54,7 @@ be set to be fairly small, without losing accuracy. On the other hand, for the s
 of absorption spectra, energy windows need to be defined larger, as oscillator
 strengths are much more sensitive to even small values of the off-diagonal
 elements of the response matrix. However, DFTB+ offers the possibility to select transitions
-orbital constraint based on both energy and oscillator strength values. Thus,
+based on both energy and oscillator strength values. Thus,
 additionally to the energy window, it is possible to define an oscillator
 strength cutoff in the calculations. Our experience tells us that with the
 combination of both truncations, the dimension of the response matrix can be
