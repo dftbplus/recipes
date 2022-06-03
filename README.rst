@@ -2,10 +2,11 @@
 DFTB+ Recipes
 *************
 
-This repository contains the source of the DFTB+ Recipes book. The content is
-currently rendered on `dftbplus-recipes.readthedocs.io
-<http://dftbplus-recipes.readthedocs.io>`_. You can also render it locally by
-using the Sphinx documentation system.
+This repository contains the source of the DFTB+ Recipes book. The
+content is currently rendered on `dftbplus-recipes.readthedocs.io
+<http://dftbplus-recipes.readthedocs.io>`_. You can also render it
+locally by using the Sphinx documentation system, change directory to
+`docs` and type `make` to see possible document formats.
 
 This material is licensed under the CC-BY-SA license (see `LICENSE <LICENSE>`_).
 
