@@ -1,0 +1,57 @@
+Geometry = GenFormat {
+    <<< "geo_in.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+
+    SCC = Yes
+    SCCTolerance = 1.0E-10
+    MaxSCCIterations = 500
+    Mixer = Anderson {
+        MixingParameter = 5.000000000000000E-002
+        Generations = 6
+        DynMixingParameters =  {
+            1.000000000000000E-002 0.100000000000000
+            1.000000000000000E-003 0.300000000000000
+            1.000000000000000E-004 0.500000000000000
+        }
+    }
+    MaxAngularMomentum = {
+        O = "p"
+        N = "p"
+        Ti = "d"
+        H = "s"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../slakos/mio-ext/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+
+    Filling = Fermi {
+        Temperature [K] = 0
+    }
+    SpinPolarisation = Colinear {
+        UnpairedElectrons = 1
+    }
+    SpinConstants = {
+        O = {-0.028} # HOMO Wpp
+        N = {-0.026} # HOMO Wpp
+        Ti = {-0.014} # HOMO Wdd
+        H = {-0.072} # HOMO Wss
+    }
+}
+
+ExcitedState {
+    Casida {
+        NrOfExcitations = 1200
+        EnergyWindow = 0.01
+        Diagonaliser = Arpack{}
+    }
+}
+
+ParserOptions = {
+    ParserVersion = 10
+}

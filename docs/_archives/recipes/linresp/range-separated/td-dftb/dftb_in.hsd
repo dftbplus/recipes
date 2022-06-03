@@ -1,0 +1,33 @@
+Geometry = GenFormat {
+    <<< "in.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+    
+    SCC = Yes
+    SCCTolerance = 1.0E-10
+    MaxAngularMomentum = {
+        N = "p"
+        C = "p"
+	H = "s"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../../slakos/download/mio/mio-1-1/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+}
+
+ExcitedState {
+    Casida {
+        NrOfExcitations = 10
+        Symmetry = Singlet
+    	Diagonaliser = Stratmann {SubSpaceFactor = 30}
+    }
+}
+
+ParserOptions = {
+    ParserVersion = 10
+}
