@@ -4,7 +4,11 @@
 Geometry relaxation in the excited state
 ****************************************
 
-So far we have only looked at excited state calculations at fixed geometry. *DFTB+* supports also geometry relaxations or even MD simulations in a given excited state. In this example we are going to study the absorption and fluorescence energies of the simple molecule thioformaldehyde (SCH\ :sub:`2`). 
+So far we have only looked at excited state calculations at fixed
+geometry. *DFTB+* supports also geometry relaxations or even MD
+simulations in a given excited state. In this example we are going to
+study the absorption and fluorescence energies of the simple molecule
+thioformaldehyde (SCH\ :sub:`2`).
 
 
 
@@ -13,7 +17,9 @@ Thioformaldehyde absorption
 
 [Input: `recipes/linresp/range-separated/relax/abs`]
 
-We are starting with a geometry that has already been relaxed in the ground state. Performing a TD-DFTB calculation at this geometry yields the following spectrum (EXC.DAT)::
+We are starting with a geometry that has already been relaxed in the
+ground state. Performing a TD-DFTB calculation at this geometry yields
+the following spectrum (EXC.DAT)::
 
   w [eV]       Osc.Str.         Transition         Weight      KS [eV]    Sym.
  
@@ -30,14 +36,24 @@ We are starting with a geometry that has already been relaxed in the ground stat
       7.446        0.00000000         5   ->     8        1.000       7.446      S
       8.964        0.08762770         4   ->     8        1.000       8.685      S
 
-Note that we are only interested in singlet states here, since absorption to triplet states is spin forbidden. We will focus on the first excited state (S:sub:`1`) at 1.848 eV, which has symmetry A:sub:`2`. This symmetry can be inferred by inspection of the molecular orbitals involved in the transition, but we will not do so in this recipe. The state at 4.77 eV has much larger oscillator strength, but in real life also the S:sub:`1` state will be very weakly absorbing due to electron-phonon coupling. This is however not taken into account at the present level of theory. Due to symmetry, the oscillator strength is exactly zero in our example.
+Note that we are only interested in singlet states here, since
+absorption to triplet states is spin forbidden. We will focus on the
+first excited state (S:sub:`1`) at 1.848 eV, which has symmetry
+A:sub:`2`. This symmetry can be inferred by inspection of the
+molecular orbitals involved in the transition, but we will not do so
+in this recipe. The state at 4.77 eV has much larger oscillator
+strength, but in real life also the S:sub:`1` state will be very
+weakly absorbing due to electron-phonon coupling. This is however not
+taken into account at the present level of theory. Due to symmetry,
+the oscillator strength is exactly zero in our example.
 
 Adiabatic excitation energies
 =============================
 
 [Input: `recipes/linresp/range-separated/relax/emi`]
 
-We now relax the structure in the first excited state. The input (dftb_inp.hsd) for this task looks like this::
+We now relax the structure in the first excited state. The input
+(dftb_inp.hsd) for this task looks like this::
 
   Geometry = GenFormat {
       <<< "in.gen" 
@@ -74,11 +90,26 @@ We now relax the structure in the first excited state. The input (dftb_inp.hsd) 
       ParserVersion = 10
   }
 
-In contrast to the earlier examples in this recipe, we now set a *Driver*. We choose LBFGS optimization, but one could also take any other optimizer available in *DFTB+*. You may also set convergence criteria for the forces like detailed in the recipe :ref:`sec-basics`. Important is the new entry in the *Casida* block *StateOfInterest*. It tells the code to optimize on the S:sub:`1` potential energy surface. It is recommended to choose *NrOfExcitations* always somewhat larger (i.e., +5) as *StateOfInterest*, since iterative eigensolvers might not converge to the exact solution for boundary eigenvalues. Note also that during a relexation the order of the excited states might change. This is a frequent cause of error in these kind of simulations. 
+In contrast to the earlier examples in this recipe, we now set a
+*Driver*. We choose LBFGS optimization, but one could also take any
+other optimizer available in *DFTB+*. You may also set convergence
+criteria for the forces like detailed in the recipe
+:ref:`sec-basics`. Important is the new entry in the *Casida* block
+*StateOfInterest*. It tells the code to optimize on the S:sub:`1`
+potential energy surface. It is recommended to choose
+*NrOfExcitations* always somewhat larger (i.e., +5) as
+*StateOfInterest*, since iterative eigensolvers might not converge to
+the exact solution for boundary eigenvalues. Note also that during a
+relexation the order of the excited states might change. This is a
+frequent cause of error in these kind of simulations.
 
-You should see that the geometry optimization finishes in a few steps. Visualizing the relaxed structure shows that the S-C bond length increased by 0.5 Angstroem. The experimental value for the bond length in the S1 is 1.68 Angstroem. What do you get?
+You should see that the geometry optimization finishes in a few
+steps. Visualizing the relaxed structure shows that the S-C bond
+length increased by 0.5 Angstroem. The experimental value for the bond
+length in the S:sub:`1` is 1.68 Angstroem. What do you get?
 
-During the optimization, the file *EXC.DAT* is constantly updated. Let us have a look at the final result::
+During the optimization, the file *EXC.DAT* is constantly updated. Let
+us have a look at the final result::
 
       w [eV]       Osc.Str.         Transition         Weight      KS [eV]    Sym.
  
@@ -96,7 +127,13 @@ During the optimization, the file *EXC.DAT* is constantly updated. Let us have a
       8.818        0.10121357         4   ->     8        1.000       8.487      S
 
 
-We see that the excitation energy of the S1 decreased by 0.11 eV. This value corresponds to the so-called Stokes shift, which measures the difference between absorption and fluorescence energies. In the present example, absorption and radiative de-excitation from the S:sub:`1` (i.e., fluorescence) should be very difficult to detect, as already mentioned above. The following diagram illustrates the energetic landscape:
+We see that the excitation energy of the S:sub:`1` decreased by 0.11
+eV. This value corresponds to the so-called Stokes shift, which
+measures the difference between absorption and fluorescence
+energies. In the present example, absorption and radiative
+de-excitation from the S:sub:`1` (i.e., fluorescence) should be very
+difficult to detect, as already mentioned above. The following diagram
+illustrates the energetic landscape:
 
 .. _fig_aee:
 .. figure:: ../_figures/linresp/abs-emi.png
@@ -104,12 +141,13 @@ We see that the excitation energy of the S1 decreased by 0.11 eV. This value cor
      :align: center
      :alt: homo real
 
-     Sketch of the adiabatic excitation energy (AEE), reorganization energies :math:`\lambda` in the ground and excited states, and Stokes shift [Taken from Sokolov et al., JCTC 17, 2266 (2021)]
+     Sketch of the adiabatic excitation energy (AEE), reorganization
+     energies :math:`\lambda` in the ground and excited states, and
+     Stokes shift [Taken from Sokolov et al., JCTC 17, 2266 (2021)]
 
 
-We will now compute the adiabatic excitation energy. As the diagram :numref:`fig_aee` shows, this requires the ground state energies of the starting structure and the relaxed structure. We can get these from the respective *detailed.out* files. The experimental value is 2.03 eV, what do you get?
-
-
-
- 
-
+We will now compute the adiabatic excitation energy. As the diagram
+:numref:`fig_aee` shows, this requires the ground state energies of
+the starting structure and the relaxed structure. We can get these
+from the respective *detailed.out* files. The experimental value is
+2.03 eV, what do you get?

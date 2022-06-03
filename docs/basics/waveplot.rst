@@ -1,4 +1,6 @@
+
 .. highlight:: none
+.. _sec-basics-waveplot:
 
 *************************
 First steps with Waveplot
