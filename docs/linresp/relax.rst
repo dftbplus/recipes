@@ -96,7 +96,7 @@ During the optimization, the file *EXC.DAT* is constantly updated. Let us have a
       8.818        0.10121357         4   ->     8        1.000       8.487      S
 
 
-We see that the excitation energy of the S1 decreased by 0.11 eV. This value corresponds to the so-called Stokes shift, which measures the difference between absorption and fluorescence energies. In the present example, absorption and radiative de-excitation from the S1 (i.e., fluorescence) should be very difficult to detect, as already mentioned above. The following diagram illustrates the energetic landscape:
+We see that the excitation energy of the S1 decreased by 0.11 eV. This value corresponds to the so-called Stokes shift, which measures the difference between absorption and fluorescence energies. In the present example, absorption and radiative de-excitation from the S:sub:`1` (i.e., fluorescence) should be very difficult to detect, as already mentioned above. The following diagram illustrates the energetic landscape:
 
 .. _fig_aee:
 .. figure:: ../_figures/linresp/abs-emi.png
