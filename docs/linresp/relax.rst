@@ -30,7 +30,7 @@ We are starting with a geometry that has already been relaxed in the ground stat
       7.446        0.00000000         5   ->     8        1.000       7.446      S
       8.964        0.08762770         4   ->     8        1.000       8.685      S
 
-Note that we are only interested in singlet states here, since absorption to triplet states is spin forbidden. We will focus on the first excited state (S1) at 1.848 eV, which has symmetry A2. This symmetry can be inferred by inspection of the molecular orbitals involved in the transition, but we will not do so in this recipe. The state at 4.77 eV has much larger oscillator strength, but in real life also the S1 state will be very weakly absorbing due to electron-phonon coupling. This is however not taken into account at the present level of theory. Due to symmetry, the oscillator strength is exactly zero in our example.
+Note that we are only interested in singlet states here, since absorption to triplet states is spin forbidden. We will focus on the first excited state (S:sub:`1`) at 1.848 eV, which has symmetry A:sub:`2`. This symmetry can be inferred by inspection of the molecular orbitals involved in the transition, but we will not do so in this recipe. The state at 4.77 eV has much larger oscillator strength, but in real life also the S:sub:`1` state will be very weakly absorbing due to electron-phonon coupling. This is however not taken into account at the present level of theory. Due to symmetry, the oscillator strength is exactly zero in our example.
 
 Adiabatic excitation energies
 =============================
