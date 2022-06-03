@@ -24,7 +24,7 @@ employ a cluster model as shown in the next figure:
 We would like to compute the absorption spectrum of this complex up to the UV-A
 region, so that we can observe both near band-gap excitations of TiO\ :sub:`2` and
 ligand-to-substrate charge-transfer (CT) transitions in the visible range. The
-challenge here is in the high number of excitations that need to be solved for to
+challenge here is in the high number of excitations that need to be solved to
 cover the desired energy region. Specifically, we have to set *NrOfExcitations*
 to 1200 to cover a region of up to 4 eV::
 
