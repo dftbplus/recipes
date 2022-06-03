@@ -4,7 +4,7 @@
 Geometry relaxation in the excited state
 ****************************************
 
-So far we only looked at excited state calculations at fixed geometry. *DFTB+* supports also geometry relaxations or even MD simulations in a given excited state. In this example we are going to study the absorption and fluorescence energies of the simple molecule thioformaldehyde (SCH2). 
+So far we have only looked at excited state calculations at fixed geometry. *DFTB+* supports also geometry relaxations or even MD simulations in a given excited state. In this example we are going to study the absorption and fluorescence energies of the simple molecule thioformaldehyde (SCH\ :sub:`2`). 
 
 
 
