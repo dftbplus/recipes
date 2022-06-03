@@ -1,0 +1,76 @@
+<!-- i-PI input for nudged elastic band calculation -->
+<simulation verbosity='medium'>
+
+  <!-- Communicate via /tmp/ipi-torsion -->
+  <ffsocket mode='unix' name='torsion'>
+    <latency> 1.0e-1 </latency>
+    <timeout> 6.0e+02 </timeout>
+    <address>torsion</address>
+  </ffsocket>
+
+  <total_steps> 1000 </total_steps>
+
+  <output prefix='simulation'>
+
+    <!-- file prefix for saving structures from simulation -->
+    <trajectory
+	filename='pos' cell_units='angstrom'> positions{angstrom}
+    </trajectory>
+
+    <!-- data for record in output, set for every step -->
+    <properties stride='1'> [step, potential, forcemod] </properties>
+
+    <!--
+	output the potential energies of the images in the string of images to
+	neb file. In this case there are 8
+    -->
+    <properties stride='1' filename='neb'> [step, potential(0), potential(1),
+    potential(2), potential(3), potential(4), potential(5), potential(6),
+    potential(7), potential(8)]
+    </properties>
+
+  </output>
+
+  <!-- Random number generator seed -->
+  <prng>
+    <seed> 18885 </seed>
+  </prng>
+
+  <system>
+
+    <!-- where to find the forces/energies -->
+    <forces>
+      <force forcefield='torsion'/>
+    </forces>
+
+    <initialize nbeads='8'>
+      <!-- initial structures, remember to set units as Angstrom -->
+      <file mode='xyz' units='angstrom'> start.xyz </file>
+      <!-- put it in a big box -->
+      <cell> [50., 0, 0, 0, 50., 0, 0, 0, 50.] </cell>
+    </initialize>
+
+
+    <!-- Perform nudged elastic band optimisation -->
+    <motion mode='neb'>
+      <neb_optimizer mode='lbfgs'>
+		
+        <ls_options>
+          <step> 1.0e-3 </step>
+          <tolerance> 1.0e-5 </tolerance>
+          <iter> 150 </iter>
+        </ls_options>
+        	
+        <tolerances>
+          <energy> 1.0e-5 </energy>
+          <force> 1.0e-3 </force>
+          <position> 1.0e-5 </position>
+        </tolerances>
+        <biggest_step> 2.0 </biggest_step>
+      </neb_optimizer>
+
+    </motion>
+
+  </system>
+
+</simulation>

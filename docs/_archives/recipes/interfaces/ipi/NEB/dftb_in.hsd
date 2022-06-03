@@ -1,0 +1,77 @@
+Geometry =  XyzFormat {
+  # Initial coordinates, these are only required to specify boundary
+  # conditions and chemical types of atoms at the start of the
+  # calculation. Number and species of atoms must match i-PI setup.
+18
+
+       O  2.54817e+00 -5.56027e-01 -2.44124e-01
+       H  3.10125e+00 -5.78022e-01 -1.04289e+00
+       H  2.24397e+00  3.80833e-01 -3.31788e-02
+       O  1.76007e+00  1.93615e+00  2.22475e-01
+       H  2.05360e+00  2.41646e+00  1.01466e+00
+       H  7.97075e-01  2.13776e+00  6.51846e-03
+       O -2.55250e+00  5.63544e-01  2.17974e-01
+       H -3.12297e+00  5.81983e-01  1.00451e+00
+       H -2.24355e+00 -3.72471e-01  1.03860e-02
+       O -1.75549e+00 -1.92875e+00 -2.32038e-01
+       H -2.04188e+00 -2.42174e+00 -1.01902e+00
+       H -7.94627e-01 -2.12679e+00 -3.32381e-03
+       O  7.91128e-01 -2.47583e+00  2.82411e-01
+       H  1.05216e+00 -2.93921e+00  1.09578e+00
+       H  1.44813e+00 -1.74968e+00  4.63091e-02
+       O -7.91975e-01  2.49501e+00 -2.51320e-01
+       H -1.06530e+00  3.00017e+00 -1.03522e+00
+       H -1.44788e+00  1.76026e+00 -3.99685e-02
+}
+
+Driver = Socket { # communicate via a unix socket file in /tmp
+    Verbosity = 0 # minimum verbosity for DFTB+
+    Protocol = i-PI {} # i-PI interface
+    MaxSteps = -1 # Terminate this instance according to the external
+                  # driver control, instead of pre-set steps
+    File = "torsion" # name used for communication file
+}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    MaxSCCIterations = 1000
+    MaxAngularMomentum {
+        H = "s"
+        O = "p"
+    }
+    # use onsite corrections as this improves water cluster energetics
+    OnSiteCorrection= {
+      # ss' sp
+      # ps  pp'
+      Ouu = {0        0.08672
+             0.08672 -0.00523}
+      Oud = {0        0.14969
+             0.14969  0.03834}
+      Huu = {0}
+      Hud = {0}
+    }
+    Filling = Fermi {
+        Temperature [Kelvin] = 1000
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "slakos/origin/mio-1-1/"
+        Separator = "-"
+        Suffix  = ".skf"
+    }
+}
+
+Options = {
+    # Minimize output files
+    WriteAutotestTag = No
+    WriteDetailedOut = No
+}
+
+Analysis = {
+    # Minimize output files
+    WriteBandOut = No
+    CalculateForces = No
+}
+
+ParserOptions = {
+    ParserVersion = 10
+}
