@@ -10,7 +10,7 @@ Our previous example shows how TD-DFTB can tackle large molecules at a fraction 
 the computational cost needed by more sophisticated methods. However, a
 first-principle calculation of this complexity presents only a very minor challenge
 for today's average supercomputers. In this recipe, we raise again the bar and
-show how a problem that is practically unfeasible to solve at the DFT level of
+show how a problem that is unfeasible to practically solve at the DFT level of
 theory, can be easily addressed using DFTB+ on a modern personal computer.
 
 The system in question is a NO molecule adsorbed on the rutile (110) titania surface. We
