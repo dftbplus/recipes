@@ -11,3 +11,4 @@ Parallel usage of DFTB+
    amdahl.rst
    compiling.rst
    benchmarking.rst
+   mpi.rst

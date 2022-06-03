@@ -112,20 +112,3 @@ Weak scaling from the same data set is shown here
      :height: 40ex
      :align: center
      :alt: Weak scaling for some SiC supercells.
-   
-
-Distributed memory parallelism
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This section coming soon!
-
-Topics to be discussed:
-
-* Parallel scaling of simple examples.
-
-* Parallel efficiency.
-
-* Use of the `Groups` keyword in DFTB+ to improve scaling and efficiency for
-  calculations with spin polarisation and/or k-points.
-
-* Effects of latency on code performance.
