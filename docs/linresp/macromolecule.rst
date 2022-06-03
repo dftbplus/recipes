@@ -50,7 +50,7 @@ can be achieved in practice by systematically discarding those orbital pairs
 from the excitation energies of interest. In DFTB+, this is done by defining an
 energy windows that sets a threshold for all KS transitions entering the Casida
 equation. For the computation of excitation energies, energy windows can often
-be set fairly small, without losing accuracy. On the other hand, for the study
+be set to be fairly small, without losing accuracy. On the other hand, for the study
 of absorption spectra, energy windows need to be defined larger, as oscillator
 strengths are much more sensitive to even small values of the off-diagonal
 elements of the response matrix. However, DFTB+ offers the possibility to set an
