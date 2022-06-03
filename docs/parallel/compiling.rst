@@ -1,22 +1,24 @@
 Compiling the code
 ==================
 
+The available pre-built `dftb+ binaries
+<https://www.dftbplus.org/download/dftb-stable/>`_ are compiled with
+OpenMP support and use the OpenBLAS libraries. The conda packages (see
+the conda section in the :ref:`sec-introduction`) for both OpenMP and MPI
+parallelism are also available.
 
 Compiling for OpenMP
 --------------------
 
-The default `make.arch` examples for DFTB+ should enable OpenMP parallelism, but
-in order to gain from this you will also require an efficient thread
-parallelised BLAS library. These include `MKL
+The defaults for DFTB+ compilation should enable OpenMP parallelism,
+but in order to gain from this you will also require an efficient
+thread parallelised BLAS library. These include `MKL
 <https://software.intel.com/en-us/mkl>`_ or `OpenBLAS
 <https://www.openblas.net/>`_.
 
-The available `dftb+ binaries <https://www.dftbplus.org/download/dftb-stable/>`_
-are compiled with OpenMP support and use the OpenBLAS libraries.
-
-You will also usually need to specify the number of parallel threads that the
-code can use. This can be done by setting the OMP_NUM_THREADS environment
-variable
+You will also usually need to specify the number of parallel threads
+that the code can use. This can be done by setting the OMP_NUM_THREADS
+environment variable
   
 * For the bash shell::
     
@@ -32,9 +34,10 @@ before running DFTB+.
 Compiling with MPI
 ------------------
 
-In order to use Message Passing Interface (MPI) enabled DFTB+, you will require
+In order to use Message Passing Interface (MPI) enabled DFTB+, you
+will require
 
-#. A working MPI 2 (or later) installation. This should include a wrapper for
+#. A working MPI 3 (or later) installation. This should include a wrapper for
    Fortran compilation, which is named some variant on mpifort or mpif90 for
    most MPI implementations.
 
@@ -69,13 +72,14 @@ There is more information on the structure and use of `submodules online
 Building DFTB+ with MPI support enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You will need to either edit the file `make.config` to enable::
+You will need to enable parallelism with cmake, for example::
 
-  WITH_MPI := 1
+  cmake -DWITH_MPI=YES -B_build .
+  cd _build
+  make
 
-or compile with ::
-
-  make WITH_MPI=1
-
-to produce an MPI enabled binary. In this case, we suggest serial LAPACK and
-BLAS libraries are used (since the main parallelism comes from ScaLAPACK).
+to produce an MPI enabled binary. You may also need to specify a
+specific scalapack library to cmake (`-DSCALAPACK_LIBRARY=`), or
+blas/lapack (by setting `BLAS_LIBRARY` and `LAPACK_LIBRARY`
+respectively).  In this case, we suggest serial LAPACK and BLAS
+libraries are used (since the main parallelism comes from ScaLAPACK).

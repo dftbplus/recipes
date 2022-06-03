@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="600"
+   height="480"
+   viewBox="0 0 600 480"
+   version="1.1"
+   id="svg363"
+   sodipodi:docname="C60time.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs367">
+    <defs
+       id="defs34">
+      <circle
+         id="gpDot"
+         r="0.5"
+         stroke-width="0.5"
+         stroke="currentColor" />
+      <path
+         id="gpPt0"
+         stroke-width="0.121"
+         stroke="currentColor"
+         d="M-1,0 h2 M0,-1 v2" />
+      <path
+         id="gpPt1"
+         stroke-width="0.121"
+         stroke="currentColor"
+         d="M-1,-1 L1,1 M1,-1 L-1,1" />
+      <path
+         id="gpPt2"
+         stroke-width="0.121"
+         stroke="currentColor"
+         d="M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,1 M-1,1 L1,-1" />
+      <rect
+         id="gpPt3"
+         stroke-width="0.121"
+         stroke="currentColor"
+         x="-1"
+         y="-1"
+         width="2"
+         height="2" />
+      <rect
+         id="gpPt4"
+         stroke-width="0.121"
+         stroke="currentColor"
+         fill="currentColor"
+         x="-1"
+         y="-1"
+         width="2"
+         height="2" />
+      <circle
+         id="gpPt5"
+         stroke-width="0.121"
+         stroke="currentColor"
+         cx="0"
+         cy="0"
+         r="1" />
+      <use
+         xlink:href="#gpPt5"
+         id="gpPt6"
+         fill="currentColor"
+         stroke="none" />
+      <path
+         id="gpPt7"
+         stroke-width="0.121"
+         stroke="currentColor"
+         d="M0,-1.33 L-1.33,0.67 L1.33,0.67 z" />
+      <use
+         xlink:href="#gpPt7"
+         id="gpPt8"
+         fill="currentColor"
+         stroke="none" />
+      <use
+         xlink:href="#gpPt7"
+         id="gpPt9"
+         stroke="currentColor"
+         transform="rotate(180)" />
+      <use
+         xlink:href="#gpPt9"
+         id="gpPt10"
+         fill="currentColor"
+         stroke="none" />
+      <use
+         xlink:href="#gpPt3"
+         id="gpPt11"
+         stroke="currentColor"
+         transform="rotate(45)" />
+      <use
+         xlink:href="#gpPt11"
+         id="gpPt12"
+         fill="currentColor"
+         stroke="none" />
+      <path
+         id="gpPt13"
+         stroke-width="0.121"
+         stroke="currentColor"
+         d="M0,1.330 L1.265,0.411 L0.782,-1.067 L-0.782,-1.076 L-1.265,0.411 z" />
+      <use
+         xlink:href="#gpPt13"
+         id="gpPt14"
+         fill="currentColor"
+         stroke="none" />
+      <filter
+         id="textbox"
+         filterUnits="objectBoundingBox"
+         x="0"
+         y="0"
+         height="1"
+         width="1">
+        <feFlood
+           flood-color="white"
+           flood-opacity="1"
+           result="bgnd"
+           id="feFlood24" />
+        <feComposite
+           in="SourceGraphic"
+           in2="bgnd"
+           operator="atop"
+           id="feComposite26" />
+      </filter>
+      <filter
+         id="greybox"
+         filterUnits="objectBoundingBox"
+         x="0"
+         y="0"
+         height="1"
+         width="1">
+        <feFlood
+           flood-color="lightgrey"
+           flood-opacity="1"
+           result="grey"
+           id="feFlood29" />
+        <feComposite
+           in="SourceGraphic"
+           in2="grey"
+           operator="atop"
+           id="feComposite31" />
+      </filter>
+    </defs>
+  </defs>
+  <sodipodi:namedview
+     id="namedview365"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.6291667"
+     inkscape:cx="291.5601"
+     inkscape:cy="239.69309"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg363" />
+  <title
+     id="title2">Gnuplot</title>
+  <desc
+     id="desc4">Produced by GNUPLOT 5.4 patchlevel 2 </desc>
+  <rect
+     x="0"
+     y="0"
+     width="600"
+     height="480"
+     fill="none"
+     id="rect6" />
+  <path
+     stroke="#000000"
+     d="m 102.25,374.4 h 16.5 m 435.07,0 h -16.5"
+     id="path40"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter" />
+  <g
+     transform="translate(86.86,381.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g46"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text44"><tspan
+         font-family="Helvetica"
+         id="tspan42">0</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,325.63 h 16.5"
+     id="path50"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,332.78)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g56"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text54"><tspan
+         font-family="Helvetica"
+         id="tspan52">1</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,276.86 h 16.5"
+     id="path60"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,284.01)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g66"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text64"><tspan
+         font-family="Helvetica"
+         id="tspan62">2</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,228.09 h 16.5"
+     id="path70"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,235.24)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g76"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text74"><tspan
+         font-family="Helvetica"
+         id="tspan72">3</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,179.32 h 16.5"
+     id="path80"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,186.47)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g86"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text84"><tspan
+         font-family="Helvetica"
+         id="tspan82">4</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,130.55 h 16.5"
+     id="path90"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,137.7)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g96"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text94"><tspan
+         font-family="Helvetica"
+         id="tspan92">5</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,81.78 h 16.5"
+     id="path100"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(86.86,88.93)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g106"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text104"><tspan
+         font-family="Helvetica"
+         id="tspan102">6</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 102.25,33.01 h 16.5 m 435.07,0 h -16.5"
+     id="path110"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter" />
+  <g
+     transform="translate(86.86,40.16)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="end"
+     id="g116"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text114"><tspan
+         font-family="Helvetica"
+         id="tspan112">7</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 132.35,374.4 V 357.9"
+     id="path120"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(132.35,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g126"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text124"><tspan
+         font-family="Helvetica"
+         id="tspan122">2</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 192.56,374.4 V 357.9"
+     id="path130"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(192.56,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g136"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text134"><tspan
+         font-family="Helvetica"
+         id="tspan132">4</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 252.77,374.4 V 357.9"
+     id="path140"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(252.77,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g146"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text144"><tspan
+         font-family="Helvetica"
+         id="tspan142">6</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 312.98,374.4 V 357.9"
+     id="path150"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(312.98,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g156"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text154"><tspan
+         font-family="Helvetica"
+         id="tspan152">8</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 373.19,374.4 V 357.9"
+     id="path160"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(373.19,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g166"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text164"><tspan
+         font-family="Helvetica"
+         id="tspan162">10</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 433.4,374.4 V 357.9"
+     id="path170"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(433.4,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g176"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text174"><tspan
+         font-family="Helvetica"
+         id="tspan172">12</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 493.61,374.4 V 357.9"
+     id="path180"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter"
+     sodipodi:nodetypes="cc" />
+  <g
+     transform="translate(493.61,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g186"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text184"><tspan
+         font-family="Helvetica"
+         id="tspan182">14</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="m 553.82,374.4 v -16.5 m 0,-324.89 v 16.5"
+     id="path190"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter" />
+  <g
+     transform="translate(553.82,414.55)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g196"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text194"><tspan
+         font-family="Helvetica"
+         id="tspan192">16</tspan></text>
+  </g>
+  <path
+     stroke="#000000"
+     d="M 102.25,33.01 V 374.4 H 553.82 V 33.01 Z"
+     id="path202"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter" />
+  <g
+     transform="rotate(-90,131.445,72.265)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g210"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text208"><tspan
+         font-family="Helvetica"
+         id="tspan206">Speed-up</tspan></text>
+  </g>
+  <g
+     transform="translate(328.03,444.05)"
+     stroke="none"
+     fill="#000000"
+     font-family="Helvetica"
+     font-size="22px"
+     text-anchor="middle"
+     id="g218"
+     style="color:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter">
+    <text
+       id="text216"><tspan
+         font-family="Helvetica"
+         id="tspan214">Procs.</tspan></text>
+  </g>
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="3"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g232"
+     transform="translate(289.62684,228.44549)">
+    <g
+       transform="translate(256.15,73.16)"
+       stroke="none"
+       fill="#000000"
+       font-family="Helvetica"
+       font-size="22px"
+       text-anchor="end"
+       id="g230">
+      <text
+         id="text228"><tspan
+           font-family="Helvetica"
+           id="tspan226">28%</tspan></text>
+    </g>
+  </g>
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="3"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g236">
+    <path
+       stroke="#000000"
+       d="m 102.25,325.63 4.56,-1.87 4.56,-1.53 4.56,-1.28 4.57,-1.08 4.56,-0.93 4.56,-0.81 4.56,-0.71 4.56,-0.63 4.56,-0.56 4.56,-0.5 4.56,-0.45 4.57,-0.4 4.56,-0.37 4.56,-0.34 4.56,-0.31 4.56,-0.29 4.56,-0.26 4.56,-0.25 4.56,-0.22 4.57,-0.22 4.56,-0.19 4.56,-0.19 4.56,-0.17 4.56,-0.16 4.56,-0.16 4.56,-0.14 4.57,-0.14 4.56,-0.13 4.56,-0.12 4.56,-0.12 4.56,-0.11 4.56,-0.1 4.56,-0.1 4.56,-0.1 4.57,-0.09 4.56,-0.09 4.56,-0.08 4.56,-0.08 4.56,-0.08 4.56,-0.07 4.56,-0.07 4.57,-0.07 4.56,-0.06 4.56,-0.07 4.56,-0.06 4.56,-0.05 4.56,-0.06 4.56,-0.05 4.56,-0.06 4.57,-0.05 4.56,-0.05 4.56,-0.04 4.56,-0.05 4.56,-0.04 4.56,-0.05 4.56,-0.04 4.56,-0.04 4.57,-0.04 4.56,-0.04 4.56,-0.03 4.56,-0.04 4.56,-0.03 4.56,-0.04 4.56,-0.03 4.57,-0.03 4.56,-0.03 4.56,-0.03 4.56,-0.03 4.56,-0.03 4.56,-0.03 4.56,-0.03 4.56,-0.02 4.57,-0.03 4.56,-0.03 4.56,-0.02 4.56,-0.02 4.56,-0.03 4.56,-0.02 4.56,-0.02 4.57,-0.03 4.56,-0.02 4.56,-0.02 4.56,-0.02 4.56,-0.02 4.56,-0.02 4.56,-0.02 4.56,-0.02 4.57,-0.02 4.56,-0.02 4.56,-0.01 4.56,-0.02 4.56,-0.02 4.56,-0.01 4.56,-0.02 4.56,-0.02 4.57,-0.01 4.56,-0.02 4.56,-0.01 4.56,-0.02"
+       id="path234"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+  </g>
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="3"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g247"
+     transform="translate(289.53884,-37.900416)">
+    <g
+       transform="translate(256.15,106.16)"
+       stroke="none"
+       fill="#000000"
+       font-family="Helvetica"
+       font-size="22px"
+       text-anchor="end"
+       id="g245">
+      <text
+         id="text243"><tspan
+           font-family="Helvetica"
+           id="tspan241">90%</tspan></text>
+    </g>
+  </g>
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="3"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g251">
+    <path
+       stroke="#000000"
+       d="m 102.25,325.63 4.56,-6.52 4.56,-6.32 4.56,-6.13 4.57,-5.94 4.56,-5.78 4.56,-5.6 4.56,-5.45 4.56,-5.3 4.56,-5.15 4.56,-5.01 4.56,-4.87 4.57,-4.75 4.56,-4.62 4.56,-4.5 4.56,-4.39 4.56,-4.27 4.56,-4.17 4.56,-4.07 4.56,-3.97 4.57,-3.88 4.56,-3.78 4.56,-3.69 4.56,-3.61 4.56,-3.53 4.56,-3.44 4.56,-3.37 4.57,-3.3 4.56,-3.22 4.56,-3.15 4.56,-3.09 4.56,-3.02 4.56,-2.96 4.56,-2.89 4.56,-2.84 4.57,-2.78 4.56,-2.72 4.56,-2.67 4.56,-2.62 4.56,-2.56 4.56,-2.52 4.56,-2.46 4.57,-2.42 4.56,-2.38 4.56,-2.33 4.56,-2.29 4.56,-2.24 4.56,-2.21 4.56,-2.16 4.56,-2.13 4.57,-2.09 4.56,-2.05 4.56,-2.02 4.56,-1.98 4.56,-1.95 4.56,-1.92 4.56,-1.88 4.56,-1.86 4.57,-1.82 4.56,-1.79 4.56,-1.77 4.56,-1.73 4.56,-1.71 4.56,-1.68 4.56,-1.65 4.57,-1.63 4.56,-1.61 4.56,-1.57 4.56,-1.56 4.56,-1.53 4.56,-1.51 4.56,-1.48 4.56,-1.47 4.57,-1.44 4.56,-1.42 4.56,-1.4 4.56,-1.38 4.56,-1.37 4.56,-1.34 4.56,-1.32 4.57,-1.31 4.56,-1.28 4.56,-1.27 4.56,-1.25 4.56,-1.24 4.56,-1.21 4.56,-1.21 4.56,-1.18 4.57,-1.17 4.56,-1.16 4.56,-1.14 4.56,-1.12 4.56,-1.11 4.56,-1.1 4.56,-1.08 4.56,-1.07 4.57,-1.05 4.56,-1.05 4.56,-1.03 4.56,-1.01"
+       id="path249"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+  </g>
+  <g
+     fill="none"
+     color="#ffffff"
+     stroke="#000000"
+     stroke-width="1"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g256" />
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="1"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g264"
+     transform="translate(79.888907,209.81538)">
+    <g
+       transform="translate(256.15,139.16)"
+       stroke="none"
+       fill="#000000"
+       font-family="Helvetica"
+       font-size="22px"
+       text-anchor="end"
+       id="g262">
+      <text
+         id="text260"><tspan
+           font-family="Helvetica"
+           id="tspan258">ARPACK</tspan></text>
+    </g>
+  </g>
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,132.35,319.06)"
+     color="#56b4e9"
+     id="use268"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,162.46,318.26)"
+     color="#56b4e9"
+     id="use270"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,192.56,312.74)"
+     color="#56b4e9"
+     id="use272"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,222.67,311.49)"
+     color="#56b4e9"
+     id="use274"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,252.77,310.68)"
+     color="#56b4e9"
+     id="use276"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,282.88,315.9)"
+     color="#56b4e9"
+     id="use278"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,312.98,315.57)"
+     color="#56b4e9"
+     id="use280"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,343.09,321.87)"
+     color="#56b4e9"
+     id="use282"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,373.19,318.17)"
+     color="#56b4e9"
+     id="use284"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,403.3,325.37)"
+     color="#56b4e9"
+     id="use286"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,433.4,329.67)"
+     color="#56b4e9"
+     id="use288"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,463.51,327.99)"
+     color="#56b4e9"
+     id="use290"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,493.61,327.82)"
+     color="#56b4e9"
+     id="use292"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,523.72,326.12)"
+     color="#56b4e9"
+     id="use294"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,553.82,330.4)"
+     color="#56b4e9"
+     id="use296"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <g
+     fill="none"
+     color="#000000"
+     stroke="currentColor"
+     stroke-width="1"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     id="g311"
+     transform="translate(281.83983,-2.9851343)">
+    <g
+       transform="translate(256.15,172.16)"
+       stroke="none"
+       fill="#000000"
+       font-family="Helvetica"
+       font-size="22px"
+       text-anchor="end"
+       id="g309">
+      <text
+         id="text307"><tspan
+           font-family="Helvetica"
+           id="tspan305">Stratmann</tspan></text>
+    </g>
+  </g>
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,132.35,294.42)"
+     color="#e51e10"
+     id="use315"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,162.46,255.03)"
+     color="#e51e10"
+     id="use317"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,192.56,224.42)"
+     color="#e51e10"
+     id="use319"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,222.67,203.76)"
+     color="#e51e10"
+     id="use321"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,252.77,181.41)"
+     color="#e51e10"
+     id="use323"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,282.88,166.41)"
+     color="#e51e10"
+     id="use325"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,312.98,148.29)"
+     color="#e51e10"
+     id="use327"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,343.09,155.22)"
+     color="#e51e10"
+     id="use329"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,373.19,141.32)"
+     color="#e51e10"
+     id="use331"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,403.3,136.32)"
+     color="#e51e10"
+     id="use333"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,433.4,128.69)"
+     color="#e51e10"
+     id="use335"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,463.51,133.34)"
+     color="#e51e10"
+     id="use337"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,493.61,125.64)"
+     color="#e51e10"
+     id="use339"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,523.72,120.19)"
+     color="#e51e10"
+     id="use341"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <use
+     xlink:href="#gpPt5"
+     transform="matrix(8.25,0,0,8.25,553.82,118.94)"
+     color="#e51e10"
+     id="use343"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+  <path
+     stroke="#000000"
+     d="M 102.25,33.01 V 374.4 H 553.82 V 33.01 Z"
+     id="path356"
+     style="color:#000000;fill:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter" />
+</svg>
