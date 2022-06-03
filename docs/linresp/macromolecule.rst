@@ -46,7 +46,7 @@ For the study of excitations with low-to-medium collective character, as in our 
 it is possible to reduce considerably the dimension of the response matrix by
 disregarding Kohn-Sham (KS) transitions with small coupling to the excitations in question. This
 can be achieved in practice by systematically discarding those orbital pairs
-:math:`\phi_{p\sigma}` and :math:`\phi_{q\sigma}` with energy differences :math:`\epsilon_{p\sigma} - \epsilon_{q\sigma}` away
+:math:`\phi_{p\sigma}` and :math:`\phi_{q\sigma}` with energy differences :math:`\epsilon_{p\sigma} - \epsilon_{q\sigma}` far away
 from the excitation energies of interest. In DFTB+, this is done by defining an
 energy windows that sets a threshold for all KS transitions entering the Casida
 equation. For the computation of excitation energies, energy windows can often
