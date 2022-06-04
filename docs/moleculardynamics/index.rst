@@ -21,3 +21,4 @@ or to explore the range of structural minima the system can adopt.
    analysis.rst
    annealing.rst
    plumed2.rst
+   restarting.rst
