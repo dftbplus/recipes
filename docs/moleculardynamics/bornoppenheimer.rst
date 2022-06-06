@@ -1,4 +1,5 @@
 .. highlight:: none
+.. _sec-md-bo:
 
 ****************************
 Dynamics in the ground state

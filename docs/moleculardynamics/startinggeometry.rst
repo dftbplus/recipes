@@ -18,6 +18,8 @@ prior to performing molecular dynamics.
 After running the relaxation, the output file ``geo_end.gen`` is now suitable to
 use as a starting structure for MD (or for other property calculations).
 
+.. _sec-md-vib-modes:
+
 Vibrational modes
 =================
 
@@ -68,7 +70,7 @@ the hsd format. The code expects a ``modes_in.hsd`` file, which contains blocks
 for the geometry, Hessian and the Slater-Koster files (used to get the mass of
 the atoms). A typical input looks like::
 
-  
+
   # Needs the equilibrium geometry, at which the Hessian had been calculated
   Geometry = GenFormat { 
      <<< geom.gen
@@ -101,3 +103,5 @@ example using the `jmol <http://jmol.sourceforge.net/>`_ cross platform viewer
    jmol mode_114.xyz &
 
 for the highest frequency stretch mode of this molecule.
+
+The vibrational modes can also be obtained by processing the results of molecular dynamics (see :ref:`sec-md-analysis`)
