@@ -1,8 +1,8 @@
 .. _linear-response:
 
-###################
-Linear response
-###################
+###########################
+Linear response excitations
+###########################
 
 In this chapter we will go through a couple of recipes for the
 computation of excited state properties using linear response

@@ -114,7 +114,7 @@ Geometry optimisation
 
 [Input: `recipes/interfaces/ipi/zundel/`]
 
-An example using a Zundel ion (H:sub:`5`O:sub:`2`:sup:`+`) with
+An example using a Zundel ion (H\ :sub:`5`\ O\ :sub:`2`:sup:`+`) with
 on-site corrected DFTB2 embedded in a implicit water solvent is
 provided as an example. The implicit solvent lacks the
 hydrogen-bonding network that would be present in real water.
@@ -174,18 +174,21 @@ continued for longer) is shown below
 400 steps is insufficent to thermalise the system to the target
 temperature, but the dynamics of the individual beads, and the *path
 centroid* (i.e., the average position of the quantum particles) are
-output, along with data gathered during the run in the files ::
+output, along with data gathered during the run in the files
 
-  +----------------------+----------------+
-  |simulation.xc.xyz     | path centroid  |
-  +----------------------+----------------+
-  |RESTART               |restart data    |
-  +----------------------+----------------+
-  |simulation.out        |collected data  |
-  +----------------------+----------------+
-  |simulation.pos_\*.xyz |individual beads|
-  +----------------------+----------------+
+  +-----------------------+-----------------+
+  | File                  | Contents        |
+  +=======================+=================+
+  | simulation.xc.xyz     | path centroid   |
+  +-----------------------+-----------------+
+  | RESTART               | restart data    |
+  +-----------------------+-----------------+
+  | simulation.out        | collected data  |
+  +-----------------------+-----------------+
+  | simulation.pos_*.xyz  | individual beads|
+  +-----------------------+-----------------+
 
+  
 The frequency at which these files are appended is set in `nvtPI.xml`
 
 Stopping programs

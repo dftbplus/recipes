@@ -246,3 +246,9 @@ Topics to be discussed:
   calculations with spin polarisation and/or k-points.
 
 * Effects of latency on code performance.
+
+
+GPU computing
+^^^^^^^^^^^^^
+
+Description coming soon!

@@ -137,7 +137,6 @@ illustrates the energetic landscape:
 
 .. _fig_aee:
 .. figure:: ../_figures/linresp/abs-emi.png
-     :height: 36ex
      :align: center
      :alt: homo real
 
