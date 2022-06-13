@@ -32,19 +32,21 @@ their better performance and capabilities.
 ELSI solvers
 ^^^^^^^^^^^^
 
-Some of the [ELSI]_ solvers which can be used are ::
+Some of the [ELSI]_ solvers which can be used are
 
-  +--------------------+--------------------+--------------------+--------------------+
-  |Solver              |Use case            |Scaling with atoms  |Eigenvalues         |
-  +--------------------+--------------------+--------------------+--------------------+
-  |ELPA                |General (dense)     |O(N :sup:`3` )      |available           |
-  +--------------------+--------------------+--------------------+--------------------+
-  |PEXSI               |General (sparse)    |O(N :sup:`2` ) --   |not available       |
-  |                    |                    |O(N)                |                    |
-  +--------------------+--------------------+--------------------+--------------------+
-  |NTPoly              |Better for gapped   |O(N)                |not available       |
-  |                    |systems (sparse)    |                    |                    |
-  +--------------------+--------------------+--------------------+--------------------+
+  +--------+-------------------+--------------------+---------------+
+  | Solver | Use case          | Scaling with atoms | Eigenvalues   |
+  +========+===================+====================+===============+
+  | ELPA   | General (dense)   | O(N :sup:`3` )     | available     |
+  +--------+-------------------+--------------------+---------------+
+  | PEXSI  | General (sparse)  | between            | not available |
+  |        |                   | O(N:sup:`2`) and   |               |
+  |        |                   | O(N)               |               |
+  +--------+-------------------+--------------------+---------------+
+  | NTPoly | Better for gapped | O(N)               | not available |
+  |        | systems (sparse)  |                    |               |
+  +--------+-------------------+--------------------+---------------+
+  
 
 The PEXSI solver is not included in the condaforge binaries, but can
 be built separately.
