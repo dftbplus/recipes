@@ -26,8 +26,8 @@ memory per computing core).
 Types of parallel hardware
 --------------------------
 
-The two types of parallel computer that DFTB+ currently can make use of are
-either
+The types of parallel computer that DFTB+ currently can make use of
+are
 
 #. **shared memory** machines, where all processes have access to the same
    data. These are typically small to medium size systems. Most modern CPUs have
@@ -37,6 +37,11 @@ either
    typically larger scale systems with higher numbers of processors and a
    dedicated high speed network between them.
 
+#. **GPU accelerated** where either shared memory or distributed
+   systems have access to graphical processor units, which provide
+   extremely parallel calculations but currently only for ground-state
+   calculations.
+ 
 The different system types require distinct program models to make use of the
 hardware (however code designed for a distributed memory system can often be
 also used for shared memory architectures).
@@ -87,3 +92,9 @@ Hybrid parallelism
 DFTB+ can be compiled with both MPI and openMP parallelism combined. However
 using this can require system specific settings for thread affinity to provide
 efficiency and this is beyond the scope of this tutorial.
+
+GPU accelerated
+---------------
+
+Either the MAGMA (single node) or ELPA (distributed memory) solvers
+and libraries are required.

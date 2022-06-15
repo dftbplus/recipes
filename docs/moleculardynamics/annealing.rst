@@ -44,9 +44,10 @@ Annealing to multiple minima
 
    [Input: `recipes/moleculardynamics/annealV2/`]
    
-The annealing process can also be used to find alternative local minina. Here
-two vacancies in a graphene sheet are heated. Depending on the initial
-conditions, the system anneals to different final structures. The starting
-velocities are chosen at random, so depending on the seed value for the random
-generator (several different cases are given in the input file) a different
-final defect geometry is obtained by the same cycle of heating and cooling.
+The annealing process can also be used to find alternative local
+minina. Here two vacancies in a graphene sheet are heated. Depending
+on the initial conditions, this system anneals to different final
+structures. The starting velocities are chosen at random, so depending
+on the seed value for the random number generator (several different
+cases are given in the input file) a different final defect geometry
+is obtained by the same cycle of heating and cooling.

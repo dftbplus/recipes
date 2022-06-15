@@ -90,10 +90,11 @@ Example of restarting
 
    [Input: `recipes/moleculardynamics/thermalise/`]
 
-Stop a running MD calculation by either
+Stop a running MD calculation by
 
-  * pressing `ctrl + c` or in the DFTB+ working directory create a
-    stop file ::
+  * pressing `ctrl + c` on the attached terminal
+
+  * in the DFTB+ working directory create a stop file ::
 
       touch stop_driver
 

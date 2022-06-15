@@ -57,7 +57,8 @@ frequencies). The spectrum data is in frequency inits of wavenumbers
      :align: center
      :alt: Autocorrelation spectra of vibrations
 
-     Anharmonic spectra
+     Anharmonic spectra from velocity autocorrelation (excluding large
+     peak at ~0 cm\ :sup:`-1`.
 
 Try different sizes of the window and see what happens to the spectra.
 

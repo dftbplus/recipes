@@ -67,5 +67,6 @@ by the `FILE` tag. The `PRINT` function tells PLUMED2 to print `d1` and `d2`
 every 100 steps to the file specified by the `FILE` tag. Finally, the `ENDPLUMED`
 tag indicates to PLUMED2 that input is complete.
 
-More complete information on the functionality of PLUMED2 can be found in its
-`user manual <http://plumed.github.io/doc-v2.5/user-doc/html/index.html>`_.
+More complete information on the functionality of PLUMED2 can be found
+in it's `user manual
+<http://plumed.github.io/doc-v2.5/user-doc/html/index.html>`_.
