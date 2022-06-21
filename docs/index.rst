@@ -7,7 +7,9 @@ DFTB+ recipes
 
    introduction.rst
    basics/index.rst
+   xtb/index.rst
    moleculardynamics/index.rst
+   solvation/index.rst
    defect/index.rst
    linresp/index.rst
    electronicdynamics/index.rst
@@ -16,6 +18,7 @@ DFTB+ recipes
    reks/index.rst
    transport/index.rst
    boundaryconditions/index.rst
+   gsm/index.rst
    interfaces/index.rst
    licence.rst
    bibliography.rst

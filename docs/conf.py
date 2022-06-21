@@ -34,9 +34,13 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
+    'sphinxcontrib.bibtex',
     'sphinx_copybutton',
     'sphinx_design',
 ]
+
+bibtex_bibfiles = ["_static/references.bib"]
+bibtex_reference_style = "super"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

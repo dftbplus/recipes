@@ -1,0 +1,41 @@
+Geometry = xyzFormat {
+<<< "struc.xyz"
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  MaxAngularMomentum {
+    H = "s"
+    C = "p"
+    O = "p"
+    P = "d"
+  }
+  HubbardDerivs {
+    H = -0.1857
+    C = -0.1492
+    O = -0.1575
+    P = -0.1400
+  }
+  ThirdOrderFull = Yes
+  HCorrection = Damping { Exponent = 4.0 }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "slakos/3ob-3-1/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  Dispersion = DFTD4 {
+    s6 = 1.0
+    s9 = 0.0
+    s8 = 0.4727337
+    a1 = 0.5467502
+    a2 = 4.4955068
+  }
+  Solvation = GeneralizedBorn { ParamFile = solvation/3ob-1-0/param_alpb_h2o.txt }
+}
+
+Options = { WriteDetailedOut = No }
+Analysis { CalculateForces = Yes }
+ParserOptions = { ParserVersion = 10 }
+Parallel = { UseOmpThreads = Yes }
+
+Driver = GeometryOptimization {}
