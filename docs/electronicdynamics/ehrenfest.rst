@@ -24,23 +24,10 @@ Benzene example
 As an example of Ehrenfest dynamics, starting from the equilibrium geometry we
 can excite the lowest-lying :math:`\pi-\pi^*` excitation of a benzene molecule
 using a short laser pulse, and explicitly allow the ions to move. In this case,
-the ``ElectronDynamics`` blocks is as follows::
+the ``ElectronDynamics`` blocks is as follows:
 
-  ElectronDynamics = {
-    Steps = 100000
-    TimeStep [au] = 0.1
-    Perturbation = Laser {
-      PolarizationDirection = 0.00000001 0.61419463 -0.78915459
-      LaserEnergy [eV] = 6.834 # pi-pi* transition energy
-    }
-    EnvelopeShape = Sin2 {
-      Time1 [fs] = 10.0 # end-time of the pulse
-    }
-    FieldStrength [V/A] = 0.10
-    IonDynamics = Yes
-    InitialTemperature [K] = 0.0
-    Populations = Yes
-  }
+.. literalinclude:: ../_archives/recipes/electronicdynamics/ehrenfest/dftb_in.hsd
+   :lines: 24-38
 
 The keyword ``IonDynamics`` is set to ``Yes`` and for this example, we are
 starting with zero initial atomic velocities. The short, but strong, laser pulse
@@ -49,11 +36,11 @@ electronic structure impulsively drives the nuclei to move. In the following
 figure, we plot the distances between neighbouring carbon atoms in the benzene
 ring:
 
-  .. figure:: ../_figures/elecdynamics/CC-dist.png
-     :height: 60ex
-     :align: center
-     :alt: Carbon-carbon distances for benzene following excitation by a laser
-           pulse.
+.. figure:: ../_figures/elecdynamics/CC-dist.png
+    :height: 60ex
+    :align: center
+    :alt: Carbon-carbon distances for benzene following excitation by a laser
+          pulse.
 
 After the short excitation, all carbon atoms move in a *breathing* motion with
 all distances increasing and decreasing periodically. The breathing is not

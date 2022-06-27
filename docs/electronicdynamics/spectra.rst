@@ -1,4 +1,5 @@
 .. highlight:: none
+.. _sec-spectra:
 
 ********************************************
 Calculation of electronic absorption spectra
@@ -20,35 +21,9 @@ The input
 [Input: `recipes/electronicdynamics/spectrum/`]
 
 The following input can be used to calculate the absorption spectrum of
-chlorophyll a::
+chlorophyll a:
 
-  Geometry = GenFormat {
-    <<< "coords.gen"
-  }
-  
-  Hamiltonian = DFTB {
-    SCC = Yes
-    SCCTolerance = 1.0e-7
-    MaxAngularMomentum = {
-      Mg = "p"
-      C = "p"
-      N = "p"
-      O = "p"
-      H = "s"
-    }
-    Filling = Fermi {
-      Temperature [K] = 300
-    }
-  }
-  
-  ElectronDynamics = {
-     Steps = 20000
-     TimeStep [au] = 0.2
-     Perturbation = Kick {
-       PolarizationDirection = all
-     }
-     FieldStrength [v/a] = 0.001
-  } 
+.. literalinclude:: ../_archives/recipes/electronicdynamics/spectrum/dftb_in.hsd
 
 The optimised geometry is located in the *coords.gen* file. Note that for this
 example the long *phytol* chain present in the natural molecule has been
@@ -57,11 +32,11 @@ influence on the absorption spectrum.
 
 For the calculation of absorption spectra, an initial kick of the system is made
 using a Dirac delta type perturbation. The input specifies that after the
-initial perturbation of *Kick* type, twenty thousand steps of dynamics will be
-executed using a time step of 0.2 atomic units. The *Kick* perturbation can be
-applied in any of the Cartesian directions (*x*, *y* or *z*). The use of *all*
-here in the input instructs the code to run three independent dynamic
-calculations, one with an initial *Kick* in each Cartesian direction.
+initial perturbation of ``Kick`` type, twenty thousand steps of dynamics will be
+executed using a time step of 0.2 atomic units. The ``Kick`` perturbation can be
+applied in any of the Cartesian directions (``x``, ``y`` or ``z``). The use of
+``all`` here in the input instructs the code to run three independent dynamic
+calculations, one with an initial ``Kick`` in each Cartesian direction.
 
 After self consistency has been achieved and the ground state density matrix is
 obtained, the perturbation is applied and then the propagation starts, the
@@ -121,7 +96,7 @@ of induced dipole moment of the molecule in the presence of an external time
 dependent field (within the linear response range) is related to the Fourier
 transform of said field in the following manner:
 
-:math:`\mathbf{mu}(\omega)=\overset\leftrightarrow{\alpha}(\omega)\mathbf{E}(\omega)`
+.. math:: \mathbf{\mu}(\omega)=\overset\leftrightarrow{\alpha}(\omega)\,\mathbf{E}(\omega)
 
 since the Fourier transform of a Dirac delta is a constant at all frequencies,
 the polarizability tensor :math:`\overset\leftrightarrow{\alpha}(\omega)` can be
@@ -146,10 +121,10 @@ equivalent to using a *windowing* function.
 The spectrum is located in the output files *spec-ev* and *spec-nm*. In this
 case the spectrum looks as follows:
 
-  .. figure:: ../_figures/elecdynamics/spectrum.png
-     :height: 40ex
-     :align: center
-     :alt: Absorption spectrum of chlorophyll a.
+.. figure:: ../_figures/elecdynamics/spectrum.png
+   :height: 40ex
+   :align: center
+   :alt: Absorption spectrum of chlorophyll a.
 
 The band between 400 and 500 nm is called the Soret band and the one between 600
 and 700 nm is the Q band. This band is the band that provides is responsible for
