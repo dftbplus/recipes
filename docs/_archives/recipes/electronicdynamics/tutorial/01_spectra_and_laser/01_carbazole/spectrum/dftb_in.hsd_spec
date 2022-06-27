@@ -1,0 +1,40 @@
+Geometry = GenFormat {
+    <<< "coords.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1e-7  
+    MaxAngularMomentum = {
+        C = "p"
+        H = "s"
+	N = "p"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../mio-1-1/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+}
+
+ ElectronDynamics = {
+     Steps =                         #define the time window
+     TimeStep [au] =                 #resolution of the spectrum
+     Perturbation = Kick {           #must be a kick (Dirac delta)
+         PolarizationDirection =     #desired direction/s
+     }
+     FieldStrength [v/a] =           #Field strength of the perturbation
+ }
+
+
+InputVersion = 21.2
+
+
+Parallel {
+  # Allow OMP threads explicitely to test for hybrid parallelisation with
+  # MPI-binary. (Check the manual before using this in production runs!)
+  UseOmpThreads = Yes
+}
+
