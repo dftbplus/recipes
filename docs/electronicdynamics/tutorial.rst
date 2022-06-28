@@ -140,8 +140,11 @@ and calculate the direction of maximal polarization of the transition.
            ``PolarizationDirection`` is 3-cartesian components vector in which the 
            laser will be applied. 
 
-     Also note that we turned on the ``Populations`` flag in order to write
-     the occupations during the dynamics.   
+     Note that we turned on the ``Populations`` flag in order to write
+     the occupations during the dynamics. Also note that we are asking for
+     the detailed xml and the eigenvectors with the ``WriteDetailedXML``
+     and ``WriteEigenvectors`` flags. We will need them to plot the orbitals
+     with waveplot in the following sections. 
 
 2. To complete the input template for the laser, we need to provide
    the ``LaserEnergy`` and the ``PolarizationDirection`` of the laser. Based on 
@@ -167,7 +170,8 @@ and calculate the direction of maximal polarization of the transition.
       
       PolarizationDirection = 0.99999221 0.00101174 -0.00381496
 
-     which is essentially paralel to the *X* cartesian direction
+     which is essentially paralel to the *X* cartesian direction (because
+     of the molecules orientation with respect to the cartesian axes)
 
 
 3. Prepare the input for the dynamics under a continuous laser perturbation.
@@ -180,6 +184,13 @@ and calculate the direction of maximal polarization of the transition.
 4. After the dynamics, take a look at the *mu.dat* file.
 
    - Is the dipole moment increasing linearly?
+
+   .. figure:: ../_figures/elecdynamics/tutorial/mu-carbazole-components.png
+      :width: 60%
+      :align: center
+      :alt: mu components
+
+      Dipole moment components vs time for the laser dynamics.
 
 5. Take a look at the *molpopul.dat*
    generated. This file contains the populations projected on the GS orbitals during the dynamics.
@@ -196,10 +207,25 @@ and calculate the direction of maximal polarization of the transition.
      which curves are increasing during the dynamics. These are the orbitals
      being populated.
 
+     You could also check in the *band.out* file generated from the SCC 
+     calculation the states numbers. In the near of the Fermi energy, you 
+     should see something like::
+
+      29    -6.641  2.00000
+      30    -5.809  2.00000
+      31    -5.512  2.00000    #HOMO
+      32    -1.983  0.00000    #LUMO
+      33    -1.358  0.00000
+      34    -0.501  0.00000
+
+     where it is clear that states 31 and 32 are the HOMO 
+     and LUMO of the molecule, respectively.   
+
 6. Let's generate those orbitals using ``waveplot``
 
   - Look at the *waveplot_in.hsd_* template input file for waveplot:
 
+    
     - Which files are needed?
     - In which orbitals are we interested?
 
@@ -213,7 +239,10 @@ and calculate the direction of maximal polarization of the transition.
 7. Let's plot these orbitals:
 
    - Open the cube files that correspond to the HOMO and LUMO and plot them as an isosurface.
-     (For a tutorial on the [Basics of VMD](https://www.ks.uiuc.edu/Training/SumSchool/materials/sources/tutorials/01-vmd-tutorial/html/node2.html) and/or plotting an [isosurface](https://www.ks.uiuc.edu/Research/vmd/current/ug/node77.html) method please refer to the links.)
+     For that there are several software options. Particularly, we give here some links for VMD and VESTA:
+     For a tutorial on the `Basics of VMD <https://www.ks.uiuc.edu/Training/SumSchool/materials/sources/tutorials/01-vmd-tutorial/html/node2.html>`_ and/or plotting an `isosurface <https://www.ks.uiuc.edu/Research/vmd/current/ug/node77.html>`_ method please refer to the links.
+     VESTA allows the user to open directly cube files showing the isosurface instantaneusly
+     with some default parameters. Really good for rapid examinations. `Download VESTA <https://jp-minerals.org/vesta/en/download.html>`_
 
 Here we show a figure with the Populations obtained from the laser dynamics
 and the orbitals involved in the transition. You should get something 
