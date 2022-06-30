@@ -456,6 +456,8 @@ Laser dynamics on the donor-acceptor aggregate for charge transfer
    used). So we could in principle divide the mechanism in two steps. The first
    one, from 0 to ~30 fs where the PDI is beeing excited. The second step is the
    charge transfer from the carbazole to the PDI once the last is already excited.
+
+
    
 
       
