@@ -18,6 +18,8 @@ analyse them using the tools provided by DFTB+.
 Calculation of the absorption spectrum of carbazole
 ---------------------------------------------------
 
+[Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/01_carbazole/01_spectrum`]
+
 We will calculate the absorption spectrum of the carbazole molecule
 
 1. Take a look at the input coordinates *coords.gen*. The *.gen* format
@@ -107,6 +109,8 @@ We will calculate the absorption spectrum of the carbazole molecule
 Analysis of the absorption spectrum of carbazole
 ------------------------------------------------
 
+[Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/01_carbazole/02_laser`]
+
 We will consider a laser perturbation in tune with the lowest energy
 transition of the molecule in order to study the photodynamic
 process of absorption in this transition. In order to do this, we
@@ -172,7 +176,6 @@ and calculate the direction of maximal polarization of the transition.
 
      which is essentially paralel to the *X* cartesian direction (because
      of the molecules orientation with respect to the cartesian axes)
-
 
 3. Prepare the input for the dynamics under a continuous laser perturbation.
    Use the energy transition obtained from the spectrum as the ``LaserEnergy``
@@ -255,3 +258,209 @@ similar in your calculations:
 
    (left)Populations vs time for the laser dynamics. (right) Orbitals involved
    in the lower energy transition of the carbazole molecule.
+
+
+Now is your turn! Calculation of PDI absorption spectrum
+--------------------------------------------------------
+
+[Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/02_PDI/]
+
+We will repeat the workflow used for the carbazole molecule with a new
+molecule, PDI.
+
+1. Based on the calculations that you ran before.
+
+  - Calculate the absorption spectrum with a proper *dftb_in.hsd* input file.
+  - Find the lowest energy transition.
+  - Study the excitation process using a laser tuned with the transition.
+  - Obtain the orbitals involved in the transition using waveplot and plot them.
+
+Here we leave some figures from our calculations that could be useful to 
+compare with your own calculations of this section:
+
+.. figure:: ../_figures/elecdynamics/tutorial/PDI.png
+   :width: 60%
+   :align: center
+   :alt: PDI
+
+   \(a\) Absorption spectrum of the PDI molecule.\(b\) PDI molecule structure.\(c\) Dipole
+   moment components vs time during a laser dynamics at 548 nm (note that in 
+   this case the dipole moment in the *X* direction increases linearly).\(d\) Populations
+   vs time for the laser dynamics.\(e\) Orbitals involved in the transition.
+
+Photoinduced charge transfer
+============================
+
+Calculate the absorption spectrum of the Donor-acceptor aggregate
+-----------------------------------------------------------------
+
+[Input: `recipes/electronicdynamics/tutorial/02_photoinduced_CT/01_aggregate_spec/`]
+
+1. Take a look at the input coordinates *coords.xyz* (you can open it using avogadro,
+jmol, vmd, VESTA, etc).
+
+.. figure:: ../_figures/elecdynamics/tutorial/PDI+carbazole.png
+   :width: 60%
+   :align: center
+   :alt: PDI+carbazole aggregate
+
+   PDI+carbazole derivatives aggregate
+
+It is an aggregate of the previous molecules analysed in which the carbazole and
+PDI derivative act as donor and acceptor of electrons, respectively.
+
+  - Convert the coordinates into *gen* format (use the ``xyz2gen`` script) and 
+    calculate the absorption spectrum using the *dftb_in.hsd_spec* as a template
+    for the input (copy this file or rename it as *dftb_in.hsd*).
+    Note that after the electron dynamics, you will need (as before) to run the 
+    Fourier transform of the induced dipole moment of the system (using the 
+    ``calc_timeprop_spectrum`` tool) in order to obtain the spectrum.
+
+2. Compare the calculated spectrum with the individual ones (you can use the spectra
+   calculated before or recalculate them from these derivatives). Is there
+   relevant differences?
+
+   .. figure:: ../_figures/elecdynamics/tutorial/specs-compar-A+D.png
+      :width: 60%
+      :align: center
+      :alt: A+D spectrum
+
+      Absorption spectrum of the PDI+carbazole derivatives aggregate.
+
+3. We are interested in the dynamics upon ilumination of the acceptor molecule. For such
+   puropose, we will perform a laser dynamic in next step and for it, we need to calculate
+   the transition dipole direction of the absorption band at ~530 nm. Calculate this vector
+   using the `calc_timeprop_maxpoldir` tool. You shold obtain something similar to::
+
+   PolarizationDirection = -0.99977920 0.01776644 0.01122075
+
+   which is essentially the *X* direction (since the PDI molecule axis is 
+   paralel to the *X* axis in the coordinates).
+
+Laser dynamics on the donor-acceptor aggregate for charge transfer
+------------------------------------------------------------------
+
+[Input: `recipes/electronicdynamics/tutorial/02_photoinduced_CT/02_aggregate_CT/`]
+
+1. With the transition dipole moment vector calculated previously, prepare
+   your input for a laser-driven electron dynamics in tune with the acceptor (PDI)
+   lowest energy excitation. Use the *dftb_in.hsd_pulse* as a template. Note
+   that this time we add an envelope function to the laser perturbation in order
+   to mimick a laser pulse::
+      
+      ElectronDynamics = {
+         Steps = 20000
+         TimeStep [au] = 0.2
+         Perturbation = Laser{
+            PolarizationDirection =       #calculate with calc_timeprop_maxpoldir
+                                          #for the energy of interest
+            LaserEnergy [nm] =
+            }
+         EnvelopeShape = Sin2{            #envelope shape type
+         Time1 [fs] = 30.0                #pulse duration (assuming Time0 = 0, by default)
+         }
+         FieldStrength [v/a] = 0.02       #field strength bigger than spectrum case (0.001)
+         WriteEnergyAndCharges = Yes
+         Populations = Yes
+      }
+   
+   Now in the ElectronDynamics we added the Sin2 ``EnvelopeShape`` with 
+   a duration of 30 fs starting at the beginning of the dynamics. We will
+   ask the code also to print the populations during dynamics to study the
+   mechanism of charge transfer. Complete the input template filling the 
+   ``PolarizationDirection`` and ``LaserEnergy`` obtained before and run the 
+   code (don't forget to rename the template to *dftb_in.hsd*).
+
+2. After running the electron dynamics, let inspect what give us de *qsvst.dat*
+   file::
+
+      #   time (fs) | total net charge (e) | charge (atom_1) (e) | ... |  charge (atom_N) (e)|
+        0.000000000000000     -0.000000000000055    0.075753114169209   0.077680106829215  ...
+        0.241888432650500     -0.000000000000048    0.075753940652948   0.077680933651269  ...
+        0.483776865301000     -0.000000000000049    0.075758821681684   0.077685768802125  ...
+
+   The first column of the file is the time and the second one is the total net charge
+   of the system at each time step (which should keep near to zero). After that, we
+   have one column for every atom charge at each time step (summing a total of N columns
+   being N the number of atoms in the system). 
+   Making use of the file *qsvst.dat* one may potencially get information
+   about partial charges moving during dynamics. If you are interested in what is 
+   happening with the charge of one molecule in your system, then you could sum the
+   atom charges corresponding to that molecule (or part) of the system at each time
+   and get some insights.
+
+3. As we are interested in the charge transfer between both molecules after the pulse
+   we want to process the information contained in the *qsvst.dat* to obtain the total
+   charge of each molecule during the dynamics. For that, you could develope your own
+   script but we also provide you a simple script based on this case to get that
+   information. The provided tool ``calc_timeprop_charges.py`` will do the job.
+   Try::
+
+      ./calc_timeprop_charges.py --help
+
+   to get info about how to use the script:: 
+   
+      usage: calc_timeprop_charges.py -l ii:jj,ll:mm
+
+      Reads output from TD calculation with external laser and produces net charges per fragment
+      (subtracting value at time = 0).
+
+      Needs qsvst.dat file present in working directory.
+
+      Options:
+      -h, --help            show this help message and exit
+      -l AT_LIST, --list=AT_LIST
+                        list of atom indices starting from 1 (initial and
+                        final index separated by colons, ranges separated by
+                        commas)
+
+   You will have to define the ranges of atoms that correspond to each of 
+   the two molecules. In our case, the PDI derivative is between atom 1 and 52
+   and the carbazole derivative is between atom 53 and 83. Then, you may do::
+
+      ./calc_timeprop_charges.py -l 1:52,53:83
+
+   After runing the script, two files may be generated: *charge_frag1.dat* and
+   *charge_frag2.dat* with the corresponding charges of each defined fragment.
+   If you plot it you will something like:
+
+   .. figure:: ../_figures/elecdynamics/tutorial/charge-vs-time.png
+      :width: 60%
+      :align: center
+      :alt: charge vs time
+
+      Charge vs time for the accpetor and donor molecules.
+
+   where it is clearly shown that during the dynamic the PDI molecule act as
+   an accpetor of electrons getting negative values, meanwhile the carbazole is
+   getting positive. This confirm the charge transfer upon ilumination.
+   If we follow the protocol from before, ploting the populations and searching 
+   for the orbitals involved in the transition, we should be able to get some
+   insigths on the mechanism of the charge transfer (follow the steps in the
+   prevous sections). As it is shown in the figure:
+
+   .. figure:: ../_figures/elecdynamics/tutorial/molpopul-CT.png
+      :width: 60%
+      :align: center
+      :alt: molpopul CT
+
+      (left)Populations vs time for the pulse dynamics. (right) Orbitals involved
+      in the excitation during the dynamics.
+   
+   the orbitals involved in the excitation with the pulse are localized in the
+   PDI molecule, i.e. we can confirm that we are exciting the PDI molecule in 
+   its own HOMO-LUMO transition (and not an HOMO-LUMO transition of the whole 
+   system). Comparing with the previous figure of the charges dynamics, we can 
+   also see that the CT process start just after a certain amount of electrons
+   are excited in the PDI molecule (more or less 30 fs, the duration of the pulse
+   used). So we could in principle divide the mechanism in two steps. The first
+   one, from 0 to ~30 fs where the PDI is beeing excited. The second step is the
+   charge transfer from the carbazole to the PDI once the last is already excited.
+   
+
+      
+
+
+
+
+

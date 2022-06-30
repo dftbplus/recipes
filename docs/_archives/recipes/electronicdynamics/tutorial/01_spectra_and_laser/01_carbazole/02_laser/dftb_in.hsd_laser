@@ -1,0 +1,50 @@
+Geometry = GenFormat {
+    <<< "coords.gen"
+}
+
+Driver = {}
+
+Hamiltonian = DFTB {
+    SCC = Yes
+    SCCTolerance = 1e-7  
+    MaxAngularMomentum = {
+        C = "p"
+        H = "s"
+	N = "p"
+    }
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "../../mio-1-1/"
+        Separator = "-"
+        Suffix = ".skf"
+    }
+}
+
+ ElectronDynamics = {
+     Steps = 10000
+     TimeStep [au] = 0.2
+     Perturbation = Laser{                # Laser type perturbation
+         PolarizationDirection =          # calculate with calc_timeprop_maxpoldir
+         LaserEnergy [ev] =               # energy of interest 
+     }                                    
+     FieldStrength [v/a] = 0.001
+     Populations = Yes                    # to write populations during dynamic
+ }
+
+Options {
+    WriteDetailedXML = Yes                # needed for waveplot
+}
+
+Analysis {
+    WriteEigenvectors = Yes               # needed for waveplot
+}
+
+
+InputVersion = 21.2
+
+
+Parallel {
+  # Allow OMP threads explicitely to test for hybrid parallelisation with
+  # MPI-binary. (Check the manual before using this in production runs!)
+  UseOmpThreads = Yes
+}
+
