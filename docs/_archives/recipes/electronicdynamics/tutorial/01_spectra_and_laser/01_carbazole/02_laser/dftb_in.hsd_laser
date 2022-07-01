@@ -13,7 +13,7 @@ Hamiltonian = DFTB {
 	N = "p"
     }
     SlaterKosterFiles = Type2FileNames {
-        Prefix = "../../mio-1-1/"
+        Prefix = "../../../../slakos/download/mio-1-1/"
         Separator = "-"
         Suffix = ".skf"
     }

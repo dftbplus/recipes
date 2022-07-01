@@ -24,3 +24,4 @@ and driving of nuclear motion via electronic excitation.
    spectra.rst
    driving.rst
    ehrenfest.rst
+   tutorial.rst
