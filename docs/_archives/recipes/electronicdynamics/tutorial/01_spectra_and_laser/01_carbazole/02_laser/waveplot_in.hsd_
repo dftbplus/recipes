@@ -25,5 +25,5 @@ Basis {
   # Including mio-1-1.hsd. (If you use a set, which depends on other sets,
   # the wfc.*.hsd files for each required set must be included in a similar
   # way.)
-  <<+ "./.hsd"            ### Path for Wave function coeffiecients for waveplot
+  <<+ "../../../../slakos/wfc/wfc.mio-1-1.hsd" ### Path for Wave function coeffiecients for waveplot
 }

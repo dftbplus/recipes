@@ -37,6 +37,8 @@ We will calculate the absorption spectrum of the carbazole molecule
       :align: center
       :alt: Carbazole molecule.
 
+      Carbazole molecule
+
 2. Open the *dftb_in.hsd_spec* file. This is a template for the calculation
    of the absorption spectrum.
 
@@ -55,15 +57,15 @@ We will calculate the absorption spectrum of the carbazole molecule
 
      * ``Steps`` (integer): the number of steps of the dynamics. It defines the time window and,
        consequently, the energy window of the spectrum. The longer the dynamic, the lower the
-       energies that can be reached in the spectrum are (also afected by the timestep, of course).
+       energies that can be reached in the spectrum (also afected by the ``TimeStep``, of course).
        Here, we will use 10000 steps.
      * ``TimeStep`` (float): the time step in time units. Usually 0.2 a.u (0.0048 fs). 
        It defines the resolution of the spectrum. The smaller the time step, 
        the higher the resolution within the time window.
      * ``Perturbation``: In this case we need a kick perturbation (Dirac delta) and we need to 
        specify the ``PolarizationDirection`` that could be *X*, *Y*, *Z* (if we are interested in 
-       one particular direction) or *all* if we want to calculate the whole absorption spectrum.
-       Set it as *all*.
+       one particular direction) or ``all`` if we want to calculate the whole absorption spectrum.
+       Set it as ``all``.
      * ``FieldStrength`` (float): the field strength of the perturbation applied. For the
        calculation of the absorption spectrum, it must be within the linear response regime,
        i.e. usually 0.001 :math:`V/\AA`.
@@ -71,7 +73,7 @@ We will calculate the absorption spectrum of the carbazole molecule
    - Complete the template file, copy it to *dftb_in.hsd* and run the calculation.
 
 3. Once the dynamics ended, we will have 3 components of the dynamical dipole moment 
-   (*mux.dat*, *muy.dat*, *muz.dat*). We need to Fourier-transform these dipole components
+   (*mux.dat*, muy.dat, *muz.dat*). We need to average and Fourier-transform these dipole components
    in order to obtain the absorption spectrum of the molecule. To do this, we will use the
    ``calc_timeprop_spectrum`` tool available after installation of DFTB+ under: 
    *dftbplus/tools/misc/*. In the folder
@@ -80,7 +82,7 @@ We will calculate the absorption spectrum of the carbazole molecule
     calc_timeprop_spectrum -d 4 -f 0.001
 
    where the option -d is for the damping constant (in fs) applied to the dipole moment before transformation.
-   The option -f stands for the field strength (in V/AA) of the perturbation applied during dynamic.
+   The option -f stands for the field strength (in :math:`V/\AA`) of the perturbation applied during dynamic.
 
 4. After running the script you will find two new files: *spec-nm.dat* and *spec-ev.dat* which are
    the absorption spectra in nm and eV, respectively. Plot the spectrum file with the plotting tool
@@ -141,13 +143,13 @@ and calculate the direction of maximal polarization of the transition.
            the transition energy of interest. This value must be in energy units
            like eV but also nm is possible.
          * ``PolarizationDirection`` (vector): in the case of a laser, the 
-           ``PolarizationDirection`` is 3-cartesian components vector in which the 
+           ``PolarizationDirection`` is a 3-cartesian components vector in which the 
            laser will be applied. 
 
      Note that we turned on the ``Populations`` flag in order to write
      the occupations during the dynamics. Also note that we are asking for
      the detailed xml and the eigenvectors with the ``WriteDetailedXML``
-     and ``WriteEigenvectors`` flags. We will need them to plot the orbitals
+     and ``WriteEigenvectors`` options. We will need them to plot the orbitals
      with waveplot in the following sections. 
 
 2. To complete the input template for the laser, we need to provide
@@ -233,7 +235,7 @@ and calculate the direction of maximal polarization of the transition.
     - In which orbitals are we interested?
 
   - After editing and completing this file, just rename it to *waveplot_in.hsd* and run
-    ``waveplot`` using your current installed version that probably is at::
+    ``waveplot`` using your current installed version that would be at::
        
        $HOME/dftbplus/_build/app/waveplot/waveplot
 
@@ -252,7 +254,7 @@ and the orbitals involved in the transition. You should get something
 similar in your calculations:
 
 .. figure:: ../_figures/elecdynamics/tutorial/molpopul-carbazole.png
-   :width: 60%
+   :width: 100%
    :align: center
    :alt: molpopul1-carbazole
 
@@ -263,7 +265,7 @@ similar in your calculations:
 Now is your turn! Calculation of PDI absorption spectrum
 --------------------------------------------------------
 
-[Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/02_PDI/]
+[Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/02_PDI/``]
 
 We will repeat the workflow used for the carbazole molecule with a new
 molecule, PDI.
@@ -279,7 +281,7 @@ Here we leave some figures from our calculations that could be useful to
 compare with your own calculations of this section:
 
 .. figure:: ../_figures/elecdynamics/tutorial/PDI.png
-   :width: 60%
+   :width: 100%
    :align: center
    :alt: PDI
 
@@ -291,30 +293,29 @@ compare with your own calculations of this section:
 Photoinduced charge transfer
 ============================
 
-Calculate the absorption spectrum of the Donor-acceptor aggregate
+Calculate the absorption spectrum of a Donor-acceptor aggregate
 -----------------------------------------------------------------
 
 [Input: `recipes/electronicdynamics/tutorial/02_photoinduced_CT/01_aggregate_spec/`]
 
 1. Take a look at the input coordinates *coords.xyz* (you can open it using avogadro,
-jmol, vmd, VESTA, etc).
+   jmol, vmd, VESTA, etc).
 
-.. figure:: ../_figures/elecdynamics/tutorial/PDI+carbazole.png
-   :width: 60%
-   :align: center
-   :alt: PDI+carbazole aggregate
+   .. figure:: ../_figures/elecdynamics/tutorial/PDI+carbazole.png
+      :width: 60%
+      :align: center
+      :alt: PDI+carbazole aggregate
 
-   PDI+carbazole derivatives aggregate
+      PDI+carbazole derivatives aggregate
 
-It is an aggregate of the previous molecules analysed in which the carbazole and
-PDI derivative act as donor and acceptor of electrons, respectively.
-
-  - Convert the coordinates into *gen* format (use the ``xyz2gen`` script) and 
-    calculate the absorption spectrum using the *dftb_in.hsd_spec* as a template
-    for the input (copy this file or rename it as *dftb_in.hsd*).
-    Note that after the electron dynamics, you will need (as before) to run the 
-    Fourier transform of the induced dipole moment of the system (using the 
-    ``calc_timeprop_spectrum`` tool) in order to obtain the spectrum.
+   It is an aggregate of the previous molecules analysed in which the carbazole and
+   PDI derivatives act as donor and acceptor of electrons, respectively.
+      - Convert the coordinates into *gen* format (use the ``xyz2gen`` script) and
+        calculate the absorption spectrum using the *dftb_in.hsd_spec* as a template
+        for the input (copy this file or rename it as *dftb_in.hsd*).
+        Note that after the electron dynamics, you will need (as before) to run the 
+        Fourier transform of the induced dipole moment of the system (using the 
+        ``calc_timeprop_spectrum`` tool) in order to obtain the spectrum.
 
 2. Compare the calculated spectrum with the individual ones (you can use the spectra
    calculated before or recalculate them from these derivatives). Is there
@@ -325,12 +326,14 @@ PDI derivative act as donor and acceptor of electrons, respectively.
       :align: center
       :alt: A+D spectrum
 
-      Absorption spectrum of the PDI+carbazole derivatives aggregate.
+      Absorption spectrum of the PDI+carbazole derivatives aggregate (in black),
+      compared to the individual spectrum for the PDI moiety (in orange) and 
+      the carbazole moiety (in red).
 
 3. We are interested in the dynamics upon ilumination of the acceptor molecule. For such
    puropose, we will perform a laser dynamic in next step and for it, we need to calculate
    the transition dipole direction of the absorption band at ~530 nm. Calculate this vector
-   using the `calc_timeprop_maxpoldir` tool. You shold obtain something similar to::
+   using the ``calc_timeprop_maxpoldir`` tool. You shold obtain something similar to::
 
    PolarizationDirection = -0.99977920 0.01776644 0.01122075
 
@@ -352,32 +355,32 @@ Laser dynamics on the donor-acceptor aggregate for charge transfer
          Steps = 20000
          TimeStep [au] = 0.2
          Perturbation = Laser{
-            PolarizationDirection =       #calculate with calc_timeprop_maxpoldir
-                                          #for the energy of interest
+            PolarizationDirection =      #calculate with calc_timeprop_maxpoldir
+                                         #for the energy of interest
             LaserEnergy [nm] =
             }
-         EnvelopeShape = Sin2{            #envelope shape type
-         Time1 [fs] = 30.0                #pulse duration (assuming Time0 = 0, by default)
+         EnvelopeShape = Sin2{           #envelope shape type
+         Time1 [fs] = 30.0               #pulse duration (assuming Time0 = 0, by default)
          }
-         FieldStrength [v/a] = 0.02       #field strength bigger than spectrum case (0.001)
+         FieldStrength [v/a] = 0.02      #field strength bigger than spectrum case (0.001)
          WriteEnergyAndCharges = Yes
          Populations = Yes
       }
    
    Now in the ElectronDynamics we added the Sin2 ``EnvelopeShape`` with 
    a duration of 30 fs starting at the beginning of the dynamics. We will
-   ask the code also to print the populations during dynamics to study the
+   also ask the code to print the populations during dynamics to study the
    mechanism of charge transfer. Complete the input template filling the 
    ``PolarizationDirection`` and ``LaserEnergy`` obtained before and run the 
    code (don't forget to rename the template to *dftb_in.hsd*).
 
-2. After running the electron dynamics, let inspect what give us de *qsvst.dat*
+2. After running the electron dynamics, let inspect what give us the *qsvst.dat*
    file::
 
-      #   time (fs) | total net charge (e) | charge (atom_1) (e) | ... |  charge (atom_N) (e)|
-        0.000000000000000     -0.000000000000055    0.075753114169209   0.077680106829215  ...
-        0.241888432650500     -0.000000000000048    0.075753940652948   0.077680933651269  ...
-        0.483776865301000     -0.000000000000049    0.075758821681684   0.077685768802125  ...
+      #time (fs) | total net charge (e) | charge (atom_1) (e) | ... | charge (atom_N) (e)|
+      0.000000000000000   -0.000000000000055   0.075753114169209   0.077680106829215  ...
+      0.241888432650500   -0.000000000000048   0.075753940652948   0.077680933651269  ...
+      0.483776865301000   -0.000000000000049   0.075758821681684   0.077685768802125  ...
 
    The first column of the file is the time and the second one is the total net charge
    of the system at each time step (which should keep near to zero). After that, we
@@ -422,7 +425,7 @@ Laser dynamics on the donor-acceptor aggregate for charge transfer
 
    After runing the script, two files may be generated: *charge_frag1.dat* and
    *charge_frag2.dat* with the corresponding charges of each defined fragment.
-   If you plot it you will something like:
+   If you plot it you will get something like:
 
    .. figure:: ../_figures/elecdynamics/tutorial/charge-vs-time.png
       :width: 60%
@@ -437,10 +440,10 @@ Laser dynamics on the donor-acceptor aggregate for charge transfer
    If we follow the protocol from before, ploting the populations and searching 
    for the orbitals involved in the transition, we should be able to get some
    insigths on the mechanism of the charge transfer (follow the steps in the
-   prevous sections). As it is shown in the figure:
+   previous sections). As it is shown in the figure:
 
    .. figure:: ../_figures/elecdynamics/tutorial/molpopul-CT.png
-      :width: 60%
+      :width: 100%
       :align: center
       :alt: molpopul CT
 
@@ -457,12 +460,29 @@ Laser dynamics on the donor-acceptor aggregate for charge transfer
    one, from 0 to ~30 fs where the PDI is beeing excited. The second step is the
    charge transfer from the carbazole to the PDI once the last is already excited.
 
+We hope that this tutorial would be helpful for those interested in get into the real-time TDDFTB
+method using ``DFTB+``. Of course, this is just the beginning and there are much more possibilities
+to do in terms of studyng optical properties and photoinduced processes within this approach in many
+different scenarios and materials like *graphene nanoribbons*, *plasmonic nanoparticles*, *glod nanoclusters*,
+*semiconductor nanoparticles* and *organic solar cells*. As an inspiration, we give you some references of
+the last works performed with this method in ``DFTB+``: 
 
-   
+**Fano Resonance and Incoherent Interlayer Excitons in Molecular van der Waals Heterostructures.** Lien-Medrano, C. R., Bonafé, F. P., Yam, C. Y., Palma, C.-A., Sánchez, C. G., & Frauenheim, T. (2022). Nano Letters, 22(3), 911–917. `https://doi.org/10.1021/acs.nanolett.1c03441 <https://doi.org/10.1021/acs.nanolett.1c03441>`_
 
-      
+**Dynamical evolution of the Schottky barrier as a determinant contribution to electron-hole pair stabilization and photocatalysis of plasmon-induced hot carriers.** Berdakin, M., Soldano, G., Bonafé, F. P., Liubov, V., Aradi, B., Frauenheim, T., & Sánchez, C. G. (2022). Nanoscale, 14(7), 2816–2825. `https://doi.org/10.1039/d1nr04699c <https://doi.org/10.1039/d1nr04699c>`_
 
+**Photoinduced charge-transfer in chromophore-labeled gold nanoclusters: quantum evidence of the critical role of ligands and vibronic couplings.** Domínguez-Castro, A., Lien-Medrano, C. R., Maghrebi, K., Messaoudi, S., Frauenheim, T., & Fihey, A. (2021). Nanoscale, 13(14), 6786–6797. `https://doi.org/10.1039/D1NR00213A <https://doi.org/10.1039/D1NR00213A>`_
 
+**Interplay between Intra- And Interband Transitions Associated with the Plasmon-Induced Hot Carrier Generation Process in Silver and Gold Nanoclusters.** Berdakin, M., Douglas-Gallardo, O. A., & Sánchez, C. G. (2020). Journal of Physical Chemistry C, 1631–1639. `https://doi.org/10.1021/acs.jpcc.9b10871 <https://doi.org/10.1021/acs.jpcc.9b10871>`_
 
+**Plasmon-induced hot-carrier generation differences in gold and silver nanoclusters.** Douglas-Gallardo, O. A., Berdakin, M., Frauenheim, T., & Sánchez, C. G. (2019). Nanoscale, 11(17), 8604–8615. `https://doi.org/10.1039/c9nr01352k <https://doi.org/10.1039/c9nr01352k>`_
 
+**Trap-Door-Like Irreversible Photoinduced Charge Transfer in a Donor-Acceptor Complex.** Medrano, C. R., & Sánchez, C. G. (2018). Journal of Physical Chemistry Letters, 9(12), 3517–3524. `https://doi.org/10.1021/acs.jpclett.8b01043 <https://doi.org/10.1021/acs.jpclett.8b01043>`_
 
+**Quantum efficiency of the photo-induced electronic transfer in dye–TiO 2 complexes.** Marquez, D. M., & Sánchez, C. G. (2018). Physical Chemistry Chemical Physics, 20(41), 26280–26287. `https://doi.org/10.1039/C8CP04625E <https://doi.org/10.1039/C8CP04625E>`_
+
+**Characterization of ZnO as substrate for DSSC.** Mansilla Wettstein, C., & Sánchez, C. G. (2018).  Physical Chemistry Chemical Physics, 20(34), 21910–21916. `https://doi.org/10.1039/C8CP01709C <https://doi.org/10.1039/C8CP01709C>`_
+
+**Plasmon-driven sub-picosecond breathing of metal nanoparticles.** Bonafé, F. P., Aradi, B., Guan, M., Douglas-Gallardo, O. A., Lian, C., Meng, S., Frauenheim, T., & Sánchez, C. G. (2017). Nanoscale, 9(34), 12391–12397. `https://doi.org/10.1039/C7NR04536K <https://doi.org/10.1039/C7NR04536K>`_
+
+**Photoinduced charge-transfer dynamics simulations in noncovalently bonded molecular aggregates.** Medrano, C. R., Oviedo, M. B., & Sánchez, C. G. (2016). Physical Chemistry Chemical Physics, 18(22), 14840–14849. `https://doi.org/10.1039/c6cp00231e <https://doi.org/10.1039/c6cp00231e>`_
