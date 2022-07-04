@@ -1,9 +1,8 @@
 .. highlight:: none
 
-***********************************************************************
-Tutorial: Absorption spectra, analysis and charge transfer
-***********************************************************************
-
+*******************************************************************
+Tutorial: Photoinduced charge transfer in a donor-acceptor complex.
+*******************************************************************
 
 This is the tutorial given at the DFTB+ School 2022 in Daresbury, UK. The idea is to get familiar
 with the real-time TDDFTB method applied to molecules and molecular complexes, learning the basics of absorption spectra calculations and photoinduced processes such as charge transfer under laser irradiation.
@@ -22,15 +21,17 @@ Calculation of the absorption spectrum of carbazole
 We will calculate the absorption spectrum of the carbazole molecule, following the procedure described in  :ref:`sec-spectra`.
 
 1. Take a look at the input coordinates *coords.gen*. The *.gen* format
-   is the one used for DFTB+ code. In order to visualize the molecule,
+   is the one used for DFTB+ code (see section :ref:`gen_format` for more details). In order to visualize the molecule,
    you can use the ``gen2xyz`` script, provided in the installation of the 
    DFTB+ code, by running::
      
      gen2xyz coords.gen
 
    This will generate a *coords.xyz* that you can open with VMD, Avogadro or
-   any other molecular visualization software of your choice.
+   any other molecular visualization software of your choice. An image of the
+   carbazole molecule made with VMD is presented in :numref:`fig_carbazole`.
 
+   .. _fig_carbazole:
    .. figure:: ../_figures/elecdynamics/tutorial/carbazole.png
       :height: 30ex
       :align: center
@@ -81,8 +82,9 @@ We will calculate the absorption spectrum of the carbazole molecule, following t
 4. After running the script you will find two new files: *spec-nm.dat* and *spec-ev.dat* which are
    the absorption spectra in nm and eV, respectively. Plot the spectrum file with the plotting tool
    of your choice and look at the lowest energy transitions. You should then see
-   an absorption spectrum similar to:
+   an absorption spectrum similar to :numref:`fig_carbazole_spec`.
 
+   .. _fig_carbazole_spec:
    .. figure:: ../_figures/elecdynamics/tutorial/spec-nm-carbazole.png
       :width: 60%
       :align: center
@@ -92,9 +94,10 @@ We will calculate the absorption spectrum of the carbazole molecule, following t
 
 5. Change the damping constant for a higher value, recalculate the specctrum and plot both spectra
    together. What is the effect of the damping time in the spectrum?
-   Here it is an example of the same spectrum calculated with
+   In :numref:`fig_carbazole_spec_damp` can be seen the same spectrum calculated with
    different values of the damping constant.
 
+   .. _fig_carbazole_spec_damp:
    .. figure:: ../_figures/elecdynamics/tutorial/specs-comparison-damp.png
       :width: 60%
       :align: center
@@ -177,11 +180,17 @@ finding first the lowest energy transition of the molecule in the spectrum plott
 
    - Why we should use this laser polarization instead of any other?
 
-4. After the dynamics, take a look at the *mu.dat* file.
+4. After the dynamics, take a look at the *mu.dat* file. You could plot the 3
+   componets of the dipole moment by doing::
+
+      xmgrace -nxy mu.dat
+
+   In :numref:`fig_carbazole_mu` the dipole moment is plotted.
 
    - Is the dipole moment increasing linearly?
-
-   .. figure:: ../_figures/ele.. _sec-driving:cdynamics/tutorial/mu-carbazole-components.png
+   
+   .. _fig_carbazole_mu:
+   .. figure:: ../_figures/elecdynamics/tutorial/mu-carbazole-components.png
       :width: 60%
       :align: center
       :alt: mu components
@@ -189,12 +198,18 @@ finding first the lowest energy transition of the molecule in the spectrum plott
       Dipole moment components vs time for the laser dynamics.
 
 5. Take a look at the *molpopul1.dat* file
-   generated. This file contains the populations projected on the GS orbitals during the dynamics.
+   generated. This file contains the populations projected on the GS orbitals during the dynamics::
+      
+      # GS molecular orbital populations, spin channel : 1
+      #time (fs) | population (orb 1) | population (orb 2) | ... | population (orb N) |
+      0.237050663997490  1.999999999825206  1.999999999780047  1.999999999771997  ...
+      0.478939096647990  1.999999999978780  1.999999999983538  1.999999999962606  ...
+      0.720827529298490  1.999999999870651  1.999999999913354  1.999999999904491  ...
 
    - Which orbitals are involved in the transition?
      Help: you can plot the *molpopul1.dat* file using `xmgrace`::
 
-      xmgrace -nxy molpopul.dat
+        xmgrace -nxy molpopul1.dat
 
      Look at the populations initially at y=2 (occupied orbitals in the GS basis) and find
      which curves are decreasing over time, these are the orbitals
@@ -216,10 +231,9 @@ finding first the lowest energy transition of the molecule in the spectrum plott
      where it is clear that states 31 and 32 are the HOMO 
      and LUMO of the molecule, respectively.   
 
-6. Let's visualize those orbitals using ``waveplot``. For a complete description please check :ref:`basics-waveplot`.
+6. Let's visualize those orbitals using ``waveplot``. For a complete description please check :ref:`sec-basics-waveplot`.
 
   - Look at the *waveplot_in.hsd_* template input file for waveplot:
-
     
     - Which files are needed?
     - In which orbitals are we interested?
@@ -237,9 +251,10 @@ finding first the lowest energy transition of the molecule in the spectrum plott
      `VESTA <https://jp-minerals.org/vesta/en/download.html>`_ allows the user to open directly cube files showing the isosurface immediately
      with some default parameters, making it a really good option for quick inspections.
 
-As a reference, here are the populations obtained from the laser dynamics
-and the orbitals involved in the transition:
+As a reference, we plotted the populations obtained from the laser dynamics
+and the orbitals involved in the transition in :numref:`fig_carbazole_pops`.
 
+.. _fig_carbazole_pops:
 .. figure:: ../_figures/elecdynamics/tutorial/molpopul-carbazole.png
    :width: 100%
    :align: center
@@ -250,7 +265,7 @@ and the orbitals involved in the transition:
 
 
 Now it's your turn! Calculation of PDI absorption spectrum
---------------------------------------------------------
+----------------------------------------------------------
 
 [Input: `recipes/electronicdynamics/tutorial/01_spectra_and_laser/02_PDI/``]
 
@@ -264,8 +279,9 @@ molecule, PDI.
   - Apply a laser tuned with this transition.
   - Obtain the orbitals involved in the transition using waveplot and plot them.
 
-Reference results:
+The reference results are plotted in :numref:`fig_PDI` 
 
+.. _fig_PDI:
 .. figure:: ../_figures/elecdynamics/tutorial/PDI.png
    :width: 100%
    :align: center
@@ -284,24 +300,29 @@ Calculate the absorption spectrum of a donor-acceptor aggregate
 
 [Input: `recipes/electronicdynamics/tutorial/02_photoinduced_CT/01_aggregate_spec/`]
 
-1. Visualize the coordinates file *coords.xyz* 
-
+1. Visualize the coordinates file *coords.xyz*.
+   
+   .. _fig_aggregate:
    .. figure:: ../_figures/elecdynamics/tutorial/PDI+carbazole.png
       :width: 60%
       :align: center
       :alt: PDI+carbazole aggregate
 
       PDI+carbazole derivatives aggregate
-`
+
    It is an aggregate of the two previous molecules, in which the carbazole and
    PDI derivatives act as donor and acceptor of electrons, respectively.
+
       - Convert the coordinates into *gen* format (using the ``xyz2gen`` script) and
         calculate the absorption spectrum using the *dftb_in.hsd_spec* as a template
         for the input (copy this file or rename it as *dftb_in.hsd*).
 
 2. Compare the calculated spectrum with the individual ones (you can use the spectra
-   calculated before or recalculate them from these derivatives). For the comparison to be valid, you should use the same damping constant for all spectra. Are there relevant differences?
-
+   calculated before or recalculate them from these derivatives). For the comparison to be valid,
+   you should use the same damping constant for all spectra. Are there relevant differences?
+   See :numref:`fig_specs_AD`.
+   
+   .. _fig_specs_AD:
    .. figure:: ../_figures/elecdynamics/tutorial/specs-compar-A+D.png
       :width: 60%
       :align: center
@@ -315,8 +336,8 @@ Calculate the absorption spectrum of a donor-acceptor aggregate
    puropose, we will perform a driven simulation in next step and for it, we need to calculate
    the transition dipole direction of the absorption band at ~530 nm. Calculate this vector
    using the ``calc_timeprop_maxpoldir`` tool. You shold obtain something similar to::
-
-   PolarizationDirection = -0.99977 0.01777 0.01122
+      
+      PolarizationDirection = -0.99977 0.01777 0.01122
 
    which is essentially the *X* direction (since the PDI molecule axis is 
    paralel to the *X* axis in the coordinates).
@@ -399,8 +420,9 @@ Laser dynamics on the donor-acceptor aggregate and charge transfer
 
    After runing the script, two files may be generated: *charge_frag1.dat* and
    *charge_frag2.dat* with the corresponding charges of each defined fragment.
-   If you plot it you will get something like:
-
+   If you plot it you will get something like in :numref:`fig_CT_AD`.
+   
+   .. _fig_CT_AD:
    .. figure:: ../_figures/elecdynamics/tutorial/charge-vs-time.png
       :width: 60%
       :align: center
@@ -413,8 +435,9 @@ Laser dynamics on the donor-acceptor aggregate and charge transfer
    If we follow the protocol from before, ploting the populations and searching 
    for the orbitals involved in the transition, we should be able to get some
    insigths on the mechanism of the charge transfer (follow the steps in the
-   previous sections). As it is shown in the figure:
+   previous sections). As it is shown in :numref:`fig_molpopul-CT`.
 
+   .. _fig_molpopul-CT:
    .. figure:: ../_figures/elecdynamics/tutorial/molpopul-CT.png
       :width: 100%
       :align: center
@@ -445,3 +468,4 @@ recent works performed with this method in ``DFTB+``:
 **Photoinduced charge-transfer in chromophore-labeled gold nanoclusters: quantum evidence of the critical role of ligands and vibronic couplings.** Domínguez-Castro, A., Lien-Medrano, C. R., Maghrebi, K., Messaoudi, S., Frauenheim, T., & Fihey, A. (2021). Nanoscale, 13(14), 6786–6797. `https://doi.org/10.1039/D1NR00213A <https://doi.org/10.1039/D1NR00213A>`_
 
 **Plasmon-driven sub-picosecond breathing of metal nanoparticles.** Bonafé, F. P., Aradi, B., Guan, M., Douglas-Gallardo, O. A., Lian, C., Meng, S., Frauenheim, T., & Sánchez, C. G. (2017). Nanoscale, 9(34), 12391–12397. `https://doi.org/10.1039/C7NR04536K <https://doi.org/10.1039/C7NR04536K>`_
+

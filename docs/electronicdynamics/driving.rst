@@ -1,4 +1,5 @@
 .. highlight:: none
+.. _sec-driving:
 
 ************************************************
 Driving electronic dynamics with external fields

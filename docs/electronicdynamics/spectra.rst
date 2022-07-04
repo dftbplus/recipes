@@ -1,4 +1,5 @@
 .. highlight:: none
+.. _sec-spectra:
 
 ********************************************
 Calculation of electronic absorption spectra
