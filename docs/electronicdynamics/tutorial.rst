@@ -6,6 +6,8 @@ Tutorial: Photoinduced charge transfer in a donor-acceptor complex.
 
 This is the tutorial given at the DFTB+ School 2022 in Daresbury, UK. The idea is to get familiar
 with the real-time TDDFTB method applied to molecules and molecular complexes, learning the basics of absorption spectra calculations and photoinduced processes such as charge transfer under laser irradiation.
+The tutorial is based on the following work: **Photoinduced charge-transfer dynamics simulations in noncovalently bonded molecular aggregates.
+** Medrano, C. R., Oviedo, M. B., & Sánchez, C. G. (2016). Physical Chemistry Chemical Physics, 18(22), 14840–14849. `https://doi.org/10.1039/c6cp00231e <https://doi.org/10.1039/c6cp00231e>`_
 
 Spectra and analysis
 ====================
