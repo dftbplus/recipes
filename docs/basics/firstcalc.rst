@@ -23,20 +23,21 @@ DFTB+ accepts the input in the Human-readable Structured Data (HSD) format. The
 input file must be called `dftb_in.hsd`.  The input file used in this example
 looks as follows::
 
-  Geometry = GenFormat { 
-  3 C 
-    O H 
-  
+  Geometry = GenFormat {
+  3 C
+    O H
+
     1 1  0.00000000000E+00 -0.10000000000E+01  0.00000000000E+00
     2 2  0.00000000000E+00  0.00000000000E+00  0.78306400000E+00
-    3 2  0.00000000000E+00  0.00000000000E+00 -0.78306400000E+00 
+    3 2  0.00000000000E+00  0.00000000000E+00 -0.78306400000E+00
   }
-  
-  Driver = ConjugateGradient {
+
+  Driver = GeometryOptimization {
+    Optimizer = Rational {}
     MovedAtoms = 1:-1
-    MaxForceComponent = 1E-4
     MaxSteps = 100
     OutputPrefix = "geom.out"
+    Convergence {GradAMax = 1E-4}
   }
 
   Hamiltonian = DFTB {
@@ -52,15 +53,15 @@ looks as follows::
       H = "s"
     }
   }
-  
+
   Options {}
-  
+
   Analysis {
     CalculateForces = Yes
   }
 
   ParserOptions {
-    ParserVersion = 7
+    ParserVersion = 12
   }
 
 The order of the specified blocks in the HSD input is arbitrary. You are free to
@@ -128,17 +129,18 @@ like ::
 
 or omit the ``Driver`` block completely from `dftb_in.hsd`.
 
-In the current example::
+In the current example ::
 
-  # Do conjugate gradient optimisation
-  Driver = ConjugateGradient {
+  # Perform rational function based optimisation
+  Driver = GeometryOptimization {
+    Optimizer = Rational {}
     MovedAtoms = 1:-1               # Move all atoms in the system
-    MaxForceComponent = 1.0e-4      # Stop if maximal force below 1.0e-4
     MaxSteps = 100                  # Stop after maximal 100 steps
     OutputPrefix = "geom.out"       # Final geometry in geom.out.{xyz,gen}
+    Convergence {GradAMax = 1E-4}   # Stop if maximal force below 1E-4 H/a0
   }
 
-the molecule is relaxed using the conjugate gradient method. The
+the molecule is relaxed using a rational function based optimiser. The
 entire range of atoms from the first (atom 1) until and including the
 last (-1) is allowed to move. Instead of ``1:-1`` you could also have
 written::
@@ -156,19 +158,20 @@ or ::
 
 In our case the geometry optimisation continues as long as the maximum component
 of the force acting on the moving atoms is bigger than 1e-4 atomic units
-(Hartree per Bohr radius).  Numeric values are by default interpreted to be in
+(Hartree per Bohr radius). Numeric values are by default interpreted to be in
 atomic units. However the HSD format offers the possibility of using alternative
 units by specifying a unit modifier before the equals sign. This is given in
 square brackets. For example instead of the original atomic units, you could
 have used ::
 
-  MaxForceComponent [eV/AA] = 5.14e-3    # Force in Electronvolts/Angstrom
+  GradAMax [eV/AA] = 5.14e-3    # Force in Electronvolts/Angstrom
 
 or ::
 
-  MaxForceComponent [Electronvolt/Angstrom] = 5.14e-3
+  GradAMax [Electronvolt/Angstrom] = 5.14e-3
 
-See the manual for the list of accepted modifiers.
+See the manual for the list of accepted modifiers and additional convergence
+criteria supported by the ``Convergence`` block.
 
 The ``MaxSteps`` keyword specifies the maximum number of geometry optimisation
 steps that the program can take before stopping, even if the specified tolerance
@@ -195,7 +198,7 @@ Binding Hamiltonians (with some extensions). In our example, the chosen
 self-consistent DFTB Hamiltonian has the following properties::
 
   Hamiltonian = DFTB {                 # DFTB Hamiltonian
-    Scc = Yes                          # Use self consistent charges
+    Scc = Yes                          # Use self-consistent charges
     SlaterKosterFiles {                # Specifying Slater-Koster files
       O-O = "../../slakos/mio-ext/O-O.skf"
       O-H = "../../slakos/mio-ext/O-H.skf"
@@ -238,7 +241,7 @@ elements in your system, the corresponding Slater-Koster file::
 If you use a consistent file naming convention, you can avoid typing all the
 file names by specifying only the generating pattern. The input::
 
-  SlaterKosterFiles = Type2FileNames {    # File names with two atom type names
+  SlaterKosterFiles = Type2FileNames {  # File names with two atom type names
     Prefix = "../../slakos/mio-ext/"    # Prefix before first type name
     Separator = "-"                     # Dash between type names
     Suffix = ".skf"                     # Suffix after second type name
@@ -299,7 +302,7 @@ The version number of the parser in the current DFTB+ code is always printed out
 at the program start. It is a good habit to set this value in your input files
 explicitly, like in our case::
 
-  ParserVersion = 7
+  ParserVersion = 12
 
 This allows you to use your input file with future versions of DFTB+ without
 adapting it by hand, if the input format has changed in the more recent version.
@@ -325,96 +328,96 @@ starting with::
 
   |===============================================================================
   |
-  |  DFTB+ (Release 17.1)
+  |  DFTB+ release 22.2
   |
-  |  Copyright (C) 2017  DFTB+ developers group
+  |  Copyright (C) 2006 - 2022  DFTB+ developers group
   |
   |===============================================================================
   |
   |  When publishing results obtained with DFTB+, please cite the following
   |  reference:
   |
-  |  * B. Aradi, B. Hourahine and T. Frauenheim,
-  |    DFTB+, a Sparse Matrix-Based Implementation of the DFTB Method,
-  |    J. Phys. Chem. A, 111 5678 (2007).  [doi: 10.1021/jp070186p]
+  |  * DFTB+, a software package for efficient approximate density functional
+  |    theory based atomistic simulations, J. Chem. Phys. 152, 124101 (2020).
+  |    [doi: 10.1063/1.5143190]
   |
   |  You should also cite additional publications crediting the parametrization
   |  data you use. Please consult the documentation of the SK-files for the
   |  references.
   |
   |===============================================================================
-  
-  
-  ***  Parsing and initializing
-  
-  Parser version: 5
-  
-  Interpreting input file 'dftb_in.hsd'
+
+  Reading input file 'dftb_in.hsd'
+  Parser version: 12
+
   --------------------------------------------------------------------------------
   Reading SK-files:
-    O-O.skf
-    O-H.skf
-    O-H.skf
-    H-H.skf
+  /home/user/slakos/mio-1-1/O-O.skf
+  /home/user/slakos/mio-1-1/O-H.skf
+  /home/user/slakos/mio-1-1/H-H.skf
   Done.
-  
-  
+
+
   Processed input in HSD format written to 'dftb_pin.hsd'
-  
+
   Starting initialization...
   --------------------------------------------------------------------------------
-  Mode:                        Conjugate gradient relaxation
+  OpenMP threads:              16
+  Chosen random seed:          1354468809
+  Mode:                        Static calculation
   Self consistent charges:     Yes
   SCC-tolerance:                 0.100000E-04
   Max. scc iterations:                    100
-  Ewald alpha parameter:         0.000000E+00
+  Shell resolved Hubbard:      No
   Spin polarisation:           No
   Nr. of up electrons:             4.000000
   Nr. of down electrons:           4.000000
   Periodic boundaries:         No
-  Diagonalizer:                Relatively robust (version 1)
+  Electronic solver:           Relatively robust
   Mixer:                       Broyden mixer
   Mixing parameter:                  0.200000
   Maximal SCC-cycles:                     100
-  Nr. of chrg. vec. in memory:              0
-  Nr. of moved atoms:                       3
-  Max. nr. of geometry steps:             100
-  Force tolerance:               0.100000E-03
-  Force evaluation method:     Traditional                                                                                                                                                                                             
-  Electronic temperature:        0.100000E-07
+  Nr. of chrg. vec. in memory:            100
+  Electronic temperature:              0.100000E-07 H      0.272114E-06 eV
   Initial charges:             Set automatically (system chrg:   0.000E+00)
   Included shells:             O:  s, p
-                               H:  s
+			       H:  s
   Extra options:
-                               Mulliken analysis
+			       Mulliken analysis
+			       Force calculation
   Force type                   original
-  
-  
+
   --------------------------------------------------------------------------------
-  
+
   ***  Geometry step: 0
-  
-      iSCC Total electronic   Diff electronic      SCC error    
-      1   -0.39511797E+01    0.00000000E+00    0.88081627E+00
-      2   -0.39705438E+01   -0.19364070E-01    0.55742893E+00
-      3   -0.39841371E+01   -0.13593374E-01    0.32497352E-01
-      4   -0.39841854E+01   -0.48242063E-04    0.19288772E-02
-      5   -0.39841856E+01   -0.17020682E-06    0.87062163E-05
-  
-   Total Energy:                      -3.9798793068 H         -108.2980 eV
-   Total Mermin free energy:          -3.9798793068 H         -108.2980 eV
-   Maximal force component:            0.187090E+00
+
+   iSCC Total electronic   Diff electronic      SCC error
+      1    0.00000000E+00    0.00000000E+00    0.88081627E+00
+      2   -0.39511797E+01   -0.39511797E+01    0.55742893E+00
+      3   -0.39705438E+01   -0.19364070E-01    0.32497352E-01
+      4   -0.39841371E+01   -0.13593374E-01    0.19288772E-02
+      5   -0.39841854E+01   -0.48242063E-04    0.87062163E-05
+
+  Total Energy:                       -3.9798793068 H         -108.2980 eV
+  Extrapolated to 0K:                 -3.9798793068 H         -108.2980 eV
+  Total Mermin free energy:           -3.9798793068 H         -108.2980 eV
+  Force related energy:               -3.9798793068 H         -108.2980 eV
+
   >> Charges saved for restart in charges.bin
-  
+
+  total energy  -3.9798793E+00 H       energy change -3.9798793E+00 H
+  gradient norm  2.3565839E-01 H/a0    max. gradient  1.8709029E-01 H/a0
+  step length    0.0000000E+00 a0      max. step      0.0000000E+00 a0
+
   --------------------------------------------------------------------------------
-  
+
   ***  Geometry step: 1
-  
-    iSCC Total electronic   Diff electronic      SCC error    
-      1   -0.40495559E+01    0.00000000E+00    0.92334735E-01
+
+   iSCC Total electronic   Diff electronic      SCC error
+      1   -0.39841856E+01    0.00000000E+00    0.84282109E-01
   .
   .
-  . 
+  .
 
 If this is the case, you have managed to run DFTB+ for the first
 time. Congratulations!
@@ -437,52 +440,48 @@ program header::
 
   |===============================================================================
   |
-  |  DFTB+ (Release 17.1)
+  |  DFTB+ release 22.2
   |
-  |  Copyright (C) 2017  DFTB+ developers group
+  |  Copyright (C) 2006 - 2022  DFTB+ developers group
   |
   |===============================================================================
   |
   |  When publishing results obtained with DFTB+, please cite the following
   |  reference:
   |
-  |  * B. Aradi, B. Hourahine and T. Frauenheim,
-  |    DFTB+, a Sparse Matrix-Based Implementation of the DFTB Method,
-  |    J. Phys. Chem. A, 111 5678 (2007).  [doi: 10.1021/jp070186p]
+  |  * DFTB+, a software package for efficient approximate density functional
+  |    theory based atomistic simulations, J. Chem. Phys. 152, 124101 (2020).
+  |    [doi: 10.1063/1.5143190]
   |
   |  You should also cite additional publications crediting the parametrization
   |  data you use. Please consult the documentation of the SK-files for the
   |  references.
   |
   |===============================================================================
-  
-  
-  ***  Parsing and initializing
-  
-  Parser version: 5
 
-This tells you which program you are using (DFTB+), which release (17.1) and the
+  Reading input file 'dftb_in.hsd'
+  Parser version: 12
+
+This tells you which program you are using (DFTB+), which release (22.2) and the
 paper(s) associated with the code. Then the version of the parser used in this
 DFTB+ release is listed.
 
 As already discussed above, it can be a good habit to set this version number
 explicitly in your input inside the ``ParserOptions`` block, so that::
 
-  ParserOptions { 
-    ParserVersion = 7
+  ParserOptions {
+    ParserVersion = 12
   }
 
 Next, the parser starts to interpret your input, then reads in the
 necessary SK-files and writes the full input settings to
 `dftb_pin.hsd`::
-  
-  Interpreting input file 'dftb_in.hsd'
+
   --------------------------------------------------------------------------------
   Reading SK-files:
-    O-O.skf
-    O-H.skf
-    O-H.skf
-    H-H.skf
+  /home/user/slakos/mio-1-1/O-O.skf
+  /home/user/slakos/mio-1-1/O-H.skf
+  /home/user/slakos/mio-1-1/H-H.skf
   Done.
 
 
@@ -495,56 +494,63 @@ missing specifications, you should look at the processed input file
 `dftb_pin.hsd`, which contains the value for all the possible input settings
 (see next the subsection).
 
-At this point the DFTB+ code is then initialised, and the most important
-parameters of the calculation are then printed out::
+At this point the DFTB+ code is initialised and the most important parameters
+of the calculation are printed out::
 
-  Mode:                        Conjugate gradient relaxation
+  Starting initialization...
+  --------------------------------------------------------------------------------
+  OpenMP threads:              16
+  Chosen random seed:          1354468809
+  Mode:                        Static calculation
   Self consistent charges:     Yes
   SCC-tolerance:                 0.100000E-04
   Max. scc iterations:                    100
-  Ewald alpha parameter:         0.000000E+00
+  Shell resolved Hubbard:      No
   Spin polarisation:           No
   Nr. of up electrons:             4.000000
   Nr. of down electrons:           4.000000
   Periodic boundaries:         No
-  Diagonalizer:                Relatively robust (version 1)
+  Electronic solver:           Relatively robust
   Mixer:                       Broyden mixer
   Mixing parameter:                  0.200000
   Maximal SCC-cycles:                     100
-  Nr. of chrg. vec. in memory:              0
-  Nr. of moved atoms:                       3
-  Max. nr. of geometry steps:             100
-  Force tolerance:               0.100000E-03
-  Force evaluation method:     Traditional                                                                                                                                                                                             
-  Electronic temperature:        0.100000E-07
+  Nr. of chrg. vec. in memory:            100
+  Electronic temperature:              0.100000E-07 H      0.272114E-06 eV
   Initial charges:             Set automatically (system chrg:   0.000E+00)
   Included shells:             O:  s, p
-                               H:  s
+			       H:  s
   Extra options:
-                               Mulliken analysis
+			       Mulliken analysis
+			       Force calculation
   Force type                   original
-  
 
-As you can see, all quantities (e.g. force tolerance, electronic temperature)
-are converted to the internal units of DFTB+, namely atomic units (with Hartree
-as the base energy unit).
+
+As you can see, all quantities (e.g. electronic temperature) are converted to
+the internal units of DFTB+, namely atomic units (with Hartree as the base
+energy unit).
 
 Then the program starts::
 
   ***  Geometry step: 0
-  
-      iSCC Total electronic   Diff electronic      SCC error    
-      1   -0.39511797E+01    0.00000000E+00    0.88081627E+00
-      2   -0.39705438E+01   -0.19364070E-01    0.55742893E+00
-      3   -0.39841371E+01   -0.13593374E-01    0.32497352E-01
-      4   -0.39841854E+01   -0.48242063E-04    0.19288772E-02
-      5   -0.39841856E+01   -0.17020682E-06    0.87062163E-05
-  
-   Total Energy:                      -3.9798793068 H         -108.2980 eV
-   Total Mermin free energy:          -3.9798793068 H         -108.2980 eV
-   Maximal force component:            0.187090E+00
+
+   iSCC Total electronic   Diff electronic      SCC error
+      1    0.00000000E+00    0.00000000E+00    0.88081627E+00
+      2   -0.39511797E+01   -0.39511797E+01    0.55742893E+00
+      3   -0.39705438E+01   -0.19364070E-01    0.32497352E-01
+      4   -0.39841371E+01   -0.13593374E-01    0.19288772E-02
+      5   -0.39841854E+01   -0.48242063E-04    0.87062163E-05
+
+  Total Energy:                       -3.9798793068 H         -108.2980 eV
+  Extrapolated to 0K:                 -3.9798793068 H         -108.2980 eV
+  Total Mermin free energy:           -3.9798793068 H         -108.2980 eV
+  Force related energy:               -3.9798793068 H         -108.2980 eV
+
   >> Charges saved for restart in charges.bin
-  :  
+
+  total energy  -3.9798793E+00 H       energy change -3.9798793E+00 H
+  gradient norm  2.3565839E-01 H/a0    max. gradient  1.8709029E-01 H/a0
+  step length    0.0000000E+00 a0      max. step      0.0000000E+00 a0
+  :
 
 Since this is an SCC calculation, DFTB+ has to iterate the charges until the
 specified convergence criteria is fulfilled. In every cycle, you get information
@@ -556,25 +562,31 @@ value is relevant to the tolerance specified in the input (``SccTolerance``).
 If the SCC cycle has converged, the total energy (including SCC and repulsive
 contributions) is calculated, and similarly the total Mermin free energy (this
 is the Helmholtz free energy, but where only the electronic entropy is
-included). Additionally the biggest force component in the system is indicated.
+included). Additionally, geometry convergence relevant components are indicated.
 
 Then the driver changes the geometry of the system, and the self-consistent
 cycle is repeated as before but for the new geometry. This process continues as
 long as the geometry does not converge::
 
-  ***  Geometry step: 12
-  
-    iSCC Total electronic   Diff electronic      SCC error    
-      1   -0.41505816E+01    0.00000000E+00    0.20115717E-02
-      2   -0.41505816E+01   -0.21681791E-07    0.14908557E-02
-      3   -0.41505816E+01   -0.26422777E-07    0.27122328E-07
-  
-   Total Energy:                      -4.0779379339 H         -110.9663 eV
-   Total Mermin free energy:          -4.0779379339 H         -110.9663 eV
-   Maximal force component:            0.280551E-05
+  ***  Geometry step: 9
+
+   iSCC Total electronic   Diff electronic      SCC error
+      1   -0.41506534E+01    0.00000000E+00    0.33681615E-04
+      2   -0.41505940E+01    0.59393461E-04    0.24963044E-04
+      3   -0.41505940E+01   -0.60786931E-11    0.66000538E-11
+
+  Total Energy:                       -4.0779379326 H         -110.9663 eV
+  Extrapolated to 0K:                 -4.0779379326 H         -110.9663 eV
+  Total Mermin free energy:           -4.0779379326 H         -110.9663 eV
+  Force related energy:               -4.0779379326 H         -110.9663 eV
+
   >> Charges saved for restart in charges.bin
-  
-   Geometry converged
+
+  total energy  -4.0779379E+00 H       energy change -2.1070335E-08 H
+  gradient norm  3.0077217E-05 H/a0    max. gradient  1.9992076E-05 H/a0
+  step length    1.9263985E-04 a0      max. step      1.1981494E-04 a0
+
+  Geometry converged
 
 If the geometry does not converge before the maximum number of geometry steps is
 reached, the code will stop and you will get an appropriate warning message.
@@ -582,16 +594,22 @@ Assuming the ``MaxSteps`` option had been set to ``6`` in the input, you would
 obtain::
 
   ***  Geometry step: 6
-  
-    iSCC Total electronic   Diff electronic      SCC error    
-      1   -0.41414806E+01    0.00000000E+00    0.12690850E-01
-      2   -0.41414816E+01   -0.96478820E-06    0.93483401E-02
-      3   -0.41414827E+01   -0.11442335E-05    0.17373439E-05
-  
-   Total Energy:                      -4.0774103506 H         -110.9520 eV
-   Total Mermin free energy:          -4.0774103506 H         -110.9520 eV
-   Maximal force component:            0.207962E-01
+
+   iSCC Total electronic   Diff electronic      SCC error
+      1   -0.41530295E+01    0.00000000E+00    0.98887987E-03
+      2   -0.41529684E+01    0.61129539E-04    0.73298155E-03
+      3   -0.41529684E+01   -0.52412306E-08    0.51941278E-08
+
+  Total Energy:                       -4.0778494543 H         -110.9639 eV
+  Extrapolated to 0K:                 -4.0778494543 H         -110.9639 eV
+  Total Mermin free energy:           -4.0778494543 H         -110.9639 eV
+  Force related energy:               -4.0778494543 H         -110.9639 eV
+
   >> Charges saved for restart in charges.bin
+
+  total energy  -4.0778495E+00 H       energy change -4.9306884E-05 H
+  gradient norm  6.9348797E-03 H/a0    max. gradient  4.7428785E-03 H/a0
+  step length    9.5435174E-03 a0      max. step      5.5244015E-03 a0
   WARNING!
   -> !!! Geometry did NOT converge!
 
@@ -602,20 +620,27 @@ dftb_pin.hsd
 As already mentioned, the processed input file `dftb_pin.hsd` is an input file
 generated from your `dftb_in.hsd` by including the default values for all
 unspecified options and converting some of the input quantities to atomic
-units. For example, in our case in the ``ConjugateGradient`` block several
+units. For example, in our case in the ``GeometryOptimization`` block several
 unspecified options would appear, for which sensible default values have been
 set::
 
-  Driver = ConjugateGradient {
+  Driver = GeometryOptimization {
+    Optimizer = Rational {
+      DiagLimit = 1.000000000000000E-002
+    }
     MovedAtoms = 1:-1
-    MaxForceComponent = 1E-4
     MaxSteps = 100
     OutputPrefix = "geom.out"
+    Convergence = {
+      GradAMax = 1E-4
+      Energy = 1.797693134862316E+308
+      GradNorm = 1.797693134862316E+308
+      GradElem = 1.000000000000000E-004
+      DispNorm = 1.797693134862316E+308
+      DispElem = 1.797693134862316E+308
+    }
     LatticeOpt = No
-    MaxAtomStep = 0.20000000000000001
     AppendGeometries = No
-    ConvergentForcesOnly = Yes
-    Constraints {}
   }
 
 Similarly, in the ``DFTB{}`` block the switch for the shell resolved SCC, for
@@ -642,89 +667,83 @@ is updated continuously during the run, by the end of the calculation will
 contain values calculated during the last SCC cycle. All the numerical values
 given in this file are in atomic units, unless explicitly specified otherwise.
 
-`detailed.out` contains (among other data) the number of the last geometry step,
-a summary of the last SCC cycle and coordinates of any moved atoms::
+`detailed.out` contains (among other data) the number of the last geometry step
+and a summary of the last SCC cycle::
 
-  Geometry optimization step: 12
-   
-  
+  Geometry optimization step: 9
+
+
   ********************************************************************************
-    iSCC Total electronic   Diff electronic      SCC error    
-      3   -0.41505816E+01   -0.26422777E-07    0.27122328E-07
+   iSCC Total electronic   Diff electronic      SCC error
+      3   -0.41505940E+01   -0.60786931E-11    0.66000538E-11
   ********************************************************************************
-   
-   Coordinates of moved atoms (au):
-      1      0.00000000     -1.35303527     -0.00000000
-      2     -0.00000000     -0.26834536      1.47115110
-      3      0.00000000     -0.26834536     -1.47115110
 
 Then the populaton analysis information follows::
 
-  Total charge:    -0.00000000
-  
-  Atomic gross charges (e)
-  Atom           Charge
-     1      -0.59261515
-     2       0.29630757
-     3       0.29630757
-  
+   Total charge:    -0.00000000
+
+   Atomic gross charges (e)
+   Atom           Charge
+      1      -0.59260702
+      2       0.29630351
+      3       0.29630351
+
   Nr. of electrons (up):      8.00000000
   Atom populations (up)
    Atom       Population
-      1       6.59261515
-      2       0.70369243
-      3       0.70369243
-  
+      1       6.59260702
+      2       0.70369649
+      3       0.70369649
+
   l-shell populations (up)
    Atom Sh.   l       Population
-      1   1   0       1.73421713
-      1   2   1       4.85839802
-      2   1   0       0.70369243
-      3   1   0       0.70369243
-  
-  Orbital populations (up)
-   Atom Sh.   l   m       Population
-      1   1   0   0       1.73421713
-      1   2   1  -1       1.68107958
-      1   2   1   0       1.17731844
-      1   2   1   1       2.00000000
-      2   1   0   0       0.70369243
-      3   1   0   0       0.70369243
+      1   1   0       1.73421608
+      1   2   1       4.85839094
+      2   1   0       0.70369649
+      3   1   0       0.70369649
 
+  Orbital populations (up)
+   Atom Sh.   l   m       Population  Label
+      1   1   0   0       1.73421608  s
+      1   2   1  -1       1.68105131  p_y
+      1   2   1   0       1.17733963  p_z
+      1   2   1   1       2.00000000  p_x
+      2   1   0   0       0.70369649  s
+      3   1   0   0       0.70369649  s
 
 It shows the total charge of the system and the charges for each atom, followed
 by detailed population analyis for each atom, shell and orbital.
 
 .. |H2O| replace:: H\ :sub:`2`\ O
-       
+
 
 Then you obtain a count of the total number electrons in the system, and the
 number of electrons on each atom, each atomic shell of the atoms (s, p, d, etc.)
 and each atomic orbital (labelled by their m\ :sub:`z` value) as calculated by
 Mulliken-analysis::
 
-   Nr. of electrons (up):      8.00000000
-   Atom populations (up)
-    Atom       Population
-       1       6.59261515
-       2       0.70369243
-       3       0.70369243
-   
-   l-shell populations (up)
-    Atom Sh.   l       Population
-       1   1   0       1.73421713
-       1   2   1       4.85839802
-       2   1   0       0.70369243
-       3   1   0       0.70369243
-   
-   Orbital populations (up)
-    Atom Sh.   l   m       Population
-       1   1   0   0       1.73421713
-       1   2   1  -1       1.68107958
-       1   2   1   0       1.17731844
-       1   2   1   1       2.00000000
-       2   1   0   0       0.70369243
-       3   1   0   0       0.70369243
+  Nr. of electrons (up):      8.00000000
+  Atom populations (up)
+   Atom       Population
+      1       6.59260702
+      2       0.70369649
+      3       0.70369649
+
+  l-shell populations (up)
+   Atom Sh.   l       Population
+      1   1   0       1.73421608
+      1   2   1       4.85839094
+      2   1   0       0.70369649
+      3   1   0       0.70369649
+
+  Orbital populations (up)
+   Atom Sh.   l   m       Population  Label
+      1   1   0   0       1.73421608  s
+      1   2   1  -1       1.68105131  p_y
+      1   2   1   0       1.17733963  p_z
+      1   2   1   1       2.00000000  p_x
+      2   1   0   0       0.70369649  s
+      3   1   0   0       0.70369649  s
 
 In our case, due to the electronegativity difference, the hydrogen atoms are
 positively charged (having only 0.704 electrons), while the oxygen atom is
@@ -736,20 +755,21 @@ the total energy and the total energy in Hartrees and electron-volts. If you are
 calculating at a finite electronic temperature, you should consider using the
 Mermin free energy instead of the total energy::
 
-   Fermi level:                        0.0700447751 H            1.9060 eV
-   Band energy:                       -3.6725069692 H          -99.9340 eV
-   TS:                                 0.0000000000 H            0.0000 eV
-   Band free energy (E-TS):           -3.6725069692 H          -99.9340 eV
-   Extrapolated E(0K):                -3.6725069692 H          -99.9340 eV
-   Input/Output electrons (q):      8.00000000      8.00000000
-   
-   Energy H0:                         -4.1689433198 H         -113.4427 eV
-   Energy SCC:                         0.0183617102 H            0.4996 eV
-   Total Electronic energy:           -4.1505816095 H         -112.9431 eV
-   Repulsive energy:                   0.0726436756 H            1.9767 eV
-   Total energy:                      -4.0779379339 H         -110.9663 eV
-   Extrapolated to 0:                 -4.0779379339 H         -110.9663 eV
-   Total Mermin free energy:          -4.0779379339 H         -110.9663 eV
+  Fermi level:                         0.0700493319 H            1.9061 eV
+  Band energy:                        -3.6725386873 H          -99.9349 eV
+  TS:                                  0.0000000000 H            0.0000 eV
+  Band free energy (E-TS):            -3.6725386873 H          -99.9349 eV
+  Extrapolated E(0K):                 -3.6725386873 H          -99.9349 eV
+  Input / Output electrons (q):      8.0000000000      8.0000000000
+
+  Energy H0:                          -4.1689552805 H         -113.4430 eV
+  Energy SCC:                          0.0183612644 H            0.4996 eV
+  Total Electronic energy:            -4.1505940161 H         -112.9434 eV
+  Repulsive energy:                    0.0726560835 H            1.9771 eV
+  Total energy:                       -4.0779379326 H         -110.9663 eV
+  Extrapolated to 0:                  -4.0779379326 H         -110.9663 eV
+  Total Mermin free energy:           -4.0779379326 H         -110.9663 eV
+  Force related energy:               -4.0779379326 H         -110.9663 eV
 
 Between the two blocks of energy data, the input and output electron numbers at
 the last Hamiltonian diagonalisation are shown, so that you can check that no
@@ -765,26 +785,25 @@ system have been calculated by using convergent charges. Values obtained by
 using non convergent charges are usually meaningless.
 
 Finally you get the forces on the atoms in your system.  You get also the
-maximal force component occurring in your system and the maximal force occurring
-among the moved atoms. After this, the dipole moment of the system (in atomic
-units and Debye) is printed where possible. The end of the file will then show
-whether the geometry optimisation has reached convergence, i.e., all force
-components on the moved atoms are below the specified tolerance::
+maximal force component occurring in your system. After this, the dipole moment
+of the system (in atomic units and Debye) is printed where possible. The end of
+the file will then show whether the geometry optimisation has reached
+convergence, i.e., all force components on the moved atoms are below the
+specified tolerance::
 
-   Full geometry written in geom.out.{xyz|gen}
-   
-   Total Forces
-    -1.0881602793401035E-026   6.8304105649286129E-008   4.3629613810658441E-012
-    -1.9606916877279574E-016  -3.4153820160920390E-008  -2.8055131119641974E-006
-     1.9606916878367734E-016  -3.4150285529999103E-008   2.8055087490097552E-006
-   
-   Maximal derivative component:       0.280551E-05 au
-   Max force for moved atoms::         0.280551E-05 au
-   
-   Dipole moment  :   -0.00000000    0.64280367    0.00000000 au
-   Dipole moment  :   -0.00000000    1.63384410    0.00000000 Debye
-   
-   Geometry converged
+  Full geometry written in geom.out.{xyz|gen}
+
+  Total Forces
+      1     -0.000000000000     -0.000008377460     -0.000000000000
+      2      0.000000000000      0.000004188730      0.000019992076
+      3     -0.000000000000      0.000004188730     -0.000019992076
+
+  Maximal derivative component:        0.199921E-04 au
+
+  Dipole moment:    0.00000000    0.64283623    0.00000000 au
+  Dipole moment:    0.00000000    1.63392685    0.00000000 Debye
+
+  Geometry converged
 
 As indicated above, in the current case, the final relaxed geometries can be
 found stored as xyz and gen format in the output files `geom.out.xyz` and
@@ -801,13 +820,13 @@ levels for all of the possible spin channels. For spin unpolarised calculations
 restricted and are twofold degenerate. In a collinear spin polarised calculation
 you would obtain separate values for the spin up and spin down levels::
 
-  KPT            1  SPIN            1  KWEIGHT    1.0000000000000000
-     -23.10209     2.00000
-     -11.27470     2.00000
-      -8.53769     2.00000
-      -7.05252     2.00000
-      10.86455     0.00000
-      15.19442     0.00000
+  KPT            1  SPIN            1  KWEIGHT    1.00000000000000
+      1   -23.102  2.00000
+      2   -11.275  2.00000
+      3    -8.538  2.00000
+      4    -7.053  2.00000
+      5    10.865  0.00000
+      6    15.197  0.00000
 
 The eigenenergies are in units of electron volts. You can use the scripts
 `dp_bands` in the `dptools` package to convert the data in `band.out` to
@@ -826,20 +845,20 @@ If you want to process the results of DFTB+ with another program, you should not
 extract the information from the standard output or the human readable output
 files (`detailed.out`, `band.out`, etc.), since their format could significantly
 change between subsequent releases of DFTB+. By setting the ``WriteResultsTag``
-to ``Yes`` in the ``Options {}`` block::
+to ``Yes`` in the ``Options`` block ::
 
-  Options { 
-    WriteResultsTag = Yes 
+  Options {
+    WriteResultsTag = Yes
   }
 
 you obtain the file `results.tag` at the end of your calculation, which contains
 some of the most important data in a format easily parsed by a script or a
 program. This file contains entries like::
 
-  forces              :real:2:3,3
-   -0.108816027934010E-025  0.683041056492861E-007  0.436296138106584E-011
-   -0.196069168772796E-015 -0.341538201609204E-007 -0.280551311196420E-005
-    0.196069168783677E-015 -0.341502855299991E-007  0.280550874900976E-005
+   forces              :real:2:3,3
+    -0.711965764038220E-026 -0.837746041076892E-005 -0.292432744686266E-012
+     0.107287666233641E-015  0.418872998346476E-005  0.199920761760342E-004
+    -0.107287666226522E-015  0.418873042729029E-005 -0.199920758836292E-004
 
 In the first line the name of the quantity is given, followed by its type
 (``real``, ``integer``, ``logical``). Then the rank of the quantity is given
