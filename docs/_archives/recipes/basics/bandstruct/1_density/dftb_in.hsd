@@ -49,5 +49,5 @@ Analysis {
 }
 
 ParserOptions {
-  ParserVersion = 7
+  ParserVersion = 12
 }

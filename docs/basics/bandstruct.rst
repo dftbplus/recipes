@@ -1,6 +1,6 @@
 .. highlight:: none
 
-****************************               
+****************************
 Band structure, DOS and PDOS
 ****************************
 
@@ -43,7 +43,7 @@ DFTB picture, this corresponds to obtaining the self-consistent charges of the
 atoms.  These charges must be convergent with respect to two quantities in order
 to give correct results:
 
-* Tolerance of the SCC cycle and 
+* Tolerance of the SCC cycle and
 * quality of the k-point sampling grid.
 
 In the current tutorial, the SCC tolerance is set to be ``1e-5``. For the
@@ -70,7 +70,7 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
       0.1903471721E+01   -0.1903471721E+01    0.4864738245E+01
       0.1903471721E+01    0.1903471721E+01   -0.4864738245E+01
   }
-  
+
   Hamiltonian = DFTB {
     Scc = Yes
     SccTolerance = 1e-5
@@ -90,7 +90,7 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
       0.5 0.5 0.5
     }
   }
-  
+
   Analysis {
     ProjectStates {
       Region {
@@ -105,9 +105,9 @@ good k-point sampling. A sample `dftb_in.hsd` input looks like::
        }
     }
   }
-  
+
   ParserOptions {
-    ParserVersion = 7
+    ParserVersion = 12
   }
 
 In the input above, the coordinates have been specified in relative (fractional)
@@ -244,7 +244,7 @@ to be changed slightly::
     MaxSCCIterations = 1
 
     # ...
- 
+
     KPointsAndWeights = Klines {
       1   0.5   0.5  -0.5    # Z
      20   0.0   0.0   0.0    # G
@@ -298,7 +298,7 @@ adaptions:
   The starting point of the first line segment is by default the Gamma point,
   but you can override this behaviour by setting a first line segment with one
   point only, as demonstrated above for the Z-point.
-  
+
   Running DFTB+ with the input above, the eigenlevel spectrum is calculated at
   the required k-points. The results are written to the file `band.out`. You can
   use the script `dp_bands` from the `dptools` package to convert this file into
