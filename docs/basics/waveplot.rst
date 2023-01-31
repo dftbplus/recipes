@@ -32,14 +32,14 @@ optimised by DFTB+::
        2    2    0.00000000000E+00   0.00000000000E+00   0.78306400000E+00
        3    2    0.00000000000E+00   0.00000000000E+00  -0.78306400000E+00
   }
-  
+
   Driver = ConjugateGradient {
     MovedAtoms = 1:-1
     MaxForceComponent = 1.0e-4
     MaxSteps = 100
     OutputPrefix = "geom.out"
   }
-  
+
   Hamiltonian = DFTB {
     Scc = Yes
     SccTolerance = 1.0e-5
@@ -53,7 +53,7 @@ optimised by DFTB+::
       H = "s"
     }
   }
-  
+
   Options {
     WriteDetailedXml = Yes
   }
@@ -61,9 +61,9 @@ optimised by DFTB+::
   Analysis {
     WriteEigenvectors = Yes
   }
-  
+
   ParserOptions {
-    ParserVersion = 9
+    ParserVersion = 12
   }
 
 Running DFTB+ for this input, you should obtain the usual results, and
@@ -90,33 +90,33 @@ The appropriate waveplot input (``waveplot_in.hsd``) could look like the
 following::
 
   # General options
-  
+
   Options {
     TotalChargeDensity = Yes           # Total density be plotted?
     TotalChargeDifference = Yes        # Total density difference plotted?
     ChargeDensity = Yes                # Charge density for each state?
     RealComponent = Yes                # Plot real component of the wavefunction
-    PlottedSpins = 1 -1 
+    PlottedSpins = 1 -1
     PlottedLevels = 4                  # Levels to plot
     PlottedRegion =  OptimalCuboid {}  # Region to plot
-  
+
     NrOfPoints = 50 50 50              # Number of grid points in each direction
     NrOfCachedGrids = -1               # Nr of cached grids (speeds up things)
     Verbose = Yes                      # Wanna see a lot of messages?
   }
-  
+
   DetailedXml = "detailed.xml"         # File containing the detailed xml output
                                        # of DFTB+
   EigenvecBin = "eigenvec.bin"         # File cointaining the binary eigenvecs
-  
-  
+
+
   # Definition of the basis
   Basis {
     Resolution = 0.01
     # Including mio-1-1.hsd. (If you use a set, which depends on other sets,
     # the wfc.*.hsd files for each required set must be included in a similar
     # way.)
-    <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"  
+    <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"
   }
 
 
@@ -169,7 +169,7 @@ Output
   ================================================================================
        WAVEPLOT  0.2
   ================================================================================
-  
+
   Interpreting input file 'waveplot_in.hsd'
   --------------------------------------------------------------------------------
   WARNING!
@@ -183,15 +183,15 @@ Output
   (3)
   Path: waveplot/Basis/S
   Line: 120-170 (File: wfc.mio-0-1.hsd)
-  
+
   Processed input written as HSD to 'waveplot_pin.hsd'
   Processed input written as XML to 'waveplot_pin.xml'
   --------------------------------------------------------------------------------
-  
+
   Doing initialisation
-  
+
   Starting main program
-  
+
   Origin
     -5.00000 -6.35306 -6.47114
   Box
@@ -200,18 +200,18 @@ Output
     0.00000 0.00000 12.94228
   Spatial resolution [1/Bohr]:
     5.00000 4.51071 3.86331
-  
+
   Total charge of atomic densities:    7.981973
-  
-  
+
+
    Spin KPoint  State  Action        Norm   W. Occup.
       1      1      1    read
       1      1      2    read
       1      1      3    read
       1      1      4    read
-  
+
   Calculating grid
-  
+
       1      1      1    calc    0.996855    2.000000
       1      1      2    calc    1.003895    2.000000
       1      1      3    calc    0.998346    2.000000
@@ -219,11 +219,11 @@ Output
   File 'wp-1-1-4-abs2.cube' written
   File 'wp-1-1-4-real.cube' written
   File 'wp-abs2.cube' written
-  
+
   Total charge:    7.998297
-  
+
   File 'wp-abs2diff.cube' written
-  
+
   ================================================================================
 
 Some notes on the output:
@@ -284,7 +284,7 @@ color had been set to white using the ``Graphics|Colors`` menu.)
 
      Total charge density for the H2O molecule, created by Waveplot, visualised
      by VMD.
-     
+
 
 
 Charge distribution difference
