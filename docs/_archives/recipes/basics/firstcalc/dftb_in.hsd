@@ -7,11 +7,12 @@ Geometry = GenFormat {
   3 2  0.00000000000E+00  0.00000000000E+00 -0.78306400000E+00
 }
 
-Driver = ConjugateGradient {
+Driver = GeometryOptimization {
+  Optimizer = Rational {}
   MovedAtoms = 1:-1
-  MaxForceComponent = 1E-4
   MaxSteps = 100
   OutputPrefix = "geom.out"
+  Convergence {GradAMax = 1E-4}
 }
 
 Hamiltonian = DFTB {
@@ -35,5 +36,5 @@ Analysis {
 }
 
 ParserOptions {
-  ParserVersion = 7
+  ParserVersion = 12
 }
