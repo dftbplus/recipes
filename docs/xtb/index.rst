@@ -1,11 +1,14 @@
+**********************
 Extended tight binding
-======================
+**********************
+
+[Input: `recipes/xtb/`]
 
 This chapter will investigate some basic usage of the extended tight binding (xTB) methods.\ :cite:`bannwarth2020`
 
 
 Calculation setup
------------------
+=================
 
 To make use of the extended tight binding Hamiltonian, the ``xTB`` group is set for the ``Hamiltonian`` group in the ``dftb_in.hsd``.
 
@@ -13,28 +16,28 @@ To make use of the extended tight binding Hamiltonian, the ``xTB`` group is set 
 
    .. tab-item:: GFN1-xTB\ :cite:`grimme2017-1`
 
-      .. literalinclude:: data/gfn1-xtb.hsd
+      .. literalinclude:: ../_archives/recipes/xtb/gfn1/dftb_in.hsd
          :caption: dftb_in.hsd
          :language: shell
          :emphasize-lines: 6
 
    .. tab-item:: GFN2-xTB\ :cite:`bannwarth2019`
 
-      .. literalinclude:: data/gfn2-xtb.hsd
+      .. literalinclude:: ../_archives/recipes/xtb/gfn2/dftb_in.hsd
          :caption: dftb_in.hsd
          :language: shell
          :emphasize-lines: 6
 
    .. tab-item:: IPEA1-xTB\ :cite:`asgeirsson2017`
 
-      .. literalinclude:: data/ipea1-xtb.hsd
+      .. literalinclude:: ../_archives/recipes/xtb/ipea1/dftb_in.hsd
          :caption: dftb_in.hsd
          :language: shell
          :emphasize-lines: 6
 
 An example system with several different elements can be this molecule of the mindless benchmark set from the GMTKN55:
 
-.. literalinclude:: data/mindless42.xyz
+.. literalinclude:: ../_archives/recipes/xtb/structs/mindless42.xyz
    :caption: struc.xyz
 
 For GFN2-xTB we will find the following printout for the initialization.
@@ -107,14 +110,14 @@ Three notable points can be found in the output:
 
    .. dropdown:: Taxol molecule
 
-      .. literalinclude:: data/taxol.xyz
+      .. literalinclude:: ../_archives/recipes/xtb/structs/taxol.xyz
 
    Do you notice a difference in computational cost of the xTB methods?
    Is this difference expected and how can it be explained?
 
 
 Using parameter files
----------------------
+=====================
 
 For the silicon element a reparametrization of the GFN1-xTB Hamiltonian was proposed, which is not directly available as ``Method`` keyword.
 Instead a ``ParameterFile`` can be provided.
@@ -129,9 +132,10 @@ To obtain the parameter file for the GFN1(Si)-xTB method,\ :cite:`komissarov2021
 
 Checking the publication for the silicon reparametrization, we find the following block should replace the original silicon parameters
 
-.. literalinclude:: data/gfn1-si-xtb.toml
+.. literalinclude:: ../_archives/recipes/xtb/si/gfn1-si-xtb.toml
    :caption: GFN1(Si)-xTB silicon parameters
    :language: toml
+   :lines: 1157-1175
 
 Furthermore, a new element-pair scaling is added for silicon–oxygen pairs under ``hamiltonian.xtb.kpair``, replacing the default scaling of 1.0 by
 
@@ -154,15 +158,10 @@ Finally, it would be diligent to properly update the ``meta`` entry to correctly
 
 The modified parameter file can now be used in DFTB+ with
 
-.. literalinclude:: data/gfn1-si-xtb.hsd
+.. literalinclude:: ../_archives/recipes/xtb/si/dftb_in.hsd
    :caption: dftb_in.hsd
    :language: shell
    :emphasize-lines: 6
-
-.. dropdown:: Difference between GFN1-xTB and GFN1(Si)-xTB parameter file
-
-   .. literalinclude:: data/gfn1-si-xtb.diff
-      :language: diff
 
 .. tip::
 
@@ -170,7 +169,7 @@ The modified parameter file can now be used in DFTB+ with
 
 
 Summary
--------
+=======
 
 .. admonition:: You learned...
    :class: important
