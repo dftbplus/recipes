@@ -31,3 +31,5 @@ Bibliography
    Semiconductor-Oxide Interface*, SISPAD 2014, 9-11 Sept. 2014, Yokohama,
    Japan, DOI: 10.1109/SISPAD.2014.6931564.
 
+.. bibliography::
+   :cited:

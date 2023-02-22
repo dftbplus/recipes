@@ -1,0 +1,15 @@
+Geometry = xyzFormat {
+<<< "struc.xyz"
+}
+
+Hamiltonian = xTB {
+  Method = "GFN2-xTB"
+  Solvation = GeneralizedBorn { ParamFile = solvation/gfn2-1-0/param_alpb_water.txt }
+}
+
+Options = { WriteDetailedOut = No }
+Analysis { CalculateForces = Yes }
+ParserOptions = { ParserVersion = 10 }
+Parallel = { UseOmpThreads = Yes }
+
+Driver = GeometryOptimization {}
