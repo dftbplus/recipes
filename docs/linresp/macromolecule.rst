@@ -25,12 +25,12 @@ computed as usual::
 
 After obtaining the energy and oscillator strength pairs (takes very
 few minutes), we can use a simple script to plot the absorption
-spectrum. The script (*spectrum.py*) is provided in the input folder
+spectrum. The script (`spectrum.py`) is provided in the input folder
 and requires Python 3.  Simply run::
 
   python spectrum.py > abs.dat
 
-and plot the content of *abs.dat* with your graphing tool of
+and plot the content of `abs.dat` with your graphing tool of
 preference.  The script employs a Lorentzian function for the spectral
 broadening, with a full width at half-maximum parameter of
 :math:`\Gamma` = 0.2 eV. Specifically, what is plotted is the molar
@@ -75,8 +75,8 @@ single-particle transitions and roughly equal to 1 Hartree). As for
 the oscillator strength window, we will use a cutoff of
 :math:`10^{-3}`. These values ensure a negligible loss of accuracy in
 the optical spectra, while reducing the computation time by roughly
-half. Those are specified in the *Casida* block using the
-*EnergyWindow* and *OscillatorWindow* keywords::
+half. Those are specified in the ``Casida`` block using the
+``EnergyWindow`` and ``OscillatorWindow`` keywords::
 
   ExcitedState {
       Casida {

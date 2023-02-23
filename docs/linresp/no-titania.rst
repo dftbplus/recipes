@@ -29,7 +29,7 @@ the UV-A region, so that we can observe both near band-gap excitations
 of TiO\ :sub:`2` and ligand-to-substrate charge-transfer (CT)
 transitions in the visible range. The challenge here is in the high
 number of excitations that need to be solved to cover the desired
-energy region. Specifically, we have to set *NrOfExcitations* to 1200
+energy region. Specifically, we have to set ``NrOfExcitations`` to 1200
 to cover a region of up to 4 eV::
 
   ExcitedState {
@@ -40,18 +40,18 @@ to cover a region of up to 4 eV::
       }
   }
 
-we have set *EnergyWindow = 0.01* to save computational time. We can
+we have set ``EnergyWindow = 0.01`` to save computational time. We can
 choose such a small energy cutoff as titania band-to-band transitions
 have a rather low collective character. The visible range of the
 spectrum, which is of most interest, is negligibly affected by this
 truncation, as the CT absorption bands are away from the energy window
 frontier. This constraint speeds up the calculation roughly 7 times!
 
-After obtaining the *EXC.DAT* output file (we provide it in the recipe
+After obtaining the `EXC.DAT` output file (we provide it in the recipe
 folder as the calculation will take some time to complete), we can run
-the *spectrum.py* script to obtain the absorption spectrum. Only those
+the `spectrum.py` script to obtain the absorption spectrum. Only those
 transition with a spin contamination smaller than 0.5 will be
-considered. This value is hard-coded in *spectrum.py*, and the reader
+considered. This value is hard-coded in `spectrum.py`, and the reader
 can modify it at his/her convenience. The absorption spectrum should
 finally look like this:
 
