@@ -1,0 +1,20 @@
+# General options
+
+Options {
+  RealComponent = Yes                # Plot real component of the wavefunction
+  PlottedSpins = 1 -1
+  PlottedLevels = {1 -1}             # Levels to plot
+  PlottedRegion =  OptimalCuboid {}  # Region to plot
+  NrOfPoints = 50 50 50              # Number of grid points in each direction
+  NrOfCachedGrids = -1               # Nr of cached grids (speeds up things)
+  Verbose = Yes                      # Wanna see a lot of messages?
+}
+
+DetailedXml = "detailed.xml"         # File containing the detailed xml output
+                                     # of DFTB+
+EigenvecBin = "excitedOrbs.bin"         # File cointaining the binary eigenvecs
+
+Basis {
+  Resolution = 0.01
+  <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"
+}
