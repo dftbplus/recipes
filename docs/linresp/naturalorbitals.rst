@@ -1,8 +1,10 @@
 .. highlight:: none
 
 ***********************************************
-Visualization of natural orbitals with waveplot 
+Visualization of natural orbitals with waveplot
 ***********************************************
+
+[Input: `recipes/linresp/natural-orbitals`]
 
 The majority of excited states are not well described by the
 transition of an electron from a single Kohn-Sham orbital to another
@@ -18,32 +20,14 @@ Benzene-Tetracyanoethylene dimer we looked at :ref:`earlier <benz_dimer>`. Stric
 speaking, natural orbitals are not really required for this system,
 since for example the lowest excited state is well described by a HOMO
 to LUMO transition, without contributions from other single-particle
-transitions. We still discuss the NTO feature for this example, because 
-it allows us to compare the results with the earlier calculations. 
+transitions. We still discuss the NTO feature for this example, because
+it allows us to compare the results with the earlier calculations.
 
-[Input: `recipes/linresp/naturalOrbitals`]          
+We first run DFTB+ with the following modified input:
 
-We first run DFTB+ with the following modified input::
+.. literalinclude:: ../_archives/recipes/linresp/natural-orbitals/dftb_in.hsd
+   :lines: 21-38
 
- ExcitedState {
-     Casida {
-         NrOfExcitations = 10
- 	 StateOfInterest = 1	
-         Symmetry = Singlet
-     	 Diagonaliser = Stratmann {SubSpaceFactor = 30}
-         WriteEigenvectors = Yes		 
-     }
- }
- 
- Options {
-     WriteDetailedXml = Yes
- }
- 
- Analysis {
-    CalculateForces = Yes    
-    WriteEigenvectors = Yes
- }
-  
 Here ``CalculateForces`` requests to compute excited forces for state
 ``StateOfInterest``. During this calculation also the NTO for that state
 are created and written to a file (always called `excitedOrbs.bin`), if
@@ -72,28 +56,11 @@ excited states (unless you have degeneracy) have only one important
 (:math:`n_{i}\approx 1.0`) electron NTO, even though the CI expansion
 might include a large number of single-particle transitions.
 
-As seen in the section  :ref:`here <sec-basics-waveplot>`, we can now visualize these orbitals using the waveplot code. The input file `waveplot_in.hsd` has this form::
+As seen in the section  :ref:`here <sec-basics-waveplot>`, we can now visualize these orbitals using the waveplot code. The input file `waveplot_in.hsd` has this form:
 
- Options {
-   RealComponent = Yes                # Plot real component of the wavefunction
-   PlottedSpins = 1 -1
-   PlottedLevels = {1 -1}             # Levels to plot
-   PlottedRegion =  OptimalCuboid {}  # Region to plot
-   NrOfPoints = 50 50 50              # Number of grid points in each direction
-   NrOfCachedGrids = -1               # Nr of cached grids (speeds up things)
-   Verbose = Yes                      # Wanna see a lot of messages?
- }
- 
- DetailedXml = "detailed.xml"         # File containing the detailed xml output
-                                      # of DFTB+
- EigenvecBin = "excitedOrbs.bin"         # File cointaining the binary eigenvecs
- 
- Basis {
-   Resolution = 0.01
-   <<+ "../../slakos/wfc/wfc.mio-1-1.hsd"
- }
-    
- 
+.. literalinclude:: ../_archives/recipes/linresp/natural-orbitals/waveplot_in.hsd
+   :emphasize-lines: 4,13
+
 Important is here the line ``EigenvecBin`` which reads the created file
 with natural transition orbitals instead of the ground state MO. The
 keyword ``PlottedLevels`` in this example requests the first and last
@@ -102,5 +69,4 @@ indices of the NO, not the occupation). These are exactly the natural
 transition orbitals with highest occupation. If you do the plot, you
 will realize that the hole orbital is essentially Kohn-Sham state 37
 (the HOMO), while the electron orbital is Kohn-Sham state 38 (the
-LUMO).   
-
+LUMO).
