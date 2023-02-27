@@ -19,9 +19,12 @@ corresponding method is named LC-DFTB.
 You will need a recent version of DFTB+ (>= 21) to perform the
 calculations in this section.
 
+.. _benz_dimer: 
 
 Benzene-Tetracyanoethylene dimer (TD-DFTB)
 ==========================================
+
+
 
 [Input: `recipes/linresp/range-separated/td-dftb`]
 
@@ -53,12 +56,12 @@ input::
       }
   }
 
-We are loading here the *mio* Slater-Koster files, which have been
+We are loading here the `mio` Slater-Koster files, which have been
 generated using the GGA functional PBE. Note the new entry
-*Diagonalizer* in the Casida block. Besides the default *Arpack*
-diagonalizer also the *Stratmann* algorithm may be used for the
+``Diagonalizer`` in the Casida block. Besides the default ``Arpack``
+diagonalizer also the ``Stratmann`` algorithm may be used for the
 diagonalization of the response matrix. For small systems like the
-present one, the *Stratmann* option is very often faster.
+present one, the ``Stratmann`` option is very often faster.
 
 The output in EXC.DAT looks like follows::
 
@@ -78,7 +81,7 @@ The output in EXC.DAT looks like follows::
       4.897        0.00000000        28   ->    38        1.000       4.897      S
 
 The lowest excited state at 2.033 eV corresponds to the HOMO->LUMO
-transition. We can visualize these orbitals using *waveplot* (see
+transition. We can visualize these orbitals using `waveplot` (see
 :ref:`sec-basics-waveplot`) to obtain more information on the nature
 of this state (:numref:`fig_dimer_homo` and :numref:`fig_dimer_lumo`).
 
@@ -147,15 +150,15 @@ looks like this::
   }
  
 TD-LC-DFTB requires special Slater-Koster files that have been
-generated for range-separated functionals. We are loading the *ob2*
-set here. The block *RangeSeparated* invokes the LC-DFTB method for
+generated for range-separated functionals. We are loading the `ob2`
+set here. The block ``RangeSeparated`` invokes the LC-DFTB method for
 the ground state. Several algorithms to speed up the calculation are
-available (see manual), we are choosing the *MatrixBased* algorithm
-here which involves no approximations. The *ExcitedState* section
-requires no changes, although the *Stratmann* diagonalizer is
+available (see manual), we are choosing the ``MatrixBased`` algorithm
+here which involves no approximations. The ``ExcitedState`` section
+requires no changes, although the ``Stratmann`` diagonalizer is
 mandatory for TD-LC-DFTB. As you will recognize, the calculation is
 slower than the previous TD-DFTB job. You can play with the parameter
-*SubSpaceFactor* (c.f. manual) to see the influence on the execution
+``SubSpaceFactor`` (c.f. manual) to see the influence on the execution
 time.
 
 Let us now investigate the output (EXC.DAT) of the job::
