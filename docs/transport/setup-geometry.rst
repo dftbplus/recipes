@@ -27,15 +27,19 @@ called `setup_in.hsd` which looks like the following::
       Id = source
       Atoms = {1:24}
       ContactVector [Angstrom] = 4.94 0.0 0.0
-      NumPLsDefined = 1
+      PLsDefined = 1
     }
     Contact{
       Id = drain
-      NumPLsDefined = 1
+      PLsDefined = 1
       Atoms = {120:143}
       ContactVector [Angstrom] = 4.94 0.0 0.0 
     }
-    Task=SetupGeometry{}
+    Task=SetupGeometry{
+      SlaterKosterFiles = {
+        C-C = "C-C.skf
+      }
+    }
   }
 
 The most significant keywords are
@@ -54,6 +58,10 @@ The most significant keywords are
 * ``SpecifiedPLs``. It is used to specify how many contact PLs are provided.
   Possible values are 1 or 2. See :ref:`principal_layers` for details.
 
+* ``SlaterKosterFiles``. This is used to extract interaction distances
+  for checking purposes, and uses the same syntax as DFTB+ (see
+  below).
+  
 Selecting atoms using jmol
 --------------------------
 
@@ -71,7 +79,7 @@ shifted exact copies of each other. No worries! ``SetupGeometry`` will reorder
 the atom indices of the two PLs in the correct way.  In some cases you might
 have only one PL per contact. The tool can then be told to duplicate this single
 PL, as required by the input geometry. If this is needed add the keyword
-``NumPLsDefined = 1`` to the relevant ``Contact`` block(s).
+``PLsDefined = 1`` to the relevant ``Contact`` block(s).
 
   .. _fig_transport_setup-geometry_sel:
   .. figure:: ../_figures/transport/setup-geometry/atom-selected.png
