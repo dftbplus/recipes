@@ -27,26 +27,19 @@ the eigenvector of the polarizability tensor at that energy that has the largest
 eigenvalue. It is equivalent to a principal axis of inertia in rigid body
 rotation.
 
-Using the ``ElectronDynamics`` block that follows::
+Using the ``ElectronDynamics`` block that follows:
 
-  ElectronDynamics = {
-    Steps = 60000
-    TimeStep [au] = 0.2
-    Perturbation = Laser {
-      PolarizationDirection = -0.08808129 0.99564018 -0.03069709
-      LaserEnergy [eV] = 1.94944
-    }
-    FieldStrength [V/A] = 0.0001
-  }
+.. literalinclude:: ../_archives/recipes/electronicdynamics/driving/dftb_in.hsd
+   :lines: 27-37
 
 We resonantly excite the Q band along the direction of its maximum
 polarizability. The obtained magnitude of the dipole moment as a function of
 time is shown in the following figure:
 
-  .. figure:: ../_figures/elecdynamics/muvst.png
-     :height: 40ex
-     :align: center
-     :alt: Dipole moment as a function of time.
+.. figure:: ../_figures/elecdynamics/muvst.png
+   :height: 40ex
+   :align: center
+   :alt: Dipole moment as a function of time.
 
 An initial transient, the dipole moment maxima and minima grow in absolute value
 as a linear function of time after, confirming that the applied field is in
@@ -61,11 +54,11 @@ Off-resonant excitation
 An *off resonance* excitation at 1.9 eV produces the following result for the
 dipole moment:
 
-  .. figure:: ../_figures/elecdynamics/muvst-oot.png
-     :height: 40ex
-     :align: center
-     :alt: Dipole moment as a function of time.
-	   
+.. figure:: ../_figures/elecdynamics/muvst-oot.png
+    :height: 40ex
+    :align: center
+    :alt: Dipole moment as a function of time.
+
 showing characteristic *beats*, the frequency of which are related to the amount
 of *detuning*. The amplitude of the dipole moment change caused by the
 illumination is also much smaller that when the laser is *in tune* with the
