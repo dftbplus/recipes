@@ -43,3 +43,4 @@ of TD-DFTB will be exploited.
    no-titania.rst
    rangeseparated.rst
    relax.rst
+   naturalorbitals.rst

@@ -1,0 +1,15 @@
+Geometry = xyzFormat {
+<<< "struc.xyz"
+}
+
+Hamiltonian = xTB {
+  Method = "GFN2-xTB"
+}
+
+Options = {
+  WriteAutotestTag = Yes
+  WriteDetailedOut = No
+}
+Analysis { CalculateForces = Yes }
+ParserOptions = { ParserVersion = 10 }
+Parallel = { UseOmpThreads = Yes }

@@ -84,6 +84,15 @@ installer::
 
   conda install -n base mamba
 
+Depending on the order of the channels in your `~/.condarc` file, the
+install may pick the wrong version of some packages. Therefore, it is
+important to ensure, that "conda-forge" comes **before** "defaults" in
+your ~/.condarc file ::
+
+  channels:
+     - conda-forge
+     - defaults
+
 Once the conda-forge channel has been enabled, ``dftb+`` can be
 installed with:
 
@@ -142,7 +151,6 @@ additional components that are available on your platform with:
 .. code-block:: none
 
    mamba search 'dftbplus*' --channel conda-forge
-
 
 Where to start with the tutorials
 =================================

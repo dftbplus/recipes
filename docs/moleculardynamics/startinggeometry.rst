@@ -28,7 +28,7 @@ Vibrational modes
    [Input: `recipes/moleculardynamics/vibrations/`]
 
 Once at a structural minimum, the quasi-harmonic vibrational modes of the atoms
-in the system can be calculated. These can then be compated with the power
+in the system can be calculated. These can then be compared with the power
 spectrum of the system, as determined by molecular dynamics.
 
 The vibrational modes can be obtained from the mass-weighted Hessian matrix of
@@ -49,8 +49,8 @@ differentiate the energy as 0.0001 atomic units.
 The modes are known as quasi-harmonic, since depending on the numerical step
 size these derivatives will include a contribution from higher even derivatives
 of the function. Hence, for accurate evaluation of harmonic frequencies, the
-smallest stable choice of the step size should be used (however, a carefull
-choice of this value can sometimes be used to include anharonicity in the
+smallest stable choice of the step size should be used (however, a careful
+choice of this value can sometimes be used to include anharmonicity in the
 calculated vibrational energies, see for example `Jones and Briddon 1998
 <https://doi.org/10.1016/S0080-8784(08)63058-6>`_).
 

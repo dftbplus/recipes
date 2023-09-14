@@ -24,7 +24,7 @@ excited states with both singlet and triplet multiplicities. The
 solution of the Casida equation is performed after a single-point
 (static) DFTB ground-state calculation for the optimised geometry. All
 this is done in a single DFTB run (one single input file). The
-*dftb_in.hsd* input file should look like this::
+`dftb_in.hsd` input file should look like this::
 
   Geometry = GenFormat {
       <<< "geo_in.gen"
@@ -58,8 +58,8 @@ this is done in a single DFTB run (one single input file). The
   }
 
 The input shows a standard spin-unpolarised static DFTB calculation,
-except for a new block denoted as *ExcitedState* with an embedded
-subblock called *Casida*. Once the SCC loop is converged, this block
+except for a new block denoted as ``ExcitedState`` with an embedded
+subblock called ``Casida``. Once the SCC loop is converged, this block
 instructs DFTB+ to build the response matrix according to Casida,
 using the just-obtained DFTB orbitals and energies, and diagonalise
 it.
@@ -72,9 +72,9 @@ triplet excitations. That is, if we would be only interested in
 singlet transitions, we could just omit the spin constants in the
 input file.
 
-Let us now take a closer look at the *Casida* block. The keyword
-*NrOfExcitations* specifies how many transitions per spin symmetry, or
-multiplicity, we want to compute. In *Symmetry* we specify the
+Let us now take a closer look at the ``Casida`` block. The keyword
+``NrOfExcitations`` specifies how many transitions per spin symmetry, or
+multiplicity, we want to compute. In ``Symmetry`` we specify the
 multiplicity of the transition (either singlet, triplet or both). The
 multiplicity of the transition is the difference between the
 multiplicities of the excited state and the ground state. In our
@@ -85,7 +85,7 @@ means the first 10 singlet-to-singlet and 10 singlet-to-triplet
 transitions.
 
 Once the calculation is finished (it takes a fraction of a second),
-the output file *EXC.DAT* contains the excitation energies and
+the output file `EXC.DAT` contains the excitation energies and
 oscillator strengths, as well as other valuable information. It should
 look like this::
 
@@ -117,20 +117,20 @@ look like this::
 
 
 The triplet transitions are listed first, followed by the singlet
-ones. They can be identified by the letter *T* or *S* in the last
+ones. They can be identified by the letter ``T`` or ``S`` in the last
 column.
 
-The first column *w [eV]* is the excited state energy we are looking
-for, the second one *Osc.Str.* lists the corresponding oscillator
-strength. The column *Transition* reports the indices of the dominant
+The first column ``w [eV]`` is the excited state energy we are looking
+for, the second one ``Osc.Str.`` lists the corresponding oscillator
+strength. The column ``Transition`` reports the indices of the dominant
 molecular orbitals involved in the electronic transition. In our
 example, the singlet state at 12.75 eV features a transition from the
 occupied Kohn-Sham orbital 3 (HOMO-2) to the virtual orbital 6 (the
-LUMO). The next column *Weight* indicates the weight of the
+LUMO). The next column ``Weight`` indicates the weight of the
 corresponding singly excited determinant in the CIS expansion of the
 excited state. Values close to one indicate that the excited state is
 well described by a single electronic excitation, while small values
-speak for a collective excitation. Column *KS [eV]* provides the
+speak for a collective excitation. Column ``KS [eV]`` provides the
 Kohn-Sham transition energy difference :math:`\omega_{ia\sigma} =
 \epsilon_{a\sigma} - \epsilon_{i\sigma}` (see above).
 
@@ -141,7 +141,7 @@ Oxygen molecule
 
 For the |O2| molecule, we will consider its triplet ground state. This
 is specified in the input file through the
-*Hamiltonian/SpinPolarisation* block::
+``Hamiltonian/SpinPolarisation`` block::
 
   SpinPolarisation = Colinear {
       UnpairedElectrons = 2
@@ -162,7 +162,7 @@ our eigenvalue problem into two independent singlet and triplet
 equations, so we have to build and diagonalise the entire response
 matrix in this case. But, how do we know the spin multiplicities of
 the computed transitions? We get this information from the last column
-of the *EXC.DAT* file::
+of the `EXC.DAT` file::
 
   w [eV]       Osc.Str.         Transition         Weight      KS [eV]    D<S*S>
 
@@ -227,7 +227,7 @@ In this case, the first 10 excitations are::
   8.636        0.00000000      3   ->     7        0.657       8.636    -0.000
  11.652        0.49971991      3   ->     6        0.600       8.636    -0.597
 
-Let us pay attention to the last column of the *EXC.DAT*
+Let us pay attention to the last column of the `EXC.DAT`
 file. Contrary to the previous case, here we obtain large non-zero
 :math:`\Delta S^2` values. When :math:`\Delta S^2 = 0`, we are in the
 presence of a doublet-to-doublet transition. Likewise, if
@@ -236,7 +236,7 @@ state. Otherwise, we have some extent of spin contamination in our
 obtained transitions. The last column should help us determine which
 excitations are to be trusted. We can set an arbitrary spin
 contamination threshold to establish which transitions we will
-consider leading to a physical excited state.  In our *NO-TiO2*
+consider leading to a physical excited state.  In our ``NO-TiO2``
 recipe, we will compute the absorption spectrum of a system where
 transitions with a spin contamination beyond an imposed threshold are
 excluded.

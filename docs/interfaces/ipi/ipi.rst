@@ -13,19 +13,19 @@ Originally designed for path-integral molecular dynamics, i-PI [iPI2]_
 is a python based program which can communicate with various
 electronic structure and interatomic potential codes, using them to
 calculate forces and energies under its control. It now includes a
-range of advanced dynamics and structural drivers. These include ::
+range of advanced dynamics and structural drivers. These include:
 
-  * Closed and open path integration to calculate quantum nuclear
-    positions and dynamics
-  * Molecular dynamics in various ensembles (NVE, NVT, ...)
-  * Thermodynamic integration, replica exchange and umbrella sampling
-    to efficiently calculate free energies and sample free energy
-    landscapes
-  * Hessian evaluation for vibrational modes, free energy or instanton
-    dynamics
-  * Geometry optimisation and transition state search methods (nudged
-    elastic band, NEB, is temporarily disabled in i-PI 2.0, see
-    :ref:`sec-interfaces-ase-neb` for an alternative)
+* Closed and open path integration to calculate quantum nuclear
+  positions and dynamics
+* Molecular dynamics in various ensembles (NVE, NVT, ...)
+* Thermodynamic integration, replica exchange and umbrella sampling
+  to efficiently calculate free energies and sample free energy
+  landscapes
+* Hessian evaluation for vibrational modes, free energy or instanton
+  dynamics
+* Geometry optimisation and transition state search methods (nudged
+  elastic band, NEB, is temporarily disabled in i-PI 2.0, see
+  :ref:`sec-interfaces-ase-neb` for an alternative)
 
 See the full `list of i-PI features
 <http://ipi-code.org/about/features/>`_ for more details.

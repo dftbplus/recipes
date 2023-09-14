@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# SPDX-Identifier: Unlicense
+
+# Break on errors and uninitialized variables
+set -eu
+
+# Get executables
+dp2orca=$(which ${DP2ORCA:-dp2orca.awk})
+dftbplus=$(which ${DFTBPLUS:-dftb+})
+
+# All calculations are performed in scratch
+if [ -f dftb_in.hsd ]; then
+  cp dftb_in.hsd scratch/
+fi
+pushd scratch 2>&1 > /dev/null
+
+# find the input files
+input_file=$(realpath orcain$1.in)
+output_file=$(realpath orcain$1.out)
+geom_file=$(realpath structure$1)
+
+# Prepare input file in xyz format
+wc -l < "$geom_file" > struc.xyz
+echo "Dummy" >> struc.xyz
+cat "$geom_file" >> struc.xyz
+
+# Run actual DFTB+ calculation
+"$dftbplus" > dftb.out
+
+# Post-processing, convert to Orca standard output
+if [ -f results.tag ]; then
+  "$dp2orca" results.tag > "$output_file"
+fi
+if [ -f autotest.tag ]; then
+  "$dp2orca" autotest.tag > "$output_file"
+fi
+
+popd 2>&1 > /dev/null
