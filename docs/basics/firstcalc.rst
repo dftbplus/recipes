@@ -37,7 +37,7 @@ looks as follows::
     MovedAtoms = 1:-1
     MaxSteps = 100
     OutputPrefix = "geom.out"
-    Convergence {GradAMax = 1E-4}
+    Convergence {GradElem = 1E-4}
   }
 
   Hamiltonian = DFTB {
@@ -137,7 +137,7 @@ In the current example ::
     MovedAtoms = 1:-1               # Move all atoms in the system
     MaxSteps = 100                  # Stop after maximal 100 steps
     OutputPrefix = "geom.out"       # Final geometry in geom.out.{xyz,gen}
-    Convergence {GradAMax = 1E-4}   # Stop if maximal force below 1E-4 H/a0
+    Convergence {GradElem = 1E-4}   # Stop if maximal force below 1E-4 H/a0
   }
 
 the molecule is relaxed using a rational function based optimiser. The
@@ -164,11 +164,11 @@ units by specifying a unit modifier before the equals sign. This is given in
 square brackets. For example instead of the original atomic units, you could
 have used ::
 
-  GradAMax [eV/AA] = 5.14e-3    # Force in Electronvolts/Angstrom
+  GradElem [eV/AA] = 5.14e-3    # Force in Electronvolts/Angstrom
 
 or ::
 
-  GradAMax [Electronvolt/Angstrom] = 5.14e-3
+  GradElem [Electronvolt/Angstrom] = 5.14e-3
 
 See the manual for the list of accepted modifiers and additional convergence
 criteria supported by the ``Convergence`` block.
@@ -632,10 +632,9 @@ set::
     MaxSteps = 100
     OutputPrefix = "geom.out"
     Convergence = {
-      GradAMax = 1E-4
+      GradElem = 1E-4
       Energy = 1.797693134862316E+308
       GradNorm = 1.797693134862316E+308
-      GradElem = 1.000000000000000E-004
       DispNorm = 1.797693134862316E+308
       DispElem = 1.797693134862316E+308
     }
