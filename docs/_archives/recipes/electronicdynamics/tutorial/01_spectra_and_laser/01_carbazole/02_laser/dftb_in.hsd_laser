@@ -1,0 +1,39 @@
+InputVersion = 21.2
+
+Geometry = GenFormat {
+  <<< "coords.gen"
+}
+
+Hamiltonian = DFTB {
+  Scc = Yes
+  SccTolerance = 1e-7  
+  MaxAngularMomentum {
+    C = "p"
+    H = "s"
+    N = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../../../slakos/download/mio-1-1/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+}
+
+ElectronDynamics {
+  Steps = 10000
+  TimeStep [au] = 0.2
+  Perturbation = Laser {             # Laser type perturbation
+    PolarizationDirection =          # calculate with calc_timeprop_maxpoldir
+    LaserEnergy [eV] =               # energy of interest 
+  }                                    
+  FieldStrength [V/A] = 0.001
+  Populations = Yes                  # to write GS-MP projected populations during dynamic
+}
+
+Options {
+  WriteDetailedXml = Yes             # needed for waveplot
+}
+
+Analysis {
+  WriteEigenvectors = Yes            # needed for waveplot
+}

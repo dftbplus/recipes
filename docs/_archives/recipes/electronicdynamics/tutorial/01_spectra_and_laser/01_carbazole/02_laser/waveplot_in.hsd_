@@ -1,0 +1,29 @@
+# General options
+
+Options {
+  RealComponent = Yes                # Plot real component of the wavefunction
+  PlottedSpins = 1 -1
+  PlottedLevels =                    ### Levels (Orbitals) to plot
+  PlottedRegion =  OptimalCuboid {}  # Region to plot
+
+  NrOfPoints = 50 50 50              # Number of grid points in each direction
+  NrOfCachedGrids = -1               # Nr of cached grids (speeds up things)
+  Verbose = Yes                      # Wanna see a lot of messages?
+}
+
+DetailedXml = "detailed.xml"         # File containing the detailed xml output
+                                     # of DFTB+
+EigenvecBin = "eigenvec.bin"         # File cointaining the binary eigenvecs
+                                     # Both files must be asked for the user in the
+                                     # input for DFTB+ calculation (they are not default
+                                     # printed)
+
+
+# Definition of the basis
+Basis {
+  Resolution = 0.01
+  # Including mio-1-1.hsd. (If you use a set, which depends on other sets,
+  # the wfc.*.hsd files for each required set must be included in a similar
+  # way.)
+  <<+ "../../../../slakos/wfc/wfc.mio-1-1.hsd" ### Path for Wave function coeffiecients for waveplot
+}
