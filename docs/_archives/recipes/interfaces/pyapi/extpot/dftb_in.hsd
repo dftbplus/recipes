@@ -28,9 +28,9 @@ Hamiltonian = DFTB {
 }
 
 Analysis = {
-  CalculateForces = Yes
+  PrintForces = Yes
 }
 
 ParserOptions = {
-  ParserVersion = 8
+  ParserVersion = 14
 }
