@@ -5,9 +5,9 @@ import dftbplus
 LIB_PATH = '/home/user/libdftbplus'
 
 # DFTB+ conversion factors
-# (according to prog/dftb+/lib_common/constants.F90)
-BOHR__AA = 0.529177249
-AA__BOHR = 1 / BOHR__AA
+# (according to src/dftbp/common/constants.F90)
+BOHR_AA = 0.529177249
+AA_BOHR = 1 / BOHR_AA
 
 
 def main():
@@ -21,14 +21,14 @@ def main():
         [ 1.920770753428742, -0.024319922392223, -4.437737763954652],
         [ 0.024319174400169, -0.017404302527510, -2.005347277168561],
         [ 0.024317270342179,  1.886164739806594, -5.291732430733527]])
-    coords *= AA__BOHR
+    coords *= AA_BOHR
 
     # lattice vectors of TiO2, in atomic units
     latvecs = np.array([
         [-1.903471721000000,  1.903471721000000,  4.864738245000000],
         [ 1.903471721000000, -1.903471721000000,  4.864738245000000],
         [ 1.903471721000000,  1.903471721000000, -4.864738245000000]])
-    latvecs *= AA__BOHR
+    latvecs *= AA_BOHR
 
     cdftb = dftbplus.DftbPlus(libpath=LIB_PATH,
                               hsdpath='dftb_in.hsd',

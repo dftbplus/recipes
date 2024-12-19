@@ -22,18 +22,18 @@ For this special use case, DFTB+ needs to be compiled as a shared library with
 API support enabled. At this point, a basic understanding of how to build DFTB+
 is assumed (all necessary steps are explained in the INSTALL.rst file in the top
 level directory of the DFTB+ repository). The CMake configuration for this case
-can be done by setting the WITH_API and BUILD_SHARED_LIBS flags to be TRUE in
-the file `config.cmake`, before starting the configuration and compilation
-process. Alternatively, if you do not want to modify files, a construct like the
-following is a convenient way to specify these flags on the command line while
-configuring with CMake:
+can be done by setting the WITH_PYTHON, WITH_API, ENABLE_DYNAMIC_LOADING and
+BUILD_SHARED_LIBS flags to be TRUE in the file `config.cmake`, before starting
+the configuration and compilation process. Alternatively, if you do not want to
+modify files, a construct like the following is a convenient way to specify
+these flags on the command line while configuring with CMake:
 
-``cmake -DBUILD_SHARED_LIBS=1 -DWITH_API=1 ..``
+``cmake -DWITH_PYTHON=1 -DWITH_API=1 -DENABLE_DYNAMIC_LOADING=1 -DBUILD_SHARED_LIBS=1 ..``
 
 If only the pure compilation process is carried out, the resulting library is
-located inside the buid directory at `prog/dftb+/`. If ``make install`` was
+located inside the build directory at `src/dftbp/`. If ``make install`` was
 executed, there is also a copy placed in the `CMAKE_INSTALL_PREFIX` path, which
-defaults to `install/lib/` inside the build directory. Within these locations,
+defaults to `_install/lib/` inside the build directory. Within these locations,
 the library files `libdftbplus.*` will be installed.
 
 The path to the resulting shared library must be passed to the interface, so you
@@ -42,13 +42,9 @@ will need to know where the `libdftbplus.*` files ends up.
 Setting up the interface
 ========================
 
-You can install the associated Python package via the standard 'python setup'
-mechanism. If you want to install it system-wide into your normal python
-installation, with the appropriate permissions you can simply issue ``python
-setup.py`` in the directory `tools/pythonapi/`. Alternatively, to install it
-locally in your home space, use ``python setup.py install --user``. If the local
-Python installation directory is not in your PATH, you should add it
-accordingly.
+You can install the associated Python package via the standard 'pip' mechanism,
+by issuing ``python -m pip install .`` in the directory `tools/pythonapi/`, with
+an appropriate level of permissions.
 
 .. _sec-interfaces-pyapi-input:
 
@@ -155,9 +151,9 @@ interface.
     LIB_PATH = '/home/user/libdftbplus'
 
     # DFTB+ conversion factors
-    # (according to prog/dftb+/lib_common/constants.F90)
-    BOHR__AA = 0.529177249
-    AA__BOHR = 1 / BOHR__AA
+    # (according to src/dftbp/common/constants.F90)
+    BOHR_AA = 0.529177249
+    AA_BOHR = 1 / BOHR_AA
 
 At the beginning of the ``main()`` function, the atom coordinates and lattice
 vectors are defined. In this case, a conversion to atomic units is necessary,
@@ -186,8 +182,8 @@ since a `.gen` block is used whose values are usually in units of Ångström.
 	    [ 1.903471721000000,  1.903471721000000, -4.864738245000000]])
 
 	# conversion to atomic units
-	coords *= AA__BOHR
-	latvecs *= AA__BOHR
+	coords *= AA_BOHR
+	latvecs *= AA_BOHR
 
 An object of the DftbPlus class is instantiated, which requires the location of
 the shared library `libpath`, the HSD input file `hsdpath` and the name of the
@@ -284,7 +280,8 @@ This section deals with the capability of the interface to run calculations with
 a population dependent external potential, i.e. arrising in cases like
 polarizable surroundings where the applied field responds to the state of the QM
 calculation. Since in general only the user knows how to calculate this type of
-potential, callback functions can be defined which will then be executed at runtime.
+potential, callback functions can be defined which will then be executed at
+runtime.
 
 The DFTB+ object provides a method ``register_ext_pot_generator()`` that takes
 care of the registration of the callback functions. As the first positional
