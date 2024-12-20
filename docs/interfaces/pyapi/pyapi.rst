@@ -117,11 +117,11 @@ will issue an error message, asking the user to do so. To ensure backwards
 compatibility of the input, the parser version should also be specified::
 
     Analysis {
-      CalculateForces = Yes
+      PrintForces = Yes
     }
 
     ParserOptions {
-      ParserVersion = 8
+      ParserVersion = 14
     }
 
 
