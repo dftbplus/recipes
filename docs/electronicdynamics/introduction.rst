@@ -1,5 +1,5 @@
 .. _sec-electrondynamics:
-	       
+
 *******************
 Electronic dynamics
 *******************
@@ -37,7 +37,7 @@ The EOM for the density matrix is integrated using a Leapfrog scheme in which
 the density matrix at time :math:`t_{i+i}` is obtained from its value a t time
 :math:`t_{i-1}` and its derivative at time :math:`t_i`:
 
-   :math:`\rho_{i+1}=\rho_{i-1}+2\Delta t \dot{\rho}_i.`
+.. math:: \rho_{i+1}=\rho_{i-1}+2\Delta t \dot{\rho}_i.
 
 The nuclear motion is integrated using a velocity Verlet algorithm.
 
@@ -46,7 +46,7 @@ calculation of absorption spectra, to study the response to constant or pulsed
 excitation and even the simulation of pump-probe spectroscopy.
 
 All input related to electronic dynamics is located within the
-*ElectronDynamics* block of the input file. Electron dynamics is run after
+``ElectronDynamics`` block of the input file. Electron dynamics is run after
 ground state self consistency is achieved, with the possibility of reading
 previously converged charges for the ground state or the state of the
 time-evolving density matrix to continue time propagation.
