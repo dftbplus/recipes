@@ -164,7 +164,7 @@ chapters first.
 The recipes are to introduce you to specific functionalities of DFTB+
 and so are therefore rather short and focused. Please also always
 consult the corresponding sections of the `DFTB+ manual
-<http://www.dftbplus.org/fileadmin/DFTBPLUS/public/dftbplus/latest/manual.pdf>`_
+<https://github.com/dftbplus/dftbplus/releases/latest/download/manual.pdf>`_
 for further details and possibilities.
 
 Please note that the example outputs in the recipes may have been
