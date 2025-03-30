@@ -1,39 +1,37 @@
 InputVersion = 20.1
 
 Geometry = GenFormat {
-    <<< "coords.gen"
+  <<< "coords.gen"
 }
-
-Driver = {}
 
 Hamiltonian = DFTB {
-    SCC = Yes
-    SCCTolerance = 1.0e-7
-    SlaterKosterFiles = Type2FileNames {
-        Prefix = "../../slakos/download/3ob/3ob-3-1/"
-        Separator = "-"
-        Suffix = ".skf"
-    }
-    MaxAngularMomentum = {
-        Mg = "p"
-        C = "p"
-        N = "p"
-        O = "p"
-        H = "s"
-    }
-    Filling = Fermi {
-        Temperature [K] = 300
-    }
+  Scc = Yes
+  SccTolerance = 1.0e-7
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../slakos/download/3ob/3ob-3-1/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  MaxAngularMomentum {
+    Mg = "p"
+    C = "p"
+    N = "p"
+    O = "p"
+    H = "s"
+  }
+  Filling = Fermi {
+    Temperature [K] = 300
+  }
 }
 
-ElectronDynamics = {
-    Steps = 60000
-    TimeStep [au] = 0.2
-    Perturbation = Laser {
-        PolarizationDirection = -0.08808129 0.99564018 -0.03069709
-        LaserEnergy [eV] = 1.94944
-    }
-    FieldStrength [V/A] = 0.0001
-    Populations = Yes
-    WriteFrequency = 100
+ElectronDynamics {
+  Steps = 60000
+  TimeStep [au] = 0.2
+  Perturbation = Laser {
+    PolarizationDirection = -0.08808129 0.99564018 -0.03069709
+    LaserEnergy [eV] = 1.94944
+  }
+  FieldStrength [V/A] = 0.0001
+  Populations = Yes
+  WriteFrequency = 100
 }

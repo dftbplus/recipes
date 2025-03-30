@@ -1,0 +1,29 @@
+InputVersion = 21.2
+
+Geometry = GenFormat {
+  <<< "coords.gen"
+}
+
+Hamiltonian = DFTB {
+  Scc = Yes
+  SccTolerance = 1e-7  
+  MaxAngularMomentum {
+    C = "p"
+    H = "s"
+    N = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "../../../../../slakos/download/mio/mio-1-1/"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+}
+
+ElectronDynamics {
+  Steps =                         # define the time window
+  TimeStep [au] =                 # resolution of the spectrum
+  Perturbation = Kick {           # must be a kick (Dirac delta)
+    PolarizationDirection =       # desired direction/s
+  }
+  FieldStrength [V/A] =           # field strength of the perturbation
+}
