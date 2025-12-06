@@ -1,11 +1,11 @@
 Phonon calculations with phonopy
 ================================
 
-The `phonopy <http://atztogo.github.io/phonopy/>`_ code can calculate
+The `phonopy <https://phonopy.github.io/phonopy/>`_ code can calculate
 a range of harmonic and quasi-harmonic vibrational properties and from
 version 2.0 onwards supports DFTB+. Information about how to install
 phonopy is `available
-<http://atztogo.github.io/phonopy/install.html>`_, it is also
+<https://phonopy.github.io/phonopy/install.html>`_, it is also
 available on conda-forge::
 
   mamba install -c conda-forge phonopy
@@ -66,7 +66,7 @@ DFTB+ output `results.tag` files).
 
 Then specify the path in the Brillouin zone you are interested in in
 `band.conf` (see the `phonopy documentation
-<https://atztogo.github.io/phonopy/setting-tags.html#band-structure-related-tags>`_),
+<https://phonopy.github.io/phonopy/setting-tags.html#band-structure-related-tags>`_),
 and post-process the phonopy data, again providing the dimensions of
 the the supercell repeat. This can either be on the command line or in
 the settings file (a `DIM` file)::
