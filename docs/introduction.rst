@@ -62,27 +62,18 @@ DFTB+ is available with the cross platform package manager `conda
 `conda-forge <https://conda-forge.org>`_ channel.
 
 If you have no conda installation yet, we recommend you bootstrap an
-installation with the conda-forge distribution `miniforge
-<https://github.com/conda-forge/miniforge/releases/latest>`_ or the
-anaconda distribution `miniconda
-<https://docs.conda.io/en/latest/miniconda.html>`_. If you are
+installation with the `miniforge
+<https://github.com/conda-forge/miniforge/releases/latest>`_ distribution. If you are
 unfamiliar with conda, their `getting started guide
 <https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html>`_
 introduces the environment.
 
-Installing ``dftb+`` from the conda-forge channel can then be achieved
-by adding conda-forge to your channels with:
+Installing ``dftb+`` from the conda-forge channel can then requires
+adding conda-forge to your channels with:
 
 .. code-block:: none
 
    conda config --add channels conda-forge
-
-We suggest using the `mamba installer
-<https://mamba.readthedocs.io/>`_ with conda-forge, as we have
-experienced dependency resolution problems with the original conda
-installer::
-
-  conda install -n base mamba
 
 Depending on the order of the channels in your `~/.condarc` file, the
 install may pick the wrong version of some packages. Therefore, it is
@@ -98,20 +89,20 @@ installed with:
 
 .. code-block:: none
 
-   mamba install 'dftbplus=*=nompi_*'
+   conda install 'dftbplus=*=nompi_*'
 
 If you prefer to install an MPI parallel version you have to
 explicitly request it with
 
 .. code-block:: none
 
-   mamba install 'dftbplus=*=mpi_mpich_*'
+   conda install 'dftbplus=*=mpi_mpich_*'
 
 for MPICH, or
 
 .. code-block:: none
 
-   mamba install 'dftbplus=*=mpi_openmpi_*'
+   conda install 'dftbplus=*=mpi_openmpi_*'
 
 with Open MPI.
 
@@ -125,13 +116,13 @@ dftb+ versions::
 
   conda create --name dftbplus
   conda activate dftbplus
-  mamba install 'dftbplus=*=nompi_*'
+  conda install 'dftbplus=*=nompi_*'
   conda deactivate
 
 and likewise for your choice of MPI::
 
   conda create -n dftbplusMPI
-  mamba install -n dftbplusMPI 'dftbplus=*=mpi_openmpi_*'
+  conda install -n dftbplusMPI 'dftbplus=*=mpi_openmpi_*'
 
 Then list available environments::
 
@@ -143,14 +134,14 @@ them with
 
 .. code-block:: none
 
-   mamba install dftbplus-tools dftbplus-python
+   conda install dftbplus-tools dftbplus-python
 
 It is possible to list all of the versions of ``dftb+`` and its
 additional components that are available on your platform with:
 
 .. code-block:: none
 
-   mamba search 'dftbplus*' --channel conda-forge
+   conda search 'dftbplus*' --channel conda-forge
 
 Where to start with the tutorials
 =================================
