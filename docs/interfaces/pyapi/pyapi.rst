@@ -445,3 +445,51 @@ registration of the callback functions is still missing:
 
 Please consult the associated archive with this tutorial to obtain the full
 corresponding example.
+
+
+Extra tools for DFTB data
+=========================
+
+The ``dftbplus-tools`` package (see the
+:ref:`conda install <subsec-condainstall>`) also contains routines to
+handle some of the common file formats that DFTB+ uses.
+
+A geometry can be read from file in `gen` format
+
+.. code-block:: python
+
+   import numpy as np
+   from dptools.gen import Gen
+
+   try:
+       gen = Gen.fromfile("structure.gen")
+   except OSError:
+       raise ScriptError('Input file does not exist.')
+
+   geometry = gen.geometry
+
+   if geometry.periodic:
+       print("This is a periodic structure")
+
+
+
+The `geometry` structure includes variables for
+
+  +----------------+------------------------------------------------+
+  | element        | description                                    |
+  +================+================================================+
+  | speciesnames   | Names of the atoms present in the geometry     |
+  +----------------+------------------------------------------------+
+  | nspecies       | Number of different chemical species           |
+  +----------------+------------------------------------------------+
+  | indexes        | The species index of each atom in speciesnames |
+  +----------------+------------------------------------------------+
+  | natom          | Number of atoms present in the geometry        |
+  +----------------+------------------------------------------------+
+  | coords         | xyz coordinates of the atoms (in Angstrom)     |
+  +----------------+------------------------------------------------+
+  | periodic       | True if the structure is periodic              |
+  +----------------+------------------------------------------------+
+  | latvecs        | Lattice vectors in  Angstrom (variable is      |
+  |                | `None` for non-periodic structures)            |
+  +----------------+------------------------------------------------+

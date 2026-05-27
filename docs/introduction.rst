@@ -52,7 +52,7 @@ script file in the directory to run examples of multistage calculations, called
 ``run.sh`` which contains the individual commands needed to run the full
 example.
 
-
+.. _subsec-condainstall:
 
 Installing DFTB+ from conda-forge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
