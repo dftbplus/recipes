@@ -39,6 +39,8 @@ extensions = [
     'sphinx_design',
 ]
 
+latex_engine = "xelatex"
+
 bibtex_bibfiles = ["_static/references.bib"]
 bibtex_reference_style = "super"
 

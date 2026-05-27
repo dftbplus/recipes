@@ -30,7 +30,7 @@ symmetry. In this case the structure rotational repeats every 360 / 10
 = 36 degrees, which is commensurate with twice the 18 degree helical
 twist.
 
-  .. figure:: ../_figures/boundaryconditions/helical/tube.svg
+  .. figure:: ../_figures/boundaryconditions/helical/tube.png
      :height: 40ex
      :align: center
      :alt: Repeated nanotube a) along and b) across the tube axis
@@ -75,7 +75,7 @@ geometry for the same structure are supplied. The helical case has a
 supercell has simple translational symmetry along the ribbon with a
 cell containing twice as many atoms.
 
-  .. figure:: ../_figures/boundaryconditions/helical/ribbon.svg
+  .. figure:: ../_figures/boundaryconditions/helical/ribbon.png
      :height: 40ex
      :align: center
      :alt: Ribbon geometry as a supercell and one possible helical
@@ -91,7 +91,7 @@ automatically x2 points around the C\ :sub:`2` rotation). In this
 case, the translational operation is directly equivalent to the
 supercell, so both calculations give equivalent band structures.
 
-  .. figure:: ../_figures/boundaryconditions/helical/helicalbs.svg
+  .. figure:: ../_figures/boundaryconditions/helical/helicalbs.png
      :height: 40ex
      :align: center
      :alt: Band structure of helical cell, showing band that are
