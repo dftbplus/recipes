@@ -1,3 +1,5 @@
+.. _sec-parallel-benchmarking:
+
 Benchmarking and scalability
 ============================
 
@@ -235,6 +237,9 @@ Distributed memory parallelism
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section coming soon!
+
+The settings that control how the available processors are used, once their
+number has been chosen, are collected in :ref:`sec-parallel-tuning`.
 
 Topics to be discussed:
 
